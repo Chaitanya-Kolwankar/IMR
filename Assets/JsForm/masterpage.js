@@ -84,7 +84,7 @@ function loadSidebarState() {
 function fill_module() {
     $.ajax({
         type: "POST",
-        url: "~/Login.aspx/fillModule",
+        url: "http://staffportal.runasp.net/Portals/Staff/Login.aspx/fillModule",
         data: '{emp_id:"' + empId + '"}',
         contentType: "application/json; charset=utf-8",
         success: function (data) {
@@ -106,7 +106,7 @@ function fill_module() {
 function fill_form() {
     $.ajax({
         type: "POST",
-        url: "~/Login.aspx/fillform",
+        url: "http://staffportal.runasp.net/Portals/Staff/Login.aspx/fillform",
         data: '{emp_id:"' + empId + '"}',
         contentType: "application/json; charset=utf-8",
         success: function (data) {

@@ -397,7 +397,7 @@ public class Class1
                     if (Convert.ToString(HttpContext.Current.ApplicationInstance.Session["username"]) == Convert.ToString(HttpContext.Current.ApplicationInstance.Session["password"]))
                     {
                         HttpContext.Current.ApplicationInstance.Session["passwordchanged"] = "false";
-                        HttpContext.Current.Response.Redirect("~/Profile/ChangePassword.aspx", false);
+                        HttpContext.Current.Response.Redirect("../Profile/ChangePassword.aspx", false);
                     }
                     else
                     {

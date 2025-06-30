@@ -1439,7 +1439,7 @@ function Clear_book() {
     $("#divhideshow").hide(500);
     $("#book_photo").val('');
     document.getElementById('txtbookcount').disabled = false;
-    $("[id*='imgbook']").attr('src', '~/Assets/img/book_open.png');
+    $("[id*='imgbook']").attr('src', '../../../Assets/img/book_open.png');
 
     //window.location.reload(true);
 };
@@ -2500,28 +2500,28 @@ function LoadBook(bookid,book_name) {
                     }
 
                 }
-                    var b = imageExists("~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpg");
-                    var b1 = imageExists("~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpeg");
-                    var b2 = imageExists("~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".png");
-                    var b3 = imageExists("~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".gif");
+                    var b = imageExists("../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpg");
+                    var b1 = imageExists("../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpeg");
+                    var b2 = imageExists("../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".png");
+                    var b3 = imageExists("../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".gif");
 
                 if (b == true) {
-                    document.getElementById("imgbook").src = "~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpg";
+                    document.getElementById("imgbook").src = "../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpg";
                 }
                 else if (b1 == true) {
-                    document.getElementById("imgbook").src = "~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpeg";
+                    document.getElementById("imgbook").src = "../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpeg";
                 }
                 else if (b2 == true) {
-                    document.getElementById("imgbook").src = "~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".png";
+                    document.getElementById("imgbook").src = "../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".png";
                 }
                 else if (b3 == true) {
-                    document.getElementById("imgbook").src = "~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".gif";
+                    document.getElementById("imgbook").src = "../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".gif";
                 }
 
                 if (b == false && b1 == false && b2 == false && b3 == false)
                 {
                     $("#book_photo").val('');
-                    $("[id*='imgbook']").attr('src', '~/Assets/img/book_open.png');
+                    $("[id*='imgbook']").attr('src', '../../../Assets/img/book_open.png');
                 }
 
                // $("[id*='txtpublisher']").val(r.d[0].cd_PUBLISHER);
@@ -2709,28 +2709,28 @@ function LoadBook(bookid,book_name) {
                                             }
 
                                         }
-                                        var b = imageExists("~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpg");
-                                        var b1 = imageExists("~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpeg");
-                                        var b2 = imageExists("~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".png");
-                                        var b3 = imageExists("~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".gif");
+                                        var b = imageExists("../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpg");
+                                        var b1 = imageExists("../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpeg");
+                                        var b2 = imageExists("../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".png");
+                                        var b3 = imageExists("../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".gif");
 
                                         if (b == true) {
-                                            document.getElementById("imgbook").src = "~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpg";
+                                            document.getElementById("imgbook").src = "../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpg";
                                         }                                             
                                         else if (b1 == true) {                        
-                                            document.getElementById("imgbook").src = "~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpeg";
+                                            document.getElementById("imgbook").src = "../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".jpeg";
                                         }                                             
                                         else if (b2 == true) {                        
-                                            document.getElementById("imgbook").src = "~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".png";
+                                            document.getElementById("imgbook").src = "../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".png";
                                         }                                             
                                         else if (b3 == true) {                        
-                                            document.getElementById("imgbook").src = "~/Library/Book/" + r.d[0].cd_ACCESSION_NO + ".gif";
+                                            document.getElementById("imgbook").src = "../../../Library/Book/" + r.d[0].cd_ACCESSION_NO + ".gif";
                                         }
 
 
                                         if (b == false && b1 == false && b2 == false && b3 == false) {
                                             $("#book_photo").val('');
-                                            $("[id*='imgbook']").attr('src', '~/Assets/img/book_open.png');
+                                            $("[id*='imgbook']").attr('src', '../../../Assets/img/book_open.png');
                                         }
                                         // $("[id*='txtpublisher']").val(r.d[0].cd_PUBLISHER);
                                         $("[id*='txtcallno']").val(r.d[0].bookcallno);
@@ -3532,7 +3532,7 @@ function clear_cd() {
     $("[id*='txt_rem']").val('');
     $("[id*='donar_name']").val('');
     $("[id*='txt_cd_cnt']").val('');
-    $("[id*='imgcd']").attr('src', '~/Assets/img/cd.png');
+    $("[id*='imgcd']").attr('src', '../../../Assets/img/cd.png');
     
     document.getElementById('txt_cd_cnt').disabled = false;
     // $("#txt_cd_cnt").trigger('keydown', { keyCode: 13, which: 13 });
@@ -4983,7 +4983,7 @@ function clearMap() {
 
     $("[id*=tblmap]")[0].innerHTML = "";
     $(".tokens-list-token-holder").remove();
-    document.getElementById("imgMap").src = "~/Assets/img/Map.png";
+    document.getElementById("imgMap").src = "../../../Assets/img/Map.png";
     $("#get_photo").val('');
     //window.location.reload(true);
     

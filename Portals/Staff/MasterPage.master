@@ -13,39 +13,39 @@
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="~/assets/img/vivalogo.png" rel="icon" />
-    <link href="~/assets/img/vivalogo.png" rel="apple-touch-icon" />
+    <link href="../assets/img/vivalogo.png" rel="icon" />
+    <link href="../assets/img/vivalogo.png" rel="apple-touch-icon" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
 
     <!-- Vendor CSS Files -->
-    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-    <link href="~/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-    <link href="~/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
-    <link href="~/assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
-    <link href="~/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
-    <link href="~/assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+    <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="../../assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="../../assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="../../assets/vendor/simple-datatables/style.css" rel="stylesheet" />
 
 
     <!-- Template Main CSS File -->
-    <link href="~/assets/css/style.css" rel="stylesheet" />
+    <link href="../../assets/css/style.css" rel="stylesheet" />
 
 
     <!-- datepicker -->
-    <script src="~/Assets/js/jquery.datetimepicker.js"></script>
-    <link href="~/Assets/css/jquery.datetimepicker.css" rel="stylesheet" />
-    <%--<script src="~/Assets/js/datepicker/daterangepicker.js"></script>--%>
+    <script src="../../../Assets/js/jquery.datetimepicker.js"></script>
+    <link href="../../Assets/css/jquery.datetimepicker.css" rel="stylesheet" />
+    <%--<script src="../../Assets/js/datepicker/daterangepicker.js"></script>--%>
 
 
 
 
     <!-- Notify -->
-    <script src="~/assets/notify-master/js/jquery-1.11.0.js"></script>
-    <link href="~/assets/notify-master/css/notify.css" rel="stylesheet" />
-    <script src="~/assets/notify-master/js/notify.js"></script>
+    <script src="../../../assets/notify-master/js/jquery-1.11.0.js"></script>
+    <link href="../../assets/notify-master/css/notify.css" rel="stylesheet" />
+    <script src="../../../assets/notify-master/js/notify.js"></script>
 
 
     <!-- =======================================================
@@ -63,8 +63,8 @@
     <%--font links--%>
 
     <%--Datatable --%>
-    <link href="~/Assets/datatable/DataTable.css" rel="stylesheet" />
-    <script src="~/Assets/datatable/DataTable.js"></script>
+    <link href="../../Assets/datatable/DataTable.css" rel="stylesheet" />
+    <script src="../../../Assets/datatable/DataTable.js"></script>
     <%--Datatable --%>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -89,7 +89,7 @@
 
             <div class="d-flex align-items-center justify-content-between">
                 <a href="index.html" class="logo d-flex align-items-center">
-                    <img src="~/assets/img/mu.png" alt=""/>
+                    <img src="../../../assets/img/mu.png" alt="">
                     <span class="d-none d-lg-block">IMR College</span>
                 </a>
                 <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -126,7 +126,7 @@
                     <li class="nav-item dropdown pe-3">
 
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                            <%--<img src="~/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">--%>
+                            <%--<img src="../../../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">--%>
                             <img src="" runat="server" id="photos" class="rounded-circle" />
                             <span class="d-none d-md-block dropdown-toggle ps-2" runat="server">User</span>
                         </a>
@@ -142,7 +142,7 @@
                             </li>
 
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" href="~/profile/ViewProfile.aspx">
+                                <a class="dropdown-item d-flex align-items-center" href="../profile/ViewProfile.aspx">
                                     <i class="bi bi-person"></i>
                                     <span>My Profile</span>
                                 </a>
@@ -172,7 +172,7 @@
                             </li>
 
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" href="~/Login.aspx" id="signOutButton">
+                                <a class="dropdown-item d-flex align-items-center" href="../Login.aspx" id="signOutButton">
                                     <i class="bi bi-box-arrow-right"></i>
                                     <span>
                                         <asp:Label runat="server"> Sign Out</asp:Label>
@@ -214,22 +214,22 @@
                     </a>
                     <ul id="Profile1" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li id="viewprofile" style="display: none">
-                            <a href="~/profile/ViewProfile.aspx">
+                            <a href="../profile/ViewProfile.aspx">
                                 <i class="bi bi-circle"></i><span>View Profile</span>
                             </a>
                         </li>
                         <li id="editprofile" style="display: none">
-                            <a href="~/profile/EditProfile.aspx">
+                            <a href="../profile/EditProfile.aspx">
                                 <i class="bi bi-circle"></i><span>Edit Profile</span>
                             </a>
                         </li>
                         <li id="changepassword" style="display: none">
-                            <a href="~/profile/ChangePassword.aspx">
+                            <a href="../profile/ChangePassword.aspx">
                                 <i class="bi bi-circle"></i><span>Change Password</span>
                             </a>
                         </li>
                         <li>
-                            <%--  <a href="~/Profile/Dashboard.aspx">
+                            <%--  <a href="../Profile/Dashboard.aspx">
                                 <i class="bi bi-circle"></i><span>Dashboard</span>
                             </a>--%>
                         </li>
@@ -242,44 +242,44 @@
                     <ul id="Library1" class="nav-content collapse" data-bs-parent="#sidebar-nav">
 
                         <li style="display: none" id="issuereturn">
-                            <a href="~/Library/IssueReturn.aspx">
+                            <a href="../Library/IssueReturn.aspx">
                                 <i class="bi bi-circle"></i><span>Issue/Return</span>
                             </a>
                         </li>
 
                         <li style="display: none" id="return">
-                            <a href="~/Library/return_circulation.aspx">
+                            <a href="../Library/return_circulation.aspx">
                                 <i class="bi bi-circle"></i><span>Return</span>
                             </a>
                         </li>
 
                         <li style="display: none" id="issuereturnreport">
-                            <a href="~/Library/IssueReturnReport.aspx">
+                            <a href="../Library/IssueReturnReport.aspx">
                                 <i class="bi bi-circle"></i><span>IssueReturnReport</span>
                             </a>
                         </li>
 
                         <li style="display: none" id="booksearch">
-                            <a href="~/Library/book_search.aspx">
+                            <a href="../Library/book_search.aspx">
                                 <i class="bi bi-circle"></i><span>Book Search</span>
                             </a>
                         </li>
 
 
                         <li id="bookmaster" style="display: none">
-                            <a href="~/Library/BookmasterNew.aspx">
+                            <a href="../Library/BookmasterNew.aspx">
                                 <i class="bi bi-circle"></i><span>Book master</span>
                             </a>
                         </li>
 
                         <li style="display: none" id="barcodeprinting">
-                            <a href="~/Library/AccessionNumberPrinting.aspx">
+                            <a href="../Library/AccessionNumberPrinting.aspx">
                                 <i class="bi bi-circle"></i><span>Barcode Printing</span>
                             </a>
                         </li>
 
                         <li style="display: none" id="catlogue_report">
-                            <a href="~/Library/CatlogReport.aspx">
+                            <a href="../Library/CatlogReport.aspx">
                                 <i class="bi bi-circle"></i><span>Catelogue Report</span>
                             </a>
                         </li>
@@ -291,31 +291,31 @@
                     </a>
                     <ul id="AdmissionMaster1" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li id="academicyear" style="display: none">
-                            <a href="~/Admission_master/academic_year.aspx">
+                            <a href="../Admission_master/academic_year.aspx">
                                 <i class="bi bi-circle"></i><span>Academic year</span>
                             </a>
                         </li>
                         <li id="coursemaster" style="display: none">
-                            <a href="~/Admission_master/Course_Master.aspx">
+                            <a href="../Admission_master/Course_Master.aspx">
                                 <i class="bi bi-circle"></i><span>Course Master</span>
                             </a>
                         </li>
                         <li id="defineintake" style="display: none">
-                            <a href="~/Admission_master/Define_Intake.aspx">
+                            <a href="../Admission_master/Define_Intake.aspx">
                                 <i class="bi bi-circle"></i><span>Define Intake</span>
                             </a>
                         </li>
 
                         <li id="feemaster" style="display: none">
-                            <a href="~/Admission_Master/Fee_Master.aspx">
+                            <a href="../Admission_Master/Fee_Master.aspx">
                                 <i class="bi bi-circle"></i><span>Fee master</span></a>
                         </li>
                         <li id="groupmapping" style="display: none">
-                            <a href="~/Admission_Master/GroupMapping.aspx">
+                            <a href="../Admission_Master/GroupMapping.aspx">
                                 <i class="bi bi-circle"></i><span>Group Mapping</span></a>
                         </li>
                         <%-- <li id="categorycaste" style="display: none">
-                            <a href="~/Admission_Master/CategoryCast.aspx">
+                            <a href="../Admission_Master/CategoryCast.aspx">
                                 <i class="bi bi-circle"></i><span>Category Caste</span>
                             </a>
                         </li>--%>
@@ -327,35 +327,35 @@
                     </a>
                     <ul id="PreAdmission1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <%--<li>
-                            <a href="~/Pre_Admission/stud_eligiblity.aspx">
+                            <a href="../Pre_Admission/stud_eligiblity.aspx">
                                 <i class="bi bi-circle"></i><span>Define Eligibility</span>
                             </a>
                         </li>--%>
 
                         <%--  <li>
-                            <a href="~/Pre_Admission/AdmissionURL.aspx">
+                            <a href="../Pre_Admission/AdmissionURL.aspx">
                                 <i class="bi bi-circle"></i><span>Admission Url ON/OFF</span>
                             </a>
                         </li>--%>
                         <li id="updateregistration" style="display: none">
-                            <a href="~/Pre_Admission/searchstudent.aspx">
+                            <a href="../Pre_Admission/searchstudent.aspx">
                                 <i class="bi bi-circle"></i><span>Update Registration</span>
                             </a>
                         </li>
                         <li id="defineeligibility" style="display: none">
-                            <a href="~/Pre_Admission/student_eligibility.aspx">
+                            <a href="../Pre_Admission/student_eligibility.aspx">
                                 <i class="bi bi-circle"></i><span>Define Eligibility </span>
 
                             </a>
                         </li>
                         <li id="naacbulkadmissionform" style="display: none">
-                            <a href="~/Pre_Admission/NaacAdmissionFormPrint.aspx">
+                            <a href="../Pre_Admission/NaacAdmissionFormPrint.aspx">
                                 <i class="bi bi-circle"></i><span>Bulk Admission Form</span>
                             </a>
                         </li>
 
                         <%-- <li>Student_transfer_payment
-                            <a href="~/Pre_Admission/searchstudent.aspx">
+                            <a href="../Pre_Admission/searchstudent.aspx">
                                 <i class="bi bi-circle"> </i><span>Edit Applicant Data</span>
                             </a>
                         </li>--%>
@@ -367,33 +367,33 @@
                     </a>
                     <ul id="Admission1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li id="applicantidpassword" style="display: none">
-                            <a href="~/Admission/ApplicantSearch.aspx">
+                            <a href="../Admission/ApplicantSearch.aspx">
                                 <i class="bi bi-circle"></i><span>Applicant ID / Password</span>
                             </a>
                         </li>
 
                         <li id="newstudent" style="display: none">
-                            <a href="~/Admission/NewStudent.aspx">
+                            <a href="../Admission/NewStudent.aspx">
                                 <i class="bi bi-circle"></i><span>New Student</span>
                             </a>
                         </li>
                         <li id="studentinhousetransfer" style="display: none">
-                            <a href="~/Admission/Student_transfer_payment.aspx">
+                            <a href="../Admission/Student_transfer_payment.aspx">
                                 <i class="bi bi-circle"></i><span>Student Inhouse Transfer </span>
                             </a>
                         </li>
                         <li id="assignrollno" style="display: none">
-                            <a href="~/Admission/AssignRollNo.aspx">
+                            <a href="../Admission/AssignRollNo.aspx">
                                 <i class="bi bi-circle"></i><span>Assign RollNo </span>
                             </a>
                         </li>
                         <li id="studentadmissioncancellation" style="display: none">
-                            <a href="~/Admission/AdmissionCancellation.aspx">
+                            <a href="../Admission/AdmissionCancellation.aspx">
                                 <i class="bi bi-circle"></i><span>Student Admission Cancellation  </span>
                             </a>
                         </li>
                         <li id="applicantreport" style="display: none">
-                            <a href="~/Admission/applicantreport.aspx">
+                            <a href="../Admission/applicantreport.aspx">
                                 <i class="bi bi-circle"></i><span>Applicant Report</span>
                             </a>
                         </li>
@@ -420,12 +420,12 @@
                     </a>
                     <ul id="Fee1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li style="display: none" id="feeentry">
-                            <a href="~/Fee/FeeEntry_New.aspx">
+                            <a href="../Fee/FeeEntry_New.aspx">
                                 <i class="bi bi-search"></i><span>Fee Entry</span>
                             </a>
                         </li>
                         <li id="feereport" style="display: none">
-                            <a href="~/Fee/Feereport.aspx">
+                            <a href="../Fee/Feereport.aspx">
                                 <i class="bi bi-search"></i><span>Fee Report</span>
                             </a>
                         </li>
@@ -437,56 +437,56 @@
                     </a>
                     <ul id="Employee1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li style="display: none" id="employeesearch">
-                            <a href="~/Employee/EmployeeSearch.aspx">
+                            <a href="../Employee/EmployeeSearch.aspx">
                                 <i class="bi bi-circle"></i><span>Employee Search</span>
                             </a>
                         </li>
                         <li style="display: none" id="employeeentry">
-                            <a href="~/Employee/EmployeeEntry.aspx">
+                            <a href="../Employee/EmployeeEntry.aspx">
                                 <i class="bi bi-circle"></i><span>Employee Entry
                                 </span>
                             </a>
                         </li>
                         <li style="display: none" id="employeedetails">
-                            <a href="~/Employee/EmployeeDetails.aspx">
+                            <a href="../Employee/EmployeeDetails.aspx">
                                 <i class="bi bi-circle"></i><span>Employee Details
                                 </span>
                             </a>
                         </li>
                         <%--<li>
-                            <a href="~/profile/EditProfile.aspx">
+                            <a href="../profile/EditProfile.aspx">
                                 <i class="bi bi-circle"></i><span>Edit Profile</span>
                             </a>
                         </li>
                          <li>
-                            <a href="~/profile/ChangePassword.aspx">
+                            <a href="../profile/ChangePassword.aspx">
                                 <i class="bi bi-circle"></i><span>Change Password</span>
                             </a>
                         </li> --%>
 
                         <li style="display: none" id="leaveDefine">
-                            <a href="~/Employee/leaveDefine.aspx">
+                            <a href="../Employee/leaveDefine.aspx">
                                 <i class="bi bi-circle"></i><span>Leave Define
                                 </span>
                             </a>
                         </li>
 
                         <li style="display: none" id="leaveApplication">
-                            <a href="~/Employee/leaveApplication.aspx">
+                            <a href="../Employee/leaveApplication.aspx">
                                 <i class="bi bi-circle"></i><span>Leave Application
                                 </span>
                             </a>
                         </li>
 
                         <li style="display: none" id="leaveApproval">
-                            <a href="~/Employee/leaveApproval.aspx">
+                            <a href="../Employee/leaveApproval.aspx">
                                 <i class="bi bi-circle"></i><span>Leave Approval
                                 </span>
                             </a>
                         </li>
 
                         <li style="display: none" id="leaveConsumedRpt">
-                            <a href="~/Employee/leaveConsumedRpt.aspx">
+                            <a href="../Employee/leaveConsumedRpt.aspx">
                                 <i class="bi bi-circle"></i><span>Leave Consumed Report
                                 </span>
                             </a>
@@ -499,17 +499,17 @@
                     </a>
                     <ul id="Ul5" class="nav-content collapse " data-bs-parent="#sidebar-nav">--%>
                 <%-- <li>
-                            <a href="~/profile/ViewProfile.aspx">
+                            <a href="../profile/ViewProfile.aspx">
                                 <i class="bi bi-circle"></i><span>View Profile</span>
                             </a>
                         </li>
                          <li>
-                            <a href="~/profile/EditProfile.aspx">
+                            <a href="../profile/EditProfile.aspx">
                                 <i class="bi bi-circle"></i><span>Edit Profile</span>
                             </a>
                         </li>
                          <li>
-                            <a href="~/profile/ChangePassword.aspx">
+                            <a href="../profile/ChangePassword.aspx">
                                 <i class="bi bi-circle"></i><span>Change Password</span>
                             </a>
                         </li> --%>
@@ -521,50 +521,50 @@
                     </a>
                     <ul id="Student1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li style="display: none" id="studentidpassword">
-                            <a href="~/Student/search_student_information.aspx">
+                            <a href="../Student/search_student_information.aspx">
                                 <i class="bi bi-circle"></i><span>Student ID/Password</span>
                             </a>
                         </li>
                         <li style="display: none" id="rollnolist">
-                            <a href="~/Student/RollNolist.aspx">
+                            <a href="../Student/RollNolist.aspx">
                                 <i class="bi bi-circle"></i><span>Roll No. List</span>
                             </a>
                         </li>
                         <li style="display: none" id="studentreports">
-                            <a href="~/Student/studentReports.aspx">
+                            <a href="../Student/studentReports.aspx">
                                 <i class="bi bi-circle"></i><span>Students Report</span>
                             </a>
                         </li>
                         <li style="display: none" id="studentmodify">
-                            <a href="~/Student/StudentModify.aspx">
+                            <a href="../Student/StudentModify.aspx">
                                 <i class="bi bi-circle"></i><span>Student Modify</span>
                             </a>
                         </li>
                         <li style="display: none" id="studentbonafide">
-                            <a href="~/Student/Studentbonafide.aspx">
+                            <a href="../Student/Studentbonafide.aspx">
 
                                 <i class="bi bi-circle"></i><span>Student Bonafide</span>
                             </a>
                         </li>
                         <li style="display: none" id="studenttransfercertificate">
-                            <a href="~/Student/studenttransfercertificate.aspx">
+                            <a href="../Student/studenttransfercertificate.aspx">
 
                                 <i class="bi bi-circle"></i><span>Student Transfer Certificate</span>
                             </a>
                         </li>
                         <%-- <li>
-                            <a href="~/Student/search_id_password.aspx"> 
+                            <a href="../Student/search_id_password.aspx"> 
                             
                                 <i class="bi bi-circle"></i><span>Search Student Information</span>
                             </a>
                         </li>--%>
                         <%--                         <li>
-                            <a href="~/profile/EditProfile.aspx">
+                            <a href="../profile/EditProfile.aspx">
                                 <i class="bi bi-circle"></i><span>Edit Profile</span>
                             </a>
                         </li>
                          <li>
-                            <a href="~/profile/ChangePassword.aspx">
+                            <a href="../profile/ChangePassword.aspx">
                                 <i class="bi bi-circle"></i><span>Change Password</span>
                             </a>
                         </li>                     --%>
@@ -576,17 +576,17 @@
                     </a>
                     <ul id="Ul7" class="nav-content collapse " data-bs-parent="#sidebar-nav">--%>
                 <%--                        <li>
-                            <a href="~/profile/ViewProfile.aspx">
+                            <a href="../profile/ViewProfile.aspx">
                                 <i class="bi bi-circle"></i><span>View Profile</span>
                         </li>
                             </a>
                          <li>
-                            <a href="~/profile/EditProfile.aspx">
+                            <a href="../profile/EditProfile.aspx">
                                 <i class="bi bi-circle"></i><span>Edit Profile</span>
                             </a>
                         </li>
                          <li>
-                            <a href="~/profile/ChangePassword.aspx">
+                            <a href="../profile/ChangePassword.aspx">
                                 <i class="bi bi-circle"></i><span>Change Password</span>
                             </a>
                         </li>                     --%>
@@ -629,18 +629,18 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="~/assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/assets/vendor/chart.js/chart.min.js"></script>
-    <script src="~/assets/vendor/echarts/echarts.min.js"></script>
-    <script src="~/assets/vendor/quill/quill.min.js"></script>
-    <script src="~/assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="~/assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="~/assets/vendor/php-email-form/validate.js"></script>
+    <script src="../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../assets/vendor/chart.js/chart.min.js"></script>
+    <script src="../../../assets/vendor/echarts/echarts.min.js"></script>
+    <script src="../../../assets/vendor/quill/quill.min.js"></script>
+    <script src="../../../assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="../../../assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="../../../assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="~/assets/js/main.js"></script>
-    <script src="~/Assets/JsForm/masterpage.js"></script>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../Assets/JsForm/masterpage.js"></script>
 </body>
 <script type="text/javascript">
     var empId = '<%=Session["emp_id"] %>'
@@ -662,11 +662,11 @@
                     contentType: "application/json; charset=utf-8",
                     success: function () {
                         // Session cleared successfully
-                        window.location.href = '~/Login.aspx'; // Redirect after session clear
+                        window.location.href = '../Login.aspx'; // Redirect after session clear
                     },
                     error: function () {
                         // Handle any error during session clearing
-                        window.location.href = '~/Login.aspx'; //redirect anyway.
+                        window.location.href = '../Login.aspx'; //redirect anyway.
                     }
                 });
             });

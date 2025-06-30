@@ -13548,7 +13548,7 @@ public class classWebMethods
                     //Byte[] img = (Byte[])resultset[5];
                     //s_img = Convert.ToBase64String(img);
                     //sdb.emp_photo = s_img;
-                    s_img = "~/Staff/Staff_Photo/" + stud_id + ".jpg";
+                    s_img = "../../Staff/Staff_Photo/" + stud_id + ".jpg";
                     sdb.emp_photo = s_img;
                     sdb.member_type = "E";
 
