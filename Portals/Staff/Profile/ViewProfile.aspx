@@ -11,8 +11,8 @@
             text-transform: capitalize;
         }
     </style>
-     <script src="notify-master/js/notify.js"></script>
-    <link href="notify-master/css/notify.css" rel="stylesheet" />
+     <script src="/assets/notify-master/js/notify.js"></script>
+    <link href="/assets/notify-master/css/notify.css" rel="stylesheet" />
     <script>
 
     </script>

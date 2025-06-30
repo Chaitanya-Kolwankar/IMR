@@ -82,9 +82,12 @@ function loadSidebarState() {
 }
 
 function fill_module() {
+    var fullUrl = window.location.href;
+    var match = fullUrl.match(/^(.*\/Staff)/i);
+    var baseUrl = match ? match[1] : '';
     $.ajax({
         type: "POST",
-        url: "http://staffportal.runasp.net/Portals/Staff/Login.aspx/fillModule",
+        url: baseUrl + "/Login.aspx/fillModule",
         data: '{emp_id:"' + empId + '"}',
         contentType: "application/json; charset=utf-8",
         success: function (data) {
@@ -104,9 +107,12 @@ function fill_module() {
 }
 
 function fill_form() {
+    var fullUrl = window.location.href;
+    var match = fullUrl.match(/^(.*\/Staff)/i);
+    var baseUrl = match ? match[1] : '';
     $.ajax({
         type: "POST",
-        url: "http://staffportal.runasp.net/Portals/Staff/Login.aspx/fillform",
+        url:  baseUrl + "/Login.aspx/fillform",
         data: '{emp_id:"' + empId + '"}',
         contentType: "application/json; charset=utf-8",
         success: function (data) {

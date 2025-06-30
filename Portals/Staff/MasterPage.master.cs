@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -15,7 +16,13 @@ public partial class MasterPage : System.Web.UI.MasterPage
         {
             try
             {
-                photos.Src = "../../Staff/Staff_Photo/" + Session["emp_id"].ToString() + ".jpg";
+
+                string filePath = Server.MapPath("~/Portals/Staff/Staff_Photo/" + Session["emp_id"].ToString() + ".jpg"); // for ASP.NET
+                if (File.Exists(filePath))
+                {
+                    photos.Src = "/Portals/Staff/Staff_Photo/" + Session["emp_id"].ToString() + ".jpg";
+                }
+                
                 DataTable dt = cls.fillDataTable("select * from m_academic order by ayid desc");
                 ddlyear.DataSource = dt;
                 ddlyear.DataTextField = "Duration";

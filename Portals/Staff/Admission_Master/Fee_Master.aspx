@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Portals/Staff/MasterPage.master" AutoEventWireup="true" CodeFile="Fee_Master.aspx.cs" Inherits="Fee_Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <script src="../../../Assets/js/jquery.datetimepicker.js"></script>
-    <link href="../../Assets/css/jquery.datetimepicker.css" rel="stylesheet" />
+    <%--<script src="/Assets/js/jquery.datetimepicker.js"></script>
+    <link href="/Assets/css/jquery.datetimepicker.css" rel="stylesheet" />
      <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />--%>
 
 
 
@@ -294,7 +294,7 @@ oncut="return false" ></asp:Label>
             return pattern.test(value);
         }
 
-        datepicker();
+        
         function datepicker() {
 
             $('[id*=lastdt]').datetimepicker(
@@ -310,6 +310,7 @@ oncut="return false" ></asp:Label>
                                //endDate: "+0m"
                            });
         }
+        datepicker();
 
         function notify(msg, type) {
             $.notify(msg, { type: type, animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.2, delay: 0 });

@@ -13,8 +13,8 @@
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="../assets/img/logo.jpg" rel="icon" />
-    <link href="../assets/img/logo.jpg" rel="apple-touch-icon" />
+    <link href="/Assets/img/vivalogo.png" rel="icon" />
+    <link href="/Assets/img/vivalogo.png" rel="apple-touch-icon" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
