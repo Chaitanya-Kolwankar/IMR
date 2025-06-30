@@ -35,7 +35,7 @@
 
 
     <!-- datepicker -->
-    <script src="~/~/Assets/js/jquery.datetimepicker.js"></script>
+    <script src="~/Assets/js/jquery.datetimepicker.js"></script>
     <link href="~/Assets/css/jquery.datetimepicker.css" rel="stylesheet" />
     <%--<script src="~/Assets/js/datepicker/daterangepicker.js"></script>--%>
 
@@ -43,9 +43,9 @@
 
 
     <!-- Notify -->
-    <script src="~/~/assets/notify-master/js/jquery-1.11.0.js"></script>
+    <script src="~/assets/notify-master/js/jquery-1.11.0.js"></script>
     <link href="~/assets/notify-master/css/notify.css" rel="stylesheet" />
-    <script src="~/~/assets/notify-master/js/notify.js"></script>
+    <script src="~/assets/notify-master/js/notify.js"></script>
 
 
     <!-- =======================================================
@@ -64,7 +64,7 @@
 
     <%--Datatable --%>
     <link href="~/Assets/datatable/DataTable.css" rel="stylesheet" />
-    <script src="~/~/Assets/datatable/DataTable.js"></script>
+    <script src="~/Assets/datatable/DataTable.js"></script>
     <%--Datatable --%>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -89,7 +89,7 @@
 
             <div class="d-flex align-items-center justify-content-between">
                 <a href="index.html" class="logo d-flex align-items-center">
-                    <img src="~/~/assets/img/mu.png" alt="">
+                    <img src="~/assets/img/mu.png" alt=""/>
                     <span class="d-none d-lg-block">IMR College</span>
                 </a>
                 <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -126,7 +126,7 @@
                     <li class="nav-item dropdown pe-3">
 
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                            <%--<img src="~/~/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">--%>
+                            <%--<img src="~/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">--%>
                             <img src="" runat="server" id="photos" class="rounded-circle" />
                             <span class="d-none d-md-block dropdown-toggle ps-2" runat="server">User</span>
                         </a>
@@ -629,18 +629,18 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="~/~/assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="~/~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/~/assets/vendor/chart.js/chart.min.js"></script>
-    <script src="~/~/assets/vendor/echarts/echarts.min.js"></script>
-    <script src="~/~/assets/vendor/quill/quill.min.js"></script>
-    <script src="~/~/assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="~/~/assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="~/~/assets/vendor/php-email-form/validate.js"></script>
+    <script src="~/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/vendor/chart.js/chart.min.js"></script>
+    <script src="~/assets/vendor/echarts/echarts.min.js"></script>
+    <script src="~/assets/vendor/quill/quill.min.js"></script>
+    <script src="~/assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="~/assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="~/assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="~/~/assets/js/main.js"></script>
-    <script src="~/~/Assets/JsForm/masterpage.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="~/Assets/JsForm/masterpage.js"></script>
 </body>
 <script type="text/javascript">
     var empId = '<%=Session["emp_id"] %>'
