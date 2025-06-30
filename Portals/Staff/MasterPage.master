@@ -1,0 +1,677 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>IMR College</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="~/assets/img/vivalogo.png" rel="icon" />
+    <link href="~/assets/img/vivalogo.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="~/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="~/assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="~/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="~/assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+
+    <!-- Template Main CSS File -->
+    <link href="~/assets/css/style.css" rel="stylesheet" />
+
+
+    <!-- datepicker -->
+    <script src="~/~/Assets/js/jquery.datetimepicker.js"></script>
+    <link href="~/Assets/css/jquery.datetimepicker.css" rel="stylesheet" />
+    <%--<script src="~/Assets/js/datepicker/daterangepicker.js"></script>--%>
+
+
+
+
+    <!-- Notify -->
+    <script src="~/~/assets/notify-master/js/jquery-1.11.0.js"></script>
+    <link href="~/assets/notify-master/css/notify.css" rel="stylesheet" />
+    <script src="~/~/assets/notify-master/js/notify.js"></script>
+
+
+    <!-- =======================================================
+  * Template Name: NiceAdmin - v2.2.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+
+    <%--font links --%>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo&family=Baloo+Bhai+2&family=Cabin&family=Roboto+Slab&display=swap" rel="stylesheet">
+    <%--font links--%>
+
+    <%--Datatable --%>
+    <link href="~/Assets/datatable/DataTable.css" rel="stylesheet" />
+    <script src="~/~/Assets/datatable/DataTable.js"></script>
+    <%--Datatable --%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        .sidebar {
+            background-image: linear-gradient(to top, #72afd3 60%, #37ecba 150%);
+        }
+
+
+        .sidebar-nav .nav-content a {
+            background: aquamarine;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body style="font-family: 'Roboto Slab', serif;">
+
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
+        <!-- ======= Header ======= -->
+        <header id="header" class="header fixed-top d-flex align-items-center">
+
+            <div class="d-flex align-items-center justify-content-between">
+                <a href="index.html" class="logo d-flex align-items-center">
+                    <img src="~/~/assets/img/mu.png" alt="">
+                    <span class="d-none d-lg-block">IMR College</span>
+                </a>
+                <i class="bi bi-list toggle-sidebar-btn"></i>
+                <div>
+
+                    <%--<h5>&nbsp&nbsp&nbsp&nbsp&nbsp Academic Year &nbsp</h5>--%>
+                </div>
+                &nbsp
+                <%--<asp:UpdatePanel runat="server"><ContentTemplate>--%>
+                <asp:DropDownList ID="ddlyear" CssClass="form-select" TabIndex="1" runat="server" AutoPostBack="true" Style="border-radius: 5px; width: 300px" OnSelectedIndexChanged="ddlyear_SelectedIndexChanged">
+                </asp:DropDownList>
+                <%--</ContentTemplate></asp:UpdatePanel>--%>
+            </div>
+            <!-- End Logo -->
+
+            <%-- <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div>--%>
+            <!-- End Search Bar -->
+
+            <nav class="header-nav ms-auto">
+                <ul class="d-flex align-items-center">
+
+                    <li class="nav-item d-block d-lg-none">
+                        <a class="nav-link nav-icon search-bar-toggle " href="#">
+                            <i class="bi bi-search"></i>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item dropdown pe-3">
+
+                        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                            <%--<img src="~/~/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">--%>
+                            <img src="" runat="server" id="photos" class="rounded-circle" />
+                            <span class="d-none d-md-block dropdown-toggle ps-2" runat="server">User</span>
+                        </a>
+                        <!-- End Profile Iamge Icon -->
+
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                            <li class="dropdown-header">
+                                <h6>Vss VSS</h6>
+                                <span>Web Designer</span>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="~/profile/ViewProfile.aspx">
+                                    <i class="bi bi-person"></i>
+                                    <span>My Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <%-- <li>
+                                <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                    <i class="bi bi-gear"></i>
+                                    <span>Account Settings</span>
+                                </a>
+                            </li>--%>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                                    <i class="bi bi-question-circle"></i>
+                                    <span>Need Help?</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="~/Login.aspx" id="signOutButton">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    <span>
+                                        <asp:Label runat="server"> Sign Out</asp:Label>
+                                        <%--<li><a href="Login.aspx"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>--%>
+                                    </span>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <!-- End Profile Dropdown Items -->
+                    </li>
+                    <!-- End Profile Nav -->
+
+                </ul>
+            </nav>
+            <!-- End Icons Navigation -->
+
+        </header>
+        <!-- End Header -->
+
+        <!-- ======= Sidebar ======= -->
+
+        <aside id="sidebar" class="sidebar">
+
+            <ul class="sidebar-nav" id="sidebar-nav">
+
+                <%-- <li class="nav-item">
+                    <a class="nav-link " href="index.html">
+                        <i class="bi bi-grid"></i>
+                        <span>Dashboard</span>
+                    </a>z
+                </li>--%>
+                <!-- End Dashboard Nav -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" style="display: none" id="Profile" data-bs-target="#Profile1" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-person"></i><span>Profile</span><i class="bi bi-chevron-down ms-auto"></i>
+
+                    </a>
+                    <ul id="Profile1" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                        <li id="viewprofile" style="display: none">
+                            <a href="~/profile/ViewProfile.aspx">
+                                <i class="bi bi-circle"></i><span>View Profile</span>
+                            </a>
+                        </li>
+                        <li id="editprofile" style="display: none">
+                            <a href="~/profile/EditProfile.aspx">
+                                <i class="bi bi-circle"></i><span>Edit Profile</span>
+                            </a>
+                        </li>
+                        <li id="changepassword" style="display: none">
+                            <a href="~/profile/ChangePassword.aspx">
+                                <i class="bi bi-circle"></i><span>Change Password</span>
+                            </a>
+                        </li>
+                        <li>
+                            <%--  <a href="~/Profile/Dashboard.aspx">
+                                <i class="bi bi-circle"></i><span>Dashboard</span>
+                            </a>--%>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" style="display: none" id="Library" data-bs-target="#Library1" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-book"></i><span>Library</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Library1" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+
+                        <li style="display: none" id="issuereturn">
+                            <a href="~/Library/IssueReturn.aspx">
+                                <i class="bi bi-circle"></i><span>Issue/Return</span>
+                            </a>
+                        </li>
+
+                        <li style="display: none" id="return">
+                            <a href="~/Library/return_circulation.aspx">
+                                <i class="bi bi-circle"></i><span>Return</span>
+                            </a>
+                        </li>
+
+                        <li style="display: none" id="issuereturnreport">
+                            <a href="~/Library/IssueReturnReport.aspx">
+                                <i class="bi bi-circle"></i><span>IssueReturnReport</span>
+                            </a>
+                        </li>
+
+                        <li style="display: none" id="booksearch">
+                            <a href="~/Library/book_search.aspx">
+                                <i class="bi bi-circle"></i><span>Book Search</span>
+                            </a>
+                        </li>
+
+
+                        <li id="bookmaster" style="display: none">
+                            <a href="~/Library/BookmasterNew.aspx">
+                                <i class="bi bi-circle"></i><span>Book master</span>
+                            </a>
+                        </li>
+
+                        <li style="display: none" id="barcodeprinting">
+                            <a href="~/Library/AccessionNumberPrinting.aspx">
+                                <i class="bi bi-circle"></i><span>Barcode Printing</span>
+                            </a>
+                        </li>
+
+                        <li style="display: none" id="catlogue_report">
+                            <a href="~/Library/CatlogReport.aspx">
+                                <i class="bi bi-circle"></i><span>Catelogue Report</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" style="display: none" id="AdmissionMaster" data-bs-target="#AdmissionMaster1" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-menu-button-wide"></i><span>Admission Master</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="AdmissionMaster1" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                        <li id="academicyear" style="display: none">
+                            <a href="~/Admission_master/academic_year.aspx">
+                                <i class="bi bi-circle"></i><span>Academic year</span>
+                            </a>
+                        </li>
+                        <li id="coursemaster" style="display: none">
+                            <a href="~/Admission_master/Course_Master.aspx">
+                                <i class="bi bi-circle"></i><span>Course Master</span>
+                            </a>
+                        </li>
+                        <li id="defineintake" style="display: none">
+                            <a href="~/Admission_master/Define_Intake.aspx">
+                                <i class="bi bi-circle"></i><span>Define Intake</span>
+                            </a>
+                        </li>
+
+                        <li id="feemaster" style="display: none">
+                            <a href="~/Admission_Master/Fee_Master.aspx">
+                                <i class="bi bi-circle"></i><span>Fee master</span></a>
+                        </li>
+                        <li id="groupmapping" style="display: none">
+                            <a href="~/Admission_Master/GroupMapping.aspx">
+                                <i class="bi bi-circle"></i><span>Group Mapping</span></a>
+                        </li>
+                        <%-- <li id="categorycaste" style="display: none">
+                            <a href="~/Admission_Master/CategoryCast.aspx">
+                                <i class="bi bi-circle"></i><span>Category Caste</span>
+                            </a>
+                        </li>--%>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" style="display: none" id="PreAdmission" data-bs-target="#PreAdmission1" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-menu-button-wide"></i><span>Pre Admission</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="PreAdmission1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <%--<li>
+                            <a href="~/Pre_Admission/stud_eligiblity.aspx">
+                                <i class="bi bi-circle"></i><span>Define Eligibility</span>
+                            </a>
+                        </li>--%>
+
+                        <%--  <li>
+                            <a href="~/Pre_Admission/AdmissionURL.aspx">
+                                <i class="bi bi-circle"></i><span>Admission Url ON/OFF</span>
+                            </a>
+                        </li>--%>
+                        <li id="updateregistration" style="display: none">
+                            <a href="~/Pre_Admission/searchstudent.aspx">
+                                <i class="bi bi-circle"></i><span>Update Registration</span>
+                            </a>
+                        </li>
+                        <li id="defineeligibility" style="display: none">
+                            <a href="~/Pre_Admission/student_eligibility.aspx">
+                                <i class="bi bi-circle"></i><span>Define Eligibility </span>
+
+                            </a>
+                        </li>
+                        <li id="naacbulkadmissionform" style="display: none">
+                            <a href="~/Pre_Admission/NaacAdmissionFormPrint.aspx">
+                                <i class="bi bi-circle"></i><span>Bulk Admission Form</span>
+                            </a>
+                        </li>
+
+                        <%-- <li>Student_transfer_payment
+                            <a href="~/Pre_Admission/searchstudent.aspx">
+                                <i class="bi bi-circle"> </i><span>Edit Applicant Data</span>
+                            </a>
+                        </li>--%>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" style="display: none" id="Admission" data-bs-target="#Admission1" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-menu-button-wide"></i><span>Admission</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Admission1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li id="applicantidpassword" style="display: none">
+                            <a href="~/Admission/ApplicantSearch.aspx">
+                                <i class="bi bi-circle"></i><span>Applicant ID / Password</span>
+                            </a>
+                        </li>
+
+                        <li id="newstudent" style="display: none">
+                            <a href="~/Admission/NewStudent.aspx">
+                                <i class="bi bi-circle"></i><span>New Student</span>
+                            </a>
+                        </li>
+                        <li id="studentinhousetransfer" style="display: none">
+                            <a href="~/Admission/Student_transfer_payment.aspx">
+                                <i class="bi bi-circle"></i><span>Student Inhouse Transfer </span>
+                            </a>
+                        </li>
+                        <li id="assignrollno" style="display: none">
+                            <a href="~/Admission/AssignRollNo.aspx">
+                                <i class="bi bi-circle"></i><span>Assign RollNo </span>
+                            </a>
+                        </li>
+                        <li id="studentadmissioncancellation" style="display: none">
+                            <a href="~/Admission/AdmissionCancellation.aspx">
+                                <i class="bi bi-circle"></i><span>Student Admission Cancellation  </span>
+                            </a>
+                        </li>
+                        <li id="applicantreport" style="display: none">
+                            <a href="~/Admission/applicantreport.aspx">
+                                <i class="bi bi-circle"></i><span>Applicant Report</span>
+                            </a>
+                        </li>
+                        <%-- <li>
+                            <a href="ViewProfile.aspx">
+                                <i class="bi bi-circle"></i><span>Student Verification</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ViewProfile.aspx">
+                                <i class="bi bi-circle"></i><span>Admission Statistic</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ViewProfile.aspx">
+                                <i class="bi bi-circle"></i><span>Studnet Transfer</span>
+                            </a>
+                        </li>--%>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" id="Fee" style="display: none" data-bs-target="#Fee1" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-menu-button-wide"></i><span>Fees</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Fee1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li style="display: none" id="feeentry">
+                            <a href="~/Fee/FeeEntry_New.aspx">
+                                <i class="bi bi-search"></i><span>Fee Entry</span>
+                            </a>
+                        </li>
+                        <li id="feereport" style="display: none">
+                            <a href="~/Fee/Feereport.aspx">
+                                <i class="bi bi-search"></i><span>Fee Report</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" id="Employee" style="display: none" data-bs-target="#Employee1" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-person"></i><span>Employee</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Employee1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li style="display: none" id="employeesearch">
+                            <a href="~/Employee/EmployeeSearch.aspx">
+                                <i class="bi bi-circle"></i><span>Employee Search</span>
+                            </a>
+                        </li>
+                        <li style="display: none" id="employeeentry">
+                            <a href="~/Employee/EmployeeEntry.aspx">
+                                <i class="bi bi-circle"></i><span>Employee Entry
+                                </span>
+                            </a>
+                        </li>
+                        <li style="display: none" id="employeedetails">
+                            <a href="~/Employee/EmployeeDetails.aspx">
+                                <i class="bi bi-circle"></i><span>Employee Details
+                                </span>
+                            </a>
+                        </li>
+                        <%--<li>
+                            <a href="~/profile/EditProfile.aspx">
+                                <i class="bi bi-circle"></i><span>Edit Profile</span>
+                            </a>
+                        </li>
+                         <li>
+                            <a href="~/profile/ChangePassword.aspx">
+                                <i class="bi bi-circle"></i><span>Change Password</span>
+                            </a>
+                        </li> --%>
+
+                        <li style="display: none" id="leaveDefine">
+                            <a href="~/Employee/leaveDefine.aspx">
+                                <i class="bi bi-circle"></i><span>Leave Define
+                                </span>
+                            </a>
+                        </li>
+
+                        <li style="display: none" id="leaveApplication">
+                            <a href="~/Employee/leaveApplication.aspx">
+                                <i class="bi bi-circle"></i><span>Leave Application
+                                </span>
+                            </a>
+                        </li>
+
+                        <li style="display: none" id="leaveApproval">
+                            <a href="~/Employee/leaveApproval.aspx">
+                                <i class="bi bi-circle"></i><span>Leave Approval
+                                </span>
+                            </a>
+                        </li>
+
+                        <li style="display: none" id="leaveConsumedRpt">
+                            <a href="~/Employee/leaveConsumedRpt.aspx">
+                                <i class="bi bi-circle"></i><span>Leave Consumed Report
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <%--<li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Ul5" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-person"></i><span>Fee</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Ul5" class="nav-content collapse " data-bs-parent="#sidebar-nav">--%>
+                <%-- <li>
+                            <a href="~/profile/ViewProfile.aspx">
+                                <i class="bi bi-circle"></i><span>View Profile</span>
+                            </a>
+                        </li>
+                         <li>
+                            <a href="~/profile/EditProfile.aspx">
+                                <i class="bi bi-circle"></i><span>Edit Profile</span>
+                            </a>
+                        </li>
+                         <li>
+                            <a href="~/profile/ChangePassword.aspx">
+                                <i class="bi bi-circle"></i><span>Change Password</span>
+                            </a>
+                        </li> --%>
+                <%--    </ul>
+                </li>--%>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" style="display: none" id="Student" data-bs-target="#Student1" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-person"></i><span>Student</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Student1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li style="display: none" id="studentidpassword">
+                            <a href="~/Student/search_student_information.aspx">
+                                <i class="bi bi-circle"></i><span>Student ID/Password</span>
+                            </a>
+                        </li>
+                        <li style="display: none" id="rollnolist">
+                            <a href="~/Student/RollNolist.aspx">
+                                <i class="bi bi-circle"></i><span>Roll No. List</span>
+                            </a>
+                        </li>
+                        <li style="display: none" id="studentreports">
+                            <a href="~/Student/studentReports.aspx">
+                                <i class="bi bi-circle"></i><span>Students Report</span>
+                            </a>
+                        </li>
+                        <li style="display: none" id="studentmodify">
+                            <a href="~/Student/StudentModify.aspx">
+                                <i class="bi bi-circle"></i><span>Student Modify</span>
+                            </a>
+                        </li>
+                        <li style="display: none" id="studentbonafide">
+                            <a href="~/Student/Studentbonafide.aspx">
+
+                                <i class="bi bi-circle"></i><span>Student Bonafide</span>
+                            </a>
+                        </li>
+                        <li style="display: none" id="studenttransfercertificate">
+                            <a href="~/Student/studenttransfercertificate.aspx">
+
+                                <i class="bi bi-circle"></i><span>Student Transfer Certificate</span>
+                            </a>
+                        </li>
+                        <%-- <li>
+                            <a href="~/Student/search_id_password.aspx"> 
+                            
+                                <i class="bi bi-circle"></i><span>Search Student Information</span>
+                            </a>
+                        </li>--%>
+                        <%--                         <li>
+                            <a href="~/profile/EditProfile.aspx">
+                                <i class="bi bi-circle"></i><span>Edit Profile</span>
+                            </a>
+                        </li>
+                         <li>
+                            <a href="~/profile/ChangePassword.aspx">
+                                <i class="bi bi-circle"></i><span>Change Password</span>
+                            </a>
+                        </li>                     --%>
+                    </ul>
+                </li>
+                <%--<li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Ul7" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-person"></i><span>Salary</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Ul7" class="nav-content collapse " data-bs-parent="#sidebar-nav">--%>
+                <%--                        <li>
+                            <a href="~/profile/ViewProfile.aspx">
+                                <i class="bi bi-circle"></i><span>View Profile</span>
+                        </li>
+                            </a>
+                         <li>
+                            <a href="~/profile/EditProfile.aspx">
+                                <i class="bi bi-circle"></i><span>Edit Profile</span>
+                            </a>
+                        </li>
+                         <li>
+                            <a href="~/profile/ChangePassword.aspx">
+                                <i class="bi bi-circle"></i><span>Change Password</span>
+                            </a>
+                        </li>                     --%>
+                <%--    </ul>
+                </li>--%>
+            </ul>
+            <!-- End Components Nav -->
+
+
+
+        </aside>
+
+        <!-- End Sidebar-->
+        <div style="background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);position: absolute;top: 0; left: 0;width: 100vw;height: 100vh;overflow: auto;background-size: contain;">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    <%--<div class="page-wrapper">
+        <div class="container-fluid">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <footer class="footer text-center">
+            Designed and Developed by VIVA Software Solutions
+        </footer>
+    </div>--%>
+    <%--<footer id="footer" class="footer" style="bottom:0; text-align:center;background-color:white;position:absolute">
+        <div class="copyright">
+            &copy; Copyright <strong><span>VIVA Software Solutions</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+         
+            
+        </div>
+    </footer>--%>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="~/~/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="~/~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/~/assets/vendor/chart.js/chart.min.js"></script>
+    <script src="~/~/assets/vendor/echarts/echarts.min.js"></script>
+    <script src="~/~/assets/vendor/quill/quill.min.js"></script>
+    <script src="~/~/assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="~/~/assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="~/~/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/~/assets/js/main.js"></script>
+    <script src="~/~/Assets/JsForm/masterpage.js"></script>
+</body>
+<script type="text/javascript">
+    var empId = '<%=Session["emp_id"] %>'
+</script>
+
+    <script>
+        $(document).ready(function () {
+            addSignOutListener(); // Add this line
+        });
+
+        function addSignOutListener() {
+            $('#signOutButton').on('click', function () {
+                localStorage.removeItem('moduleState');
+                localStorage.removeItem('formState');
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Portals/Staff/Login.aspx/ClearSession",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        // Session cleared successfully
+                        window.location.href = '~/Login.aspx'; // Redirect after session clear
+                    },
+                    error: function () {
+                        // Handle any error during session clearing
+                        window.location.href = '~/Login.aspx'; //redirect anyway.
+                    }
+                });
+            });
+        }
+    </script>
+
+
+</html>
