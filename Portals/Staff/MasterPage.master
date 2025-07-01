@@ -13,41 +13,41 @@
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="/Assets/img/vivalogo.png" rel="icon" />
-    <link href="/Assets/img/vivalogo.png" rel="apple-touch-icon" />
+    <link href="<%= ResolveUrl("~/Assets/img/vivalogo.png") %>" rel="icon" />
+    <link href="<%= ResolveUrl("~/Assets/img/vivalogo.png") %>" rel="apple-touch-icon" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
 
     <%--Jquery--%>
-    <script src="/Assets/notify-master/js/jquery-1.11.0.js"></script>
+    <script src="<%= ResolveUrl("~/Assets/notify-master/js/jquery-1.11.0.js") %>"></script>
 
     <!-- Vendor CSS Files -->
-    <link href="/Assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/Assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-    <link href="/Assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-    <link href="/Assets/vendor/quill/quill.snow.css" rel="stylesheet" />
-    <link href="/Assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
-    <link href="/Assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
-    <link href="/Assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/bootstrap/css/bootstrap.min.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/bootstrap-icons/bootstrap-icons.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/boxicons/css/boxicons.min.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/quill/quill.snow.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/quill/quill.bubble.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/remixicon/remixicon.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/simple-datatables/style.css") %>" rel="stylesheet" />
 
 
     <!-- Template Main CSS File -->
-    <link href="/Assets/css/style.css" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/css/style.css") %>" rel="stylesheet" />
 
 
     <!-- datepicker -->
-    <script src="/Assets/js/jquery.datetimepicker.js"></script>
-    <link href="/Assets/css/jquery.datetimepicker.css" rel="stylesheet" />
+    <script src="<%= ResolveUrl("~/Assets/js/jquery.datetimepicker.js") %>"></script>
+    <link href="<%= ResolveUrl("~/Assets/css/jquery.datetimepicker.css") %>" rel="stylesheet" />
     <%--<script src="../../Assets/js/datepicker/daterangepicker.js"></script>--%>
 
 
 
 
     <!-- Notify -->
-    <link href="/Assets/notify-master/css/notify.css" rel="stylesheet" />
-    <script src="/Assets/notify-master/js/notify.js"></script>
+    <link href="<%= ResolveUrl("~/Assets/notify-master/css/notify.css") %>" rel="stylesheet" />
+    <script src="<%= ResolveUrl("~/Assets/notify-master/js/notify.js") %>"></script>
 
 
     <!-- =======================================================
@@ -65,8 +65,8 @@
     <%--font links--%>
 
     <%--Datatable --%>
-    <link href="/Assets/datatable/DataTable.css" rel="stylesheet" />
-    <script src="/Assets/datatable/DataTable.js"></script>
+    <link href="<%= ResolveUrl("~/Assets/datatable/DataTable.css") %>" rel="stylesheet" />
+    <script src="<%= ResolveUrl("~/Assets/datatable/DataTable.js") %>"></script>
     <%--Datatable --%>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -631,18 +631,18 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="/Assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="/Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/Assets/vendor/chart.js/chart.min.js"></script>
-    <script src="/Assets/vendor/echarts/echarts.min.js"></script>
-    <script src="/Assets/vendor/quill/quill.min.js"></script>
-    <script src="/Assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="/Assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="/Assets/vendor/php-email-form/validate.js"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/apexcharts/apexcharts.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/bootstrap/js/bootstrap.bundle.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/chart.js/chart.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/echarts/echarts.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/quill/quill.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/simple-datatables/simple-datatables.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/tinymce/tinymce.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/php-email-form/validate.js") %>"></script>
 
     <!-- Template Main JS File -->
-    <script src="/Assets/js/main.js"></script>
-    <script src="/Assets/JsForm/masterpage.js"></script>
+    <script src="<%= ResolveUrl("~/Assets/js/main.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/JsForm/masterpage.js") %>"></script>
 </body>
 <script type="text/javascript">
     var empId = '<%=Session["emp_id"] %>'

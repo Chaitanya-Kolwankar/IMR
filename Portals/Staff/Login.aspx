@@ -3,36 +3,74 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server">
+<head runat="server">
 
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>IMR STAFF PORTAL</title>
+    <title>IMR College</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="/Assets/img/vivalogo.png" rel="icon" />
-    <link href="/Assets/img/vivalogo.png" rel="apple-touch-icon" />
+    <link href="<%= ResolveUrl("~/Assets/img/vivalogo.png") %>" rel="icon" />
+    <link href="<%= ResolveUrl("~/Assets/img/vivalogo.png") %>" rel="apple-touch-icon" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
 
+    <%--Jquery--%>
+    <script src="<%= ResolveUrl("~/Assets/notify-master/js/jquery-1.11.0.js") %>"></script>
+
     <!-- Vendor CSS Files -->
-    <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-    <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-    <link href="../../assets/vendor/quill/quill.snow.css" rel="stylesheet" />
-    <link href="../../assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
-    <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
-    <link href="../../assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/bootstrap/css/bootstrap.min.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/bootstrap-icons/bootstrap-icons.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/boxicons/css/boxicons.min.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/quill/quill.snow.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/quill/quill.bubble.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/remixicon/remixicon.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/simple-datatables/style.css") %>" rel="stylesheet" />
+
 
     <!-- Template Main CSS File -->
-    <link href="../../assets/css/style.css" rel="stylesheet" />
-   
- <style>
+    <link href="<%= ResolveUrl("~/Assets/css/style.css") %>" rel="stylesheet" />
+
+
+    <!-- datepicker -->
+    <script src="<%= ResolveUrl("~/Assets/js/jquery.datetimepicker.js") %>"></script>
+    <link href="<%= ResolveUrl("~/Assets/css/jquery.datetimepicker.css") %>" rel="stylesheet" />
+    <%--<script src="../../Assets/js/datepicker/daterangepicker.js"></script>--%>
+
+
+
+
+    <!-- Notify -->
+    <link href="<%= ResolveUrl("~/Assets/notify-master/css/notify.css") %>" rel="stylesheet" />
+    <script src="<%= ResolveUrl("~/Assets/notify-master/js/notify.js") %>"></script>
+
+
+    <!-- =======================================================
+  * Template Name: NiceAdmin - v2.2.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+
+    <%--font links --%>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo&family=Baloo+Bhai+2&family=Cabin&family=Roboto+Slab&display=swap" rel="stylesheet"/>
+    <%--font links--%>
+
+    <%--Datatable --%>
+    <link href="<%= ResolveUrl("~/Assets/datatable/DataTable.css") %>" rel="stylesheet" />
+    <script src="<%= ResolveUrl("~/Assets/datatable/DataTable.js") %>"></script>
+    <%--Datatable --%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
      body {
 
          background-image:url("../../assets/img/bckimgimr.jpg ");
@@ -44,8 +82,7 @@
      }
    
 
- </style>   
-    
+ </style> 
 </head>
 <body>
 
@@ -143,18 +180,18 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../assets/vendor/chart.js/chart.min.js"></script>
-  <script src="../../assets/vendor/echarts/echarts.min.js"></script>
-  <script src="../../assets/vendor/quill/quill.min.js"></script>
-  <script src="../../assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="../../assets/vendor/php-email-form/validate.js"></script>
-                 
-  <!-- Template Main JS File -->
-  <script src="../../assets/js/main.js"></script>
+   <!-- Vendor JS Files -->
+    <script src="<%= ResolveUrl("~/Assets/vendor/apexcharts/apexcharts.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/bootstrap/js/bootstrap.bundle.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/chart.js/chart.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/echarts/echarts.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/quill/quill.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/simple-datatables/simple-datatables.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/tinymce/tinymce.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Assets/vendor/php-email-form/validate.js") %>"></script>
+
+    <!-- Template Main JS File -->
+    <script src="<%= ResolveUrl("~/Assets/js/main.js") %>"></script>
 
 </body>
 
