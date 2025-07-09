@@ -68,8 +68,7 @@
     <link href="<%= ResolveUrl("~/Assets/datatable/DataTable.css") %>" rel="stylesheet" />
     <script src="<%= ResolveUrl("~/Assets/datatable/DataTable.js") %>"></script>
     <%--Datatable --%>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+
     <style>
      body {
 
