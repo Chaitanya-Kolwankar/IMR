@@ -68,6 +68,7 @@
     <link href="<%= ResolveUrl("~/Assets/datatable/DataTable.css") %>" rel="stylesheet" />
     <script src="<%= ResolveUrl("~/Assets/datatable/DataTable.js") %>"></script>
     <%--Datatable --%>
+
     <style>
      body {
 
