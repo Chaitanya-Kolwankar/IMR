@@ -16,708 +16,639 @@ using System.Collections.Generic;
 
 public partial class Fee_Master : System.Web.UI.Page
 {
-    
     Class1 cls = new Class1();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            try
-            {
-                if (Convert.ToString(Session["Emp_id"]) == "")
-                {
-                    Response.Redirect("~/Portals/Staff/Login.aspx");
-                }
-                else
-                {
-                    //LoadDdlYear();
-                    ddlFaculty();
-                    //txtstruct.Enabled = false;
-                    //txtamunt.Enabled = false;
-                    //rankTxt.Enabled = false;
-                    //lastdt.Enabled = false;
-                    //save.Enabled = false;
-                }
-            }
-            catch (Exception d)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' " + d.Message + "','danger')", true);
-            }
+            dataonpageload();
         }
-        //   GrdIn.HeaderRow.TableSection = TableRowSection.TableHeader;
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "func", "datepicker()", true);
     }
-    //public void LoadDdlYear()
-    //{
-    //    DataTable dt = cls.fillDataTable("select * from m_academic order by ayid desc");
-    //    ddlyearfee.DataSource = dt;
-    //    ddlyearfee.DataTextField = "Duration";
-    //    ddlyearfee.DataValueField = "AYID";
-    //    ddlyearfee.DataBind();
 
-    //    ddlyearfee.Items.Insert(0, "----SELECT----");
-    //    ddlyearfee.SelectedIndex = 1;
-    //    Session["Year"] = dt.Rows[0]["AYID"];
-    //}
-    public void ddlFaculty()
+    public void dataonpageload()
     {
-        try
-        {
-
-            string facultyQuery = "select faculty_id,faculty_name from m_crs_faculty where del_flag=0";
-            DataTable dt = new DataTable();
-            dt = cls.fillDataTable(facultyQuery);
-            ddl_Faculty.DataTextField = dt.Columns["faculty_name"].ToString();
-            ddl_Faculty.DataValueField = dt.Columns["faculty_id"].ToString();
-            ddl_Faculty.DataSource = dt;
-            ddl_Faculty.DataBind();
-            ddl_Faculty.Items.Insert(0, new ListItem("--Select--", "na"));
-            // grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-
-
-        }
-        catch (Exception d)
-        {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' " + d.Message + "','danger')", true);
-            // grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-        }
+        cls.SetdropdownForMember1(ddl_faculty, "m_crs_faculty", "faculty_name", "faculty_Id", "faculty_name <> ''   and del_flag=0");
     }
 
-    protected void ddl_Faculty_SelectedIndexChanged(object sender, EventArgs e)
+    protected void ddl_faculty_SelectedIndexChanged(object sender, EventArgs e)
     {
-        try
+        if (ddl_course.Items.Count > 0)
         {
-            string queryFor = "select course_id,course_name from m_crs_course_tbl where del_flag='0' and faculty_id='" + ddl_Faculty.SelectedValue.ToString() + "'";
-            DataTable dtcrs = new DataTable();
-            dtcrs = cls.fillDataTable(queryFor);
-            ddl_course.DataTextField = dtcrs.Columns["course_name"].ToString();
-            ddl_course.DataValueField = dtcrs.Columns["course_id"].ToString();
-            ddl_course.DataSource = dtcrs;
-            ddl_course.DataBind();
-            ddl_course.Items.Insert(0, new ListItem("--Select--", "na"));
-            if (ddl_Faculty.SelectedIndex == 0)
-            {
-                ddl_course.Items.Clear();
-                ddl_Subcourse.Items.Clear();
-                dll_Group.Items.Clear();
-                rankTxt.Text = "";
-                rankTxt.Text = "";
-            }
-            
-            grid.DataBind();
-            grid.DataSource = null;
-            txtstruct.Text = "";
-            txtamunt.Text = "";
-            lastdt.Text = "";
-            //   grid.HeaderRow.TableSection = TableRowSection.TableHeader;
+            ddl_course.Items.Clear();
+        }
+        if (ddl_subcourse.Items.Count > 0)
+        {
+            ddl_subcourse.Items.Clear();
+        }
+        if (ddl_group.Items.Count > 0)
+        {
+            ddl_group.Items.Clear();
+        }
+        if (ddl_struct_type.Items.Count > 0)
+        {
+            ddl_struct_type.Items.Clear();
+        }
+        clear_grd();
+        clear_grd_sub();
 
-        }
-        catch (Exception d)
-        {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' " + d.Message + "','danger')", true);
-            //    grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-        }
+        cls.SetdropdownForMember1(ddl_course, "m_crs_course_tbl", "Course_name", "course_id", "Course_name <> '' And faculty_id='" + ddl_faculty.SelectedValue + "' and del_flag=0");
     }
+
     protected void ddl_course_SelectedIndexChanged(object sender, EventArgs e)
     {
+        if (ddl_subcourse.Items.Count > 0)
+        {
+            ddl_subcourse.Items.Clear();
+        }
+        if (ddl_group.Items.Count > 0)
+        {
+            ddl_group.Items.Clear();
+        }
+        if (ddl_struct_type.Items.Count > 0)
+        {
+            ddl_struct_type.Items.Clear();
+        }
+        clear_grd();
+        clear_grd_sub();
+        if (ddl_course.SelectedValue != "0")
+        {
+            cls.SetdropdownForMember1(ddl_subcourse, "m_crs_subcourse_tbl", "subcourse_name", "subcourse_id", "subcourse_name <> '' And course_id='" + ddl_course.SelectedValue + "' and del_flag=0");
+            fill_subgrd();
+        }
+    }
+
+    protected void ddl_subcourse_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddl_group.Items.Count > 0)
+        {
+            ddl_group.Items.Clear();
+        }
+        if (ddl_struct_type.Items.Count > 0)
+        {
+            ddl_struct_type.Items.Clear();
+        }
+        clear_grd();
+        clear_grd_sub();
+        if (ddl_subcourse.SelectedValue != "0")
+        {
+            cls.SetdropdownForMember1(ddl_group, "m_crs_subjectgroup_tbl", "Group_title", "Group_id", "subcourse_id='" + ddl_subcourse.SelectedValue + "'  and del_flag=0 ");
+            fill_subgrd();
+        }
+    }
+
+    protected void ddl_group_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddl_struct_type.Items.Count > 0)
+        {
+            ddl_struct_type.Items.Clear();
+        }
+        clear_grd();
+        clear_grd_sub();
+        if (ddl_struct_type.SelectedValue != "0")
+        {
+            cls.SetdropdownForMember1(ddl_struct_type, "m_struct_type", "Struct_type_name", "Struct_type_name", "del_flag=0 ");
+            fill_subgrd();
+        }
+    }
+
+    protected void ddl_struct_type_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        clear_grd();
+        clear_grd_sub();
+        if (ddl_struct_type.SelectedValue != "0")
+        {
+            fill_grd();
+            fill_subgrd();
+        }
+    }
+
+    public void fill_grd()
+    {
+        string qry = "select  Struct_id,Struct_name,Amount,Rank,'' updt_flag from m_FeeMaster where group_id = '" + ddl_group.SelectedValue + "' and AYID = '" + Session["Year"].ToString() + "' and Struct_type='" + ddl_struct_type.SelectedValue + "' and del_flag=0 order by group_id";
+        DataTable dt = cls.fillDataTable(qry);
+        if (dt.Rows.Count > 0)
+        {
+            grd_fee.DataSource = dt;
+            grd_fee.DataBind();
+            ViewState["MainTable"] = dt;
+            ViewState["CurrentTable"] = dt;
+            for (int i = 0; i < grd_fee.Rows.Count; i++)
+            {
+                TextBox txt_struct = (TextBox)grd_fee.Rows[i].FindControl("txt_struct");
+                TextBox txt_amount = (TextBox)grd_fee.Rows[i].FindControl("txt_amount");
+                TextBox txt_rank = (TextBox)grd_fee.Rows[i].FindControl("txt_rank");
+                LinkButton btn_remove = (LinkButton)grd_fee.Rows[i].FindControl("btn_remove");
+                txt_struct.Enabled = false;
+                txt_amount.Enabled = false;
+                txt_rank.Enabled = false;
+                btn_remove.Enabled = false;
+                if (btn_remove.Enabled == false)
+                {
+                    btn_remove.CssClass = "btn btn-outline-secondary bg-secondary-light form-control";
+                }
+            }
+        }
+        else
+        {
+            ViewState["MainTable"] = null;
+            DataTable dt1 = new DataTable();
+            DataRow dr = null;
+            dt1.Columns.Add(new DataColumn("Struct_id", typeof(string)));
+            dt1.Columns.Add(new DataColumn("Struct_name", typeof(string)));
+            dt1.Columns.Add(new DataColumn("Amount", typeof(string)));
+            dt1.Columns.Add(new DataColumn("Rank", typeof(string)));
+            dt1.Columns.Add(new DataColumn("updt_flag", typeof(string)));
+            dr = dt1.NewRow();
+            dr["Struct_id"] = string.Empty;
+            dr["Struct_name"] = string.Empty;
+            dr["Amount"] = string.Empty;
+            dr["Rank"] = string.Empty;
+            dr["updt_flag"] = string.Empty;
+            dt1.Rows.Add(dr);
+            //Store the DataTable in ViewState
+            ViewState["CurrentTable"] = dt1;
+            grd_fee.DataSource = dt1;
+            grd_fee.DataBind();
+        }
+    }
+
+    protected void btn_add_Click(object sender, EventArgs e)
+    {
+        int rowIndex = 0;
+        DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+        if (ViewState["CurrentTable"] != null)
+        {
+            DataRow drCurrentRow = null;
+            if (dtCurrentTable.Rows.Count > 0)
+            {
+                for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                {
+                    //extract the TextBox values
+                    Label updt = (Label)grd_fee.Rows[rowIndex].FindControl("updt_flag");
+                    Label box = (Label)grd_fee.Rows[rowIndex].FindControl("struct_id");
+                    TextBox box1 = (TextBox)grd_fee.Rows[rowIndex].FindControl("txt_struct");
+                    TextBox box2 = (TextBox)grd_fee.Rows[rowIndex].FindControl("txt_amount");
+                    TextBox box3 = (TextBox)grd_fee.Rows[rowIndex].FindControl("txt_rank");
+                    drCurrentRow = dtCurrentTable.NewRow();
+                    dtCurrentTable.Rows[i - 1]["Struct_id"] = box.Text;
+                    dtCurrentTable.Rows[i - 1]["Struct_name"] = box1.Text;
+                    dtCurrentTable.Rows[i - 1]["Amount"] = box2.Text;
+                    dtCurrentTable.Rows[i - 1]["Rank"] = box3.Text;
+                    dtCurrentTable.Rows[i - 1]["updt_flag"] = updt.Text;
+                    rowIndex++;
+                }
+                dtCurrentTable.Rows.Add(drCurrentRow);
+                ViewState["CurrentTable"] = dtCurrentTable;
+                grd_fee.DataSource = dtCurrentTable;
+                grd_fee.DataBind();
+            }
+        }
+        SetPreviousData();
+    }
+
+    private void SetPreviousData()
+    {
         try
         {
-
-
-            string queryFor = "select subcourse_id,subcourse_name from m_crs_subcourse_tbl where course_id='" + ddl_course.SelectedValue.ToString() + "' and del_flag='0'";
-            DataTable dtsubcrs = new DataTable();
-            dtsubcrs = cls.fillDataTable(queryFor);
-            if (dtsubcrs.Rows.Count > 0)
-            {               
-                ddl_Subcourse.DataTextField = dtsubcrs.Columns["subcourse_name"].ToString();
-                ddl_Subcourse.DataValueField = dtsubcrs.Columns["subcourse_id"].ToString();
-                ddl_Subcourse.DataSource = dtsubcrs;             
-                ddl_Subcourse.DataBind();
-                grid.DataSource = null;
-                ddl_Subcourse.Items.Insert(0, new ListItem("--Select--", "na"));
-            }
-            else 
+            int rowIndex = 0;
+            if (ViewState["CurrentTable"] != null)
             {
-                if (ddl_course.SelectedIndex == 0)
+                DataTable dt = (DataTable)ViewState["CurrentTable"];
+                if (dt.Rows.Count > 0)
                 {
-                    grid.DataSource = null;
-                    grid.DataBind();
-                    dll_Group.Items.Clear();
-                    ddl_Subcourse.Items.Clear();                   
-                    txtstruct.Text = "";
-                    txtamunt.Text = "";
-                    rankTxt.Text = "";
-                    lastdt.Text = "";
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Label box = (Label)grd_fee.Rows[rowIndex].FindControl("struct_id");
+                        Label updt = (Label)grd_fee.Rows[rowIndex].FindControl("updt_flag");
+                        TextBox box1 = (TextBox)grd_fee.Rows[rowIndex].FindControl("txt_struct");
+                        TextBox box2 = (TextBox)grd_fee.Rows[rowIndex].FindControl("txt_amount");
+                        TextBox box3 = (TextBox)grd_fee.Rows[rowIndex].FindControl("txt_rank");
+                        box.Text = dt.Rows[i]["Struct_id"].ToString();
+                        box1.Text = dt.Rows[i]["Struct_name"].ToString();
+                        box2.Text = dt.Rows[i]["Amount"].ToString();
+                        box3.Text = dt.Rows[i]["Rank"].ToString();
+                        updt.Text = dt.Rows[i]["updt_flag"].ToString();
+                        rowIndex++;
+                    }
+                }
+                ViewState["CurrentTable"] = dt;
+
+                if (ViewState["MainTable"] != null)
+                {
+                    DataTable dtchk = (DataTable)ViewState["MainTable"];
+                    if (dtchk.Rows.Count > 0)
+                    {
+                        for (int j = 0; j < dtchk.Rows.Count; j++)
+                        {
+                            Label updt = (Label)grd_fee.Rows[j].FindControl("updt_flag");
+                            TextBox box1 = (TextBox)grd_fee.Rows[j].FindControl("txt_struct");
+                            TextBox box2 = (TextBox)grd_fee.Rows[j].FindControl("txt_amount");
+                            TextBox box3 = (TextBox)grd_fee.Rows[j].FindControl("txt_rank");
+                            LinkButton btn_remove = (LinkButton)grd_fee.Rows[j].FindControl("btn_remove");
+                            if (updt.Text != "TRUE")
+                            {
+                                box1.Enabled = false;
+                                box2.Enabled = false;
+                                box3.Enabled = false;
+                            }
+                            btn_remove.Enabled = false;
+                            if (btn_remove.Enabled == false)
+                            {
+                                btn_remove.CssClass = "btn btn-outline-secondary bg-secondary-light form-control";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('" + ex.Message + "', { color: '#691710', background: '#f27d72', blur: 0.2, delay: 0 });", true);
+        }
+    }
+
+    protected void btn_remove_Click(object sender, EventArgs e)
+    {
+        GridViewRow gvRow = (GridViewRow)(sender as Control).Parent.Parent;
+        int rowID = gvRow.RowIndex;
+        Label per_id = (Label)grd_fee.Rows[rowID].FindControl("struct_id");
+        if (!per_id.Text.Contains("STR"))
+        {
+            DataTable dt = (DataTable)ViewState["CurrentTable"];
+            if (dt.Rows.Count > 1)
+            {
+                dt.Rows.Remove(dt.Rows[rowID]);
+                grd_fee.DataSource = dt;
+                grd_fee.DataBind();
+            }
+            ViewState["CurrentTable"] = dt;
+            SetPreviousData();
+        }
+    }
+
+    protected void btn_save_Click(object sender, EventArgs e)
+    {
+        string qry = "";
+        int qrytimes = 0;
+        bool validate = true;
+        if (ddl_faculty.SelectedValue == "0")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Select Faculty !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+        }
+        else if (ddl_course.SelectedValue == "0")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Select Course!!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+        }
+        else if (ddl_subcourse.SelectedValue == "0")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Select Subcourse !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+        }
+        else if (ddl_group.SelectedValue == "0")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Select Group !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+        }
+        else if (ddl_struct_type.SelectedValue == "0")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Select Structure Type !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+        }
+        else
+        {
+            for (int i = 0; i < grd_fee.Rows.Count; i++)
+            {
+                Label struct_id = (Label)grd_fee.Rows[i].FindControl("struct_id");
+                TextBox txt_struct = (TextBox)grd_fee.Rows[i].FindControl("txt_struct");
+                TextBox txt_amount = (TextBox)grd_fee.Rows[i].FindControl("txt_amount");
+                TextBox txt_rank = (TextBox)grd_fee.Rows[i].FindControl("txt_rank");
+                if (txt_struct.Text.Trim() == "")
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Enter Structure Name !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+                    txt_struct.Focus();
+                    validate = false;
+                }
+                else if (txt_amount.Text.Trim() == "")
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Enter Amount !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+                    txt_amount.Focus();
+                    validate = false;
+                }
+                else if (txt_rank.Text == "")
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Enter Rank !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+                    txt_rank.Focus();
+                    validate = false;
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('no subcourse assigned to this course.','danger')", true);
-                    ddl_course.SelectedIndex = 0;
+                    if (txt_struct.Enabled == true && txt_amount.Enabled == true && txt_rank.Enabled == true)
+                    {
+                        if (struct_id.Text == "")
+                        {
+                            string gen_id = get_maxid(qrytimes);
+                            qry = qry + "insert into m_FeeMaster (AYID,group_id,Struct_id,Struct_type,Struct_name,Amount,Rank,user_id,curr_dt) values('" + Session["Year"].ToString() + "','" + ddl_group.SelectedValue + "','" + gen_id.Trim() + "','" + ddl_struct_type.SelectedValue + "','" + txt_struct.Text.Trim() + "'," + txt_amount.Text.Trim() + "," + txt_rank.Text.Trim() + ",'" + Session["emp_id"].ToString() + "',GETDATE());";
+                            qrytimes++;
+                        }
+                        else if (struct_id.Text.Contains("STR"))
+                        {
+                            qry = qry + "UPDATE m_FeeMaster SET Struct_name='" + txt_struct.Text.Trim() + "',Amount='" + txt_amount.Text.Trim() + "',Rank='" + txt_rank.Text.Trim() + "' WHERE Struct_id='" + struct_id.Text.Trim() + "' and del_flag=0;";
+                        }
+                    }
                 }
             }
-            
-              
-            
-            //dll_Group.Items.Clear();
-            //dll_Group_SelectedIndexChanged(this, EventArgs.Empty);
-        }
-        catch (Exception d)
-        {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' " + d.Message + "','danger')", true);
-            //  grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-        }
-    }
-
-    protected void ddl_Subcourse_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        try
-        {
-            string queryFor = "select Group_id,Group_title from m_crs_subjectgroup_tbl where Subcourse_id='" + ddl_Subcourse.SelectedValue.ToString() + "' and del_flag='0'";
-            DataTable dtsubcrs = new DataTable();
-            dtsubcrs = cls.fillDataTable(queryFor);
-            if (dtsubcrs.Rows.Count > 0)
+            if (validate == true)
             {
-                dll_Group.DataTextField = dtsubcrs.Columns["Group_title"].ToString();
-                dll_Group.DataValueField = dtsubcrs.Columns["Group_id"].ToString();
-                //dll_Group_SelectedIndexChanged(this, EventArgs.Empty);
-                dll_Group.DataSource = dtsubcrs;
-                dll_Group.DataBind();
-                grid.DataSource = null;
-                dll_Group.Items.Insert(0, new ListItem("--Select--", "na"));
-                dll_Group_SelectedIndexChanged(this, EventArgs.Empty);
-            }
-            else
-            {
-                if (ddl_Subcourse.SelectedIndex == 0)
+                if (qry != "")
                 {
-                    dll_Group.Items.Clear();
-                    grid.DataSource = null;
-                    grid.DataBind();
-                    txtamunt.Text = "";
-                    txtstruct.Text = "";
-                    rankTxt.Text = "";
-                    lastdt.Text = "";
+                    if (cls.TranDMLqueries(qry) == true)
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Saved Sucessfully', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
+                        fill_grd();
+                        fill_subgrd();
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Something Went Wrong !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+                    }
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('no Group assign to this subcourse.','danger')", true);
-                    dll_Group.SelectedIndex = 0;
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('No Changes Made !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
                 }
-            }
-          
-            //  grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-        }
-        catch (Exception d)
-        {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' " + d.Message + "','danger')", true);
-            //  grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-        }
-    }
-    protected void dll_Group_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        try
-        {
-            loadgridview();
-            // grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-            if (dll_Group.SelectedIndex==0) 
-            {
-                txtstruct.Text = "";
-                txtamunt.Text = "";
-                rankTxt.Text = "";
-                lastdt.Text = "";
 
-            
             }
-
-        }
-        catch (Exception d)
-        {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' " + d.Message + "','danger')", true);
-            // grid.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
     }
 
-
-
-
-
-    // insert and update function start
-
-    protected void save_Click(object sender, EventArgs e)
+    protected void btn_edit_Click(object sender, EventArgs e)
     {
-        try
+        GridViewRow gvRow = (GridViewRow)(sender as Control).Parent.Parent;
+        int rowID = gvRow.RowIndex;
+        Label struct_id = (Label)grd_fee.Rows[rowID].FindControl("struct_id");
+        string qry = "select * from m_FeeEntry where Struct_id='" + struct_id.Text + "' and del_flag=0;";
+        DataTable dt = cls.fillDataTable(qry);
+        if (dt.Rows.Count > 0)
         {
-            string lastdate = lastdt.Text;
-          
-            if (ddl_Faculty.SelectedIndex == 0)
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Updation Prohibited as Fee Structure Already Is In Use !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+        }
+        else
+        {
+            Label updt = (Label)grd_fee.Rows[rowID].FindControl("updt_flag");
+            TextBox txt_struct = (TextBox)grd_fee.Rows[rowID].FindControl("txt_struct");
+            TextBox txt_amount = (TextBox)grd_fee.Rows[rowID].FindControl("txt_amount");
+            TextBox txt_rank = (TextBox)grd_fee.Rows[rowID].FindControl("txt_rank");
+            updt.Text = "TRUE";
+            txt_struct.Enabled = true;
+            txt_amount.Enabled = true;
+            txt_rank.Enabled = true;
+        }
+    }
+
+    public string get_maxid(int qrytimes)
+    {
+        string qry = "Select dbo.Genrate_fees_perid(" + qrytimes + ") as perticular_id";
+        DataTable dt = cls.fillDataTable(qry);
+        string perticular_id = dt.Rows[0]["perticular_id"].ToString();
+        return perticular_id;
+    }
+
+    public void clear_grd()
+    {
+        grd_fee.DataSource = null;
+        grd_fee.DataBind();
+    }
+
+    protected void btn_delete_Click(object sender, EventArgs e)
+    {
+        GridViewRow gvRow = (GridViewRow)(sender as Control).Parent.Parent;
+        int rowID = gvRow.RowIndex;
+        Label struct_id = (Label)grd_fee.Rows[rowID].FindControl("struct_id");
+        if (struct_id.Text != "")
+        {
+
+            string qrychk = "select * from m_FeeEntry where Struct_id='" + struct_id.Text + "' and del_flag=0;";
+            DataTable dt = cls.fillDataTable(qrychk);
+            if (dt.Rows.Count > 0)
             {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' Select Faculty.','danger')", true);
-              //  grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-
-            }
-
-            else if (ddl_course.SelectedIndex == 0)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' Select Course.','danger')", true);
-                //grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-            }
-            else if (ddl_Subcourse.SelectedIndex == 0)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' Select Subcourse.','danger')", true);
-                //grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-            }
-            else if (dll_Group.SelectedIndex == 0)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' Select Group.','danger')", true);
-               // grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-
-
-            }
-            else if (txtstruct.Text.Trim() == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' Add Structure.','danger')", true);
-                //grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-
-            }
-
-            else if (txtamunt.Text == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' Add Amount.','danger')", true);
-                //grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-            }
-            
-            else if (lastdt.Text.Trim() == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' Add Last Date of Payment.','danger')", true);
-              //  grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-
-
+                ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Deletion Prohibited  Fees Structure Is In Use   !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
             }
             else
             {
-
-                if (save.Text == "Add")
-                {                   
-            
-                    string chkstruct = "select * from m_FeeMaster where Ayid = '"+ Session["Year"] + "' and Group_id = '" + dll_Group.SelectedValue.ToString() + "' and Struct_name = '"+ txtstruct.Text.Trim() + "' and del_flag = 0";
-                    DataTable dtchkstruct = cls.fillDataTable(chkstruct);
-                    if (dtchkstruct.Rows.Count > 0)
-                    {
-                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Structure  Name Must Be Unique','danger')", true);
-                        txtstruct.Text = "";
-                        txtamunt.Text = "";
-                        rankTxt.Text = "";
-                        lastdt.Text = "";
-                     
-                    }
-                    else 
-                    {
-
-                        if (rankTxt.Text != "")
-                        {
-                            List<int> list = new List<int>();
-                            //  List<int> intList = stringList.ConvertAll(int.Parse);
-                            foreach (GridViewRow gvr in grid.Rows)
-                            {
-                                Label grdrank = (Label)gvr.FindControl("RankLbl");
-                                if (grdrank.Text != "")
-                                {
-                                    list.Add(int.Parse(grdrank.Text));
-                                }
-                            }
-                            string rankdup = rankTxt.Text;
-                            bool isInList = list.IndexOf(int.Parse(rankdup)) != -1;
-                            if (isInList)
-                            {
-                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('This Rank is already Assigned.','danger')", true);
-                                return;
-                            }
-                        }
-
-
-                        string inserfeemaster = "insert into m_FeeMaster (Ayid,Group_id,Struct_name,Amount,LastDayOFPay,Rank,user_id,curr_dt,mod_dt,del_flag,del_dt) values('" + Session["Year"] + "','" + dll_Group.SelectedValue.ToString() + "','" + txtstruct.Text.Trim() + "','" + txtamunt.Text.Trim() + "',convert(datetime,'" + lastdt.Text.Trim() + "',103),NULLIF('" + rankTxt.Text.Trim() + "',''),'Admin',getdate(),'',0,'')";
-                        if (cls.DMLqueries_string(inserfeemaster) == "True")
-                        {
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' Fee Structure Added Successfully.','success')", true);
-                            txtstruct.Text = "";
-                            txtamunt.Text = "";
-                            lastdt.Text = "";
-                            rankTxt.Text = string.Empty;
-                            loadgridview();
-                            //grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-                        }
-                        //else if (cls.DMLqueries_string(inserfeemaster).ToString().Contains("ClusteredIndex-20220411-134809"))
-                        //{
-                        //    grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-
-                        //    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' Rank Must Be Unique ','danger')", true);
-                        //}
-                        else if (cls.DMLqueries_string(inserfeemaster).ToString().Contains("Idx_ayidGroupStruct"))
-                        {
-                            //grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-                            string msg = cls.DMLqueries_string(inserfeemaster).ToString();
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Structure  Name Must Be Unique','danger')", true);
-                            // grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-                        }
-                        else
-                        {
-
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Something went wrong','danger')", true);
-
-                            //grid.HeaderRow.TableSection = TableRowSection.TableHeader; 
-                        }
-
-                    }
-
-                }
-                else if (save.Text == "Update")
+                string confirmValue = "";
+                confirmValue = Request.Form["confirm_value"];
+                string[] CVA = confirmValue.Split(new Char[] { ',' });
+                if (CVA[CVA.Length - 1] == "Yes")
                 {
-                   
-                    string group_id = dll_Group.SelectedValue;
-                    string structcheck = "select * from m_FeeMaster where Ayid='" + Session["Year"].ToString() + "' and Group_id='" + group_id + "' and del_flag=0 and Struct_name!='" + ViewState["oldstruct"].ToString() + "'and Struct_name = '" + txtstruct.Text.Trim() + "' ";
-                    DataTable structchk = cls.fillDataTable(structcheck);
-                    if (structchk.Rows.Count > 0)
+                    string qrydel = "update m_FeeMaster set del_flag=1 where Struct_id='" + struct_id.Text + "'";
+                    bool chk = cls.DMLqueries(qrydel);
+                    if (chk == true)
                     {
-                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' Structure Name Should Be Unique.','danger')", true);
-                        return;
+                        ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Deleted Sucessfully', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
+                        fill_grd();
+                        fill_subgrd();
                     }
-                    if (rankTxt.Text != "")
+                    else
                     {
-                        foreach (GridViewRow grd in grid.Rows)
-                        {
-                            Label grdrnkup = (Label)grd.FindControl("RankLbl");
-                            if (grd.DataItemIndex.ToString() == ViewState["indeditbtn"].ToString())
-                            {
-
-                            }
-                            else
-                            {
-                                if (rankTxt.Text.Trim() == grdrnkup.Text.Trim())
-                                {
-
-                                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Rank shoul be unique','danger')", true);
-                                    return;
-                                }
-
-                            }
-
-                        }
+                        ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Something Went Wrong !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
                     }
-                    string updatefeemaster = "update m_FeeMaster set Rank=NULLIF('" + rankTxt.Text.Trim() + "','') , Ayid='" + Session["Year"].ToString() + "', Struct_name='" + txtstruct.Text.Trim() + "' ,Group_id='" + group_id + "',Amount='" + txtamunt.Text.Trim() + "',LastDayOfPay=Convert(datetime,'" + lastdate + "',103),mod_dt=GETDATE() where Ayid='" + Session["Year"] + "' and Group_id='" + Session["sess_grupidd"] + "' and Struct_name='" + Session["sessstructname"]
-      + "' ";
-                    if (cls.DMLqueries_string(updatefeemaster) == "True")
-                    {
-                        loadgridview();
-                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' Fee Structure Updated Successfully.','success')", true);
-                        ddl_Faculty.Enabled = true;
-                        ddl_course.Enabled = true;
-                        ddl_Subcourse.Enabled = true;
-
-                        dll_Group.Enabled = true;
-
-                        save.Text = "Add";
-                        //ddl_Faculty.SelectedIndex = 0;
-                        //ddl_course.SelectedIndex = 0;
-                        //ddl_Subcourse.SelectedIndex = 0;
-                        //dll_Group.SelectedIndex = 0;
-                        txtstruct.Text = "";
-                        txtamunt.Text = "";
-                        lastdt.Text = "";
-                        rankTxt.Text = string.Empty;
-
-                    }
-                    else 
-                    {
-                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Something went wrong','success')", true);
-
-                    }
-                    string rankdup = rankTxt.Text.Trim();                  
-                    List<int> listb = new List<int>();
-                    foreach (GridViewRow gvr2 in grid.Rows)
-                    {
-                        Label grdrnkup = (Label)gvr2.FindControl("RankLbl");
-                        if (grdrnkup.Text != "")
-                        {
-
-                            listb.Add(int.Parse(grdrnkup.Text));
-
-                        }
-                    }
-                    string rankdup2 = rankTxt.Text;
-                    if (rankdup2!="")
-                    {
-                        bool isInList2 = listb.IndexOf(int.Parse(rankdup2)) != -1;
-                        if (isInList2)
-                        {
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Rank Should be unique','danger')", true);
-                            rankTxt.Text = "";
-                            return;
-                        }
-                    }                                                        
-                    
-                    
-                 
                 }
-           }
-                
-           
-        }
-        catch (Exception d)
-        {
-            //grid.HeaderRow.TableSection = TableRowSection.TableHeader;
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' " + d.Message + "','danger')", true);
-        }
-    }
-    // insert and update function end
-
-    // grid loading start
-    public void loadgridview()
-    {
-        string gridquery = "select  e.faculty_name,e.faculty_id,d.course_name,d.course_id,c.subcourse_id,c.subcourse_name,b.Group_title,a.Group_id,a.Amount,a.Struct_name,convert(varchar,a.LastDayOfPay,103) as lstdate,a.Rank from m_FeeMaster a,                m_crs_subjectgroup_tbl as b,m_crs_subcourse_tbl as c,m_crs_course_tbl as d,m_crs_faculty as e where a.Group_id=b.Group_id and b.Subcourse_id=c.subcourse_id and d.course_id=c.course_id and e.faculty_id=d.faculty_id and a.group_id='" + dll_Group.SelectedValue + "'  and a.Ayid='" + Session["Year"] + "' and a.del_flag=0 order by  a.Struct_name asc";
-        DataTable dtgridqury = cls.fillDataTable(gridquery);
-        grid.DataSource = dtgridqury;
-        grid.DataBind();
-        // GrdIn.HeaderRow.TableSection = TableRowSection.TableHeader;
-        if (dtgridqury.Rows.Count == 0 && dll_Group.SelectedIndex != 0)
-        {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Fee structure not defined for this group','danger')", true);
-           // dll_Group.SelectedIndex = 0;
-        }
-    }
-    // grid loading end
-
-    //  checking dublication of records  at insertion time start
-    private bool checkInsert()
-    {
-        bool rank = false;
-        DataTable ds = new DataTable();
-        ds = cls.fillDataTable("select * from   m_FeeMaster where   Struct_name ='" + txtstruct.Text.Trim() + "' or Rank='" + rankTxt.Text.Trim() + "'");
-        //Convert(datetime,'" + lastdt.Text + "',103)
-        if (ds.Rows.Count > 0)
-        {
-            return true;
-        }
-        return rank;
-    }
-    //  checking dublication of records insertion end
-
-    //  checking dublication of records  at updation time star
-    private bool checkUpdate()
-    {
-        bool rank = false;
-        DataTable ds = new DataTable();
-        ///Select * from  (select * from   m_FeeMaster where    Struct_name <> (select Struct_name from m_FeeMaster where Ayid='AYD0075' and Group_id='GRP031' and Struct_name='Tution Feees')) as a where  a.Struct_name='Tution Feees'
-        ds = cls.fillDataTable("Select * from  (select * from   m_FeeMaster where    Struct_name <> (select Struct_name from m_FeeMaster where Ayid='" + Session["Year"] + "' and Group_id='" + dll_Group.SelectedValue + "' and Struct_name='" + txtstruct.Text.Trim() + "')) as a where  a.Struct_name='" + txtstruct.Text.Trim() + "'");
-        //ds = cls.fillDataTable("select * from   m_FeeMaster where    Struct_name <> (select Struct_name from m_FeeMaster where Ayid='"+Session["Year"]+"' and Group_id='"+dll_Group.SelectedValue+"' and Struct_name='"+txtstruct.Text+"')");
-        //ds = cls.fillDataTable("select * from   m_FeeMaster where   Struct_name ='" + txtstruct.Text + "'");
-        //Convert(datetime,'" + lastdt.Text + "',103)
-        if (ds.Rows.Count > 0)
-        {
-            return true;
-        }
-        return rank;
-    }
-
-
-    //  checking dublication of records updation end
-
-
-    private bool checkRank()
-    {
-        bool rank = false;
-
-        DataTable ds = new DataTable();
-        ds = cls.fillDataTable("Select * from  (select * from   m_FeeMaster where    Rank <> (select Rank from m_FeeMaster where Ayid='" + Session["Year"] + "' and Group_id='" + dll_Group.SelectedValue + "' and Rank='" + rankTxt.Text + "')) as a where  a.Rank='" + rankTxt.Text + "'");
-        //ds = cls.fillDataTable("select * from   m_FeeMaster where  Rank='" + rankTxt.Text + "'");
-        //Convert(datetime,'" + lastdt.Text + "',103)
-        if (ds.Rows.Count > 0)
-        {
-            return true;
-
-        }
-
-        return rank;
-
-
-    }
-
-
-    // grid Edit  start
-
-    protected void grdbtnedit_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            LinkButton btn = sender as LinkButton;
-           
-            GridViewRow row = (GridViewRow)btn.NamingContainer;
-            ViewState["indeditbtn"] = row.RowIndex;
-            Label fac = (Label)row.FindControl("lblgrdfaculname") as Label;
-            Label cour = (Label)row.FindControl("lblgrdCou") as Label;
-            Label subcour = (Label)row.FindControl("lblgrdsubcou") as Label;
-            Label grup = (Label)row.FindControl("lblgrdgroup") as Label;
-            Label strucname = (Label)row.FindControl("lblgrdstruct") as Label;
-            Session["sessstructname"] = strucname.Text;
-            ViewState["oldstruct"] = ((Label)row.FindControl("lblgrdstruct") as Label).Text;
-            Label amnt = (Label)row.FindControl("lblgrdamunt") as Label;
-            Label lstpay = (Label)row.FindControl("lblgrdlstdatpay") as Label;
-            //==========id=======
-            Label lblfacid = (Label)row.FindControl("facid") as Label;
-            Label lblcouid = (Label)row.FindControl("couid") as Label;
-            Label lblsubcouid = (Label)row.FindControl("subcouid") as Label;
-            Label lblgrpid = (Label)row.FindControl("grpid") as Label;
-            Label lblRank = (Label)row.FindControl("RankLbl") as Label;
-            Session["sess_grupidd"] = lblgrpid.Text;
-            //Session["sess_year"] = ddlyearfee.SelectedValue.ToString();
-            ddl_Faculty.Enabled = false;
-            ddl_course.Enabled = false;
-            ddl_Subcourse.Enabled = false;
-            dll_Group.Enabled = false;
-            ddl_Faculty.SelectedValue = ddl_Faculty.Items.FindByValue(lblfacid.Text).Value;
-            ddl_Faculty_SelectedIndexChanged(this, EventArgs.Empty);
-            ddl_course.SelectedValue = ddl_course.Items.FindByValue(lblcouid.Text).Value;
-            ddl_course_SelectedIndexChanged(this, EventArgs.Empty);
-            ddl_Subcourse.SelectedValue = ddl_Subcourse.Items.FindByValue(lblsubcouid.Text).Value;
-            ddl_Subcourse_SelectedIndexChanged(this, EventArgs.Empty);
-            dll_Group.SelectedValue = dll_Group.Items.FindByValue(lblgrpid.Text).Value;
-            dll_Group_SelectedIndexChanged(this, EventArgs.Empty);
-            txtstruct.Text = strucname.Text;
-            txtamunt.Text = amnt.Text;
-            lastdt.Text = lstpay.Text;
-            rankTxt.Text = lblRank.Text;
-            save.Text = "Update";
-        }
-        catch (Exception d)
-        {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' " + d.Message + "','danger')", true);
-        }
-    }
-
-    // grid Edit  end
-
-
-    // grid Delete start
-
-
-    protected void grdbtndel_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            LinkButton btndel = sender as LinkButton;
-            // Button btndel = (Button)sender;
-            GridViewRow row2 = (GridViewRow)btndel.NamingContainer;
-            Label strucname2 = (Label)row2.FindControl("lblgrdstruct") as Label;
-            Label lblfacid2 = (Label)row2.FindControl("facid") as Label;
-            Label lblcouid2 = (Label)row2.FindControl("couid") as Label;
-            Label lblsubcouid2 = (Label)row2.FindControl("subcouid") as Label;
-            Label lblgrpid2 = (Label)row2.FindControl("grpid") as Label;
-            Label lblrank = (Label)row2.FindControl("RankLbl") as Label;
-            //Session["sessayid_del"] = ddlyearfee.SelectedValue.ToString();]
-            string chkdel = "select * from m_std_studentacademic_tbl where stud_id in (select stud_id from m_FeeEntry where Struct_name='" + strucname2.Text + "' and Ayid='" + Session["Year"] + "' and del_flag=0) and del_flag=0 and group_id='" + lblgrpid2 + "'";
-            cls.fillDataTable(chkdel);
-            DataTable dtchk = new DataTable();
-            dtchk = cls.fillDataTable(chkdel);
-            if (dtchk.Rows.Count > 0)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Stucture Name Deletion restricted'danger')", true);
-
             }
+        }
+    }
 
+    protected void btn_clear_Click(object sender, EventArgs e)
+    {
+        ddl_faculty.SelectedValue = "0";
+        ddl_faculty_SelectedIndexChanged(this, EventArgs.Empty);
+    }
+
+    public void fill_subgrd()
+    {
+        string extra_qry = "";
+        if (ddl_subcourse.SelectedValue != "" && ddl_subcourse.SelectedValue != "0")
+        {
+            extra_qry = " and b.Subcourse_id='" + ddl_subcourse.SelectedValue + "'";
+        }
+        if (ddl_group.SelectedValue != "" && ddl_group.SelectedValue != "0")
+        {
+            extra_qry = " and a.group_id ='" + ddl_group.SelectedValue + "'";
+        }
+        if (ddl_struct_type.SelectedValue != "" && ddl_struct_type.SelectedValue != "0")
+        {
+            extra_qry += " and Struct_type !='" + ddl_struct_type.SelectedValue + "'";
+        }
+        string query = "select distinct a.group_id,b.Group_title,a.Struct_type,b.Subcourse_id from m_FeeMaster a,m_crs_subjectgroup_tbl b where a.AYID='" + Session["Year"].ToString() + "' and b.Group_id=a.group_id " + extra_qry + " and b.del_flag=0 and a.del_flag=0 order by a.group_id,a.Struct_type";
+        DataTable dt = cls.fillDataTable(query);
+        if (query != "")
+        {
+            grd_subdata.DataSource = dt;
+            grd_subdata.DataBind();
+        }
+    }
+
+    public void clear_grd_sub()
+    {
+        grd_subdata.DataSource = null;
+        grd_subdata.DataBind();
+    }
+
+    protected void sub_btn_edit_Click(object sender, EventArgs e)
+    {
+        GridViewRow gvRow = (GridViewRow)(sender as Control).Parent.Parent;
+        int rowID = gvRow.RowIndex;
+        Label grp_id = (Label)grd_subdata.Rows[rowID].FindControl("sub_grp_id");
+        Label Struct_type = (Label)grd_subdata.Rows[rowID].FindControl("sub_struct_type");
+        Label Subcourse_id = (Label)grd_subdata.Rows[rowID].FindControl("sub_Subcourse_id");
+        string query = "select * from m_FeeEntry where Struct_id in (select Struct_id from m_FeeMaster where Group_id ='" + grp_id.Text.Trim() + "' and AYID='" + Session["Year"].ToString() + "')";
+        DataTable dt = cls.fillDataTable(query);
+        if (dt.Rows.Count > 0)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Updation Prohibited As Fee Structure Already Is In Use !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+        }
+        else
+        {
+            ddl_subcourse.SelectedValue = Subcourse_id.Text.Trim();
+            ddl_subcourse_SelectedIndexChanged(sender, e);
+            ddl_group.SelectedValue = grp_id.Text.Trim();
+            ddl_group_SelectedIndexChanged(sender, e);
+            ddl_struct_type.SelectedValue = Struct_type.Text.Trim();
+            ddl_struct_type_SelectedIndexChanged(sender, e);
+        }
+    }
+
+    protected void sub_btn_delete_Click(object sender, EventArgs e)
+    {
+        GridViewRow gvRow = (GridViewRow)(sender as Control).Parent.Parent;
+        int rowID = gvRow.RowIndex;
+        Label grp_id = (Label)grd_subdata.Rows[rowID].FindControl("sub_grp_id");
+        Label Struct_type = (Label)grd_subdata.Rows[rowID].FindControl("sub_struct_type");
+        string query = "select * from m_FeeEntry where Struct_id in (select Struct_id from m_FeeMaster where Group_id ='" + grp_id.Text.Trim() + "' and AYID='" + Session["Year"].ToString() + "')";
+        DataTable dt = cls.fillDataTable(query);
+        if (dt.Rows.Count > 0)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Deletion Prohibited  Fees Structure Is In Use   !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+        }
+        else
+        {
+            string confirmValue = "";
+            confirmValue = Request.Form["confirm_value"];
+            string[] CVA = confirmValue.Split(new Char[] { ',' });
+            if (CVA[CVA.Length - 1] == "Yes")
+            {
+                string qrydel = "Update m_FeeMaster set del_flag=1 where group_id ='" + grp_id.Text.Trim() + "' and Struct_type='"+ Struct_type.Text.Trim() + "' and AYID='" + Session["Year"].ToString() + "'";
+
+                bool chk = cls.DMLqueries(qrydel);
+                if (chk == true)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Deleted Sucessfully', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
+                    fill_subgrd();
+                }
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Something Went Wrong !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+                }
+            }
+        }
+    }
+
+    protected void btn_save_type_Click(object sender, EventArgs e)
+    {
+        if (txt_type_nm.Text.Trim() == "")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Enter Structure Type Name !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+        }
+        else
+        {
+            string qry = "insert into m_struct_type (Struct_type_name) values ('" + txt_type_nm.Text.Trim().ToUpper() + "')";
+            string text = "Saved";
+            if (btn_save_type.Text == "Update")
+            {
+                qry = "Update m_struct_type set Struct_type_name='" + txt_type_nm.Text.Trim().ToUpper() + "' where Struct_type_id=" + hidden_Id_type.Value.Trim() + "";
+                text = "Updated";
+            }
+            if (cls.DMLqueries(qry))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('" + text + " Sucessfully', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
+                fill_grd_type();
+                if (ddl_struct_type.SelectedValue != "")
+                {
+                    cls.SetdropdownForMember1(ddl_struct_type, "m_struct_type", "Struct_type_name", "Struct_type_name", "del_flag=0 ");
+                    ddl_struct_type_SelectedIndexChanged(sender, e);
+                }
+                txt_type_nm.Text = string.Empty;
+                btn_save_type.Text = "Save";
+            }
             else
             {
-                string del_query = "update m_FeeMaster set del_flag=1 where Ayid='" + Session["Year"] + "' and Group_id='" + lblgrpid2.Text.Trim() + "' and Struct_name='" + strucname2.Text.Trim()+"  '";
-                if (cls.DMLqueries(del_query))
-                {
-
-                    ddl_Faculty.Enabled = true;
-                    ddl_course.Enabled = true;
-                    ddl_Subcourse.Enabled = true;
-                    dll_Group.Enabled = true;
-                    txtstruct.Text = string.Empty;
-                    txtamunt.Text = string.Empty;
-                    lastdt.Text = string.Empty;
-                    rankTxt.Text = string.Empty;
-                    //ddl_Faculty.SelectedIndex = 0;
-                    //ddl_Subcourse.SelectedIndex = 0;
-                    //dll_Group.SelectedIndex = 0;
-                    //ddl_course.SelectedIndex = 0;
-                    save.Text = "Add";
-                    cls.DMLqueries(del_query);
-                    loadgridview();
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Delete Successful','success')", true);
-                }
-                else { ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('something went wrong.','success')", true); }
+                ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Something Went Wrong !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
             }
 
         }
-        catch (Exception d)
-        {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' " + d.Message + "','danger')", true);
-        }
     }
 
-    // grid Delete end
-
-
-    // cancel button start
-
-    protected void btncancel_Click(object sender, EventArgs e)
+    public void fill_grd_type()
     {
-        try
-        {
-
-            save.Text = "Add";
-            ddl_Faculty.SelectedIndex = 0;
-            ddl_Subcourse.SelectedIndex = 0;
-            ddl_course.SelectedIndex = 0;
-            dll_Group.SelectedIndex = 0;
-            ddl_Faculty.Enabled = true;
-            ddl_course.Enabled = true;
-            ddl_Subcourse.Enabled = true;
-            dll_Group.Enabled = true;
-            txtstruct.Text = "";
-            txtamunt.Text = "";
-            lastdt.Text = "";
-            rankTxt.Text = string.Empty;
-            grid.DataBind();
-            grid.DataSource = null;
-            ddlFaculty();
-            ddl_Faculty.SelectedIndex = 0;
-            //ddl_Faculty_SelectedIndexChanged(this, EventArgs.Empty);
-            ddl_course.Items.Clear();
-            ddl_Subcourse.Items.Clear();
-            dll_Group.Items.Clear();
-            //ddl_course.DataSource = null;
-            //ddl_course.DataBind();
-            //ddl_Subcourse.DataSource = null;
-            //ddl_Subcourse.DataBind();
-            //dll_Group.DataSource = null;
-            //dll_Group.DataBind();
-            
-
-        }
-        catch (Exception d)
-        {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify(' " + d.Message + "','danger')", true);
-        }
+        string qry = "select * from m_struct_type where del_flag=0";
+        DataTable dt = cls.fillDataTable(qry);
+        grd_type.DataSource = dt;
+        grd_type.DataBind();
     }
 
-
-    // cancel button end
-
-
-
-
-    // grid row data bound event start
-    protected void grid_RowDataBound(object sender, GridViewRowEventArgs e)
+    protected void btn_struct_type_Click(object sender, EventArgs e)
     {
-        //check if the row is the header row
-        if (e.Row.RowType == DataControlRowType.Header)
+        fill_grd_type();
+    }
+
+    protected void type_delete_Click(object sender, EventArgs e)
+    {
+        GridViewRow gvRow = (GridViewRow)(sender as Control).Parent.Parent;
+        int rowID = gvRow.RowIndex;
+        Label type_name = (Label)grd_type.Rows[rowID].FindControl("type_name");
+        Label Struct_type_id = (Label)grd_type.Rows[rowID].FindControl("Struct_type_id");
+        string query = "select Struct_type from m_FeeMaster where del_flag=0 and Struct_type='" + type_name + "';";
+        DataTable dt = cls.fillDataTable(query);
+        if (dt.Rows.Count > 0)
         {
-            //add the thead and tbody section programatically
-            e.Row.TableSection = TableRowSection.TableHeader;
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Updation Prohibited Structure Type Is In Use !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+        }
+        else
+        {
+            string confirmValue = Request.Form["confirm_value"];
+            string[] CVA = confirmValue.Split(new Char[] { ',' });
+            if (CVA[CVA.Length - 1] == "Yes")
+            {
+                string qrydel = "update m_struct_type set del_flag=1 where Struct_type_id=" + Struct_type_id.Text.Trim() + "";
+
+                bool chk = cls.DMLqueries(qrydel);
+                if (chk == true)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Deleted Sucessfully', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
+                    fill_grd_type();
+                    txt_type_nm.Text = "";
+                }
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Something Went Wrong !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+                }
+            }
         }
     }
 
-    // grid row data bound event end
+    protected void tye_edit_Click(object sender, EventArgs e)
+    {
+        GridViewRow gvRow = (GridViewRow)(sender as Control).Parent.Parent;
+        int rowID = gvRow.RowIndex;
+        Label Struct_type_id = (Label)grd_type.Rows[rowID].FindControl("Struct_type_id");
+        Label type_name = (Label)grd_type.Rows[rowID].FindControl("type_name");
+        string query = "select Struct_type from m_FeeMaster where del_flag=0 and Struct_type='" + type_name + "';";
+        DataTable dt = cls.fillDataTable(query);
+        if (dt.Rows.Count > 0)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Deletion Prohibited   Structure Type Is In Use   !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+        }
+        else
+        {
+            txt_type_nm.Text = type_name.Text.Trim();
+            hidden_Id_type.Value = Struct_type_id.Text.Trim();
+            btn_save_type.Text = "Update";
+        }
+    }
 }

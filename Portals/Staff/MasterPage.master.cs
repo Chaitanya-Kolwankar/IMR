@@ -16,27 +16,34 @@ public partial class MasterPage : System.Web.UI.MasterPage
         {
             try
             {
-
-                string filePath = Server.MapPath("~/Portals/Staff/Staff_Photo/" + Session["emp_id"].ToString() + ".jpg"); // for ASP.NET
-                if (File.Exists(filePath))
+                if (Convert.ToString(Session["Emp_id"]) == "")
                 {
-                    photos.Src = "/Portals/Staff/Staff_Photo/" + Session["emp_id"].ToString() + ".jpg";
-                }
-                
-                DataTable dt = cls.fillDataTable("select * from m_academic order by ayid desc");
-                ddlyear.DataSource = dt;
-                ddlyear.DataTextField = "Duration";
-                ddlyear.DataValueField = "AYID";
-                ddlyear.DataBind();
-                if (Session["Year"].ToString() == "")
-                {
-                    ddlyear.SelectedValue = cls.fillDataTable("select ayid from m_academic where iscurrent=1").Rows[0][0].ToString();
-                    Session["Year"] = cls.fillDataTable("select ayid from m_academic where iscurrent=1").Rows[0][0].ToString();
+                    Response.Redirect("~/Portals/Staff/Login.aspx");
                 }
                 else
                 {
-                    ddlyear.SelectedValue = Session["Year"].ToString();
+                    string filePath = Server.MapPath("~/Portals/Staff/Staff_Photo/" + Session["emp_id"].ToString() + ".jpg"); // for ASP.NET
+                    if (File.Exists(filePath))
+                    {
+                        photos.Src = "/Portals/Staff/Staff_Photo/" + Session["emp_id"].ToString() + ".jpg";
+                    }
+
+                    DataTable dt = cls.fillDataTable("select * from m_academic order by ayid desc");
+                    ddlyear.DataSource = dt;
+                    ddlyear.DataTextField = "Duration";
+                    ddlyear.DataValueField = "AYID";
+                    ddlyear.DataBind();
+                    if (Session["Year"].ToString() == "")
+                    {
+                        ddlyear.SelectedValue = cls.fillDataTable("select ayid from m_academic where iscurrent=1").Rows[0][0].ToString();
+                        Session["Year"] = cls.fillDataTable("select ayid from m_academic where iscurrent=1").Rows[0][0].ToString();
+                    }
+                    else
+                    {
+                        ddlyear.SelectedValue = Session["Year"].ToString();
+                    }
                 }
+               
             }
             catch (Exception ex) {
                 Response.Redirect("~/Portals/Staff/Login.aspx");

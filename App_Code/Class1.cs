@@ -788,10 +788,80 @@ public class Class1
     }
     ////////// for admissionconfirm///////////////////////////////////
 
-        
+    public object SetdropdownForMember1(DropDownList ddl, string TABLE_NAME, string DATA_COLUMN, string VALUE_COLUMN, string CONDITION)
+    {
+        string Query;
+        try
+        {
+
+            if (VALUE_COLUMN.Length > 0)
+            {
+                VALUE_COLUMN = "," + VALUE_COLUMN;
+            }
+            if (string.IsNullOrEmpty(CONDITION))
+            {
+                Query = "SELECT " + DATA_COLUMN + VALUE_COLUMN + " FROM " + TABLE_NAME;
+            }
+            else
+            {
+                //=============
+                Query = "SELECT " + DATA_COLUMN + VALUE_COLUMN + " FROM " + TABLE_NAME + " where " + CONDITION;
+            }
+            ds = fillDataset(Query);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                DataRow drr = ds.Tables[0].NewRow();
+                drr[0] = "--SELECT--";
+                drr[1] = "0";
+                ds.Tables[0].Rows.InsertAt(drr, 0);
+                ddl.DataSource = ds.Tables[0];
+                ddl.DataTextField = ds.Tables[0].Columns[0].ColumnName;
+                ddl.DataValueField = ds.Tables[0].Columns[1].ColumnName;
+                ddl.DataSource = null;
+                ddl.DataBind();
+                ddl.DataSource = ds.Tables[0];
+                ddl.DataBind();
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+        return 0;
+    }
 
 
-
+    public bool TranDMLqueries(string query)
+    {
+        cmd = new SqlCommand();
+        cmd.CommandText = query;
+        cmd.CommandType = CommandType.Text;
+        cmd.Connection = con;
+        cmd.CommandTimeout = 0;
+        if (con.State == ConnectionState.Open)
+        {
+            con.Close();
+            con.Open();
+        }
+        else
+        {
+            con.Open();
+        }
+        SqlTransaction transaction = con.BeginTransaction();
+        cmd.Transaction = transaction;
+        try
+        {
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+            con.Close();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            transaction.Rollback();
+            return false;
+        }
+    }
 
 
 
