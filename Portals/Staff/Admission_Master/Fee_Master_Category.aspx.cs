@@ -1,20 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Configuration;
-using System.Collections;
+using System.Linq;
 using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using System.Data.SqlClient;
-using System.Text;
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;
 
-public partial class Fee_Master : System.Web.UI.Page
+public partial class Portals_Staff_Admission_Master_Fee_Master_Category : System.Web.UI.Page
 {
     Class1 cls = new Class1();
     protected void Page_Load(object sender, EventArgs e)
@@ -44,6 +36,14 @@ public partial class Fee_Master : System.Web.UI.Page
         {
             ddl_group.Items.Clear();
         }
+        if (ddl_gender.Items.Count > 0)
+        {
+            ddl_gender.Items.Clear();
+        }
+        if (ddl_category.Items.Count > 0)
+        {
+            ddl_category.Items.Clear();
+        }
         if (ddl_struct_type.Items.Count > 0)
         {
             ddl_struct_type.Items.Clear();
@@ -64,6 +64,14 @@ public partial class Fee_Master : System.Web.UI.Page
         {
             ddl_group.Items.Clear();
         }
+        if (ddl_gender.Items.Count > 0)
+        {
+            ddl_gender.Items.Clear();
+        }
+        if (ddl_category.Items.Count > 0)
+        {
+            ddl_category.Items.Clear();
+        }
         if (ddl_struct_type.Items.Count > 0)
         {
             ddl_struct_type.Items.Clear();
@@ -83,6 +91,14 @@ public partial class Fee_Master : System.Web.UI.Page
         {
             ddl_group.Items.Clear();
         }
+        if (ddl_gender.Items.Count > 0)
+        {
+            ddl_gender.Items.Clear();
+        }
+        if (ddl_category.Items.Count > 0)
+        {
+            ddl_category.Items.Clear();
+        }
         if (ddl_struct_type.Items.Count > 0)
         {
             ddl_struct_type.Items.Clear();
@@ -98,6 +114,14 @@ public partial class Fee_Master : System.Web.UI.Page
 
     protected void ddl_group_SelectedIndexChanged(object sender, EventArgs e)
     {
+        if (ddl_gender.Items.Count > 0)
+        {
+            ddl_gender.Items.Clear();
+        }
+        if (ddl_category.Items.Count > 0)
+        {
+            ddl_category.Items.Clear();
+        }
         if (ddl_struct_type.Items.Count > 0)
         {
             ddl_struct_type.Items.Clear();
@@ -106,9 +130,47 @@ public partial class Fee_Master : System.Web.UI.Page
         clear_grd_sub();
         if (ddl_struct_type.SelectedValue != "0")
         {
+            ddl_gender.Items.Clear();
+            ddl_gender.Items.Add(new ListItem("MALE", "MALE"));
+            ddl_gender.Items.Add(new ListItem("FEMALE", "FEMALE"));
+            ddl_gender.Items.Insert(0, new ListItem("--SELECT--", "0"));
+            fill_subgrd();
+        }
+    }
+
+    protected void ddl_gender_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddl_category.Items.Count > 0)
+        {
+            ddl_category.Items.Clear();
+        }
+        if (ddl_struct_type.Items.Count > 0)
+        {
+            ddl_struct_type.Items.Clear();
+        }
+        clear_grd();
+        clear_grd_sub();
+        if (ddl_gender.SelectedValue != "0")
+        {
+            cls.SetdropdownForMember1(ddl_category, "State_category_details", "distinct parent", "parent", "Main='Reserved Category' and Parent !='OPEN' and  del_flag=0");
+            fill_subgrd();
+        }
+    }
+
+    protected void ddl_category_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddl_struct_type.Items.Count > 0)
+        {
+            ddl_struct_type.Items.Clear();
+        }
+        clear_grd();
+        clear_grd_sub();
+        if (ddl_category.SelectedValue != "0")
+        {
             cls.SetdropdownForMember1(ddl_struct_type, "m_struct_type", "Struct_type_name", "Struct_type_name", "del_flag=0 ");
             fill_subgrd();
         }
+
     }
 
     protected void ddl_struct_type_SelectedIndexChanged(object sender, EventArgs e)
@@ -124,7 +186,7 @@ public partial class Fee_Master : System.Web.UI.Page
 
     public void fill_grd()
     {
-        string qry = "select  Struct_id,Struct_name,Amount,Rank,'' updt_flag from m_FeeMaster where group_id = '" + ddl_group.SelectedValue + "' and AYID = '" + Session["Year"].ToString() + "' and Struct_type='" + ddl_struct_type.SelectedValue + "' and del_flag=0 order by group_id";
+        string qry = "select  Struct_id,Struct_name,Amount,Rank,'' updt_flag from m_FeeMaster_category where group_id = '" + ddl_group.SelectedValue + "' and AYID = '" + Session["Year"].ToString() + "' and Struct_type='" + ddl_struct_type.SelectedValue + "' and category='" + ddl_category.SelectedValue + "' and gender='" + ddl_gender.SelectedValue + "' and del_flag=0 order by group_id";
         DataTable dt = cls.fillDataTable(qry);
         if (dt.Rows.Count > 0)
         {
@@ -307,6 +369,15 @@ public partial class Fee_Master : System.Web.UI.Page
         {
             ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Select Group !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
         }
+        else if (ddl_gender.SelectedValue == "0")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Select Gender !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+        }
+        else if (ddl_category.SelectedValue == "0")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Select Category !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+
+        }
         else if (ddl_struct_type.SelectedValue == "0")
         {
             ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Select Structure Type !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
@@ -344,12 +415,12 @@ public partial class Fee_Master : System.Web.UI.Page
                         if (struct_id.Text == "")
                         {
                             string gen_id = get_maxid(qrytimes);
-                            qry = qry + "insert into m_FeeMaster (AYID,group_id,Struct_id,Struct_type,Struct_name,Amount,Rank,user_id,curr_dt) values('" + Session["Year"].ToString() + "','" + ddl_group.SelectedValue + "','" + gen_id.Trim() + "','" + ddl_struct_type.SelectedValue + "','" + txt_struct.Text.Trim() + "'," + txt_amount.Text.Trim() + "," + txt_rank.Text.Trim() + ",'" + Session["emp_id"].ToString() + "',GETDATE());";
+                            qry = qry + "insert into m_FeeMaster_category (AYID,group_id,Struct_id,Struct_type,Struct_name,Amount,Rank,user_id,curr_dt,category,gender) values('" + Session["Year"].ToString() + "','" + ddl_group.SelectedValue + "','" + gen_id.Trim() + "','" + ddl_struct_type.SelectedValue + "','" + txt_struct.Text.Trim() + "'," + txt_amount.Text.Trim() + "," + txt_rank.Text.Trim() + ",'" + Session["emp_id"].ToString() + "',GETDATE(),'" + ddl_category.SelectedValue + "','" + ddl_gender.SelectedValue + "');";
                             qrytimes++;
                         }
                         else if (struct_id.Text.Contains("STR"))
                         {
-                            qry = qry + "UPDATE m_FeeMaster SET Struct_name='" + txt_struct.Text.Trim() + "',Amount='" + txt_amount.Text.Trim() + "',Rank='" + txt_rank.Text.Trim() + "' WHERE Struct_id='" + struct_id.Text.Trim() + "' and del_flag=0;";
+                            qry = qry + "UPDATE m_FeeMaster_category SET Struct_name='" + txt_struct.Text.Trim() + "',Amount='" + txt_amount.Text.Trim() + "',Rank='" + txt_rank.Text.Trim() + "' WHERE Struct_id='" + struct_id.Text.Trim() + "' and del_flag=0;";
                         }
                     }
                 }
@@ -404,7 +475,7 @@ public partial class Fee_Master : System.Web.UI.Page
 
     public string get_maxid(int qrytimes)
     {
-        string qry = "Select dbo.Genrate_fees_perid(" + qrytimes + ",'FEEMASTER') as perticular_id";
+        string qry = "Select dbo.Genrate_fees_perid(" + qrytimes + ",'FEEMASTERCATEGORY') as perticular_id";
         DataTable dt = cls.fillDataTable(qry);
         string perticular_id = dt.Rows[0]["perticular_id"].ToString();
         return perticular_id;
@@ -437,7 +508,7 @@ public partial class Fee_Master : System.Web.UI.Page
                 string[] CVA = confirmValue.Split(new Char[] { ',' });
                 if (CVA[CVA.Length - 1] == "Yes")
                 {
-                    string qrydel = "update m_FeeMaster set del_flag=1 where Struct_id='" + struct_id.Text + "'";
+                    string qrydel = "update m_FeeMaster_category set del_flag=1 where Struct_id='" + struct_id.Text + "'";
                     bool chk = cls.DMLqueries(qrydel);
                     if (chk == true)
                     {
@@ -463,19 +534,21 @@ public partial class Fee_Master : System.Web.UI.Page
     public void fill_subgrd()
     {
         string extra_qry = "";
-        if (ddl_subcourse.SelectedValue != "" && ddl_subcourse.SelectedValue != "0")
-        {
-            extra_qry = " and b.Subcourse_id='" + ddl_subcourse.SelectedValue + "'";
-        }
-        if (ddl_group.SelectedValue != "" && ddl_group.SelectedValue != "0")
-        {
-            extra_qry = " and a.group_id ='" + ddl_group.SelectedValue + "'";
-        }
-        if (ddl_struct_type.SelectedValue != "" && ddl_struct_type.SelectedValue != "0")
-        {
-            extra_qry += " and Struct_type !='" + ddl_struct_type.SelectedValue + "'";
-        }
-        string query = "select distinct a.group_id,b.Group_title,a.Struct_type,b.Subcourse_id from m_FeeMaster a,m_crs_subjectgroup_tbl b where a.AYID='" + Session["Year"].ToString() + "' and b.Group_id=a.group_id " + extra_qry + " and b.del_flag=0 and a.del_flag=0 order by a.group_id,a.Struct_type";
+        //if (ddl_gender.SelectedValue != "" && ddl_gender.SelectedValue != "0")
+        //{
+        //    extra_qry = " and (";
+        //    extra_qry += "a.gender !='" + ddl_gender.SelectedValue + "'";
+        //}
+        //if (ddl_category.SelectedValue != "" && ddl_category.SelectedValue != "0")
+        //{
+        //    extra_qry += " or a.category !='" + ddl_category.SelectedValue + "'";
+        //}
+        //if (ddl_struct_type.SelectedValue != "" && ddl_category.SelectedValue != "0")
+        //{
+        //    extra_qry += " or Struct_type !='" + ddl_struct_type.SelectedValue + "'";
+        //}
+        //if (extra_qry != "") { extra_qry += ")"; }
+        string query = "select distinct a.group_id,b.Group_title,a.Struct_type,b.Subcourse_id,a.gender,a.category from m_FeeMaster_category a,m_crs_subjectgroup_tbl b where a.AYID='" + Session["Year"].ToString() + "' and b.Group_id=a.group_id " + extra_qry + " and b.del_flag=0 and a.del_flag=0 order by a.group_id,a.Struct_type";
         DataTable dt = cls.fillDataTable(query);
         if (query != "")
         {
@@ -497,7 +570,7 @@ public partial class Fee_Master : System.Web.UI.Page
         Label grp_id = (Label)grd_subdata.Rows[rowID].FindControl("sub_grp_id");
         Label Struct_type = (Label)grd_subdata.Rows[rowID].FindControl("sub_struct_type");
         Label Subcourse_id = (Label)grd_subdata.Rows[rowID].FindControl("sub_Subcourse_id");
-        string query = "select * from m_FeeEntry where Struct_id in (select Struct_id from m_FeeMaster where Group_id ='" + grp_id.Text.Trim() + "' and AYID='" + Session["Year"].ToString() + "')";
+        string query = "select * from m_FeeEntry where Struct_id in (select Struct_id from m_FeeMaster_category where Group_id ='" + grp_id.Text.Trim() + "' and AYID='" + Session["Year"].ToString() + "' and category='" + ddl_category.SelectedValue + "' and gender='" + ddl_gender.SelectedValue + "' and del_flag=0)";
         DataTable dt = cls.fillDataTable(query);
         if (dt.Rows.Count > 0)
         {
@@ -520,7 +593,7 @@ public partial class Fee_Master : System.Web.UI.Page
         int rowID = gvRow.RowIndex;
         Label grp_id = (Label)grd_subdata.Rows[rowID].FindControl("sub_grp_id");
         Label Struct_type = (Label)grd_subdata.Rows[rowID].FindControl("sub_struct_type");
-        string query = "select * from m_FeeEntry where Struct_id in (select Struct_id from m_FeeMaster where Group_id ='" + grp_id.Text.Trim() + "' and AYID='" + Session["Year"].ToString() + "')";
+        string query = "select * from m_FeeEntry where Struct_id in (select Struct_id from m_FeeMaster_category where Group_id ='" + grp_id.Text.Trim() + "' and AYID='" + Session["Year"].ToString() + "'and category='" + ddl_category.SelectedValue + "' and gender='" + ddl_gender.SelectedValue + "' )";
         DataTable dt = cls.fillDataTable(query);
         if (dt.Rows.Count > 0)
         {
@@ -533,7 +606,7 @@ public partial class Fee_Master : System.Web.UI.Page
             string[] CVA = confirmValue.Split(new Char[] { ',' });
             if (CVA[CVA.Length - 1] == "Yes")
             {
-                string qrydel = "Update m_FeeMaster set del_flag=1 where group_id ='" + grp_id.Text.Trim() + "' and Struct_type='"+ Struct_type.Text.Trim() + "' and AYID='" + Session["Year"].ToString() + "'";
+                string qrydel = "Update m_FeeMaster_category set del_flag=1 where group_id ='" + grp_id.Text.Trim() + "' and Struct_type='" + Struct_type.Text.Trim() + "' and AYID='" + Session["Year"].ToString() + "'";
 
                 bool chk = cls.DMLqueries(qrydel);
                 if (chk == true)
@@ -603,7 +676,7 @@ public partial class Fee_Master : System.Web.UI.Page
         int rowID = gvRow.RowIndex;
         Label type_name = (Label)grd_type.Rows[rowID].FindControl("type_name");
         Label Struct_type_id = (Label)grd_type.Rows[rowID].FindControl("Struct_type_id");
-        string query = "select Struct_type from m_FeeMaster where del_flag=0 and Struct_type='" + type_name + "';";
+        string query = "select Struct_type from m_FeeMaster_category where del_flag=0 and Struct_type='" + type_name + "';";
         DataTable dt = cls.fillDataTable(query);
         if (dt.Rows.Count > 0)
         {
@@ -638,7 +711,7 @@ public partial class Fee_Master : System.Web.UI.Page
         int rowID = gvRow.RowIndex;
         Label Struct_type_id = (Label)grd_type.Rows[rowID].FindControl("Struct_type_id");
         Label type_name = (Label)grd_type.Rows[rowID].FindControl("type_name");
-        string query = "select Struct_type from m_FeeMaster where del_flag=0 and Struct_type='" + type_name + "';";
+        string query = "select Struct_type from m_FeeMaster_category where del_flag=0 and Struct_type='" + type_name + "';";
         DataTable dt = cls.fillDataTable(query);
         if (dt.Rows.Count > 0)
         {
