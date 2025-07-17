@@ -68,8 +68,7 @@
     <link href="<%= ResolveUrl("~/Assets/datatable/DataTable.css") %>" rel="stylesheet" />
     <script src="<%= ResolveUrl("~/Assets/datatable/DataTable.js") %>"></script>
     <%--Datatable --%>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+
     <style>
      body {
 
@@ -128,7 +127,6 @@
                       <div class="input-group has-validation">
                         <%--<span class="input-group-text" id="inputGroupPrepend">@</span>--%>
                         <asp:TextBox runat="server" type="text" name="username" MaxLength="8" autocomplete="off" class="form-control" id="txtUserName" style="text-transform:uppercase;" onkeyPress="return alphaandnum(event)" required   oncopy="return false" 
-                                                                 onpaste="return false"
                                                                 oncut="return false"/>
                         <div class="invalid-feedback">Please enter your username.</div>
                       </div>
@@ -136,7 +134,7 @@
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <asp:TextBox runat="server" MaxLength="20" type="password" name="password" class="form-control" id="txtPassword" oncopy="return false" oncut="return paste" onpaste="return false"  required/>
+                      <asp:TextBox runat="server" MaxLength="20" type="password" name="password" class="form-control" id="txtPassword" oncopy="return false" oncut="return paste" required/>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
                         <div class="col-12">

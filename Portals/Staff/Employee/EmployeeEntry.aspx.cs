@@ -815,16 +815,16 @@ public partial class Portals_Staff_Employee_EmployeeEntry : System.Web.UI.Page
                 //}
             }
 
-            if (ddlcat.SelectedValue != "OPEN")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Select Caste.','danger')", true);
-                ddlcast.Focus();
+            //if (ddlcat.SelectedValue != "OPEN")
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Select Caste.','danger')", true);
+            //    ddlcast.Focus();
 
-            }
-            else
-            {
-                ddlcast.Enabled = false;
-            }
+            //}
+            //else
+            //{
+            //    ddlcast.Enabled = false;
+            //}
 
             if (txtfirstname.Text.Trim() == "")
             {
@@ -2288,7 +2288,7 @@ public partial class Portals_Staff_Employee_EmployeeEntry : System.Web.UI.Page
                         string bldgrp = empdt.Rows[0]["emp_blood_group"].ToString().Trim();
 
                         ddlbloodgroup.SelectedValue = empdt.Rows[0]["emp_blood_group"].ToString().Trim();
-                        ddlbloodgroup.Items.FindByValue(bldgrp).Selected = true;
+                        //ddlbloodgroup.Items.FindByValue(bldgrp).Selected = true;
                         // cmd.Parameters.AddWithValue("@emp_mobile1", txtmobno.Text.ToString().Trim());
                         // cmd.Parameters.AddWithValue("@emp_mobile2", txtmobile.Text.ToString().Trim());
                         string reli = empdt.Rows[0]["emp_religion"].ToString();

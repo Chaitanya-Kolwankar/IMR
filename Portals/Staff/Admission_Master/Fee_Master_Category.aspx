@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Portals/Staff/MasterPage.master" AutoEventWireup="true" CodeFile="Fee_Master.aspx.cs" Inherits="Fee_Master" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Portals/Staff/MasterPage.master" AutoEventWireup="true" CodeFile="Fee_Master_Category.aspx.cs" Inherits="Portals_Staff_Admission_Master_Fee_Master_Category" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+
     <style>
         input[type=number] {
             -moz-appearance: textfield;
@@ -41,7 +42,6 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
     <div id="main" class="main">
         <div class="container-fluid">
             <div class="pagetitle " style="font-size: 32px; margin-left: 34px; font-weight: 300; color: #012970;">
@@ -52,7 +52,7 @@
                     <ContentTemplate>
                         <div class="card">
                             <div class="card-title mx-4" style="font-size: 21px">
-                                Fee Master
+                                Fee Master Category
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -74,6 +74,17 @@
                                         <asp:DropDownList ID="ddl_group" runat="server" CssClass="form-select" OnSelectedIndexChanged="ddl_group_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                        <asp:Label ID="Label7" runat="server" Text="Gender :"></asp:Label><br />
+                                        <asp:DropDownList ID="ddl_gender" runat="server" CssClass="form-select" OnSelectedIndexChanged="ddl_gender_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                        <asp:Label ID="Label8" runat="server" Text="Category :"></asp:Label><br />
+                                        <asp:DropDownList ID="ddl_category" runat="server" CssClass="form-select" OnSelectedIndexChanged="ddl_category_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                                         <asp:Label ID="Label1" runat="server" Text="Structure Type :"></asp:Label><br />
                                         <asp:DropDownList ID="ddl_struct_type" runat="server" CssClass="form-select" OnSelectedIndexChanged="ddl_struct_type_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                                     </div>
@@ -81,14 +92,12 @@
                                         <br />
                                         <asp:LinkButton ID="btn_struct_type" runat="server" Text="" CssClass="btn btn-primary" OnClick="btn_struct_type_Click" OnClientClick="modal_confirm();"><i class="bi bi-plus"></i></asp:LinkButton>
                                     </div>
-                                </div>
-                                <br />
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-0 col-xs-0"></div>
                                     <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12">
+                                        <br />
                                         <asp:Button ID="btn_save" runat="server" Text="Save" CssClass="btn btn-primary btn-block form-control" OnClick="btn_save_Click" />
                                     </div>
                                     <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12">
+                                        <br />
                                         <asp:Button ID="btn_clear" runat="server" Text="Clear" CssClass="btn btn-primary btn-block form-control" OnClick="btn_clear_Click" />
                                     </div>
                                 </div>
@@ -151,7 +160,7 @@
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Sr.no">
                                                     <ItemTemplate>
-                                                        <%# Container.DataItemIndex + 1 %>
+                                                        <asp:Label ID="serno" runat="server" Text=' <%# Container.DataItemIndex + 1 %>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="group_id" Visible="false">
@@ -164,9 +173,19 @@
                                                         <asp:Label ID="sub_Subcourse_id" runat="server" Text='<%# Eval("Subcourse_id") %>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="GROUP NAME">
+                                                <asp:TemplateField HeaderText="Group Name">
                                                     <ItemTemplate>
                                                         <asp:Label ID="sub_grp_name" runat="server" Text='<%# Eval("Group_title") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Gender">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="sub_gender" runat="server" Text='<%# Eval("Gender") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Category">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="sub_category" runat="server" Text='<%# Eval("Category") %>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Structure Type">
@@ -263,6 +282,7 @@
         <%-- Modal for Search Button --%>
     </div>
     <script type="text/javascript">
+
         function allowOnlyLetters(e, t) {
             if (window.event) {
                 var charCode = window.event.keyCode;
