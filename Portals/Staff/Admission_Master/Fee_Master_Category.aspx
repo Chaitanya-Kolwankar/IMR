@@ -173,6 +173,11 @@
                                                         <asp:Label ID="sub_Subcourse_id" runat="server" Text='<%# Eval("Subcourse_id") %>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Group Name">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="sub_grp_name" runat="server" Text='<%# Eval("Group_title") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Gender">
                                                     <ItemTemplate>
                                                         <asp:Label ID="sub_gender" runat="server" Text='<%# Eval("Gender") %>'></asp:Label>
@@ -181,11 +186,6 @@
                                                 <asp:TemplateField HeaderText="Category">
                                                     <ItemTemplate>
                                                         <asp:Label ID="sub_category" runat="server" Text='<%# Eval("Category") %>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="GROUP NAME">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="sub_grp_name" runat="server" Text='<%# Eval("Group_title") %>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Structure Type">

@@ -534,20 +534,18 @@ public partial class Portals_Staff_Admission_Master_Fee_Master_Category : System
     public void fill_subgrd()
     {
         string extra_qry = "";
-        //if (ddl_gender.SelectedValue != "" && ddl_gender.SelectedValue != "0")
-        //{
-        //    extra_qry = " and (";
-        //    extra_qry += "a.gender !='" + ddl_gender.SelectedValue + "'";
-        //}
-        //if (ddl_category.SelectedValue != "" && ddl_category.SelectedValue != "0")
-        //{
-        //    extra_qry += " or a.category !='" + ddl_category.SelectedValue + "'";
-        //}
-        //if (ddl_struct_type.SelectedValue != "" && ddl_category.SelectedValue != "0")
-        //{
-        //    extra_qry += " or Struct_type !='" + ddl_struct_type.SelectedValue + "'";
-        //}
-        //if (extra_qry != "") { extra_qry += ")"; }
+        if (ddl_gender.SelectedValue != "" && ddl_gender.SelectedValue != "0")
+        {
+            extra_qry += "and a.gender ='" + ddl_gender.SelectedValue + "'";
+        }
+        if (ddl_category.SelectedValue != "" && ddl_category.SelectedValue != "0")
+        {
+            extra_qry += " and a.category ='" + ddl_category.SelectedValue + "'";
+        }
+        if (ddl_struct_type.SelectedValue != "" && ddl_category.SelectedValue != "0")
+        {
+            extra_qry += " and Struct_type !='" + ddl_struct_type.SelectedValue + "'";
+        }
         string query = "select distinct a.group_id,b.Group_title,a.Struct_type,b.Subcourse_id,a.gender,a.category from m_FeeMaster_category a,m_crs_subjectgroup_tbl b where a.AYID='" + Session["Year"].ToString() + "' and b.Group_id=a.group_id " + extra_qry + " and b.del_flag=0 and a.del_flag=0 order by a.group_id,a.Struct_type";
         DataTable dt = cls.fillDataTable(query);
         if (query != "")
@@ -570,6 +568,8 @@ public partial class Portals_Staff_Admission_Master_Fee_Master_Category : System
         Label grp_id = (Label)grd_subdata.Rows[rowID].FindControl("sub_grp_id");
         Label Struct_type = (Label)grd_subdata.Rows[rowID].FindControl("sub_struct_type");
         Label Subcourse_id = (Label)grd_subdata.Rows[rowID].FindControl("sub_Subcourse_id");
+        Label gender = (Label)grd_subdata.Rows[rowID].FindControl("sub_gender");
+        Label category = (Label)grd_subdata.Rows[rowID].FindControl("sub_category");
         string query = "select * from m_FeeEntry where Struct_id in (select Struct_id from m_FeeMaster_category where Group_id ='" + grp_id.Text.Trim() + "' and AYID='" + Session["Year"].ToString() + "' and category='" + ddl_category.SelectedValue + "' and gender='" + ddl_gender.SelectedValue + "' and del_flag=0)";
         DataTable dt = cls.fillDataTable(query);
         if (dt.Rows.Count > 0)
@@ -582,6 +582,10 @@ public partial class Portals_Staff_Admission_Master_Fee_Master_Category : System
             ddl_subcourse_SelectedIndexChanged(sender, e);
             ddl_group.SelectedValue = grp_id.Text.Trim();
             ddl_group_SelectedIndexChanged(sender, e);
+            ddl_gender.SelectedValue = gender.Text.Trim();
+            ddl_gender_SelectedIndexChanged(sender, e);
+            ddl_category.SelectedValue = category.Text.Trim();
+            ddl_category_SelectedIndexChanged(sender, e);
             ddl_struct_type.SelectedValue = Struct_type.Text.Trim();
             ddl_struct_type_SelectedIndexChanged(sender, e);
         }
@@ -593,6 +597,9 @@ public partial class Portals_Staff_Admission_Master_Fee_Master_Category : System
         int rowID = gvRow.RowIndex;
         Label grp_id = (Label)grd_subdata.Rows[rowID].FindControl("sub_grp_id");
         Label Struct_type = (Label)grd_subdata.Rows[rowID].FindControl("sub_struct_type");
+        //Label Subcourse_id = (Label)grd_subdata.Rows[rowID].FindControl("sub_Subcourse_id");
+        Label gender = (Label)grd_subdata.Rows[rowID].FindControl("sub_gender");
+        Label category = (Label)grd_subdata.Rows[rowID].FindControl("sub_category");
         string query = "select * from m_FeeEntry where Struct_id in (select Struct_id from m_FeeMaster_category where Group_id ='" + grp_id.Text.Trim() + "' and AYID='" + Session["Year"].ToString() + "'and category='" + ddl_category.SelectedValue + "' and gender='" + ddl_gender.SelectedValue + "' )";
         DataTable dt = cls.fillDataTable(query);
         if (dt.Rows.Count > 0)
@@ -606,7 +613,7 @@ public partial class Portals_Staff_Admission_Master_Fee_Master_Category : System
             string[] CVA = confirmValue.Split(new Char[] { ',' });
             if (CVA[CVA.Length - 1] == "Yes")
             {
-                string qrydel = "Update m_FeeMaster_category set del_flag=1 where group_id ='" + grp_id.Text.Trim() + "' and Struct_type='" + Struct_type.Text.Trim() + "' and AYID='" + Session["Year"].ToString() + "'";
+                string qrydel = "Update m_FeeMaster_category set del_flag=1 where group_id ='" + grp_id.Text.Trim() + "' and Struct_type='" + Struct_type.Text.Trim() + "'and category='" + category.Text.Trim() + "' and gender='" + gender.Text.Trim() + "' and AYID='" + Session["Year"].ToString() + "'";
 
                 bool chk = cls.DMLqueries(qrydel);
                 if (chk == true)

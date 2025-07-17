@@ -59,9 +59,9 @@
 
 
     <%--font links --%>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo&family=Baloo+Bhai+2&family=Cabin&family=Roboto+Slab&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo&family=Baloo+Bhai+2&family=Cabin&family=Roboto+Slab&display=swap" rel="stylesheet" />
     <%--font links--%>
 
     <%--Datatable --%>
@@ -91,7 +91,7 @@
 
             <div class="d-flex align-items-center justify-content-between">
                 <a href="index.html" class="logo d-flex align-items-center">
-                    <img src="/Assets/img/mu.png" alt=""/>
+                    <img src="/Assets/img/mu.png" alt="" />
                     <span class="d-none d-lg-block">IMR College</span>
                 </a>
                 <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -311,6 +311,10 @@
                         <li id="feemaster" style="display: none">
                             <a href="../Admission_Master/Fee_Master.aspx">
                                 <i class="bi bi-circle"></i><span>Fee master</span></a>
+                        </li>
+                        <li id="feemastercategory" style="display: none">
+                            <a href="../Admission_Master/Fee_Master_Category.aspx">
+                                <i class="bi bi-circle"></i><span>Fee master Category</span></a>
                         </li>
                         <li id="groupmapping" style="display: none">
                             <a href="../Admission_Master/GroupMapping.aspx">
@@ -602,7 +606,7 @@
         </aside>
 
         <!-- End Sidebar-->
-        <div style="background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);position: absolute;top: 0; left: 0;width: 100vw;height: 100vh;overflow: auto;background-size: contain;">
+        <div style="background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%); position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: auto; background-size: contain;">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
@@ -648,32 +652,32 @@
     var empId = '<%=Session["emp_id"] %>'
 </script>
 
-    <script>
-        $(document).ready(function () {
-            addSignOutListener(); // Add this line
-        });
+<script>
+    $(document).ready(function () {
+        addSignOutListener(); // Add this line
+    });
 
-        function addSignOutListener() {
-            $('#signOutButton').on('click', function () {
-                localStorage.removeItem('moduleState');
-                localStorage.removeItem('formState');
+    function addSignOutListener() {
+        $('#signOutButton').on('click', function () {
+            localStorage.removeItem('moduleState');
+            localStorage.removeItem('formState');
 
-                $.ajax({
-                    type: "POST",
-                    url: "/Portals/Staff/Login.aspx/ClearSession",
-                    contentType: "application/json; charset=utf-8",
-                    success: function () {
-                        // Session cleared successfully
-                        window.location.href = '../Login.aspx'; // Redirect after session clear
-                    },
-                    error: function () {
-                        // Handle any error during session clearing
-                        window.location.href = '../Login.aspx'; //redirect anyway.
-                    }
-                });
+            $.ajax({
+                type: "POST",
+                url: "/Portals/Staff/Login.aspx/ClearSession",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    // Session cleared successfully
+                    window.location.href = '../Login.aspx'; // Redirect after session clear
+                },
+                error: function () {
+                    // Handle any error during session clearing
+                    window.location.href = '../Login.aspx'; //redirect anyway.
+                }
             });
-        }
-    </script>
+        });
+    }
+</script>
 
 
 </html>
