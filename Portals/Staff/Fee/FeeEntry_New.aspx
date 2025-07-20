@@ -44,7 +44,7 @@
     <div id="main" class="main">
         <div class="container-fluid">
             <div class="pagetitle " style="font-size: 32px; margin-left: 34px; font-weight: 300; color: #012970;">
-               Fees
+                Fees
             </div>
             <div class="container-fluid">
                 <asp:UpdatePanel runat="server">
@@ -235,7 +235,7 @@
                                         <div class="row">
                                             <div class="col-md-12" style="overflow: auto">
                                                 <asp:GridView ID="grdedit" runat="server" Font-Size="10pt"
-                                                    Style="text-align: center;" AutoGenerateColumns="False" CssClass="table table-bordered table-hover" >
+                                                    Style="text-align: center;" AutoGenerateColumns="False" CssClass="table table-bordered table-hover">
                                                     <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                                                     <RowStyle HorizontalAlign="Center" Height="10px"></RowStyle>
                                                     <Columns>
@@ -301,7 +301,7 @@
                             <h2 class="modal-title">Student Details</h2>
                         </div>
                         <div class="col-md-2" style="display: flex; justify-content: flex-end;">
-                            <button type="button" class="close btn btn-outline-secondary" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <button type="button" class="close btn btn-outline-secondary" data-bs-dismiss="modal" aria-bs-label="Close"><span aria-hidden="true" >&times;</span></button>
                         </div>
                     </div>
                     <div class="modal-body">
@@ -397,8 +397,8 @@
     <script type="text/javascript">
         function openModal(name) {
             $("[id*=" + name + "]").modal('show');
-            $("[id*=" + name + "]").data('bs.modal').options.backdrop = 'static';
-            $("[id*=" + name + "]").data('bs.modal').options.keyboard = false;
+            //$("[id*=" + name + "]").data('bs.modal').options.backdrop = 'static';
+            //$("[id*=" + name + "]").data('bs.modal').options.keyboard = false;
         }
         function closeModal(name) {
             $("[id*=" + name + "]").modal('hide');
