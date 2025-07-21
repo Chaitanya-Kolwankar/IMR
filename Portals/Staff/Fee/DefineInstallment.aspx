@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Portals/Staff/MasterPage.master" AutoEventWireup="true" CodeFile="DefineInstallment.aspx.cs" Inherits="Portals_Staff_Fee_DefineInstallment" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <script src="<%= ResolveUrl("~/Assets/js/jquery.datetimepicker.js") %>"></script>
+    <link href="<%= ResolveUrl("~/Assets/css/jquery.datetimepicker.css") %>" rel="stylesheet" />
     <style>
         input[type=number] {
             -moz-appearance: textfield;
@@ -22,6 +24,10 @@
 
         th {
             color: #012970;
+            background-color: white !important;
+            position: sticky;
+            font-weight: bold;
+            top: 0;
         }
 
         .caps {
@@ -37,6 +43,10 @@
         .transparent-modal {
             background-color: #0000;
             border: 0px;
+        }
+
+        .form-control[readonly] {
+            background-color: #fff;
         }
     </style>
 </asp:Content>
@@ -56,7 +66,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <asp:TextBox ID="txt_studid" runat="server" CssClass="form-control" placeholder="Student ID" MaxLength="8" onkeypress="return isNumber(event)" Text="22101096"></asp:TextBox>
+                                        <asp:TextBox ID="txt_studid" runat="server" CssClass="form-control" placeholder="Student ID" MaxLength="8" onkeypress="return isNumber(event)" ></asp:TextBox>
                                     </div>
                                     <div class="col-md-1">
                                         <asp:LinkButton ID="lnksearch" runat="server" CssClass="btn btn-primary" OnClick="lnksearch_Click"><span class="bi bi-search"></span></asp:LinkButton>
@@ -134,12 +144,15 @@
                                                 <br />
                                                 <asp:Button ID="btncancel" runat="server" CssClass="btn btn-primary form-control" Text="Cancel" OnClick="btncancel_Click" />
                                             </div>
-                                            <div class="col-md-4"></div>
+                                            <div class="col-md-2">
+                                                <br />
+                                                <asp:LinkButton ID="btn_new" runat="server" CssClass="btn btn-outline-danger form-control" Text="New Installment" OnClick="btn_new_Click" Visible="false" OnClientClick="Confirm();"></asp:LinkButton>
+                                            </div>
                                         </div>
                                         <br />
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-xs-12 table-responsive" style="overflow: auto; max-height: 400px; width: 100%;">
-                                                <asp:GridView ID="grd_type" runat="server" AutoGenerateColumns="false" CssClass="table">
+                                                <asp:GridView ID="grd_install" runat="server" AutoGenerateColumns="false" CssClass="table">
                                                     <Columns>
                                                         <asp:TemplateField HeaderText="Sr.no">
                                                             <ItemTemplate>
@@ -153,22 +166,26 @@
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Installemnt No">
                                                             <ItemTemplate>
-                                                                <asp:Label ID="lbl_sr_no" runat="server" Text='<%# (Container.DataItemIndex + 1) +" "+ getnum(Container.DataItemIndex + 1) %>'></asp:Label>
+                                                                <asp:Label ID="lbl_install_no" runat="server" Text='<%# (Container.DataItemIndex + 1) +" ("+ getnum(Container.DataItemIndex + 1)+")" %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Due Date">
                                                             <ItemTemplate>
-                                                                <asp:TextBox ID="txt_due_date" runat="server" placeholder="Date" Text='<%# Eval("Due_date") %>' CssClass="form-control" onkeypress="return allowonlynumbers(event,this);" AutoComplete="off" MaxLength="7"></asp:TextBox>
+                                                                <div style="display: flex; align-items: center; gap: 6px;">
+                                                                    <asp:TextBox ID="Due_date" runat="server" placeholder="Date" Text='<%# Eval("Due_date") %>' CssClass="form-control datepicker" onkeypress="preventKeyPress(event);" AutoComplete="off" Enabled='<%# Convert.ToString(Eval("Due_date")) ==""?true:false %>'></asp:TextBox>
+                                                                    <asp:LinkButton ID="lnkEnableDate" runat="server" CssClass="btn btn-outline-primary bi bi-pencil" Visible='<%# !string.IsNullOrEmpty(Eval("Due_date").ToString()) %>' OnClick="lnkEnableDate_Click">
+                                                                    </asp:LinkButton>
+                                                                </div>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Installment Amount">
                                                             <ItemTemplate>
-                                                                <asp:TextBox ID="txt_amount" runat="server" placeholder="Installment Amount" Text='<%# Eval("Install_Amount") %>' CssClass="form-control" onkeypress="return allowonlynumbers(event,this);" ReadOnly="true"></asp:TextBox>
+                                                                <asp:TextBox ID="Install_Amount" runat="server" placeholder="Installment Amount" Text='<%# Eval("Install_Amount") %>' CssClass="form-control" onkeypress="return allowonlynumbers(event,this);" ReadOnly="true"></asp:TextBox>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Installment Balance">
                                                             <ItemTemplate>
-                                                                <asp:TextBox ID="txt_balance" runat="server" placeholder="Balance Amount" Text='<%# Eval("balance_Amount") %>' CssClass="form-control" onkeypress="return allowonlynumbers(event,this);" ReadOnly="true"></asp:TextBox>
+                                                                <asp:TextBox ID="balance_Amount" runat="server" placeholder="Balance Amount" Text='<%# Eval("balance_Amount") %>' CssClass="form-control" onkeypress="return allowonlynumbers(event,this);" ReadOnly="true"></asp:TextBox>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                     </Columns>
@@ -252,43 +269,16 @@
             </div>
         </div>
     </div>
-    <script>
-        function loaddate() {
-            $('[id*=txtpaydate]').datetimepicker(
-                {
-                    todayHighlight: true,
-                    timepicker: false,
-                    format: 'd/m/Y',
-                    orientation: 'bottom'
-                });
-            $('[id*=txtchdate]').datetimepicker(
-                {
-                    todayHighlight: true,
-                    timepicker: false,
-                    format: 'd/m/Y',
-                    orientation: 'bottom'
-                });
-        }
-        function Confirm() {
-            var confirm_value = document.createElement("INPUT");
-            confirm_value.type = "hidden";
-            confirm_value.name = "confirm_value";
-            confirm_value.value = "";
-            if (confirm("Do you want to delete the selected fee entry ?")) {
-                confirm_value.value = "OK";
-            }
-            else {
-                confirm_value.value = "Cancel";
-            }
-            document.forms[0].appendChild(confirm_value);
-        }
-    </script>
 
     <script type="text/javascript">
+        function preventKeyPress(e) {
+            e.preventDefault();
+        }
+        Sys.Application.add_load(function () {
+            datepic();
+        });
         function openModal(name) {
             $("[id*=" + name + "]").modal('show');
-            //$("[id*=" + name + "]").data('bs.modal').options.backdrop = 'static';
-            //$("[id*=" + name + "]").data('bs.modal').options.keyboard = false;
         }
         function closeModal(name) {
             $("[id*=" + name + "]").modal('hide');
@@ -303,6 +293,33 @@
         }
         function redirect(name) {
             window.open(name, '_blank');
+        }
+
+        function datepic() {
+            $('.datepicker').datetimepicker({
+                timepicker: false,
+                format: 'd/m/Y',
+                minDate: 0 // Starts from today
+            });
+        }
+        function Confirm() {
+            var form = document.forms[0];
+
+            var confirm_value = document.createElement("INPUT");
+            if (confirm_value.value != "") {
+                form.lastChild.remove();
+            }
+            var value = $('#<%= lblbal.ClientID %>').text().trim();
+            confirm_value.defaultValue = "";
+            confirm_value.type = "hidden";
+            confirm_value.name = "confirm_value";
+            if (confirm("Do you want to Redefine Installment with balance amount: " + value +" ?")) {
+                confirm_value.value = "Yes";
+            } else {
+                confirm_value.value = "No";
+            }
+
+            form.appendChild(confirm_value);
         }
     </script>
 </asp:Content>

@@ -1,9 +1,7 @@
-﻿using iTextSharp.tool.xml.css;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.IdentityModel.Protocols.WSTrust;
-using System.Linq;
+using System.Data.SqlTypes;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -54,7 +52,54 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
 
     protected void btnsave_Click(object sender, EventArgs e)
     {
+        if (grd_install.Rows.Count > 0)
+        {
+            string qry = "";
+            bool validate = true;
+            for (int i = 0; i < grd_install.Rows.Count; i++)
+            {
+                string lbl_sr_no = ((Label)grd_install.Rows[i].FindControl("lbl_sr_no")).Text.Trim();
+                string Install_id = ((Label)grd_install.Rows[i].FindControl("Install_id")).Text.Trim();
+                string Due_date = ((TextBox)grd_install.Rows[i].FindControl("Due_date")).Text.Trim();
+                Due_date = Convert.ToDateTime(Due_date).ToString("yyyy-MM-dd");
+                string Install_Amount = ((TextBox)grd_install.Rows[i].FindControl("Install_Amount")).Text.Trim();
+                string balance_Amount = ((TextBox)grd_install.Rows[i].FindControl("balance_Amount")).Text.Trim();
+                if (Due_date == "")
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Enter Due Date', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+                    ((TextBox)grd_install.Rows[i].FindControl("Due_date")).Focus();
+                    validate = false;
+                    break;
+                }
+                else
 
+                {
+                    qry += "insert into m_FeeInstallment (Install_id,Stud_id,Ayid,Group_id,Install_no,Due_date,Install_Amount,balance_Amount,PaymentStatus,user_id) values ('" + Install_id + "','" + txt_studid.Text.Trim() + "','" + lblayid.Text.Trim() + "','" + lblgroupid.Text.Trim() + "'," + lbl_sr_no + ",(CAST('" + Due_date + "' AS datetime))," + Install_Amount + "," + balance_Amount + ",0,'" + Session["emp_id"].ToString() + "');";
+                }
+            }
+            if (validate == true)
+            {
+                if (qry != "")
+                {
+                    if (cls.TranDMLqueries(qry) == true)
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Saved Successfully', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Something Went Wrong !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+                    }
+                }
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('No Changes Made !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+                }
+            }
+        }
+        else
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Select Installment !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+        }
     }
 
     protected void btncancel_Click(object sender, EventArgs e)
@@ -100,7 +145,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                 {
                     lblname.Text = lblmodalname.Text.Trim();
                     lblgender.Text = gender;
-                    lbl_totalfees.Text = dt.Rows[0]["Balance"].ToString();
+                    lbl_totalfees.Text = dt.Rows[0]["TotalAmount"].ToString();
                     lblgroup.Text = Group_Title;
                     lblgroupid.Text = group_id;
                     lblyear.Text = year.ToString();
@@ -108,9 +153,9 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                     lblcategory.Text = category;
                     lblpaidfees.Text = dt.Rows[0]["PaidAmount"].ToString();
                     lblbal.Text = dt.Rows[0]["Balance"].ToString();
-                    //lbl_totalfees.Text = (Convert.ToInt32(ds.Tables["Tution"].Rows[0][0].ToString()) + Convert.ToInt32(ds.Tables["Development"].Rows[0][0].ToString()) + Convert.ToInt32(ds.Tables["Other"].Rows[0][0].ToString())).ToString();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalyear');", true);
                     feepanel.Visible = true;
+                    load_grd();
                 }
                 else
                 {
@@ -130,7 +175,36 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
 
     protected void ddl_installment_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        grd_install.DataSource = null;
+        grd_install.DataBind();
+        if (ddl_installment.SelectedValue != "")
+        {
+            int no_of_installments = Convert.ToInt32(ddl_installment.SelectedValue);
+            int installment_amount = Convert.ToInt32(lblbal.Text) / no_of_installments;
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Install_id");
+            dt.Columns.Add("Due_date");
+            dt.Columns.Add("Install_Amount");
+            dt.Columns.Add("balance_Amount");
+            for (int i = 1; i <= no_of_installments; i++)
+            {
+                DataRow dr = dt.NewRow();
+                dr["Install_id"] = getinstall_id(i);
+                dr["Due_date"] = "";
+                dr["Install_Amount"] = installment_amount.ToString();
+                dr["balance_Amount"] = "0";
+                dt.Rows.Add(dr);
+            }
+            if (dt.Rows.Count > 0)
+            {
+                grd_install.DataSource = dt;
+                grd_install.DataBind();
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Something Went Wrong !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+            }
+        }
     }
     public string getnum(int num)
     {
@@ -147,6 +221,105 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
             case 9: return "NINE";
             case 10: return "TEN";
             default: return "INVALID";
+        }
+    }
+
+    public string getinstall_id(int i)
+    {
+        string qry = "select MAX(Install_id) from m_FeeInstallment where Stud_id='" + txt_studid.Text.Trim() + "' and Del_flag=0";
+        DataTable dt = cls.fillDataTable(qry);
+        int lastNo = 0;
+        if (dt.Rows.Count > 0 && dt.Rows[0][0] != DBNull.Value && dt.Rows[0][0].ToString().Length >= 10)
+        {
+            string lastInstallId = dt.Rows[0][0].ToString();
+            string suffix = lastInstallId.Substring(lastInstallId.Length - 2);
+            int.TryParse(suffix, out lastNo);
+        }
+        int newNumber = lastNo + i;
+        string paddedNumber = newNumber.ToString().PadLeft(2, '0');
+        return txt_studid.Text.Trim() + paddedNumber;
+    }
+
+    public void load_grd()
+    {
+        try
+        {
+            DataTable dt = cls.fillDataTable("select Install_id,Install_no,CONVERT(varchar, Due_date, 103)[Due_date],Install_Amount,balance_Amount from m_FeeInstallment where Stud_id='" + txt_studid.Text.Trim() + "' and Ayid='" + lblayid.Text.Trim() + "' and Group_id='" + lblgroupid.Text.Trim() + "' and Del_flag=0 order by Install_no");
+            if (dt.Rows.Count > 0)
+            {
+                grd_install.DataSource = dt;
+                grd_install.DataBind();
+                ddl_installment.SelectedValue = dt.Rows.Count.ToString();
+                ddl_installment.Enabled = false;
+                btn_new.Visible = true;
+            }
+            else
+            {
+                grd_install.DataSource = null;
+                grd_install.DataBind();
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('" + ex.Message.ToString() + "', { color: '#fff', background: '#D44950', blur: 0.2, delay: 0, timeout: 100 });", true);
+        }
+    }
+
+    protected void lnkEnableDate_Click(object sender, EventArgs e)
+    {
+        GridViewRow gvrow = (GridViewRow)(sender as Control).Parent.Parent;
+        LinkButton lnkEnableDate = (LinkButton)gvrow.FindControl("lnkEnableDate");
+        TextBox Due_date = (TextBox)gvrow.FindControl("Due_date");
+        string Install_id = ((Label)gvrow.FindControl("Install_id")).Text.Trim();
+        if (lnkEnableDate.CssClass.Contains("bi-pencil"))
+        {
+            Due_date.Enabled = true;
+            lnkEnableDate.CssClass = "btn btn-outline-success bi bi-save";
+        }
+        else
+        {
+            if (Due_date.Text.Trim() == "")
+            {
+                ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Enter Due Date', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+                Due_date.Focus();
+            }
+            else
+            {
+                string Due_date_sql = Convert.ToDateTime(Due_date.Text.Trim()).ToString("yyyy-MM-dd");
+                string qry = "update  m_FeeInstallment set Due_date=(CAST('" + Due_date_sql + "' AS datetime)),mod_dt=GETDATE(),user_id='" + Session["emp_id"].ToString() + "' where Install_id='" + Install_id + "' and Del_flag=0";
+                if (cls.DMLqueries(qry))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Updated Successfully', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
+                    load_grd();
+                }
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Something Went Wrong !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+                }
+            }
+        }
+    }
+
+    protected void btn_new_Click(object sender, EventArgs e)
+    {
+        string confirmValue = Request.Form["confirm_value"];
+        string[] CVA = confirmValue.Split(new Char[] { ',' });
+        if (CVA[CVA.Length - 1] == "Yes")
+        {
+            string qry = "update  m_FeeInstallment set Del_flag=1 ,del_dt=GETDATE(),user_id='" + Session["emp_id"].ToString() + "'  where Stud_id='" + txt_studid.Text.Trim() + "' and Ayid='" + lblayid.Text.Trim() + "' and Group_id='" + lblgroupid.Text.Trim() + "' and Del_flag=0";
+            if (cls.DMLqueries(qry))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Redefine Installment', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
+                ddl_installment.SelectedValue = "";
+                ddl_installment.Enabled = true;
+                btn_new.Visible = false;
+                 grd_install.DataSource = null;
+                grd_install.DataBind();
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Something Went Wrong !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+            }
         }
     }
 }
