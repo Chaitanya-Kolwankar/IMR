@@ -1,10 +1,10 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.Data.SqlTypes;
+using System.Globalization;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
 
 public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
 {
@@ -61,7 +61,8 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                 string lbl_sr_no = ((Label)grd_install.Rows[i].FindControl("lbl_sr_no")).Text.Trim();
                 string Install_id = ((Label)grd_install.Rows[i].FindControl("Install_id")).Text.Trim();
                 string Due_date = ((TextBox)grd_install.Rows[i].FindControl("Due_date")).Text.Trim();
-                Due_date = Convert.ToDateTime(Due_date).ToString("yyyy-MM-dd");
+                DateTime parsedDate = DateTime.ParseExact(Due_date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                Due_date = parsedDate.ToString("yyyy-MM-dd");
                 string Install_Amount = ((TextBox)grd_install.Rows[i].FindControl("Install_Amount")).Text.Trim();
                 string balance_Amount = ((TextBox)grd_install.Rows[i].FindControl("balance_Amount")).Text.Trim();
                 if (Due_date == "")
@@ -226,7 +227,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
 
     public string getinstall_id(int i)
     {
-        string qry = "select MAX(Install_id) from m_FeeInstallment where Stud_id='" + txt_studid.Text.Trim() + "' and Del_flag=0";
+        string qry = "select MAX(Install_id) from m_FeeInstallment where Stud_id='" + txt_studid.Text.Trim() + "' and Group_id='" + lblgroupid.Text.Trim() + "'";
         DataTable dt = cls.fillDataTable(qry);
         int lastNo = 0;
         if (dt.Rows.Count > 0 && dt.Rows[0][0] != DBNull.Value && dt.Rows[0][0].ToString().Length >= 10)
@@ -313,7 +314,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                 ddl_installment.SelectedValue = "";
                 ddl_installment.Enabled = true;
                 btn_new.Visible = false;
-                 grd_install.DataSource = null;
+                grd_install.DataSource = null;
                 grd_install.DataBind();
             }
             else
