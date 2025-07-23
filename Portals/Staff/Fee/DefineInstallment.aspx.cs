@@ -140,7 +140,8 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
 
     protected void btncancel_Click(object sender, EventArgs e)
     {
-
+        ddl_installment.SelectedIndex = 0;
+        ddl_installment_SelectedIndexChanged(sender, e);
     }
 
     protected void btnedit_Click(object sender, EventArgs e)
@@ -295,6 +296,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                 ddl_installment.Enabled = false;
                 btn_new.Visible = true;
                 btnsave.Enabled = false;
+                btncancel.Enabled = false;
             }
             else
             {
@@ -360,6 +362,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                 grd_install.DataSource = null;
                 grd_install.DataBind();
                 btnsave.Enabled = true;
+                btncancel.Enabled = true;
             }
             else
             {
@@ -397,6 +400,5 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
         GridViewRow gvrow = (GridViewRow)(sender as Control).Parent.Parent;
         txt_studid.Text= ((Label)gvrow.FindControl("lbl_stud_id")).Text.Trim();
         lnksearch_Click(sender, e);
-
     }
 }

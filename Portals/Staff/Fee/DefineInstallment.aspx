@@ -211,7 +211,7 @@
                                                                 <asp:Label ID="Install_id" runat="server" Text='<%# Eval("Install_id") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Installemnt No">
+                                                        <asp:TemplateField HeaderText="Installment No">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lbl_install_no" runat="server" Text='<%# (Container.DataItemIndex + 1) +" ("+ getnum(Container.DataItemIndex + 1)+")" %>'></asp:Label>
                                                             </ItemTemplate>
