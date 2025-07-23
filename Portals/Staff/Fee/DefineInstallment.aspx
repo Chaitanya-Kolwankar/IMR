@@ -65,14 +65,61 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-2">
-                                        <asp:TextBox ID="txt_studid" runat="server" CssClass="form-control" placeholder="Student ID" MaxLength="8" onkeypress="return isNumber(event)" ></asp:TextBox>
+                                    <div class="col-md-2 text-center" style="align-content: center;">
+                                        <asp:CheckBox ID="chk_bx" runat="server" Text="Search by Name" OnCheckedChanged="chk_bx_CheckedChanged" AutoPostBack="true" />
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2" runat="server" id="div_stud_id">
+                                        <asp:TextBox ID="txt_studid" runat="server" CssClass="form-control" placeholder="Student ID" MaxLength="8" onkeypress="return isNumber(event)"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-8" runat="server" id="div_name" visible="false">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <asp:TextBox ID="txt_fname" runat="server" autoComplete="off" CssClass="form-control" MaxLength="25" Style="text-transform: uppercase" placeholder="First Name"></asp:TextBox>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <asp:TextBox ID="txt_mname" runat="server" autoComplete="off" CssClass="form-control" MaxLength="25" Style="text-transform: uppercase" placeholder="Middle Name"></asp:TextBox>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <asp:TextBox ID="txt_lname" runat="server" autoComplete="off" MaxLength="25" CssClass="form-control" Style="text-transform: uppercase" placeholder="Last Name"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 text-center">
                                         <asp:LinkButton ID="lnksearch" runat="server" CssClass="btn btn-primary" OnClick="lnksearch_Click"><span class="bi bi-search"></span></asp:LinkButton>
                                     </div>
                                     <div class="col-md-1">
                                         <asp:Button ID="btn_refresh" runat="server" Text="Refresh" CssClass="form-control btn btn-primary" OnClick="btn_refresh_Click" />
+                                    </div>
+                                </div>
+                                <div id="div_grd_name" runat="server" visible="false">
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 table-responsive" style="overflow: auto; max-height: 400px; width: 100%;">
+                                            <asp:GridView ID="grd_name" runat="server" style="text-align: center;" AutoGenerateColumns="False" CssClass="table">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="Student ID">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="lbl_stud_id" runat="server" Text='<%# Eval("stud_id")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Student Name">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="lbl_studentname" runat="server" Text='<%# Eval("name")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Gender">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="lbl_dob" runat="server" Text='<%# Eval("Gender")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Select">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="lnk_name_view" runat="server" CssClass="btn btn-outline-primary bi bi-pencil-square" OnClick="lnk_name_view_Click"></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
                                     </div>
                                 </div>
                                 <br />
@@ -313,7 +360,7 @@
             confirm_value.defaultValue = "";
             confirm_value.type = "hidden";
             confirm_value.name = "confirm_value";
-            if (confirm("Do you want to Redefine Installment with balance amount: " + value +" ?")) {
+            if (confirm("Do you want to Redefine Installment with balance amount: " + value + " ?")) {
                 confirm_value.value = "Yes";
             } else {
                 confirm_value.value = "No";

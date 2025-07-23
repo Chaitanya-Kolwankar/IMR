@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Web;
@@ -18,18 +19,51 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
     {
         try
         {
-            DataTable dtstud = cls.fillDataTable("select (select isnull(stud_F_Name,'')+' '+isnull(stud_M_Name,'')+' '+isnull(stud_L_Name,'') [Name] from m_std_personaldetails_tbl where stud_id=a.stud_id) as [Name], (select course_name from m_crs_course_tbl where del_flag=0 and course_id in (select course_id from m_crs_subcourse_tbl where subcourse_id=a.subcourse_Id and del_flag=0)) as Course,(select subcourse_name from m_crs_subcourse_tbl where del_flag=0 and subcourse_id=a.subcourse_Id) Subcourse,(select Group_title from m_crs_subjectgroup_tbl where del_flag=0 and Group_id=a.group_id)[Group],group_id as [Group ID],(select Acd_year from academic where AYID=a.ayid)[Year],ayid as [AYID] from (select * from m_std_studentacademic_tbl where stud_id='" + txt_studid.Text + "' and del_flag=0)a order by ayid");
-            if (dtstud.Rows.Count > 0)
+            if (chk_bx.Checked)
             {
-                grdyear.DataSource = dtstud;
-                grdyear.DataBind();
-                lblmodalid.Text = txt_studid.Text;
-                lblmodalname.Text = dtstud.Rows[0]["Name"].ToString();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalyear');", true);
+                if (txt_fname.Text.Trim() == "" && txt_mname.Text.Trim() == "" && txt_lname.Text.Trim() == "")
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Notify", "$.notify('Enter Student Name', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 })", true);
+                }
+                else
+                {
+                    string qry = "select distinct  a.stud_id, stud_F_name +' ' + stud_m_name + ' ' + stud_L_name as name  ,a.stud_Gender as [Gender] from m_std_personaldetails_tbl as a,m_std_studentacademic_tbl as b where a.del_flag=0 and  b.del_flag=0 and a.stud_id = b.stud_id and a.stud_id is not null and a.stud_F_name like '%" + txt_fname.Text.Trim() + "%' and stud_m_name like '%" + txt_mname.Text.Trim() + "%' and stud_L_name like '%" + txt_lname.Text.Trim() + "%';";
+                    DataTable dt = cls.fillDataTable(qry);
+                    if (dt.Rows.Count > 0) 
+                    {
+                        grd_name.DataSource = dt;
+                        grd_name.DataBind();
+                        div_grd_name.Visible = true;
+                    }
+                }
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Student ID not found', { color: '#fff', background: '#D44950', blur: 0.2, delay: 0, timeout: 100 });", true);
+                if (txt_studid.Text.Trim() == "")
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Notify", "$.notify('Enter Student ID.', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 })", true);
+                }
+                else if (txt_studid.Text.Trim().Length != 8)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Notify", "$.notify('Invalid Student Id', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 })", true);
+                }
+                else
+                {
+                    DataTable dtstud = cls.fillDataTable("select (select isnull(stud_F_Name,'')+' '+isnull(stud_M_Name,'')+' '+isnull(stud_L_Name,'') [Name] from m_std_personaldetails_tbl where stud_id=a.stud_id) as [Name], (select course_name from m_crs_course_tbl where del_flag=0 and course_id in (select course_id from m_crs_subcourse_tbl where subcourse_id=a.subcourse_Id and del_flag=0)) as Course,(select subcourse_name from m_crs_subcourse_tbl where del_flag=0 and subcourse_id=a.subcourse_Id) Subcourse,(select Group_title from m_crs_subjectgroup_tbl where del_flag=0 and Group_id=a.group_id)[Group],group_id as [Group ID],(select Acd_year from academic where AYID=a.ayid)[Year],ayid as [AYID] from (select * from m_std_studentacademic_tbl where stud_id='" + txt_studid.Text + "' and del_flag=0)a order by ayid");
+                    if (dtstud.Rows.Count > 0)
+                    {
+                        div_grd_name.Visible = false;
+                        grdyear.DataSource = dtstud;
+                        grdyear.DataBind();
+                        lblmodalid.Text = txt_studid.Text;
+                        lblmodalname.Text = dtstud.Rows[0]["Name"].ToString();
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalyear');", true);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Student ID not found', { color: '#fff', background: '#D44950', blur: 0.2, delay: 0, timeout: 100 });", true);
+                    }
+                }
             }
         }
         catch (Exception ex)
@@ -85,6 +119,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                     if (cls.TranDMLqueries(qry) == true)
                     {
                         ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Saved Successfully', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
+                        load_grd();
                     }
                     else
                     {
@@ -180,20 +215,26 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
         grd_install.DataBind();
         if (ddl_installment.SelectedValue != "")
         {
+            int totalAmount = Convert.ToInt32(lblbal.Text);
             int no_of_installments = Convert.ToInt32(ddl_installment.SelectedValue);
-            int installment_amount = Convert.ToInt32(lblbal.Text) / no_of_installments;
+
+            int baseAmount = totalAmount / no_of_installments;
+            int remainder = totalAmount % no_of_installments;
+
             DataTable dt = new DataTable();
             dt.Columns.Add("Install_id");
             dt.Columns.Add("Due_date");
             dt.Columns.Add("Install_Amount");
             dt.Columns.Add("balance_Amount");
+
             for (int i = 1; i <= no_of_installments; i++)
             {
                 DataRow dr = dt.NewRow();
                 dr["Install_id"] = getinstall_id(i);
                 dr["Due_date"] = "";
-                dr["Install_Amount"] = installment_amount.ToString();
-                dr["balance_Amount"] = "0";
+                int installmentAmt = (i <= remainder) ? baseAmount + 1 : baseAmount;
+                dr["Install_Amount"] = installmentAmt.ToString();
+                dr["balance_Amount"] = installmentAmt.ToString(); 
                 dt.Rows.Add(dr);
             }
             if (dt.Rows.Count > 0)
@@ -253,6 +294,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                 ddl_installment.SelectedValue = dt.Rows.Count.ToString();
                 ddl_installment.Enabled = false;
                 btn_new.Visible = true;
+                btnsave.Enabled = false;
             }
             else
             {
@@ -286,7 +328,8 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
             }
             else
             {
-                string Due_date_sql = Convert.ToDateTime(Due_date.Text.Trim()).ToString("yyyy-MM-dd");
+                DateTime parsedDate = DateTime.ParseExact(Due_date.Text.Trim(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                string Due_date_sql = parsedDate.ToString("yyyy-MM-dd");
                 string qry = "update  m_FeeInstallment set Due_date=(CAST('" + Due_date_sql + "' AS datetime)),mod_dt=GETDATE(),user_id='" + Session["emp_id"].ToString() + "' where Install_id='" + Install_id + "' and Del_flag=0";
                 if (cls.DMLqueries(qry))
                 {
@@ -316,11 +359,44 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                 btn_new.Visible = false;
                 grd_install.DataSource = null;
                 grd_install.DataBind();
+                btnsave.Enabled = true;
             }
             else
             {
                 ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Something Went Wrong !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
             }
         }
+    }
+
+    protected void chk_bx_CheckedChanged(object sender, EventArgs e)
+    {
+        if (chk_bx.Checked)
+        {
+            div_name.Visible = true;
+            div_stud_id.Visible = false;
+            txt_fname.Text = "";
+            txt_mname.Text = "";
+            txt_lname.Text = "";
+            txt_studid.Text = "";
+        }
+        else
+        {
+            txt_fname.Text = "";
+            txt_mname.Text = "";
+            txt_lname.Text = "";
+            txt_studid.Text = "";
+            div_name.Visible = false;
+            div_stud_id.Visible = true;
+        }
+    }
+
+    protected void lnk_name_view_Click(object sender, EventArgs e)
+    {
+        chk_bx.Checked = false;
+        chk_bx_CheckedChanged(sender, e);
+        GridViewRow gvrow = (GridViewRow)(sender as Control).Parent.Parent;
+        txt_studid.Text= ((Label)gvrow.FindControl("lbl_stud_id")).Text.Trim();
+        lnksearch_Click(sender, e);
+
     }
 }
