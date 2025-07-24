@@ -19,6 +19,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
     {
         try
         {
+            feepanel.Visible = false;
             if (chk_bx.Checked)
             {
                 if (txt_fname.Text.Trim() == "" && txt_mname.Text.Trim() == "" && txt_lname.Text.Trim() == "")
@@ -192,6 +193,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                     lblbal.Text = dt.Rows[0]["Balance"].ToString();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalyear');", true);
                     feepanel.Visible = true;
+                    ddl_installment.SelectedIndex = 0;
                     load_grd();
                 }
                 else
@@ -373,6 +375,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
 
     protected void chk_bx_CheckedChanged(object sender, EventArgs e)
     {
+        feepanel.Visible = false;
         if (chk_bx.Checked)
         {
             div_name.Visible = true;
