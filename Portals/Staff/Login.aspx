@@ -13,8 +13,8 @@
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="<%= ResolveUrl("~/Assets/img/vivalogo.png") %>" rel="icon" />
-    <link href="<%= ResolveUrl("~/Assets/img/vivalogo.png") %>" rel="apple-touch-icon" />
+    <link href="<%= ResolveUrl("~/Assets/img/mu.png") %>" rel="icon" />
+    <link href="<%= ResolveUrl("~/Assets/img/mu.png") %>" rel="apple-touch-icon" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
@@ -72,7 +72,7 @@
     <style>
      body {
 
-         background-image:url("../../assets/img/bckimgimr.jpg ");
+         background-image:url("../../assets/img/backimg5.jpg ");
            background-repeat: no-repeat;
            background-size:cover;
             /*background:rgba(0,0,0,0.7)*/
@@ -93,7 +93,7 @@
 
         <div class="container">
           <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center" style="background-color:white;border-radius:10px">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center" style="background-color: rgba(0, 0, 0, .5);color:white;border-radius:10px">
                 <div class="d-flex justify-content-center">
                     
                   <span class="d-none d-lg-block">
@@ -106,7 +106,7 @@
                   <%--<span class="d-none d-lg-block"><img src="assets/img/logo.jpg" alt="" style="max-height:50PX !IMPORTANT"/></span>--%>
                 <a href="#" class="logo d-flex align-items-center w-auto">
                   
-                  <span class="d-none d-lg-block">College IMR </span>
+                  <span class="d-none d-lg-block" style="color:white">College IMR </span>
                 </a>
               </div><!-- End Logo -->
 
@@ -115,7 +115,7 @@
                 <div class="card-body">
 
                   <div class="">
-                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+                    <h5 class="card-title text-center pb-0 fs-4" style="color:white">Login to Your Account</h5>
                     
                   </div>
                     <%--<p class="text-center small">Enter your username & password to login</p>--%>

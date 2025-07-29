@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 public partial class Portals_Staff_Fee_FeeReport : System.Web.UI.Page
 {
     Class1 cls = new Class1();
-    SqlConnection con = new SqlConnection("Data Source=172.16.10.180; Initial Catalog=VIVAIMR; User Id = sa; password=passwd@12;");
+    SqlConnection con = new SqlConnection("Data Source=172.16.10.42; Initial Catalog=IMR_Test; User Id = sa; password=VIVAV$$@613;");
     protected void Page_Load(object sender, EventArgs e)
     {
         try
@@ -78,7 +78,8 @@ public partial class Portals_Staff_Fee_FeeReport : System.Web.UI.Page
                             txttodate.Text = "";
                             btnexcel.Visible = false;
 
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('No payment for specified dates,'danger')", true);
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('No payment for specified dates','danger')", true);
+
                         }
 
 

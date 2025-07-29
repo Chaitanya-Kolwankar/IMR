@@ -42,6 +42,9 @@ public partial class ViewProfile : System.Web.UI.Page
             fname.Text = t1.Rows[0]["emp_fname"].ToString().ToLower() + ' ' + t1.Rows[0]["emp_mname"].ToString().ToLower() + ' ' + t1.Rows[0]["emp_lname"].ToString().ToLower();
             //Label lblUserVal = (Label)Page.Master.FindControl("lblUserName");
 
+            Session["Name"] = t1.Rows[0]["emp_fname"].ToString().ToLower() + ' ' + t1.Rows[0]["emp_lname"].ToString().ToLower();
+            Session["Designation"] = t1.Rows[0]["Designation_Title"].ToString().ToLower();
+
             fullname.Text = t1.Rows[0]["emp_fname"].ToString().ToLower() + ' ' + t1.Rows[0]["emp_mname"].ToString().ToLower() + ' ' + t1.Rows[0]["emp_lname"].ToString().ToLower();
             dob.Text = t1.Rows[0]["emp_dob"].ToString().Substring(0, 10);
             //address.Text = t1.Rows[0]["emp_address_curr"].ToString().ToLower();
