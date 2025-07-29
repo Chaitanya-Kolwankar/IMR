@@ -504,7 +504,7 @@ public partial class Fee_Master : System.Web.UI.Page
         DataTable dt = cls.fillDataTable(query);
         if (dt.Rows.Count > 0)
         {
-            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Updation Prohibited As Fee Structure Already Is In Use !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Updating Prohibited As Fee Structure Already Is In Use !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
         }
         else
         {

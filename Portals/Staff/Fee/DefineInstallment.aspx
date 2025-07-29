@@ -95,7 +95,7 @@
                                     <br />
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12 table-responsive" style="overflow: auto; max-height: 400px; width: 100%;">
-                                            <asp:GridView ID="grd_name" runat="server" style="text-align: center;" AutoGenerateColumns="False" CssClass="table">
+                                            <asp:GridView ID="grd_name" runat="server" Style="text-align: center;" AutoGenerateColumns="False" CssClass="table">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Student ID">
                                                         <ItemTemplate>
@@ -210,6 +210,7 @@
                                                             <ItemTemplate>
                                                                 <asp:Label ID="Install_id" runat="server" Text='<%# Eval("Install_id") %>'></asp:Label>
                                                             </ItemTemplate>
+                                                            <ItemStyle Width="10%" />
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Installment No">
                                                             <ItemTemplate>

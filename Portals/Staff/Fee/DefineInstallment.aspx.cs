@@ -108,7 +108,6 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                     break;
                 }
                 else
-
                 {
                     qry += "insert into m_FeeInstallment (Install_id,Stud_id,Ayid,Group_id,Install_no,Due_date,Install_Amount,balance_Amount,PaymentStatus,user_id) values ('" + Install_id + "','" + txt_studid.Text.Trim() + "','" + lblayid.Text.Trim() + "','" + lblgroupid.Text.Trim() + "'," + lbl_sr_no + ",(CAST('" + Due_date + "' AS datetime))," + Install_Amount + "," + balance_Amount + ",0,'" + Session["emp_id"].ToString() + "');";
                 }
