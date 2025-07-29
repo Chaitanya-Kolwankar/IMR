@@ -14,6 +14,12 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         if (!IsPostBack)
         {
+
+            if (Session["Name"] != null && Session["Designation"] != null)
+            {
+                EmpName.Text = Session["Name"].ToString().ToUpper();
+                EmpDesg.Text = Session["Designation"].ToString().ToUpper();
+            }
             try
             {
                 if (Convert.ToString(Session["Emp_id"]) == "")
