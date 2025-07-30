@@ -395,18 +395,21 @@ public partial class Portals_Staff_Admission_Master_Fee_Master_Category : System
                     ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Enter Structure Name !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
                     txt_struct.Focus();
                     validate = false;
+                    break;
                 }
                 else if (txt_amount.Text.Trim() == "")
                 {
                     ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Enter Amount !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
                     txt_amount.Focus();
                     validate = false;
+                    break;
                 }
                 else if (txt_rank.Text == "")
                 {
                     ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Enter Rank !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
                     txt_rank.Focus();
                     validate = false;
+                    break;
                 }
                 else
                 {
@@ -418,7 +421,7 @@ public partial class Portals_Staff_Admission_Master_Fee_Master_Category : System
                             qry = qry + "insert into m_FeeMaster_category (AYID,group_id,Struct_id,Struct_type,Struct_name,Amount,Rank,user_id,curr_dt,category,gender) values('" + Session["Year"].ToString() + "','" + ddl_group.SelectedValue + "','" + gen_id.Trim() + "','" + ddl_struct_type.SelectedValue + "','" + txt_struct.Text.Trim() + "'," + txt_amount.Text.Trim() + "," + txt_rank.Text.Trim() + ",'" + Session["emp_id"].ToString() + "',GETDATE(),'" + ddl_category.SelectedValue + "','" + ddl_gender.SelectedValue + "');";
                             qrytimes++;
                         }
-                        else if (struct_id.Text.Contains("STR"))
+                        else if (struct_id.Text.Contains("SFC"))
                         {
                             qry = qry + "UPDATE m_FeeMaster_category SET Struct_name='" + txt_struct.Text.Trim() + "',Amount='" + txt_amount.Text.Trim() + "',Rank='" + txt_rank.Text.Trim() + "' WHERE Struct_id='" + struct_id.Text.Trim() + "' and del_flag=0;";
                         }
