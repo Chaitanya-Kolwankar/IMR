@@ -200,7 +200,7 @@
                                                 <div class="row">
                                                     <div class="col-md-2 d-flex align-items-end justify-content-center fs-3">+</div>
                                                     <div class="col-md-10">
-                                                        <asp:CheckBox ID="chk_fine" runat="server" Text="Fine" />
+                                                        <asp:CheckBox ID="chk_fine" runat="server" Text="Fine" OnCheckedChanged="chk_fine_CheckedChanged" AutoPostBack="true" />
                                                         <asp:TextBox ID="txt_fine" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                                     </div>
                                                 </div>
@@ -455,6 +455,93 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal" id="modal_fine" data-bs-backdrop="static">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header row">
+                        <div class="col-md-10">
+                            <h2 class="modal-title">Remove Fine</h2>
+                        </div>
+                        <div class="col-md-2" style="display: flex; justify-content: flex-end;">
+                            <button type="button" class="close btn btn-outline-secondary" data-bs-dismiss="modal" aria-bs-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <ContentTemplate>
+                                <div class="row" style="font-size: 15px; text-align: center">
+                                    <div class="col-md-4">
+                                        <b>STUDENT ID :</b>
+                                        <asp:Label ID="fine_stud_id" runat="server"></asp:Label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <b>NAME :</b>
+                                        <asp:Label ID="fine_name" runat="server"></asp:Label>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12 table-responsive" style="max-height: 300px; overflow: auto">
+                                        <asp:GridView ID="grd_fine" runat="server" Style="text-align: center;" AutoGenerateColumns="False" CssClass="table">
+                                            <RowStyle HorizontalAlign="Center"></RowStyle>
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="Sr.no">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lbl_sr_no" runat="server" Text='<%# Container.DataItemIndex + 1 %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="installemntId" Visible="false">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Install_id" runat="server" Text='<%# Eval("Install_id") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <ItemStyle Width="10%" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Installment No">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lbl_install_no" runat="server" Text='<%# (Container.DataItemIndex + 1) +" ("+ getnum(Container.DataItemIndex + 1)+")" %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Due Date">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Due_date" runat="server" placeholder="Date" Text='<%# Eval("Due_date") %>' CssClass="datepicker" onkeypress="preventKeyPress(event);" AutoComplete="off" Enabled='<%# Convert.ToString(Eval("Due_date")) ==""?true:false %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Installment Amount">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Install_Amount" runat="server" placeholder="Installment Amount" Text='<%# Eval("Install_Amount") %>' onkeypress="return allowonlynumbers(event,this);" ReadOnly="true"></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Installment Balance">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="balance_Amount" runat="server" placeholder="Balance Amount" Text='<%# Eval("balance_Amount") %>' onkeypress="return allowonlynumbers(event,this);" ReadOnly="true"></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Fine Amount">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Fine_Amount" runat="server" placeholder="Balance Amount" Text='<%# Eval("Fine_Amount") %>' onkeypress="return allowonlynumbers(event,this);" ReadOnly="true"></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Days Past">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Days_Past" runat="server" placeholder="Balance Amount" Text='<%# Eval("Days_Past") %>' onkeypress="return allowonlynumbers(event,this);" ReadOnly="true"></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Remove Fine">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="Remove_Fine" runat="server" CssClass="btn btn-outline-danger bi bi-check" OnClick="Remove_Fine_Click"></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -508,6 +595,20 @@
         }
         function redirect(name) {
             window.open(name, '_blank');
+        }
+
+    </script>
+    <script type="text/javascript">
+        function ConfirmFine(sender, args) {
+            var confirm_value = document.createElement("INPUT");
+            confirm_value.type = "hidden";
+            confirm_value.name = "confirm_value";
+            confirm_value.value = "";
+            var confirmed = confirm("Do you want to remove the fine?");
+            if (!confirmed) {
+                sender.checked = false;
+                args.set_cancel(true);
+            }
         }
     </script>
 </asp:Content>

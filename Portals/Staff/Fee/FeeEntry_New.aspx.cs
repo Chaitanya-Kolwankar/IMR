@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using System;
 using System.Data;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -309,6 +310,7 @@ public partial class FeeEntry_New : System.Web.UI.Page
             txt_studid.Text = "";
             div_name.Visible = false;
             div_stud_id.Visible = true;
+            txt_studid.Enabled = true;
         }
     }
 
@@ -691,7 +693,7 @@ public partial class FeeEntry_New : System.Web.UI.Page
             }
             else
             {
-                string qry = "update m_FeeEntry set del_flag=1,del_dt=GETDATE() where stud_id='" + txt_studid.Text.Trim() + "' and Ayid='" + lblayid.Text.Trim() + "' and Receipt_no='" + Receipt_no + "' and Type='" + Type + "';update m_FeeInstallment set balance_Amount=(cast(balance_Amount as int) + cast('"+ Amount + "' as int)),PaymentStatus=0 where Install_id='" + Install_id + "' and Del_flag=0;";
+                string qry = "update m_FeeEntry set del_flag=1,del_dt=GETDATE() where stud_id='" + txt_studid.Text.Trim() + "' and Ayid='" + lblayid.Text.Trim() + "' and Receipt_no='" + Receipt_no + "' and Type='" + Type + "';update m_FeeInstallment set balance_Amount=(cast(balance_Amount as int) + cast('" + Amount + "' as int)),PaymentStatus=0 where Install_id='" + Install_id + "' and Del_flag=0;";
                 if (cls.DMLqueries(qry))
                 {
                     ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Deleted Successfully', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
@@ -699,6 +701,17 @@ public partial class FeeEntry_New : System.Web.UI.Page
                     clear();
                     ddlmode.SelectedIndex = 0;
                     btnsave.Text = "Save";
+                    string student_details = "SELECT ISNULL(Paid.PaidAmount, 0) AS PaidAmount,ISNULL(Total.TotalAmount, 0) AS TotalAmount,ISNULL(Total.TotalAmount, 0) - ISNULL(Paid.PaidAmount, 0) AS Balance FROM (SELECT SUM(CAST(Amount AS INT)) AS PaidAmount FROM m_FeeEntry WHERE Stud_id = '" + txt_studid.Text.Trim() + "' AND Ayid = '" + lblayid.Text.Trim() + "' AND Chq_status = 'Clear' AND del_flag = 0 and fine_flag=0) AS Paid CROSS JOIN(SELECT SUM(CAST(Amount AS INT)) AS TotalAmount FROM " + Session["feemaster"].ToString() + " WHERE Ayid = '" + lblayid.Text.Trim() + "' AND Group_id = '" + lblgroup.Text.Trim() + "' AND del_flag = 0 and Gender='" + Session["gender"].ToString() + "' and Category='" + lblcategory.Text.Trim() + "' ) AS Total";
+
+                    DataTable dt = cls.fillDataTable(student_details);
+                    if (dt.Rows.Count > 0)
+                    {
+                        lblpaidfees.Text = dt.Rows[0]["PaidAmount"].ToString();
+                        lblbal.Text = dt.Rows[0]["Balance"].ToString();
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalyear');", true);
+                        feepanel.Visible = true;
+                        load_grd();
+                    }
                 }
                 else
                 {
@@ -712,13 +725,71 @@ public partial class FeeEntry_New : System.Web.UI.Page
     {
         GridViewRow gvrow = (GridViewRow)(sender as Control).Parent.Parent;
         string Chq_status = ((Label)gvrow.FindControl("Chq_status")).Text.Trim();
-        if(Chq_status != "Clear")
+        string Install_id = ((Label)gvrow.FindControl("Install_id")).Text.Trim();
+        if (Chq_status != "Clear")
         {
-            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Cheque/NEFT Status :"+ Chq_status + "!!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Cheque/NEFT Status :" + Chq_status + "!!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
         }
         else
         {
-            Response.Redirect("FeeReceiptMergeFees.aspx", true);
+            return;
+            Response.Redirect("FeeReceiptMergeFees.aspx?stud_id=" + txt_studid.Text.Trim() + "&ayid=" + lblayid.Text.Trim() + "&group_id=" + lblgroupid.Text.Trim() + "&receipt_no=" + Install_id, true);
+
+        }
+    }
+
+    protected void chk_fine_CheckedChanged(object sender, EventArgs e)
+    {
+        if (!chk_fine.Checked)
+        {
+            fine_stud_id.Text = lblmodalid.Text.Trim();
+            fine_name.Text = lblmodalname.Text.Trim();
+            DataTable dt = cls.fillDataTable("select Install_id,Install_no,CONVERT(varchar, Due_date, 103)[Due_date],Install_Amount,balance_Amount,(CASE WHEN GETDATE() > Due_date THEN DATEDIFF(DAY, Due_date, GETDATE()) * 10 ELSE 0 END) [Fine_Amount],(CASE WHEN GETDATE() > Due_date THEN DATEDIFF(DAY, Due_date, GETDATE()) ELSE 0 END) [Days_Past] from m_FeeInstallment where Stud_id='" + txt_studid.Text.Trim() + "' and Ayid='" + lblayid.Text.Trim() + "' and Group_id='" + lblgroupid.Text.Trim() + "' and Del_flag=0  and Install_id='" + ddl_install.SelectedValue + "'");
+            grd_fine.DataSource = dt;
+            grd_fine.DataBind();
+            if (dt.Rows.Count > 0)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modal_fine');", true);
+            }
+            else
+            {
+                chk_fine.Checked = true;
+            }
+
+        }
+        else
+        {
+            cls.DMLqueries("update m_FeeInstallment set Fine_flag =0 where Install_id='" + ddl_install.SelectedValue + "' and Del_flag=0");
+
+        }
+    }
+
+    public string getnum(int num)
+    {
+        switch (num)
+        {
+            case 1: return "ONE";
+            case 2: return "TWO";
+            case 3: return "THREE";
+            case 4: return "FOUR";
+            case 5: return "FIVE";
+            case 6: return "SIX";
+            case 7: return "SEVEN";
+            case 8: return "EIGHT";
+            case 9: return "NINE";
+            case 10: return "TEN";
+            default: return "INVALID";
+        }
+    }
+
+    protected void Remove_Fine_Click(object sender, EventArgs e)
+    {
+        GridViewRow gvrow = (GridViewRow)(sender as Control).Parent.Parent;
+        string Install_id = ((Label)gvrow.FindControl("Install_id")).Text.Trim();
+
+        if (cls.DMLqueries("update m_FeeInstallment set Fine_flag =0 where Install_id='" + Install_id + "' and Del_flag=0"))
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Removed Successfully', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });closeModal('modal_fine');", true);
         }
     }
 }

@@ -12,7 +12,8 @@ public partial class Portals_Staff_Admission_ApplicantReport : System.Web.UI.Pag
     Class1 cls = new Class1();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack) {
+        if (!IsPostBack)
+        {
 
             btn_excl.Visible = false;
         }
@@ -23,33 +24,33 @@ public partial class Portals_Staff_Admission_ApplicantReport : System.Web.UI.Pag
     protected void BTN_GETDATA_Click(object sender, EventArgs e)
     {
         string chked_lstboox = "";
-        for (int i=0;i< lstbx_detail.Items.Count;i++) 
+        for (int i = 0; i < lstbx_detail.Items.Count; i++)
         {
-            if (lstbx_detail.Items[i].Selected) 
+            if (lstbx_detail.Items[i].Selected)
             {
                 if (chked_lstboox == "")
                 {
                     chked_lstboox = "" + lstbx_detail.Items[i].Value + "";
                 }
-                else 
+                else
                 {
                     chked_lstboox = chked_lstboox + "," + lstbx_detail.Items[i].Value;
 
                 }
-            
+
             }
-        
+
         }
         if (chked_lstboox == "")
         {
-            string grdqry = "select Form_no as[Form No.],stud_id as [Student ID],F_name as [First Name],M_name as [Middle Name],L_name as [Last Name],case when GENDER=0 then 'FEMALE' when GENDER=1 then 'MALE' else '' end as Gender,CASE WHEN Marital_status=0 THEN 'Unmarried' when Marital_status=1 then 'Married' else '' end as [Marital Status]  from d_adm_applicant where ACDID='"+ Session["Year"].ToString() + "' and Del_Flag=0 order by [First Name],[Middle Name],[Last Name]";
+            string grdqry = "select Form_no as[Form No.],stud_id as [Student ID],F_name as [First Name],M_name as [Middle Name],L_name as [Last Name],case cast(GENDER as int) when 0 then 'FEMALE' when 1 then 'MALE' else Gender end as Gender,CASE WHEN Marital_status=0 THEN 'Unmarried' when Marital_status=1 then 'Married' else '' end as [Marital Status]  from d_adm_applicant where ACDID='" + Session["Year"].ToString() + "' and Del_Flag=0 order by [First Name],[Middle Name],[Last Name]";
             DataTable dtgrdqry = cls.fillDataTable(grdqry);
             if (dtgrdqry.Rows.Count > 0)
             {
                 Grid_app.DataSource = dtgrdqry;
                 Grid_app.DataBind();
                 btn_excl.Visible = true;
-                
+
             }
             else
             {
@@ -61,14 +62,18 @@ public partial class Portals_Staff_Admission_ApplicantReport : System.Web.UI.Pag
 
             }
         }
-        else {
-            string grdqry1 = "select Form_no as[Form No.],stud_id as [Student ID],F_name as [First Name],M_name as [Middle Name],L_name as [Last Name],case when GENDER=0 then 'FEMALE' when GENDER=1 then 'MALE' else '' end as Gender,CASE WHEN Marital_status=0 THEN 'Unmarried' when Marital_status=1 then 'Married' else '' end as [Marital Status] ," + chked_lstboox + " from d_adm_applicant where ACDID='" + Session["Year"].ToString() + "' order by [First Name],[Middle Name],[Last Name]";
+        else
+        {
+            string grdqry1 = "select Form_no as[Form No.],stud_id as [Student ID],F_name as [First Name],M_name as [Middle Name],L_name as [Last Name],case cast(GENDER as int) when 0 then 'FEMALE' when 1 then 'MALE' else Gender end as Gender,CASE WHEN Marital_status=0 THEN 'Unmarried' when Marital_status=1 then 'Married' else '' end as [Marital Status] ," + chked_lstboox + " from d_adm_applicant where ACDID='" + Session["Year"].ToString() + "' order by [First Name],[Middle Name],[Last Name]";
             DataTable dtgrd2 = cls.fillDataTable(grdqry1);
-            if (dtgrd2.Rows.Count > 0) { Grid_app.DataSource = dtgrd2;
+            if (dtgrd2.Rows.Count > 0)
+            {
+                Grid_app.DataSource = dtgrd2;
                 Grid_app.DataBind();
                 btn_excl.Visible = true;
             }
-            else {
+            else
+            {
                 Grid_app.DataSource = null;
                 Grid_app.DataBind();
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('No Applicant  applied yet','success')", true);
@@ -90,13 +95,13 @@ public partial class Portals_Staff_Admission_ApplicantReport : System.Web.UI.Pag
         btn_excl.Visible = false;
         Grid_app.DataSource = null;
         Grid_app.DataBind();
-        for (int i=0;i<lstbx_detail.Items.Count;i++)
+        for (int i = 0; i < lstbx_detail.Items.Count; i++)
         {
-            if (lstbx_detail.Items[i].Selected) 
+            if (lstbx_detail.Items[i].Selected)
             {
                 lstbx_detail.Items[i].Selected = false;
             }
-        
+
         }
     }
     public override void VerifyRenderingInServerForm(Control control)

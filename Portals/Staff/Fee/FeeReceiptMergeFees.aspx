@@ -4,15 +4,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
-    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Fee Receipt</title>
+    <link href="<%= ResolveUrl("~/Assets/img/mu.png") %>" rel="icon" />
+    <link href="<%= ResolveUrl("~/Assets/img/mu.png") %>" rel="apple-touch-icon" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/bootstrap/css/bootstrap.min.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Assets/vendor/bootstrap-icons/bootstrap-icons.css") %>" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://code.jquery.com/jquery-migrate-1.2.1.js"></script>
-    <script src="vendors/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="js/jquery-min.js"></script>
-    <script src="notify-master/js/jquery-1.11.0.js"></script>
-    <script src="js/jquery.qrcode.min.js"></script>
-    <script src="js/jquery-barcode.js"></script>
     <style>
         @page {
             size: A4;
@@ -103,7 +101,7 @@
                     <div class="receipt-copy">
                         <div class="col-lg-12 col-sm-12">
                             <div class="watermark">
-                                <img src="images/mu.png" style="opacity: 0.3;" />
+                                <img src="/Assets/img/mu.png" class="" style="opacity: 0.3;" />
                             </div>
                             <div class="container" style="width: 100%">
                                 <div class="row">
@@ -118,29 +116,49 @@
                                 <div style="width: 100%; max-width: 800px; margin: auto; border: 2px solid #000; font-family: Arial, sans-serif; font-size: 14px; padding: 15px; box-sizing: border-box;">
 
                                     <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px 16px; font-size: 14px;">
-                                        <div><b>Rec No:</b>
-                                            <asp:Label ID="lblNo" runat="server" Text=""></asp:Label></div>
-                                        <div><b>Adm. No:</b>
-                                            <asp:Label ID="Label7" runat="server" Text=""></asp:Label></div>
-                                        <div><b>Date:</b>
-                                            <asp:Label ID="lbl_date" runat="server" Text=""></asp:Label></div>
+                                        <div>
+                                            <b>Rec No:</b>
+                                            <asp:Label ID="lblNo" runat="server" Text=""></asp:Label>
+                                        </div>
+                                        <div>
+                                            <b>Adm. No:</b>
+                                            <asp:Label ID="Label7" runat="server" Text=""></asp:Label>
+                                        </div>
+                                        <div>
+                                            <b>Date:</b>
+                                            <asp:Label ID="lbl_date" runat="server" Text=""></asp:Label>
+                                        </div>
 
-                                        <div><b>Class:</b>
-                                            <asp:Label ID="lblcourse" runat="server" Text=""></asp:Label></div>
-                                        <div><b>Section:</b>
-                                            <asp:Label ID="Label8" runat="server" Text=""></asp:Label></div>
-                                        <div><b>Student ID:</b>
-                                            <asp:Label ID="Label3" runat="server" Text=""></asp:Label></div>
+                                        <div>
+                                            <b>Class:</b>
+                                            <asp:Label ID="lblcourse" runat="server" Text=""></asp:Label>
+                                        </div>
+                                        <div>
+                                            <b>Section:</b>
+                                            <asp:Label ID="Label8" runat="server" Text=""></asp:Label>
+                                        </div>
+                                        <div>
+                                            <b>Student ID:</b>
+                                            <asp:Label ID="Label3" runat="server" Text=""></asp:Label>
+                                        </div>
 
-                                        <div><b>Category:</b>
-                                            <asp:Label ID="lblcategory" runat="server" Text=""></asp:Label></div>
-                                        <div><b>Roll No:</b>
-                                            <asp:Label ID="Label1" runat="server" Text=""></asp:Label></div>
-                                        <div><b>Fee Type:</b>
-                                            <asp:Label ID="Label2" runat="server" Text=""></asp:Label></div>
+                                        <div>
+                                            <b>Category:</b>
+                                            <asp:Label ID="lblcategory" runat="server" Text=""></asp:Label>
+                                        </div>
+                                        <div>
+                                            <b>Roll No:</b>
+                                            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                                        </div>
+                                        <div>
+                                            <b>Fee Type:</b>
+                                            <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
+                                        </div>
 
-                                        <div style="grid-column: span 3;"><b>Name:</b>
-                                            <asp:Label ID="lblName" runat="server" Text=""></asp:Label></div>
+                                        <div style="grid-column: span 3;">
+                                            <b>Name:</b>
+                                            <asp:Label ID="lblName" runat="server" Text=""></asp:Label>
+                                        </div>
                                     </div>
                                     <table style="width: 100%; border-top: 2px solid #000; border-bottom: 1px solid #000; border-collapse: collapse; margin-top: 5px;">
                                         <tr style="background-color: #f2f2f2;">
@@ -167,8 +185,10 @@
 
                                     <div style="margin-top: 15px; font-size: 13px; line-height: 1.5; padding: 12px; border: 1px solid #ccc; border-radius: 6px;">
 
-                                        <p style="margin-bottom: 6px;"><b>In Words:</b>
-                                            <asp:Label ID="lblamount" runat="server" Text=""></asp:Label></p>
+                                        <p style="margin-bottom: 6px;">
+                                            <b>In Words:</b>
+                                            <asp:Label ID="lblamount" runat="server" Text=""></asp:Label>
+                                        </p>
                                         <table style="width: 100%; border-collapse: collapse;">
                                             <tr>
                                                 <td><b>Medium:</b> English</td>
