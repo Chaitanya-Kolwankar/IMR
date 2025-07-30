@@ -58,7 +58,7 @@
         @media print {
             @page {
                 size: A4 landscape;
-                margin: 5mm;
+                margin: 3mm;
             }
 
             body {
@@ -80,7 +80,7 @@
                 flex: 1;
                 border: 1px solid #000;
                 padding: 8px;
-                margin: 0 5px;
+                margin: 2px 5px;
                 box-sizing: border-box;
                 font-size: 12px;
             }
@@ -103,13 +103,13 @@
                     <div class="receipt-copy">
                         <div class="col-lg-12 col-sm-12">
                             <div class="watermark">
-                                <img src="images/mu.png" style="opacity: 0.3;" />
+                                <img src="../../../Assets/img/mu.png" style="opacity: 0.3;" />
                             </div>
                             <div class="container" style="width: 100%">
                                 <div class="row">
                                     <div class="row" style="margin-top: 8px;">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <img src="images/VIT-banner.png" style="width: 100%" />
+                                            <img src="../../../Assets/img/RJC.png" />
                                         </div>
                                     </div>
                                 </div>
@@ -120,28 +120,28 @@
                                     <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px 16px; font-size: 14px;">
                                         <div><b>Rec No:</b>
                                             <asp:Label ID="lblNo" runat="server" Text=""></asp:Label></div>
-                                        <div><b>Adm. No:</b>
-                                            <asp:Label ID="Label7" runat="server" Text=""></asp:Label></div>
+                                       <%-- <div><b>Adm. No:</b>
+                                            <asp:Label ID="lbl_admno" runat="server" Text=""></asp:Label></div>--%>
                                         <div><b>Date:</b>
                                             <asp:Label ID="lbl_date" runat="server" Text=""></asp:Label></div>
 
                                         <div><b>Class:</b>
                                             <asp:Label ID="lblcourse" runat="server" Text=""></asp:Label></div>
-                                        <div><b>Section:</b>
-                                            <asp:Label ID="Label8" runat="server" Text=""></asp:Label></div>
+                                        <%--<div><b>Section:</b>
+                                            <asp:Label ID="lbl_section" runat="server" Text=""></asp:Label></div>--%>
                                         <div><b>Student ID:</b>
-                                            <asp:Label ID="Label3" runat="server" Text=""></asp:Label></div>
+                                            <asp:Label ID="lbl_stud_id" runat="server" Text=""></asp:Label></div>
 
                                         <div><b>Category:</b>
                                             <asp:Label ID="lblcategory" runat="server" Text=""></asp:Label></div>
                                         <div><b>Roll No:</b>
-                                            <asp:Label ID="Label1" runat="server" Text=""></asp:Label></div>
+                                            <asp:Label ID="lbl_rollno" runat="server" Text=""></asp:Label></div>
                                         <div><b>Fee Type:</b>
-                                            <asp:Label ID="Label2" runat="server" Text=""></asp:Label></div>
-
+                                            <asp:Label ID="lbl_feetype" runat="server" Text=""></asp:Label></div>
                                         <div style="grid-column: span 3;"><b>Name:</b>
                                             <asp:Label ID="lblName" runat="server" Text=""></asp:Label></div>
-                                    </div>
+                                    
+                                        </div>
                                     <table style="width: 100%; border-top: 2px solid #000; border-bottom: 1px solid #000; border-collapse: collapse; margin-top: 5px;">
                                         <tr style="background-color: #f2f2f2;">
                                             <th style="text-align: left; padding: 5px;">Received the following</th>
@@ -149,19 +149,23 @@
                                         </tr>
                                     </table>
 
-                                    <div style="min-height: 350px; border-bottom: 1px solid #000; padding: 5px;">
-                                        <table style="width: 100%; border-collapse: collapse;">
-                                            <tr>
-                                                <td style="padding: 8px;">TUTION FEES</td>
-                                                <td style="text-align: right; padding: 8px;">6790.00</td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                     <div class="row" style="height:550px">
+                                     <asp:GridView ID="gridstructre" CssClass="table" AutoGenerateColumns="false" runat="server">
+                                    <Columns>
+                                        <asp:BoundField DataField="Struct_name" ItemStyle-Font-Size="15px" ItemStyle-CssClass="itemCss" ItemStyle-VerticalAlign="Middle" HeaderText="PARTICULARS" HeaderStyle-HorizontalAlign="left" ControlStyle-Font-Size="15px" />
+                                        <asp:BoundField DataField="Amount" ItemStyle-Font-Size="15px" ItemStyle-VerticalAlign="Middle" ItemStyle-CssClass="itemCss" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderText="AMOUNT (IN Rs.)" ControlStyle-Font-Size="15px" />
+                                    </Columns>
+                                </asp:GridView>
+                                </div>
 
                                     <table style="width: 100%; border-top: 2px solid #000; border-collapse: collapse; margin-top: 5px;">
                                         <tr>
                                             <td style="padding: 8px;"><b>Total:</b></td>
-                                            <td style="text-align: right; padding: 8px;"><b>₹ 6790.00</b></td>
+                                            <td style="text-align: right; padding: 8px;">
+                                                <b>₹ 
+                                                <asp:Label Id="amt_no" runat="server" Text=""></asp:Label>
+                                                    </b>
+                                            </td>
                                         </tr>
                                     </table>
 
@@ -170,16 +174,31 @@
                                         <p style="margin-bottom: 6px;"><b>In Words:</b>
                                             <asp:Label ID="lblamount" runat="server" Text=""></asp:Label></p>
                                         <table style="width: 100%; border-collapse: collapse;">
+                                           <%-- <tr>
+                                                <td><b>Medium:</b>
+                                                    <asp:Label ID="lblmedium" runat="server" Text=""></asp:Label>
+                                                </td>
+                                                <td><b>Subject:</b> 
+                                                    <asp:Label ID="lblSubjects" runat="server" Text=""></asp:Label>
+                                                </td>
+                                            </tr>--%>
                                             <tr>
-                                                <td><b>Medium:</b> English</td>
-                                                <td><b>Subject:</b> All Subjects</td>
+                                                <td><b>Payment Mode:</b> 
+                                                    <asp:Label ID="lbl_payment_mode" runat="server" Text=""></asp:Label>
+                                                </td>
+                                                <td><b>Transaction ID:</b>
+                                                    <asp:Label ID="lbltrans_id" runat="server" Text=""></asp:Label>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td><b>Payment Mode:</b> Bank Transfer</td>
-                                                <td><b>Transaction ID:</b> FQBSUIG348JHDS800</td>
+                                                <td><b>Bank Name: </b>
+                                                    <asp:Label ID="lbl_bank_name" runat="server" Text=""></asp:Label>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2"><b>Remarks:</b> Payment for Academic Term 2025-2026</td>
+                                                <td colspan="2"><b>Remarks:</b> 
+                                                    <asp:Label ID="lblremark" runat="server" Text="Payment for Academic Term 2025-2026"></asp:Label>
+                                                </td>
                                             </tr>
                                         </table>
                                         <div style="text-align: right; margin-bottom: 15px;">
@@ -191,14 +210,7 @@
                                 </div>
                                 <br />
 
-                                <div class="row">
-                                    <%-- <asp:GridView ID="gridstructre" CssClass="table" AutoGenerateColumns="false" runat="server">
-                                    <Columns>
-                                        <asp:BoundField DataField="Struct_name" ItemStyle-Font-Size="15px" ItemStyle-CssClass="itemCss" ItemStyle-VerticalAlign="Middle" HeaderText="PARTICULARS" HeaderStyle-HorizontalAlign="left" ControlStyle-Font-Size="15px" />
-                                        <asp:BoundField DataField="Amount" ItemStyle-Font-Size="15px" ItemStyle-VerticalAlign="Middle" ItemStyle-CssClass="itemCss" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderText="AMOUNT (IN Rs.)" ControlStyle-Font-Size="15px" />
-                                    </Columns>
-                                </asp:GridView>--%>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>

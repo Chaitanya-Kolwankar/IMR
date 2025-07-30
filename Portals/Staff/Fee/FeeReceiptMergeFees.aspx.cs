@@ -45,13 +45,24 @@ public partial class FeeReceiptMergeFees : System.Web.UI.Page
                         lbl_date.Text = ds.Tables["Structure"].Rows[0]["Date"].ToString();
                         lblName.Text = ds.Tables["Name"].Rows[0]["name"].ToString().ToUpper();
                         string inwords = ds.Tables["Calculated"].Rows[0]["Inwords"].ToString();
+                        //lbl_admno.Text = "";
+                        //lbl_section.Text = "";
+                        lbl_stud_id.Text = "";
+                        lbl_rollno.Text = "";
+                        amt_no.Text = "";
+                        //lblmedium.Text = "";
+                        //lblSubjects.Text = "";
+                        lbl_payment_mode.Text = "";
+                        lbltrans_id.Text = "";
+                        lblremark.Text = "";
+                        lbl_feetype.Text = "";
 
                         TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
                         lblamount.Text = textInfo.ToTitleCase(inwords.ToLower());
                         lblcourse.Text = ds.Tables["Group"].Rows[0]["Group_title"].ToString().ToUpper() + engg + " " + ds.Tables["Group"].Rows[0]["Year"].ToString().ToUpper();
                         lblcategory.Text = ds.Tables["Name"].Rows[0]["stud_category"].ToString();
-                        //gridstructre.DataSource = ds.Tables["Structure"];
-                        //gridstructre.DataBind();
+                        gridstructre.DataSource = null;
+                        gridstructre.DataBind();
                         //gridpayment.DataSource = ds.Tables["Payment"];
                         //gridpayment.DataBind();
                     }
