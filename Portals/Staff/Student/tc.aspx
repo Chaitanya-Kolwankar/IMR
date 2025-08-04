@@ -20,7 +20,7 @@
     <form id="form1" runat="server">
         <div>
             <center>
-                <img src="../../../MANAGEMENT-AND-RESEARCH.jpg" style="width: 100%; height:150px" />
+                <img src="../../../Assets/img/RJC1.png" style="width: 100%; height:150px" />
                 <h2 style="text-decoration: underline;margin-top:0px;margin-bottom:0px">TRANSFERENCE CERTIFICATE</h2>
             </center>
             
@@ -28,7 +28,7 @@
         <div>
             <p>
                 &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp Certified that <asp:Label runat="server" ID="shr_kum"></asp:Label>. <asp:Label runat="server" ID="lblname"  Font-Bold="true"></asp:Label>
-                has been a student of the VIVA INSTITUTE OF MANAGEMENT & RESEARCH<br />
+                has been a student of the Rajeev Gandhi College of Management Studies<br />
             
                 &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp Since passing the <asp:Label runat="server" ID="lblcou"  Font-Bold="true"></asp:Label> Examination <asp:Label ID="s_h_s" runat="server"></asp:Label> has not kept two terms in this Institiute. <asp:Label ID="h_s" runat="server"></asp:Label> has kept terms in this institute.
                  From <asp:Label runat="server" ID="firstmonth" Text="JULY"  Font-Bold="true"></asp:Label> to <asp:Label Font-Bold="true" runat="server" Text="NOV" ID="firstsecmonth" ></asp:Label>  (First Term) from <asp:Label ID="secfir" runat="server" Text="nov" Font-Bold="true"></asp:Label>  to  <asp:Label ID="secsecmonth" runat="server"  Font-Bold="true"></asp:Label> (Second Term)   </p>

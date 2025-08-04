@@ -24,7 +24,7 @@ public partial class Portals_Staff_Student_tc : System.Web.UI.Page
         }
         
         string gender = Request.QueryString["gender"];
-        if (gender== "Male") 
+        if (gender== "Male" || gender=="1") 
         {
             h_s.Text = "He";
             s_h_s.Text = "he";

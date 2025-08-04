@@ -111,7 +111,7 @@ public partial class Portals_Staff_Student_studenttransfercertificate : System.W
                         txt_Mname.Text = dt.Rows[0]["stud_M_Name"].ToString();
                         txt_LstName.Text = dt.Rows[0]["stud_L_Name"].ToString();
                         TXT_DOB.Text = dt.Rows[0]["DOB"].ToString();
-                        if (dt.Rows[0]["stud_Gender"].ToString() == "Male")
+                        if (dt.Rows[0]["stud_Gender"].ToString() == "Male" )
                         {
                             //rad_gender.Checked = true;
                             Session["gender"] = "Male";

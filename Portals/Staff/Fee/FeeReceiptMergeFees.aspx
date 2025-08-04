@@ -30,6 +30,12 @@
             opacity: 0.2;
         }
 
+        .watermark img{
+            height:550px;
+            width:100%;
+            margin-top:40px
+        }
+
         .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
             padding: 0.156em;
             border: 1px solid black;
