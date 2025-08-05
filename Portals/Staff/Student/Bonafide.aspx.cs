@@ -29,13 +29,13 @@ public partial class Portals_Staff_Student_Bonafide : System.Web.UI.Page
             string words_dob = Request.QueryString["dobword"];
             inwotds.Text = words_dob;
             string gen1 = Request.QueryString["gen"];
-            if (gen1 == "Male")
+            if (gen1 == "Male" || gen1=="1")
             {
                 mas_mis.InnerText = "Master";
                 his_her.InnerText = "His";
                 his_her2.InnerText = "He";
             }
-            else if(gen1=="Female"){
+            else if(gen1=="Female" || gen1=="0"){
                 his_her.InnerText = "Her";
                 mas_mis.InnerText = "Miss";
                 his_her2.InnerText = "She";

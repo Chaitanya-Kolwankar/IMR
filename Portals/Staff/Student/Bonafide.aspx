@@ -42,8 +42,7 @@
             <tr>
                 <td>--%>
                     <center>
-                        <img src="../../../MANAGEMENT-AND-RESEARCH.jpg" style="width: 100%" />
-
+                        <img src="../../../Assets/img/RJC1.png" style="width: 100%" />
                         <hr />
                         <h2 style="text-decoration: underline; text-align: center">BONAFIDE CERTIFICATE</h2>
                     </center>
