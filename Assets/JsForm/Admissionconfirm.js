@@ -16,23 +16,23 @@ var Category = "";
 var sum = "";
 $(document).ready(function () {
 
-    $.ajax({
-        type: "POST",
-        url: "NewStudent.aspx/getayidadm",
-        data: '{}',
-        contentType: "application/json; charset=utf-8",
-        success: function (r) {
-            //  $("[id*=ddlyear]").empty().append('<option selected="selected" value="0">--select--</option>');
-            $.each(r.d, function () {
-                $("[id*=ddlyear]").append($("<option></option>").val(this['Value']).html(this['Text']));
-            });
-        },
-        error: function () {
-            hasError = true;
-            debugger;
-            $.notify("Error ! Connection error, please retry.", { color: "#fff", background: "#D44950", blur: 0.2, delay: 0 });
-        }
-    });
+    //$.ajax({
+    //    type: "POST",
+    //    url: "NewStudent.aspx/getayidadm",
+    //    data: '{}',
+    //    contentType: "application/json; charset=utf-8",
+    //    success: function (r) {
+    //        //  $("[id*=ddlyear]").empty().append('<option selected="selected" value="0">--select--</option>');
+    //        $.each(r.d, function () {
+    //            $("[id*=ddlyear]").append($("<option></option>").val(this['Value']).html(this['Text']));
+    //        });
+    //    },
+    //    error: function () {
+    //        hasError = true;
+    //        debugger;
+    //        $.notify("Error ! Connection error, please retry.", { color: "#fff", background: "#D44950", blur: 0.2, delay: 0 });
+    //    }
+    //});
 
 
 

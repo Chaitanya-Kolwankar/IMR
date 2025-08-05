@@ -129,7 +129,7 @@
 
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                             <%--<img src="../../../Assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">--%>
-                            <img src="/Assets/img/profile-img.jpg" runat="server" id="photos" class="rounded-circle" />
+                            <img src="/Assets/img/profile-img.jpg" runat="server" id="photos" class="rounded-circle img-circle" />
                             <span class="d-none d-md-block dropdown-toggle ps-2" runat="server">User</span>
                         </a>
                         <!-- End Profile Iamge Icon -->
@@ -320,11 +320,6 @@
                             <a href="../Admission_Master/GroupMapping.aspx">
                                 <i class="bi bi-circle"></i><span>Group Mapping</span></a>
                         </li>
-                        <%-- <li id="categorycaste" style="display: none">
-                            <a href="../Admission_Master/CategoryCast.aspx">
-                                <i class="bi bi-circle"></i><span>Category Caste</span>
-                            </a>
-                        </li>--%>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -338,11 +333,11 @@
                             </a>
                         </li>--%>
 
-                        <%--  <li>
+                          <li>
                             <a href="../Pre_Admission/AdmissionURL.aspx">
                                 <i class="bi bi-circle"></i><span>Admission Url ON/OFF</span>
                             </a>
-                        </li>--%>
+                        </li>
                         <li id="updateregistration" style="display: none">
                             <a href="../Pre_Admission/searchstudent.aspx">
                                 <i class="bi bi-circle"></i><span>Update Registration</span>
@@ -359,12 +354,6 @@
                                 <i class="bi bi-circle"></i><span>Bulk Admission Form</span>
                             </a>
                         </li>
-
-                        <%-- <li>Student_transfer_payment
-                            <a href="../Pre_Admission/searchstudent.aspx">
-                                <i class="bi bi-circle"> </i><span>Edit Applicant Data</span>
-                            </a>
-                        </li>--%>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -403,21 +392,13 @@
                                 <i class="bi bi-circle"></i><span>Applicant Report</span>
                             </a>
                         </li>
-                        <%-- <li>
-                            <a href="ViewProfile.aspx">
-                                <i class="bi bi-circle"></i><span>Student Verification</span>
+                        <li id="">
+                            <a href="../Admission/Prov_feeEntry.aspx">
+                                <i class="bi bi-circle"></i><span>Provisional Fee Entry</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="ViewProfile.aspx">
-                                <i class="bi bi-circle"></i><span>Admission Statistic</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="ViewProfile.aspx">
-                                <i class="bi bi-circle"></i><span>Studnet Transfer</span>
-                            </a>
-                        </li>--%>
+
+               
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -425,11 +406,17 @@
                         <i class="bi bi-menu-button-wide"></i><span>Fees</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="Fee1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li style="display: none" id="defineinstallment">
+                            <a href="../Fee/DefineInstallment.aspx">
+                                <i class="bi bi-search"></i><span>Define Installment</span>
+                            </a>
+                        </li>
                         <li style="display: none" id="feeentry">
                             <a href="../Fee/FeeEntry_New.aspx">
                                 <i class="bi bi-search"></i><span>Fee Entry</span>
                             </a>
                         </li>
+
                         <li id="feereport" style="display: none">
                             <a href="../Fee/Feereport.aspx">
                                 <i class="bi bi-search"></i><span>Fee Report</span>
@@ -459,16 +446,6 @@
                                 </span>
                             </a>
                         </li>
-                        <%--<li>
-                            <a href="../profile/EditProfile.aspx">
-                                <i class="bi bi-circle"></i><span>Edit Profile</span>
-                            </a>
-                        </li>
-                         <li>
-                            <a href="../profile/ChangePassword.aspx">
-                                <i class="bi bi-circle"></i><span>Change Password</span>
-                            </a>
-                        </li> --%>
 
                         <li style="display: none" id="leaveDefine">
                             <a href="../Employee/leaveDefine.aspx">
@@ -499,28 +476,7 @@
                         </li>
                     </ul>
                 </li>
-                <%--<li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#Ul5" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-person"></i><span>Fee</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="Ul5" class="nav-content collapse " data-bs-parent="#sidebar-nav">--%>
-                <%-- <li>
-                            <a href="../profile/ViewProfile.aspx">
-                                <i class="bi bi-circle"></i><span>View Profile</span>
-                            </a>
-                        </li>
-                         <li>
-                            <a href="../profile/EditProfile.aspx">
-                                <i class="bi bi-circle"></i><span>Edit Profile</span>
-                            </a>
-                        </li>
-                         <li>
-                            <a href="../profile/ChangePassword.aspx">
-                                <i class="bi bi-circle"></i><span>Change Password</span>
-                            </a>
-                        </li> --%>
-                <%--    </ul>
-                </li>--%>
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" style="display: none" id="Student" data-bs-target="#Student1" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-person"></i><span>Student</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -611,25 +567,7 @@
             </asp:ContentPlaceHolder>
         </div>
     </form>
-    <%--<div class="page-wrapper">
-        <div class="container-fluid">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
-            </asp:ContentPlaceHolder>
-        </div>
 
-        <footer class="footer text-center">
-            Designed and Developed by VIVA Software Solutions
-        </footer>
-    </div>--%>
-    <%--<footer id="footer" class="footer" style="bottom:0; text-align:center;background-color:white;position:absolute">
-        <div class="copyright">
-            &copy; Copyright <strong><span>VIVA Software Solutions</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-         
-            
-        </div>
-    </footer>--%>
     <!-- End Footer -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

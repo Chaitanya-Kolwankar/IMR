@@ -324,18 +324,21 @@ public partial class Fee_Master : System.Web.UI.Page
                     ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Enter Structure Name !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
                     txt_struct.Focus();
                     validate = false;
+                    break;
                 }
                 else if (txt_amount.Text.Trim() == "")
                 {
                     ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Enter Amount !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
                     txt_amount.Focus();
                     validate = false;
+                    break;
                 }
                 else if (txt_rank.Text == "")
                 {
                     ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Enter Rank !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
                     txt_rank.Focus();
                     validate = false;
+                    break;
                 }
                 else
                 {
@@ -347,7 +350,7 @@ public partial class Fee_Master : System.Web.UI.Page
                             qry = qry + "insert into m_FeeMaster (AYID,group_id,Struct_id,Struct_type,Struct_name,Amount,Rank,user_id,curr_dt) values('" + Session["Year"].ToString() + "','" + ddl_group.SelectedValue + "','" + gen_id.Trim() + "','" + ddl_struct_type.SelectedValue + "','" + txt_struct.Text.Trim() + "'," + txt_amount.Text.Trim() + "," + txt_rank.Text.Trim() + ",'" + Session["emp_id"].ToString() + "',GETDATE());";
                             qrytimes++;
                         }
-                        else if (struct_id.Text.Contains("STR"))
+                        else if (struct_id.Text.Contains("SFM"))
                         {
                             qry = qry + "UPDATE m_FeeMaster SET Struct_name='" + txt_struct.Text.Trim() + "',Amount='" + txt_amount.Text.Trim() + "',Rank='" + txt_rank.Text.Trim() + "' WHERE Struct_id='" + struct_id.Text.Trim() + "' and del_flag=0;";
                         }
@@ -501,7 +504,7 @@ public partial class Fee_Master : System.Web.UI.Page
         DataTable dt = cls.fillDataTable(query);
         if (dt.Rows.Count > 0)
         {
-            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Updation Prohibited As Fee Structure Already Is In Use !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Updating Prohibited As Fee Structure Already Is In Use !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
         }
         else
         {

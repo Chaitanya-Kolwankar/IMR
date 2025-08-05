@@ -96,7 +96,7 @@
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center" style="background-color: rgba(0, 0, 0, .5);color:white;border-radius:10px">
                 <div class="d-flex justify-content-center">
                     
-                  <span class="d-none d-lg-block">
+                  <span class="d-lg-block">
                       <br />
                       <img src="../../assets/img/mu.png" alt="" style="max-height:100PX !IMPORTANT ;"/></span>
                
@@ -106,7 +106,7 @@
                   <%--<span class="d-none d-lg-block"><img src="assets/img/logo.jpg" alt="" style="max-height:50PX !IMPORTANT"/></span>--%>
                 <a href="#" class="logo d-flex align-items-center w-auto">
                   
-                  <span class="d-none d-lg-block" style="color:white">College IMR </span>
+                  <span class="d-lg-block" style="color:white">College IMR </span>
                 </a>
               </div><!-- End Logo -->
 

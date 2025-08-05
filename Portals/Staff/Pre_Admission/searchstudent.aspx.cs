@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Activities.Expressions;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -47,8 +49,8 @@ public partial class searchstudent : System.Web.UI.Page
         DataTable dt4 = new DataTable();
         dt4 = obj1.fillDataTable(relqury);
         ddlrel.DataSource = dt4;
-        ddlrel.DataTextField = dt4.Columns["parent"].ToString();
-        ddlrel.DataValueField = dt4.Columns["parent"].ToString();
+        ddlrel.DataTextField = dt4.Columns["parent"].ToString().ToUpper();
+        ddlrel.DataValueField = dt4.Columns["parent"].ToString().ToUpper();
         
         ddlrel.DataBind();
         ddlrel.Items.Insert(0, new ListItem("--Select--", ""));
@@ -56,12 +58,12 @@ public partial class searchstudent : System.Web.UI.Page
     }
     public void state()
     {
-        string state = "select distinct trim(Parent) as parent from State_category_details where Main='State'";
+        string state = "select distinct trim(upper(Parent)) as parent from State_category_details where Main='State'";
         obj1.fillDataTable(state);
         DataTable dtstate = obj1.fillDataTable(state);
         ddlstate1.DataSource = dtstate;
-        ddlstate1.DataTextField = dtstate.Columns["Parent"].ToString();
-        ddlstate1.DataValueField = dtstate.Columns["Parent"].ToString();
+        ddlstate1.DataTextField = dtstate.Columns["Parent"].ToString().ToUpper();
+        ddlstate1.DataValueField = dtstate.Columns["Parent"].ToString().ToUpper();
         
         ddlstate1.DataBind();
         ddlstate1.Items.Insert(0, new ListItem("--Select--", ""));
@@ -171,7 +173,7 @@ public partial class searchstudent : System.Web.UI.Page
                     statetxtbox.Text = dt.Rows[0]["State"].ToString();
                     citytxtbox.Text = dt.Rows[0]["city"].ToString();
 
-                    ddlstate.SelectedValue = dt.Rows[0]["S_State"].ToString().Trim();
+                    ddlstate.SelectedValue = dt.Rows[0]["S_State"].ToString().Trim().ToUpper();
                     ddlstate_SelectedIndexChanged(this, EventArgs.Empty);
                     ddlboard.Text = dt.Rows[0]["S_Board_name"].ToString();
                     schoolname.Text = dt.Rows[0]["S_Ins_Name"].ToString();
@@ -195,7 +197,7 @@ public partial class searchstudent : System.Web.UI.Page
                     gradeobt.Text = dt.Rows[0]["S_grade"].ToString();
                     seatno.Text = dt.Rows[0]["S_seat_no"].ToString();
 
-                    ddlstate1.SelectedValue=dt.Rows[0]["State_board"].ToString().Trim();
+                    ddlstate1.SelectedValue = dt.Rows[0]["State_board"].ToString().Trim().ToUpper();
 
                     ddlstate1_SelectedIndexChanged(this, EventArgs.Empty);
 
@@ -306,7 +308,7 @@ public partial class searchstudent : System.Web.UI.Page
 
                     if (dt.Rows[0]["Religion"].ToString() != "0")
                     {
-                        ddlrel.Text = dt.Rows[0]["Religion"].ToString();
+                        ddlrel.Text = dt.Rows[0]["Religion"].ToString().ToUpper();
 
                     }
 
@@ -423,7 +425,7 @@ public partial class searchstudent : System.Web.UI.Page
             }
             else
             {
-                String updt = ("update d_adm_applicant set F_name='" + firstname.Text.Trim().Replace("'", "''") + "',M_name='" + midname.Text.Trim().Replace("'", "''") + "',L_name='" + lastname.Text.Trim().Replace("'", "''") + "',Mo_name='" + mothername.Text.Trim().Replace("'", "''") + "',DOB='" + dob.Text + "',Email_id='" + mail.Trim().Replace("'", "''") + "',Mob_No='" + mobno.Text.Trim() + "',Phone_No='" + othercont.Text.Trim() + "' where Form_no='" + formno + "'");
+                String updt = ("update d_adm_applicant set F_name='" + firstname.Text.Trim().Replace("'", "''") + "',M_name='" + midname.Text.Trim().Replace("'", "''") + "',L_name='" + lastname.Text.Trim().Replace("'", "''") + "',Mo_name='" + mothername.Text.Trim().Replace("'", "''") + "',DOB='"+ dob.Text.Trim()+ "',Email_id='" + mail.Trim().Replace("'", "''") + "',Mob_No='" + mobno.Text.Trim() + "',Phone_No='" + othercont.Text.Trim() + "' where Form_no='" + formno + "'");
 
 
                 bool chk = obj1.DMLqueries(updt);
@@ -884,7 +886,7 @@ public partial class searchstudent : System.Web.UI.Page
     }
     public void ddlsta()
     {
-        string state = "select distinct trim(Parent) as parent from State_category_details where Main='State'";
+        string state = "select distinct trim(upper(Parent)) as parent from State_category_details where Main='State'";
         obj1.fillDataTable(state);
         DataTable dtstate = obj1.fillDataTable(state);
         ddlstate.DataSource = dtstate;
@@ -924,5 +926,12 @@ public partial class searchstudent : System.Web.UI.Page
         }
 
 
+    }
+
+    public string valid_date(string date)
+    {
+        DateTime parsedDate = DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        string pay_date = parsedDate.ToString("yyyy-MM-dd");
+        return "(CAST('" + pay_date + "' AS datetime))";
     }
 }

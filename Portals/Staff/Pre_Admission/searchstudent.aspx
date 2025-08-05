@@ -439,7 +439,7 @@
                                                                <asp:ListItem Value="Jun"> Jun </asp:ListItem>
                                                                <asp:ListItem Value="Jul"> Jul </asp:ListItem>
                                                                <asp:ListItem Value="Aug"> Aug </asp:ListItem>
-                                                               <asp:ListItem Value="Sep"> Sept </asp:ListItem>
+                                                               <asp:ListItem Value="Sept"> Sept </asp:ListItem>
                                                                <asp:ListItem Value="Oct"> Oct </asp:ListItem>
                                                                <asp:ListItem Value="Nov"> Nov </asp:ListItem>
                                                                <asp:ListItem Value="Dec"> Dec </asp:ListItem>
@@ -492,41 +492,78 @@
                                                                                 State <span style="COLOR: #ff3333">*</span>
                                                            <asp:DropDownList ID="ddlstate1" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlstate1_SelectedIndexChanged">
                                                                <%--<asp:ListItem Selected="True" Value="0">--Select--</asp:ListItem>--%>
-                                                               <%--  <asp:ListItem> Maharashtra </asp:ListItem>
-                                                               <asp:ListItem> Andaman and Nicobar </asp:ListItem>
-                                                               <asp:ListItem> Andhra Pradesh </asp:ListItem>
-                                                               <asp:ListItem> Arunachal Pradesh </asp:ListItem>
-                                                               <asp:ListItem> Assam </asp:ListItem>
-                                                               <asp:ListItem> Bihar </asp:ListItem>
-                                                               <asp:ListItem> Chandigarh </asp:ListItem>
-                                                               <asp:ListItem> Chattisgarh </asp:ListItem>
-                                                               <asp:ListItem> Dadra and Nagar Haveli </asp:ListItem>
-                                                               <asp:ListItem> Daman and Diu </asp:ListItem>
-                                                               <asp:ListItem> Delhi </asp:ListItem>
-                                                               <asp:ListItem> Goa </asp:ListItem>
-                                                               <asp:ListItem> Gujarat </asp:ListItem>
-                                                               <asp:ListItem> Haryana </asp:ListItem>
-                                                               <asp:ListItem> Himachal Pradesh </asp:ListItem>
-                                                               <asp:ListItem> Jammu and Kashmir </asp:ListItem>
-                                                               <asp:ListItem> Jharkhand </asp:ListItem>
-                                                               <asp:ListItem> Karnataka </asp:ListItem>
-                                                               <asp:ListItem> Kerala </asp:ListItem>
-                                                               <asp:ListItem> Lakshadweep </asp:ListItem>
-                                                               <asp:ListItem> Madhya Pradesh </asp:ListItem>
-                                                               <asp:ListItem> Manipur </asp:ListItem>
-                                                               <asp:ListItem> Meghalaya  </asp:ListItem>
-                                                               <asp:ListItem> Mizoram  </asp:ListItem>
-                                                               <asp:ListItem> Nagaland  </asp:ListItem>
-                                                               <asp:ListItem> Orissa </asp:ListItem>
-                                                               <asp:ListItem> Pondicherry </asp:ListItem>
-                                                               <asp:ListItem> Punjab </asp:ListItem>
-                                                               <asp:ListItem> Rajasthan </asp:ListItem>
-                                                               <asp:ListItem> Sikkim </asp:ListItem>
-                                                               <asp:ListItem> Tamil Nadu </asp:ListItem>
-                                                               <asp:ListItem> Tripura </asp:ListItem>
-                                                               <asp:ListItem> Uttar Pradesh </asp:ListItem>
-                                                               <asp:ListItem> Uttarakhand </asp:ListItem>
-                                                               <asp:ListItem> West Bengal </asp:ListItem>--%>
+                                                             <%--  <asp:ListItem Value="MAHARASHTRA"> Maharashtra </asp:ListItem>
+<asp:ListItem Value="ANDAMAN AND NICOBAR"> Andaman and Nicobar </asp:ListItem>
+<asp:ListItem Value="ANDHRA PRADESH"> Andhra Pradesh </asp:ListItem>
+<asp:ListItem Value="ARUNACHAL PRADESH"> Arunachal Pradesh </asp:ListItem>
+<asp:ListItem Value="ASSAM"> Assam </asp:ListItem>
+<asp:ListItem Value="BIHAR"> Bihar </asp:ListItem>
+<asp:ListItem Value="CHANDIGARH"> Chandigarh </asp:ListItem>
+<asp:ListItem Value="CHATTISGARH"> Chattisgarh </asp:ListItem>
+<asp:ListItem Value="DADRA AND NAGAR HAVELI"> Dadra and Nagar Haveli </asp:ListItem>
+<asp:ListItem Value="DAMAN AND DIU"> Daman and Diu </asp:ListItem>
+<asp:ListItem Value="DELHI"> Delhi </asp:ListItem>
+<asp:ListItem Value="GOA"> Goa </asp:ListItem>
+<asp:ListItem Value="GUJARAT"> Gujarat </asp:ListItem>
+<asp:ListItem Value="HARYANA"> Haryana </asp:ListItem>
+<asp:ListItem Value="HIMACHAL PRADESH"> Himachal Pradesh </asp:ListItem>
+<asp:ListItem Value="JAMMU AND KASHMIR"> Jammu and Kashmir </asp:ListItem>
+<asp:ListItem Value="JHARKHAND"> Jharkhand </asp:ListItem>
+<asp:ListItem Value="KARNATAKA"> Karnataka </asp:ListItem>
+<asp:ListItem Value="KERALA"> Kerala </asp:ListItem>
+<asp:ListItem Value="LAKSHADWEEP"> Lakshadweep </asp:ListItem>
+<asp:ListItem Value="MADHYA PRADESH"> Madhya Pradesh </asp:ListItem>
+<asp:ListItem Value="MANIPUR"> Manipur </asp:ListItem>
+<asp:ListItem Value="MEGHALAYA"> Meghalaya </asp:ListItem>
+<asp:ListItem Value="MIZORAM"> Mizoram </asp:ListItem>
+<asp:ListItem Value="NAGALAND"> Nagaland </asp:ListItem>
+<asp:ListItem Value="ORISSA"> Orissa </asp:ListItem>
+<asp:ListItem Value="PONDICHERRY"> Pondicherry </asp:ListItem>
+<asp:ListItem Value="PUNJAB"> Punjab </asp:ListItem>
+<asp:ListItem Value="RAJASTHAN"> Rajasthan </asp:ListItem>
+<asp:ListItem Value="SIKKIM"> Sikkim </asp:ListItem>
+<asp:ListItem Value="TAMIL NADU"> Tamil Nadu </asp:ListItem>
+<asp:ListItem Value="TRIPURA"> Tripura </asp:ListItem>
+<asp:ListItem Value="UTTAR PRADESH"> Uttar Pradesh </asp:ListItem>
+<asp:ListItem Value="UTTARAKHAND"> Uttarakhand </asp:ListItem>
+<asp:ListItem Value="WEST BENGAL"> West Bengal </asp:ListItem>--%>
+  
+                                                               
+                                                               <%--<asp:ListItem Value="Maharashtra"> Maharashtra </asp:ListItem>
+                                                               <asp:ListItem Value="Andaman and Nicobar"> Andaman and Nicobar </asp:ListItem>
+                                                               <asp:ListItem Value="Andhra Pradesh"> Andhra Pradesh </asp:ListItem>
+                                                               <asp:ListItem Value="Arunachal Pradesh"> Arunachal Pradesh </asp:ListItem>
+                                                               <asp:ListItem Value="Assam"> Assam </asp:ListItem>
+                                                               <asp:ListItem Value="Bihar"> Bihar </asp:ListItem>
+                                                               <asp:ListItem Value="Chandigarh"> Chandigarh </asp:ListItem>
+                                                               <asp:ListItem Value="Chattisgarh"> Chattisgarh </asp:ListItem>
+                                                               <asp:ListItem Value="Dadra and Nagar Haveli"> Dadra and Nagar Haveli </asp:ListItem>
+                                                               <asp:ListItem Value="Daman and Diu"> Daman and Diu </asp:ListItem>
+                                                               <asp:ListItem Value="Delhi"> Delhi </asp:ListItem>
+                                                               <asp:ListItem Value="Goa"> Goa </asp:ListItem>
+                                                               <asp:ListItem Value="Gujarat"> Gujarat </asp:ListItem>
+                                                               <asp:ListItem Value="Haryana"> Haryana </asp:ListItem>
+                                                               <asp:ListItem Value="Himachal Pradesh"> Himachal Pradesh </asp:ListItem>
+                                                               <asp:ListItem Value="Jammu and Kashmir"> Jammu and Kashmir </asp:ListItem>
+                                                               <asp:ListItem Value="Jharkhand"> Jharkhand </asp:ListItem>
+                                                               <asp:ListItem Value="Karnataka"> Karnataka </asp:ListItem>
+                                                               <asp:ListItem Value="Kerala"> Kerala </asp:ListItem>
+                                                               <asp:ListItem Value="Lakshadweep"> Lakshadweep </asp:ListItem>
+                                                               <asp:ListItem Value="Madhya Pradesh"> Madhya Pradesh </asp:ListItem>
+                                                               <asp:ListItem Value="Manipur"> Manipur </asp:ListItem>
+                                                               <asp:ListItem Value="Meghalaya"> Meghalaya  </asp:ListItem>
+                                                               <asp:ListItem Value="Mizoram"> Mizoram  </asp:ListItem>
+                                                               <asp:ListItem Value="Nagaland"> Nagaland  </asp:ListItem>
+                                                               <asp:ListItem Value="Orissa"> Orissa </asp:ListItem>
+                                                               <asp:ListItem Value="Pondicherry"> Pondicherry </asp:ListItem>
+                                                               <asp:ListItem Value="Punjab"> Punjab </asp:ListItem>
+                                                               <asp:ListItem Value="Rajasthan"> Rajasthan </asp:ListItem>
+                                                               <asp:ListItem Value="Sikkim"> Sikkim </asp:ListItem>
+                                                               <asp:ListItem Value="Tamil Nadu"> Tamil Nadu </asp:ListItem>
+                                                               <asp:ListItem Value="Tripura"> Tripura </asp:ListItem>
+                                                               <asp:ListItem Value="Uttar Pradesh"> Uttar Pradesh </asp:ListItem>
+                                                               <asp:ListItem Value="Uttarakhand"> Uttarakhand </asp:ListItem>
+                                                               <asp:ListItem Value="West Bengal"> West Bengal </asp:ListItem>--%>
                                                            </asp:DropDownList>
                                                                             </div>
 
@@ -580,6 +617,10 @@
                                                                                 Passing Year<span style="COLOR: #ff3333">*</span>
                                                            <asp:DropDownList ID="ddlpassyear1" runat="server" CssClass="form-select">
                                                                <asp:ListItem Value="0">--Select--</asp:ListItem>
+                                                               <asp:ListItem  Value="2025"> 2025 </asp:ListItem>
+                                                               <asp:ListItem  Value="2024"> 2024 </asp:ListItem>
+                                                               <asp:ListItem  Value="2023"> 2023 </asp:ListItem>
+                                                               <asp:ListItem  Value="2022"> 2022 </asp:ListItem>
                                                                <asp:ListItem  Value="2021"> 2021 </asp:ListItem>
                                                                <asp:ListItem  Value="2020"> 2020 </asp:ListItem>
                                                                <asp:ListItem  Value="2019"> 2019 </asp:ListItem>
@@ -760,13 +801,14 @@
                                                                                 <asp:Label runat="server" Text="">Occupation<span style="COLOR: #ff3333">*</span></asp:Label>
                                                                                 <asp:DropDownList ID="focupation" runat="server" CssClass="form-select">
                                                                                     <asp:ListItem  Value="0">--Select--</asp:ListItem>
-                                                                                    <asp:ListItem Value="Service"  Text="Service">     </asp:ListItem>
-                                                                                    <asp:ListItem Value="Business"  Text="Business">    </asp:ListItem>
-                                                                                    <asp:ListItem Value="Professional"  Text="Professional">          </asp:ListItem>
-                                                                                    <asp:ListItem Value="Farmer"  Text=" Farmer">      </asp:ListItem>
-                                                                                    <asp:ListItem Value="Labourer" Text=" Labourer">      </asp:ListItem>
-                                                                                    <asp:ListItem  Value="Retired" Text=" Retired">       </asp:ListItem>
-                                                                                    <asp:ListItem Value="Other"  Text=" Other">       </asp:ListItem>
+                                                                                    <asp:ListItem Value="SERVICE" Text="Service"></asp:ListItem>
+<asp:ListItem Value="BUSINESS" Text="Business"></asp:ListItem>
+<asp:ListItem Value="PROFESSIONAL" Text="Professional"></asp:ListItem>
+<asp:ListItem Value="FARMER" Text="Farmer"></asp:ListItem>
+<asp:ListItem Value="LABOURER" Text="Labourer"></asp:ListItem>
+<asp:ListItem Value="RETIRED" Text="Retired"></asp:ListItem>
+<asp:ListItem Value="OTHER" Text="Other"></asp:ListItem>
+
                                                                                 </asp:DropDownList>
                                                                             </div>
 
@@ -824,14 +866,15 @@
                                                                                 Occupation <span style="COLOR: #ff3333">*</span>
                                                            <asp:DropDownList ID="Moccupation" runat="server" CssClass="form-select">
                                                                <asp:ListItem  Value="0">--Select--</asp:ListItem>
-                                                               <asp:ListItem Value="Service"  > Service             </asp:ListItem>
-                                                               <asp:ListItem Value="Business"  > Business              </asp:ListItem>
-                                                               <asp:ListItem Value="Professional"  > Professional                    </asp:ListItem>
-                                                               <asp:ListItem Value="Farmer"  > Farmer            </asp:ListItem>
-                                                               <asp:ListItem Value="Labourer"  > Labourer           </asp:ListItem>
-                                                               <asp:ListItem Value="Retired"  > Retired           </asp:ListItem>
-                                                               <asp:ListItem Value="Housewife"  > Housewife           </asp:ListItem>
-                                                               <asp:ListItem Value="Other"  > Other               </asp:ListItem>
+                                                              <asp:ListItem Value="SERVICE">Service</asp:ListItem>
+<asp:ListItem Value="BUSINESS">Business</asp:ListItem>
+<asp:ListItem Value="PROFESSIONAL">Professional</asp:ListItem>
+<asp:ListItem Value="FARMER">Farmer</asp:ListItem>
+<asp:ListItem Value="LABOURER">Labourer</asp:ListItem>
+<asp:ListItem Value="RETIRED">Retired</asp:ListItem>
+<asp:ListItem Value="HOUSE WIFE">Housewife</asp:ListItem>
+<asp:ListItem Value="OTHER">Other</asp:ListItem>
+
                                                            </asp:DropDownList>
                                                                             </div>
 
