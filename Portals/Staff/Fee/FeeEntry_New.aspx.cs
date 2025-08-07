@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Math;
 using System;
 using System.Data;
 using System.Globalization;
@@ -725,16 +726,19 @@ public partial class FeeEntry_New : System.Web.UI.Page
     {
         GridViewRow gvrow = (GridViewRow)(sender as Control).Parent.Parent;
         string Chq_status = ((Label)gvrow.FindControl("Chq_status")).Text.Trim();
-        string Install_id = ((Label)gvrow.FindControl("Install_id")).Text.Trim();
+        string Receipt_no = ((Label)gvrow.FindControl("Receipt_no")).Text.Trim();
+        string Type = ((Label)gvrow.FindControl("Type")).Text.Trim();
         if (Chq_status != "Clear")
         {
             ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Cheque/NEFT Status :" + Chq_status + "!!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
         }
         else
         {
-            return;
-            Response.Redirect("FeeReceiptMergeFees.aspx?stud_id=" + txt_studid.Text.Trim() + "&ayid=" + lblayid.Text.Trim() + "&group_id=" + lblgroupid.Text.Trim() + "&receipt_no=" + Install_id, true);
-
+            Session["stud_id"] = txt_studid.Text.Trim();
+            Session["ayid"] = lblayid.Text.Trim();
+            Session["Type"] = Type;
+            Session["Receipt_no"] = Receipt_no;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "redirect('FeeReceiptMergeFees.aspx');", true);
         }
     }
 
