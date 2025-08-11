@@ -497,9 +497,10 @@ public partial class FeeEntry_New : System.Web.UI.Page
                             amount = 0;
                         }
                     }
-
-                    if (amount <= 0)
-                        break;
+                    else
+                    {
+                        txtpay.Text = string.Empty;    
+                    }
                 }
             }
         }

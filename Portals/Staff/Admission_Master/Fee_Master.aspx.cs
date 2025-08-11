@@ -119,6 +119,13 @@ public partial class Fee_Master : System.Web.UI.Page
         {
             fill_grd();
             fill_subgrd();
+            string qry = " select Stud_id from m_feeEntry where Struct_id in  (select Struct_id from m_FeeMaster where Ayid='"+ Session["Year"].ToString() + "' and Group_id='" + ddl_group.SelectedValue +"' and del_flag=0) and del_flag=0";
+            DataTable dt = cls.fillDataTable(qry);
+            if (dt.Rows.Count > 0)
+            {
+                btn_save.Enabled = false;
+                div_use_warning.Visible = true;
+            }
         }
     }
 
@@ -417,6 +424,7 @@ public partial class Fee_Master : System.Web.UI.Page
     {
         grd_fee.DataSource = null;
         grd_fee.DataBind();
+        div_use_warning.Visible = false;
     }
 
     protected void btn_delete_Click(object sender, EventArgs e)

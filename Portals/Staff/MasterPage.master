@@ -80,6 +80,10 @@
             background: white;
             margin-bottom: 2px;
         }
+
+        .logo img {
+            max-height:50px;
+        }
     </style>
 </head>
 <body style="font-family: 'Roboto Slab', serif;">
@@ -136,8 +140,10 @@
 
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                             <li class="dropdown-header">
-                                <h6><asp:Label ID="EmpName" runat="server" Text=""></asp:Label></h6>
-                                <span><asp:Label ID="EmpDesg" runat="server" Text=""></asp:Label></span>
+                                <h6>
+                                    <asp:Label ID="EmpName" runat="server" Text=""></asp:Label></h6>
+                                <span>
+                                    <asp:Label ID="EmpDesg" runat="server" Text=""></asp:Label></span>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -333,7 +339,7 @@
                             </a>
                         </li>--%>
 
-                          <li>
+                        <li>
                             <a href="../Pre_Admission/AdmissionURL.aspx">
                                 <i class="bi bi-circle"></i><span>Admission Url ON/OFF</span>
                             </a>
@@ -398,7 +404,7 @@
                             </a>
                         </li>
 
-               
+
                     </ul>
                 </li>
                 <li class="nav-item">
