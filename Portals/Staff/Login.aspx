@@ -98,7 +98,7 @@
                     
                   <span class="d-lg-block">
                       <br />
-                      <img src="../../assets/img/mu.png" alt="" style="max-height:100PX !IMPORTANT ;"/></span>
+                      <img src="../../assets/img/RGCMS.png" alt="" style="max-height:100PX !IMPORTANT ;"/></span>
                
                 
               </div><!-- End Logo -->
@@ -106,7 +106,7 @@
                   <%--<span class="d-none d-lg-block"><img src="assets/img/logo.jpg" alt="" style="max-height:50PX !IMPORTANT"/></span>--%>
                 <a href="#" class="logo d-flex align-items-center w-auto">
                   
-                  <span class="d-lg-block" style="color:white">College IMR </span>
+                  <span class="d-lg-block pt-2" style="color:white">College IMR </span>
                 </a>
               </div><!-- End Logo -->
 
