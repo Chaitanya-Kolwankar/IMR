@@ -484,22 +484,25 @@ public partial class FeeEntry_New : System.Web.UI.Page
                     Label lblBalance = (Label)row.FindControl("lblpending");
 
                     int balance = Convert.ToInt32(lblBalance.Text.Trim());
-                    if (balance > 0)
+                    if (amount > 0)
                     {
-                        if (amount >= balance)
+                        if (balance > 0)
                         {
-                            txtpay.Text = balance.ToString();
-                            amount -= balance;
-                        }
-                        else
-                        {
-                            txtpay.Text = amount.ToString();
-                            amount = 0;
+                            if (amount >= balance)
+                            {
+                                txtpay.Text = balance.ToString();
+                                amount -= balance;
+                            }
+                            else
+                            {
+                                txtpay.Text = amount.ToString();
+                                amount = 0;
+                            }
                         }
                     }
                     else
                     {
-                        txtpay.Text = string.Empty;    
+                        txtpay.Text = string.Empty;
                     }
                 }
             }
