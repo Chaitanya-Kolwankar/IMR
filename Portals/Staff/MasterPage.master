@@ -82,7 +82,7 @@
         }
 
         .logo img {
-            max-height:50px;
+            max-height: 50px;
         }
     </style>
 </head>
@@ -372,7 +372,11 @@
                                 <i class="bi bi-circle"></i><span>Applicant ID / Password</span>
                             </a>
                         </li>
-
+                        <li id="provfeeEntry" style="display: block">
+                            <a href="../Admission/Prov_feeEntry.aspx">
+                                <i class="bi bi-circle"></i><span>Provisional Admission</span>
+                            </a>
+                        </li>
                         <li id="newstudent" style="display: none">
                             <a href="../Admission/NewStudent.aspx">
                                 <i class="bi bi-circle"></i><span>New Student</span>
