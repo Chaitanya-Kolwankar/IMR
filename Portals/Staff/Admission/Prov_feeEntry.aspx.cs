@@ -155,8 +155,13 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
         {
             string stud_id = txt_studid.Text.Trim();
             string ayid = lblayid.Text.Trim();
-            DateTime parsedDate = DateTime.ParseExact(txtpaydate.Text.Trim(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            string pay_date = parsedDate.ToString("yyyy-MM-dd");
+            string pay_date = "";
+            if (txtpaydate.Visible)
+            {
+                DateTime parsedDate = DateTime.ParseExact(txtpaydate.Text.Trim(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                pay_date = parsedDate.ToString("yyyy-MM-dd");
+            }
+           
             string chq_status = "";
             string bankname = "";
             string recpt_chq_dt = "";
@@ -418,7 +423,7 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
         {
             msg = "Select payment mode";
         }
-        else if (txtpaydate.Text == "")
+        else if (txtpaydate.Text == "" && txtpaydate.Visible)
         {
             msg = "Select payment date";
         }
