@@ -181,6 +181,13 @@ public partial class Portals_Staff_Admission_Master_Fee_Master_Category : System
         {
             fill_grd();
             fill_subgrd();
+            string qry = " select Stud_id from m_feeEntry where Struct_id in  (select Struct_id from m_FeeMaster where Ayid='" + Session["Year"].ToString() + "' and Group_id='" + ddl_group.SelectedValue + "' and del_flag=0) and del_flag=0";
+            DataTable dt = cls.fillDataTable(qry);
+            if (dt.Rows.Count > 0)
+            {
+                btn_save.Enabled = false;
+                div_use_warning.Visible = true;
+            }
         }
     }
 
@@ -488,6 +495,7 @@ public partial class Portals_Staff_Admission_Master_Fee_Master_Category : System
     {
         grd_fee.DataSource = null;
         grd_fee.DataBind();
+        div_use_warning.Visible = false;
     }
 
     protected void btn_delete_Click(object sender, EventArgs e)

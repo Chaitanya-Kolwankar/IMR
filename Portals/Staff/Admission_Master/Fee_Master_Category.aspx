@@ -101,6 +101,7 @@
                                         <asp:Button ID="btn_clear" runat="server" Text="Clear" CssClass="btn btn-primary btn-block form-control" OnClick="btn_clear_Click" />
                                     </div>
                                 </div>
+                                 <div runat="server" visible="false" id="div_use_warning" class="card card-body bg-danger-light p-0 mt-4" style="text-align:center"><span class="p-2 text-danger">Updation Prohibited as Fee Structure Already Is In Use !!</span></div>
                                 <br />
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12 table-responsive" style="overflow: auto; max-height: 400px; width: 100%;">

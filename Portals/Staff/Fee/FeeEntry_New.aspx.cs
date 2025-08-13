@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Math;
 using System;
 using System.Data;
 using System.Globalization;
@@ -496,9 +497,10 @@ public partial class FeeEntry_New : System.Web.UI.Page
                             amount = 0;
                         }
                     }
-
-                    if (amount <= 0)
-                        break;
+                    else
+                    {
+                        txtpay.Text = string.Empty;    
+                    }
                 }
             }
         }
@@ -704,7 +706,7 @@ public partial class FeeEntry_New : System.Web.UI.Page
                     clear();
                     ddlmode.SelectedIndex = 0;
                     btnsave.Text = "Save";
-                    string student_details = "SELECT ISNULL(Paid.PaidAmount, 0) AS PaidAmount,ISNULL(Total.TotalAmount, 0) AS TotalAmount,ISNULL(Total.TotalAmount, 0) - ISNULL(Paid.PaidAmount, 0) AS Balance FROM (SELECT SUM(CAST(Amount AS INT)) AS PaidAmount FROM m_FeeEntry WHERE Stud_id = '" + txt_studid.Text.Trim() + "' AND Ayid = '" + lblayid.Text.Trim() + "' AND Chq_status = 'Clear' AND del_flag = 0 and fine_flag=0) AS Paid CROSS JOIN(SELECT SUM(CAST(Amount AS INT)) AS TotalAmount FROM " + Session["feemaster"].ToString() + " WHERE Ayid = '" + lblayid.Text.Trim() + "' AND Group_id = '" + lblgroup.Text.Trim() + "' AND del_flag = 0 and Gender='" + Session["gender"].ToString() + "' and Category='" + lblcategory.Text.Trim() + "' ) AS Total";
+                    string student_details = "SELECT ISNULL(Paid.PaidAmount, 0) AS PaidAmount,ISNULL(Total.TotalAmount, 0) AS TotalAmount,ISNULL(Total.TotalAmount, 0) - ISNULL(Paid.PaidAmount, 0) AS Balance FROM (SELECT SUM(CAST(Amount AS INT)) AS PaidAmount FROM m_FeeEntry WHERE Stud_id = '" + txt_studid.Text.Trim() + "' AND Ayid = '" + lblayid.Text.Trim() + "' AND Chq_status = 'Clear' AND del_flag = 0 and fine_flag=0) AS Paid CROSS JOIN(SELECT SUM(CAST(Amount AS INT)) AS TotalAmount FROM " + Session["feemaster"].ToString() + " WHERE Ayid = '" + lblayid.Text.Trim() + "' AND Group_id = '" + lblgroupid.Text.Trim() + "' AND del_flag = 0 and Gender='" + Session["gender"].ToString() + "' and Category='" + lblcategory.Text.Trim() + "' ) AS Total";
 
                     DataTable dt = cls.fillDataTable(student_details);
                     if (dt.Rows.Count > 0)
@@ -725,16 +727,19 @@ public partial class FeeEntry_New : System.Web.UI.Page
     {
         GridViewRow gvrow = (GridViewRow)(sender as Control).Parent.Parent;
         string Chq_status = ((Label)gvrow.FindControl("Chq_status")).Text.Trim();
-        string Install_id = ((Label)gvrow.FindControl("Install_id")).Text.Trim();
+        string Receipt_no = ((Label)gvrow.FindControl("Receipt_no")).Text.Trim();
+        string Type = ((Label)gvrow.FindControl("Type")).Text.Trim();
         if (Chq_status != "Clear")
         {
             ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Cheque/NEFT Status :" + Chq_status + "!!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
         }
         else
         {
-            return;
-            Response.Redirect("FeeReceiptMergeFees.aspx?stud_id=" + txt_studid.Text.Trim() + "&ayid=" + lblayid.Text.Trim() + "&group_id=" + lblgroupid.Text.Trim() + "&receipt_no=" + Install_id, true);
-
+            Session["stud_id"] = txt_studid.Text.Trim();
+            Session["ayid"] = lblayid.Text.Trim();
+            Session["Type"] = Type;
+            Session["Receipt_no"] = Receipt_no;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "redirect('FeeReceiptMergeFees.aspx');", true);
         }
     }
 
