@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>IMR College</title>
+    <title>RGCMS College</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -106,7 +106,7 @@
                   <%--<span class="d-none d-lg-block"><img src="assets/img/logo.jpg" alt="" style="max-height:50PX !IMPORTANT"/></span>--%>
                 <a href="#" class="logo d-flex align-items-center w-auto">
                   
-                  <span class="d-lg-block pt-2" style="color:white">College IMR </span>
+                  <span class="d-lg-block pt-2" style="color:white">RGCMS College </span>
                 </a>
               </div><!-- End Logo -->
 

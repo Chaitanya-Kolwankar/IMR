@@ -172,7 +172,7 @@ public partial class FeeEntry_New : System.Web.UI.Page
                     }
                     if (div_fine.Visible && chk_fine.Checked && btnsave.Text == "Save")
                     {
-                        qry += "insert into m_FeeEntry(Stud_id, Amount, Ayid, Pay_date, Struct_id,Install_id,Struct_name, Recpt_mode, Receipt_no, Recpt_Chq_dt, Recpt_Chq_No, Recpt_Bnk_Name, Recpt_Bnk_Branch, Chq_status, type, user_id,Fine_flag) values ('" + stud_id + "','" + txt_fine.Text.Trim() + "','" + ayid + "',(CAST('" + pay_date + "' AS datetime)),NULLIF('" + install_id + "',''),'Fine','Fine','" + recpt_mode + "','" + receipt_no + "',NULLIF((CAST('" + recpt_chq_dt + "' AS datetime)),''),NULLIF('" + recpt_chq_no + "',''),NULLIF('" + bankname + "',''),NULLIF('" + recpt_bank_branch + "',''),'" + chq_status + "','Fine','" + Session["emp_id"].ToString() + "',1);";
+                        qry += "insert into m_FeeEntry(Stud_id, Amount, Ayid, Pay_date, Struct_id,Install_id,Struct_name, Recpt_mode, Receipt_no, Recpt_Chq_dt, Recpt_Chq_No, Recpt_Bnk_Name, Recpt_Bnk_Branch, Chq_status, type, user_id,Fine_flag) values ('" + stud_id + "','" + txt_fine.Text.Trim() + "','" + ayid + "',(CAST('" + pay_date + "' AS datetime)),'Fine',NULLIF('" + install_id + "',''),'Fine','" + recpt_mode + "','" + receipt_no + "',NULLIF((CAST('" + recpt_chq_dt + "' AS datetime)),''),NULLIF('" + recpt_chq_no + "',''),NULLIF('" + bankname + "',''),NULLIF('" + recpt_bank_branch + "',''),'" + chq_status + "','Fine','" + Session["emp_id"].ToString() + "',1);";
                     }
                     if (cls.TranDMLqueries(qry))
                     {
