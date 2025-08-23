@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>IMR College</title>
+    <title>RGCMS College</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -72,7 +72,8 @@
     </asp:ContentPlaceHolder>
     <style>
         .sidebar {
-            background-image: linear-gradient(to top, #72afd3 60%, #37ecba 150%);
+            /*background-image: linear-gradient(to top, #72afd3 60%, #37ecba 150%);*/
+            background: #2471A3;
         }
 
 
@@ -84,6 +85,10 @@
         .logo img {
             max-height: 50px;
         }
+
+        .pagetitle {
+            color: #fff !important;
+        }
     </style>
 </head>
 <body style="font-family: 'Roboto Slab', serif;">
@@ -94,9 +99,9 @@
         <header id="header" class="header fixed-top d-flex align-items-center">
 
             <div class="d-flex align-items-center justify-content-between">
-                <a href="index.html" class="logo d-flex align-items-center">
+                <a href="#" class="logo d-flex align-items-center">
                     <img src="/Assets/img/mu.png" alt="" />
-                    <span class="d-none d-lg-block">IMR College</span>
+                    <span class="d-none d-lg-block">RGCMS</span>
                 </a>
                 <i class="bi bi-list toggle-sidebar-btn"></i>
                 <div>
@@ -572,7 +577,7 @@
         </aside>
 
         <!-- End Sidebar-->
-        <div style="background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%); position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: auto; background-size: contain;">
+        <div style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: auto; background-size: contain; background: rgb(127, 179, 213);">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>

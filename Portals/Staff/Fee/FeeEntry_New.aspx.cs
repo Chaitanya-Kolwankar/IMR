@@ -665,7 +665,9 @@ public partial class FeeEntry_New : System.Web.UI.Page
             else if (ds.Tables["Details"].Rows[0]["Recpt_mode"].ToString() == "Online Pay")
             {
                 txtbnkname.Text = ds.Tables["Details"].Rows[0]["Recpt_Bnk_Name"].ToString();
-                txtchdate.Text = Convert.ToDateTime(ds.Tables["Details"].Rows[0]["Recpt_Chq_dt"]).ToString("dd/MM/yyyy").Replace("-", "/");
+                //txtchdate.Text = Convert.ToDateTime(ds.Tables["Details"].Rows[0]["Recpt_Chq_dt"]).ToString("dd/MM/yyyy").Replace("-", "/");
+                DateTime? chequeDate = ds.Tables["Details"].Rows[0].Field<DateTime?>("Recpt_Chq_dt");
+                txtchdate.Text = chequeDate.HasValue ? chequeDate.Value.ToString("dd/MM/yyyy") : "";
                 txtchno.Text = ds.Tables["Details"].Rows[0]["Recpt_Chq_No"].ToString();
             }
             if (div_install.Visible)

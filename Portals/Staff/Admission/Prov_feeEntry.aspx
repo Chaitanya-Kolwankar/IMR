@@ -284,6 +284,12 @@
                                                             </ItemTemplate>
                                                             <ItemStyle HorizontalAlign="Center" />
                                                         </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Print">
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="btnPrint" runat="server" CssClass="btn btn-outline-success bi bi-printer" OnClick="btnPrint_Click"></asp:LinkButton>
+                                                            </ItemTemplate>
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
                                                     </Columns>
                                                 </asp:GridView>
                                             </div>

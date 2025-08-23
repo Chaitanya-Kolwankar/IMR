@@ -35,7 +35,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <main id="main" class="main">
         <div class="container-fluid">
-            <div class="pagetitle" style="font-size: 29px; margin-left: 34px; font-weight: 300; color: #012970;">
+            <div class="pagetitle" style="font-size: 32px; margin-left: 34px; font-weight: 300; color: #012970;">
             Student 
             </div>
 
