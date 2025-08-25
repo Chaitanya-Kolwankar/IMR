@@ -442,7 +442,7 @@
                                                                         </div>
                                                                         <div class="card-body">
                                                                             <div class="row">
-                                                                                
+
                                                                                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                                                     State <span style="color: #ff3333">*</span>
                                                                                     <asp:DropDownList ID="ddlstate1" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlstate1_SelectedIndexChanged">

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>IMR College</title>
+    <title>RGCMS College</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -82,8 +82,49 @@
 
     <div class="container">
 
+
         <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-1">
 
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center" style="background-color: rgba(0, 0, 0, .5);color:white;border-radius:10px">
+                <div class="d-flex justify-content-center">
+                    
+                  <span class="d-lg-block">
+                      <br />
+                      <img src="../../assets/img/RGCMS.png" alt="" style="max-height:100PX !IMPORTANT ;"/></span>
+               
+                
+              </div><!-- End Logo -->
+              <div class="d-flex justify-content-center">
+                  <%--<span class="d-none d-lg-block"><img src="assets/img/logo.jpg" alt="" style="max-height:50PX !IMPORTANT"/></span>--%>
+                <a href="#" class="logo d-flex align-items-center w-auto">
+                  
+                  <span class="d-lg-block pt-2" style="color:white">RGCMS College </span>
+                </a>
+              </div><!-- End Logo -->
+
+              <%--<div class="card mb-3">--%>
+
+                <div class="card-body">
+
+                  <div class="">
+                    <h5 class="card-title text-center pb-0 fs-4" style="color:white">Login to Your Account</h5>
+                    
+                  </div>
+                    <%--<p class="text-center small">Enter your username & password to login</p>--%>
+
+                  <form id="Form1" runat="server" class="row g-3 needs-validation" novalidate>
+
+                    <div class="col-12">
+                      <label for="yourUsername" class="form-label">Username</label>
+                      <div class="input-group has-validation">
+                        <%--<span class="input-group-text" id="inputGroupPrepend">@</span>--%>
+                        <asp:TextBox runat="server" type="text" name="username" MaxLength="8" autocomplete="off" class="form-control" id="txtUserName" style="text-transform:uppercase;" onkeyPress="return alphaandnum(event)" required   oncopy="return false" 
+                                                                oncut="return false"/>
+                        <div class="invalid-feedback">Please enter your username.</div>
+                      </div>
+                    </div>
 
             <div class="container">
                 <div class="row justify-content-center">

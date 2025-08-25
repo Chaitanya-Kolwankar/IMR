@@ -87,8 +87,34 @@
             max-height: 50px;
         }
 
+
         .pagetitle {
-            color: #fff !important;
+            color: #fff !important; }
+
+        body {
+            text-transform: uppercase !important;
+        }
+
+
+        input[type="text"] {
+            text-transform: uppercase;
+        }
+
+        input[type="submit"], input[type="button"] {
+            text-transform: uppercase;
+        }
+
+        select {
+            text-transform: uppercase !important;
+        }
+
+            select option {
+                text-transform: uppercase;
+            }
+
+        table {
+            text-transform: uppercase;
+
         }
     </style>
 </head>
@@ -100,9 +126,11 @@
         <header id="header" class="header fixed-top d-flex align-items-center">
 
             <div class="d-flex align-items-center justify-content-between">
+
                 <a href="#" class="logo d-flex align-items-center">
                     <img src="/Assets/img/RGCMS.png" alt="" />
                     <span class="d-none d-lg-block">RGCMS</span>
+
                 </a>
                 <i class="bi bi-list toggle-sidebar-btn"></i>
                 <div>
