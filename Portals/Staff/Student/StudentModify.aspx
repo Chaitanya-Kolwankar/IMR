@@ -8,7 +8,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <style>
-         input {
+        input {
             text-transform: uppercase;
         }
 
@@ -48,7 +48,7 @@
             top: 0;
         }
     </style>
-    
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
@@ -61,7 +61,7 @@
                             <%--        <p style="color:#012970"></p> --%>     Search By Student ID
                         </div>
 
-                        <asp:Button runat="server" OnClick="modal_cross_Click" type="button" id="modal_cross" class="btn-close" data-bs-dismiss="modal" aria-label="close"/>
+                        <asp:Button runat="server" OnClick="modal_cross_Click" type="button" ID="modal_cross" class="btn-close" data-bs-dismiss="modal" aria-label="close" />
                     </div>
                     <div class="modal-body">
                         <div class="container">
@@ -87,13 +87,13 @@
                 </div>
             </div>
         </div>
-       
-        <div class="modal fade" id="img_edit_modal" data-bs-backdrop="static"  role="dialog" >
+
+        <div class="modal fade" id="img_edit_modal" data-bs-backdrop="static" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: lightgrey; color: black; font-weight: bold;">
                         Edit Photo / Signature.
-                        <asp:Button type="button" OnClick="modal_cross_img_Click" runat="server" ID="modal_cross_img" class="btn-close imageclear" data-bs-dismiss="modal" aria-label="close"/>
+                        <asp:Button type="button" OnClick="modal_cross_img_Click" runat="server" ID="modal_cross_img" class="btn-close imageclear" data-bs-dismiss="modal" aria-label="close" />
                     </div>
                     <div class="modal-body">
                         <div class="container" style="width: 100%">
@@ -120,7 +120,7 @@
                                     <asp:Button ID="BTN_SAVE_IMAGE" runat="server" CssClass="btn btn-primary form-control" Text="UPDATE" OnClick="BTN_SAVE_IMAGE_Click" />
                                 </div>
                                 <div class="col-lg-2">
-                                    <asp:Button type="button" runat="server" Text="Close" ID="footermodalclose" OnClick="footermodalclose_Click" class="btn btn-primary form-control imageclear" data-bs-dismiss="modal"/>
+                                    <asp:Button type="button" runat="server" Text="Close" ID="footermodalclose" OnClick="footermodalclose_Click" class="btn btn-primary form-control imageclear" data-bs-dismiss="modal" />
                                 </div>
                                 <div class="col-lg-4">
                                 </div>
@@ -133,7 +133,8 @@
         </div>
 
         <div class="container-fluid">
-            <div class="pagetitle " style="font-size: 32px; margin-left: 34px; font-weight: 300; color: #012970;">
+            <div class="pagetitle " style="font-size: 32px; margin-left: 34px; font-weight: 300; color: #fff;">
+                Student Modify
             </div>
             <div class="card" style="height: 100%">
                 <div class="card-title mx-4" style="font-size: 21px">Student Modify </div>
@@ -281,21 +282,21 @@
 
                                                         </div>
                                                         <br />
-                                                                <div class="row">
-                                                    <div class="col-lg-6"></div>
-                                                    <div class="col-lg-3" style="margin-left: 57px;">
-                                                        <asp:Button ID="btn_pd" runat="server" CssClass="btn btn-primary form-control" Width="100%" OnClick="btn_pd_Click" Text="Save" />
-                                                    </div>
-                                                    <div class="col-lg-1"></div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6"></div>
+                                                            <div class="col-lg-3" style="margin-left: 57px;">
+                                                                <asp:Button ID="btn_pd" runat="server" CssClass="btn btn-primary form-control" Width="100%" OnClick="btn_pd_Click" Text="Save" />
+                                                            </div>
+                                                            <div class="col-lg-1"></div>
 
-                                                </div>
+                                                        </div>
                                                     </div>
                                                     <div class="col-lg-3" style="text-align: end;">
                                                         <div class="container">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <asp:Image runat="server" ID="stud_img" ImageUrl="~/user__image.png" Width="59%" Height="161PX" Style="border: solid #cdb1b1 2px; border-radius: 50%;" />
-                                                                    <asp:LinkButton runat="server" ID="btnUpload"  data-bs-target="#img_edit_modal">
+                                                                    <asp:LinkButton runat="server" ID="btnUpload" data-bs-target="#img_edit_modal">
                                                 <img src="https://img.icons8.com/windows/25/000000/edit--v1.png" style="margin-bottom: 123px;"/> 
                                                                     </asp:LinkButton>
                                                                 </div>
@@ -314,16 +315,8 @@
                                                             </div>
                                                         </div>
                                                         <br />
-
-
                                                     </div>
                                                 </div>
-                                        
-                                                <%--  <div class="row">
-                                                            <div class="col-lg-2">
-                                                                
-                                                            </div>
-                                                        </div>--%>
                                             </div>
                                         </div>
                                         <div class="card">
@@ -333,7 +326,6 @@
                                             <div class="card-body">
                                                 <br />
                                                 <div class="row">
-                                                    <%--<div class="col-lg-2"></div>--%>
                                                     <div class="col-lg-3">
                                                         <label for="inputState" class="form-label">
                                                             Birth Place<span style="color: #ff3333; font-weight: 800">*</span>
@@ -355,7 +347,7 @@
                                                         <label for="inputState" class="form-label">
                                                             Email ID<span style="color: #ff3333; font-weight: 800">*</span>
                                                         </label>
-                                                        <asp:TextBox ID="txtemail" style="text-transform:lowercase"  MaxLength="99"  TextMode="Email" autocomplete="off" runat="server" oncopy="return false" onpaste="return false" oncut="return false" CssClass="form-control"></asp:TextBox>
+                                                        <asp:TextBox ID="txtemail" Style="text-transform: lowercase" MaxLength="99" TextMode="Email" autocomplete="off" runat="server" oncopy="return false" onpaste="return false" oncut="return false" CssClass="form-control"></asp:TextBox>
                                                     </div>
                                                     <div class="col-lg-3">
                                                         <label for="inputState" class="form-label">
@@ -363,7 +355,6 @@
                                                         </label>
                                                         <asp:DropDownList ID="ddlreli" runat="server" CssClass="form-select"></asp:DropDownList>
                                                     </div>
-                                                    <%--<div class="col-lg-2"></div>--%>
                                                 </div>
                                                 <br />
                                                 <div class="row">
@@ -377,12 +368,11 @@
                                         </div>
                                         <div class="card">
                                             <div class="card-header">
-                                              Current  Address
+                                                Current  Address
                                             </div>
                                             <div class="card-body">
                                                 <br />
                                                 <div class="row">
-                                                    
                                                     <div class="col-lg-4">
                                                         Address<span style="color: #ff3333; font-weight: 800">*</span>
                                                         <asp:TextBox ID="txtadd" runat="server" oncopy="return false" onpaste="return false" oncut="return false" onkeypress="return address_exp(event)" autocomplete="off" MaxLength="100" CssClass="form-control"></asp:TextBox>
@@ -406,7 +396,6 @@
                                                         <asp:TextBox runat="server" ID="txtphone" oncopy="return false" onpaste="return false" oncut="return false" onkeypress="return OnlyNum(event)" autocomplete="off" MaxLength="10" CssClass="form-control">
                                                         </asp:TextBox>
                                                     </div>
-                                                    
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-5"></div>
@@ -424,7 +413,7 @@
                                             <div class="card-body">
                                                 <br />
                                                 <div class="row">
-                                               
+
                                                     <div class="col-lg-4">
                                                         Address
                                                <asp:TextBox ID="nat_address" runat="server" oncopy="return false" onpaste="return false" oncut="return false" onkeypress="return address_exp(event)" autocomplete="off" MaxLength="200" CssClass="form-control"></asp:TextBox>
@@ -450,8 +439,6 @@
 
                                                 </asp:TextBox>
                                                     </div>
-
-                                                    
                                                 </div>
                                                 <br />
                                                 <div class="row">
@@ -593,7 +580,7 @@
                                                 <div class="card-body">
                                                     <br />
                                                     <div class="row">
-                                                        
+
                                                         <div class="col-lg-2">
                                                             <label for="inputSate" class="form-label">First Name</label>
                                                             <asp:TextBox ID="txtguard_fname" onkeypress="return ONLY_ALPHA(event)" autocomplete="off" MaxLength="20" runat="server" oncopy="return false" onpaste="return false" oncut="return false" CssClass="form-control"></asp:TextBox>
@@ -615,9 +602,7 @@
                                                             <label for="inputState" class="form-label">Address.</label>
                                                             <asp:TextBox ID="txt_guard_address" onkeypress="return address_exp(event)" MaxLength="50" autocomplete="off" oncopy="return false" onpaste="return false" oncut="return false" runat="server" CssClass="form-control">  </asp:TextBox>
                                                         </div>
-                                                        
                                                     </div>
-
 
                                                     <div class="row">
                                                         <div class="col-lg-5"></div>
@@ -636,7 +621,7 @@
                                                 <div class="card-body">
                                                     <br />
                                                     <div class="row">
-                                                    
+
                                                         <div class="col-lg-3">
                                                             <label for="inputSate" class="form-label">Earning<span style="color: #ff3333; font-weight: 800">*</span></label>
                                                             <asp:TextBox ID="txt_earning" onkeypress="return OnlyNum(event)" MaxLength="3" AutoPostBack="true" OnTextChanged="txt_earning_TextChanged" autocomplete="off" oncopy="return false" onpaste="return false" oncut="return false" runat="server" CssClass="form-control"></asp:TextBox>
@@ -654,11 +639,10 @@
                                                             <label for="inputState" class="form-label">Yearly Income<span style="color: #ff3333; font-weight: 800">*</span></label>
                                                             <asp:TextBox ID="txt_Incone" onkeypress="return OnlyNum(event)" MaxLength="8" autocomplete="off" oncopy="return false" onpaste="return false" oncut="return false" runat="server" CssClass="form-control"></asp:TextBox>
                                                         </div>
-                                                     
+
 
                                                     </div>
                                                     <div class="row">
-                                                        <%--<div class="col-lg-2" style="margin-top:30px">--%>
                                                         <div class="col-lg-5"></div>
                                                         <div class="col-lg-2">
                                                             <br />
@@ -669,7 +653,6 @@
                                                             </asp:UpdatePanel>
                                                         </div>
                                                         <div class="col-lg-5"></div>
-                                                        <%--</div>--%>
                                                     </div>
                                                 </div>
                                             </div>
@@ -697,7 +680,7 @@
                                                                 <asp:ListItem>--Select--</asp:ListItem>
                                                                 <asp:ListItem>S.S.C</asp:ListItem>
                                                                 <asp:ListItem>H.S.C</asp:ListItem>
-                                                               <asp:ListItem>GRADUATION</asp:ListItem>
+                                                                <asp:ListItem>GRADUATION</asp:ListItem>
                                                             </asp:DropDownList>
                                                         </div>
                                                         <div class="col-lg-2">
@@ -898,21 +881,21 @@
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                     $('#<%=edit_image.ClientID%>').prop('src', e.target.result)
+                    $('#<%=edit_image.ClientID%>').prop('src', e.target.result)
                         .width(200)
                         .height(150);
                 };
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        
+
 
 
         function ShowImagePreview1(input) {                                                  // to show image before saving
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                     $('#<%=EDIT_SIGN.ClientID%>').prop('src', e.target.result)
+                    $('#<%=EDIT_SIGN.ClientID%>').prop('src', e.target.result)
                         .width(200)
                         .height(150);
                 };
@@ -1018,7 +1001,7 @@
         $('[id*=btnUpload]').click(function () {
             $('[id*=img_edit_modal]').modal({ backdrop: "static" });
         });
-       
+
     </script>
 
 </asp:Content>

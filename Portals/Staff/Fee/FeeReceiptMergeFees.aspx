@@ -84,8 +84,8 @@
             .receipt-copy {
                 flex: 1;
                 border: 1px solid #000;
-                padding: 8px;
-                margin: 2px 5px;
+                padding: 20px;
+                margin: 1px 15px;
                 box-sizing: border-box;
                 font-size: 12px;
             }

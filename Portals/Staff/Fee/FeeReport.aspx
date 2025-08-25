@@ -88,8 +88,8 @@
                                         <label for="inputState" class="form-label">Select Category:</label>
                                         <asp:DropDownList ID="ddlcat" runat="server" AutoPostBack="true" CssClass="form-select" OnSelectedIndexChanged="ddlcat_SelectedIndexChanged">
                                             <asp:ListItem>--Select--</asp:ListItem>
-                                            <asp:ListItem>OPEN</asp:ListItem>
-                                            <asp:ListItem>Other</asp:ListItem>
+                                            <asp:ListItem Value="OPEN">OPEN</asp:ListItem>
+                                            <asp:ListItem Value="Other">Other</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                     <asp:HiddenField runat="server" ID="ddlcategory" />

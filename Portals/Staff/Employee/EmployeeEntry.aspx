@@ -422,7 +422,7 @@
                 <div class="container-fluid">
 
                     <%--                    <div class="panel panel-primary">--%>
-                    <div class="pagetitle" style="font-size: 20px; margin-left: 34px; font-weight: 300; color: #012970;">
+                    <div class="pagetitle" style="font-size: 32px; margin-left: 34px; font-weight: 300;">
                         Employee 
                     </div>
                     <div class="container-fluid">
