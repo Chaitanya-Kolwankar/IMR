@@ -72,18 +72,24 @@
     </asp:ContentPlaceHolder>
     <style>
         .sidebar {
-            background-image: linear-gradient(to top, #72afd3 60%, #37ecba 150%);
+            /*background-image: linear-gradient(to top, #72afd3 60%, #37ecba 150%);*/
+            background: #2471A3;
         }
 
 
         .sidebar-nav .nav-content a {
-            background: white;
+            /*background: white;*/
             margin-bottom: 2px;
+            border:1px solid #fff;
         }
 
         .logo img {
             max-height: 50px;
         }
+
+
+        .pagetitle {
+            color: #fff !important; }
 
         body {
             text-transform: uppercase !important;
@@ -108,6 +114,7 @@
 
         table {
             text-transform: uppercase;
+
         }
     </style>
 </head>
@@ -119,9 +126,11 @@
         <header id="header" class="header fixed-top d-flex align-items-center">
 
             <div class="d-flex align-items-center justify-content-between">
-                <a href="index.html" class="logo d-flex align-items-center">
-                    <img src="/Assets/img/mu.png" alt="" />
-                    <span class="d-none d-lg-block">RGCMS College</span>
+
+                <a href="#" class="logo d-flex align-items-center">
+                    <img src="/Assets/img/RGCMS.png" alt="" />
+                    <span class="d-none d-lg-block">RGCMS</span>
+
                 </a>
                 <i class="bi bi-list toggle-sidebar-btn"></i>
                 <div>
@@ -597,7 +606,7 @@
         </aside>
 
         <!-- End Sidebar-->
-        <div style="background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%); position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: auto; background-size: contain;">
+        <div style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: auto; background-size: contain; background: rgb(127, 179, 213);">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>

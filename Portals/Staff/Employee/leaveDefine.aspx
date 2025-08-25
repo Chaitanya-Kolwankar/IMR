@@ -91,8 +91,8 @@
             <div class="col-lg-11 col-md-11 col-sm-11">
 
 
-                <div class="card-text" style="margin-left: -60px; color: #012970;">
-                    <span style="font-family: Verdana; font-size: 18pt"><strong>Leave Define</strong></span>
+                <div class="card-text" style="margin-left: -60px; color: #fff;">
+                    <span style="font-size: 32px">Leave Define</span>
                     <div class="pull-right">
                         <div class="form-group">
                         </div>

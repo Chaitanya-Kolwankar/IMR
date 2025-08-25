@@ -95,11 +95,21 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
                             gender = gender == "0" ? "FEMALE" : (gender == "1" ? "MALE" : gender);
 
 
-                            string checkin = "select paid_status from admProvFees where formno='" + txt_studid.Text + "'and paid_status=1";
+                            string checkin = "select paid_status,receipt_no,struct_name from admProvFees where formno='" + txt_studid.Text + "'and paid_status=1";
                             DataTable dt = cls.fillDataTable(checkin);
                             if (dt.Rows.Count > 0)
                             {
+                                lblayid.Text = ayid.ToString();
+                                load_grd();
+                                
                                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Notify", "$.notify('Provisional Fee already paid', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 })", true);
+
+                                lblname.Text = name;
+                                lblgender.Text = gender;
+                                lblgroup.Text = Group_Title;
+                                lblgroupid.Text = group_id;
+                                lblcategory.Text = category;
+                                //btnPrint_Click(sender,e);
                             }
                             else
                             {
@@ -130,6 +140,20 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
             ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('" + ex.Message.ToString() + "', { color: '#fff', background: '#D44950', blur: 0.2, delay: 0, timeout: 100 });", true);
         }
     }
+    
+
+    protected void btnPrint_Click(object Sender,EventArgs e)
+    {
+        string printData = "select paid_status,receipt_no,struct_name,formno from admProvFees where formno='" + txt_studid.Text + "'and paid_status=1";
+        DataTable dt = cls.fillDataTable(printData);
+        if (dt.Rows.Count > 0)
+            Session["Prov_studID"] = dt.Rows[0]["formno"].ToString();
+        Session["Prov_ayid"] = Session["Year"].ToString();
+        Session["Prov_receipt"] = dt.Rows[0]["receipt_no"].ToString();
+        Session["Prov_structname"] = dt.Rows[0]["struct_name"].ToString();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "redirect('ProvisionalFeeReceipt.aspx');", true);
+    }
+
 
     protected void btn_refresh_Click(object sender, EventArgs e)
     {
@@ -281,7 +305,10 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
                 grdedit.DataBind();
                 ddlmode1.Visible = false;
                 txtpaydate1.Visible = false;
-                btn.Visible = false;
+                //btn.Visible = false;
+                // printsection.Visible = false;
+                grdedit.Columns[8].Visible = true;
+                grdedit.Columns[9].Visible = false;
             }
             else
             {
@@ -289,6 +316,24 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
                 grdedit.DataBind();
                 ddlmode1.Visible = true;
                 txtpaydate1.Visible = true;
+                grdedit.Columns[9].Visible = true;
+                //btn.Visible = true;
+
+
+                DataTable dt1 = cls.fillDataTable("select Receipt_no, Chq_status, CAST(Amount as int) [Amount],Recpt_mode,Convert(varchar, Pay_date, 103)[Pay_date] from admProvfees where formno = '" + txt_studid.Text.Trim() + "' and Ayid = '" + lblayid.Text.Trim() + "' and Paid_status=1 and del_flag = 0 group by Receipt_no,Chq_status,Recpt_mode,Pay_date,Amount;");
+
+                if (dt1.Rows.Count > 0)
+                {
+                    feepanel.Visible = true;
+                    grdedit.DataSource = dt1;
+                    grdedit.DataBind();
+                    //clear();
+                    ddlmode1.Visible = false;
+                    txtpaydate1.Visible = false;
+                    grdedit.Columns[8].Visible = false;
+                    //btn.Visible = false;
+                    //   paysection.Visible = false;
+                }
             }
         }
         catch (Exception ex)
@@ -367,16 +412,6 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
                 div_amount.Visible = true;
             }
         }
-    }
-
-    protected void chkall_CheckedChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    protected void chkselect_CheckedChanged(object sender, EventArgs e)
-    {
-
     }
 
     protected void btnPay_Click(object sender, EventArgs e)

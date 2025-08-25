@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="FeeReceiptMergeFees.aspx.cs" Inherits="FeeReceiptMergeFees" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ProvisionalFeeReceipt.aspx.cs" Inherits="Portals_Staff_Admission_ProvisionalFeeReceipt" %>
 
 <!DOCTYPE html>
 
@@ -84,8 +84,8 @@
             .receipt-copy {
                 flex: 1;
                 border: 1px solid #000;
-                padding: 20px;
-                margin: 1px 15px;
+                padding: 8px;
+                margin: 2px 5px;
                 box-sizing: border-box;
                 font-size: 12px;
             }
@@ -127,8 +127,6 @@
                                             <b>Rec No:</b>
                                             <asp:Label ID="lblNo" runat="server" Text=""></asp:Label>
                                         </div>
-                                        <%-- <div><b>Adm. No:</b>
-                                            <asp:Label ID="lbl_admno" runat="server" Text=""></asp:Label></div>--%>
                                         <div>
                                             <b>Date:</b>
                                             <asp:Label ID="lbl_date" runat="server" Text=""></asp:Label>
@@ -138,20 +136,14 @@
                                             <b>Class:</b>
                                             <asp:Label ID="lblcourse" runat="server" Text=""></asp:Label>
                                         </div>
-                                        <%--<div><b>Section:</b>
-                                            <asp:Label ID="lbl_section" runat="server" Text=""></asp:Label></div>--%>
                                         <div>
-                                            <b>Student ID:</b>
+                                            <b>Form No:</b>
                                             <asp:Label ID="lbl_stud_id" runat="server" Text=""></asp:Label>
                                         </div>
 
                                         <div>
                                             <b>Category:</b>
                                             <asp:Label ID="lblcategory" runat="server" Text=""></asp:Label>
-                                        </div>
-                                        <div>
-                                            <b>Roll No:</b>
-                                            <asp:Label ID="lbl_rollno" runat="server" Text=""></asp:Label>
                                         </div>
                                         <div>
                                             <b>Fee Type:</b>
@@ -199,21 +191,10 @@
                                             <asp:Label ID="lblamount" runat="server" Text=""></asp:Label>
                                         </p>
                                         <table style="width: 100%; border-collapse: collapse;">
-                                            <%-- <tr>
-                                                <td><b>Medium:</b>
-                                                    <asp:Label ID="lblmedium" runat="server" Text=""></asp:Label>
-                                                </td>
-                                                <td><b>Subject:</b> 
-                                                    <asp:Label ID="lblSubjects" runat="server" Text=""></asp:Label>
-                                                </td>
-                                            </tr>--%>
                                             <tr>
                                                 <td><b>Payment Mode:</b>
                                                     <asp:Label ID="lbl_payment_mode" runat="server" Text=""></asp:Label>
                                                 </td>
-                                                <%--<td><b>Transaction ID:</b>
-                                                    <asp:Label ID="lbltrans_id" runat="server" Text=""></asp:Label>
-                                                </td>--%>
                                             </tr>
                                             <tr>
                                                 <td><b>Bank Name: </b>
