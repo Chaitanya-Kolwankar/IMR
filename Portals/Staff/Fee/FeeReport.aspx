@@ -103,7 +103,7 @@
                          <asp:BoundField DataField="NAME" ItemStyle-CssClass="caps" HeaderText="Student Name"/>
                                 <asp:BoundField DataField="Group_title"  HeaderText="Course Name"/>
                                 <asp:BoundField DataField="paydate"  HeaderText="Payment Date"/>
-                                <asp:BoundField DataField="recpt_No"  HeaderText="Receipt No."/>
+                                <asp:BoundField DataField="receipt_No"  HeaderText="Receipt No."/>
                                 <asp:BoundField DataField="structure"  HeaderText="Structure"/>
                                 <asp:BoundField DataField="Amount" HeaderText="Amount"/>
                                 <asp:BoundField DataField="Recpt_mode"  HeaderText="Payment Mode"/>

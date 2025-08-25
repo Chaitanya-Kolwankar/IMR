@@ -26,17 +26,13 @@ public partial class Portals_Staff_Admission_Master_NewStudent : System.Web.UI.P
                 }
                 else
                 {
-                    cls.chkPassword();
                     qryCls.getayid(ddlyear);
-                    // qryCls.getayid(ddlyear);
                 }
             }
             catch (Exception ex)
             {
                 Response.Redirect("~/Portals/Staff/Login.aspx");
-
             }
-
         }
     }
 
@@ -155,6 +151,36 @@ public partial class Portals_Staff_Admission_Master_NewStudent : System.Web.UI.P
    }
    protected void txt_formid_TextChanged(object sender, EventArgs e)
    {
-
-   }
+        string formid = txt_formid.Text.Trim();
+        cls.SetdropdownForMember1(ddlfaculty, "m_crs_faculty", "faculty_name", "faculty_Id", "m_crs_faculty Where Del_Flag <>1 And faculty_name <> ''");
+        DataTable dt_chk = cls.fillDataTable("select * from  dbo.OLA_FY_adm_CourseSelection where formno = SUBSTRING ('" + formid + "',1,5) and group_id like 'GRP'+ SUBSTRING('" + formid + "',6,9) ");
+        if(dt_chk.Rows.Count > 0)
+        {
+           
+            if(dt_chk.Rows[0]["stud_id"].ToString() == "")
+            {
+                string year = dt_chk.Rows[0]["ay_id"].ToString();
+                ddlyear.SelectedValue = year;
+                string course = dt_chk.Rows[0]["course_id"].ToString();
+                string subcourse = dt_chk.Rows[0]["sub_course_id"].ToString();
+                string group = dt_chk.Rows[0]["group_id"].ToString();
+                string faculty = dt_chk.Rows[0]["faculty_id"].ToString();
+                ddlfaculty.SelectedValue = faculty;
+                cls.SetdropdownForMember1(ddlcourse, "m_crs_course", "course_name", "course_Id", "m_crs_course Where Del_Flag <>1 And course_name <> ''");
+                ddlcourse.SelectedValue = course;
+                cls.SetdropdownForMember1(ddlsubcourse, "m_crs_sub_course", "sub_course_name", "sub_course_Id", "m_crs_sub_course Where Del_Flag <>1 And sub_course_name <> ''");
+                ddlsubcourse.SelectedValue = subcourse;
+                cls.SetdropdownForMember1(ddlgroup, "m_crs_group", "group_name", "group_Id", "m_crs_group Where Del_Flag <>1 And group_name <> ''");
+                ddlgroup.SelectedValue = group;
+            }
+            else
+            {
+                ddlyear.SelectedIndex = 0;
+            }
+        }
+        else
+        {
+            
+        }
+    }
 }
