@@ -116,6 +116,10 @@
             text-transform: uppercase;
 
         }
+
+        .hideli {
+            display: none !important;
+        }
     </style>
 </head>
 <body style="font-family: 'Roboto Slab', serif;">
@@ -350,7 +354,7 @@
 
                         <li id="feemaster" style="display: none">
                             <a href="../Admission_Master/Fee_Master.aspx">
-                                <i class="bi bi-circle"></i><span>Fee master</span></a>
+                                <i class="bi bi-circle"></i><span>Fee master Open</span></a>
                         </li>
                         <li id="feemastercategory" style="display: none">
                             <a href="../Admission_Master/Fee_Master_Category.aspx">
@@ -416,7 +420,7 @@
                                 <i class="bi bi-circle"></i><span>New Student</span>
                             </a>
                         </li>
-                        <li id="studentinhousetransfer" style="display: none">
+                        <li id="studentinhousetransfer" class="hideli" style="display: none;">
                             <a href="../Admission/Student_transfer_payment.aspx">
                                 <i class="bi bi-circle"></i><span>Student Inhouse Transfer </span>
                             </a>
@@ -436,13 +440,6 @@
                                 <i class="bi bi-circle"></i><span>Applicant Report</span>
                             </a>
                         </li>
-                        <li id="">
-                            <a href="../Admission/Prov_feeEntry.aspx">
-                                <i class="bi bi-circle"></i><span>Provisional Fee Entry</span>
-                            </a>
-                        </li>
-
-
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -468,7 +465,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" style="display: none">
                     <a class="nav-link collapsed" id="Employee" style="display: none" data-bs-target="#Employee1" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-person"></i><span>Employee</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
@@ -546,13 +543,13 @@
                                 <i class="bi bi-circle"></i><span>Student Modify</span>
                             </a>
                         </li>
-                        <li style="display: none" id="studentbonafide">
+                        <li style="display: none" id="studentbonafide" class="hideli">
                             <a href="../Student/Studentbonafide.aspx">
 
                                 <i class="bi bi-circle"></i><span>Student Bonafide</span>
                             </a>
                         </li>
-                        <li style="display: none" id="studenttransfercertificate">
+                        <li style="display: none" class="hideli" id="studenttransfercertificate">
                             <a href="../Student/studenttransfercertificate.aspx">
 
                                 <i class="bi bi-circle"></i><span>Student Transfer Certificate</span>

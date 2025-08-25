@@ -18,9 +18,9 @@
         .watermark {
             color: #d0d0d0;
             position: absolute;
-            margin-top: 282px;
+            margin-top: 330px;
             height: 50px;
-            margin-left: 90px;
+            margin-left: 180px;
             z-index: 100;
             opacity: 0.1;
             text-align: center;
@@ -84,10 +84,10 @@
             .receipt-copy {
                 flex: 1;
                 border: 1px solid #000;
-                padding: 20px;
-                margin: 1px 15px;
+                padding:0 8px;
+                margin: 2px 10px;
                 box-sizing: border-box;
-                font-size: 12px;
+                font-size: 14px;
             }
 
             table {
@@ -108,7 +108,7 @@
                     <div class="receipt-copy">
                         <div class="col-lg-12 col-sm-12">
                             <div class="watermark">
-                                <img src="../../../Assets/img/mu.png" style="height: 600px" />
+                                <img src="../../../Assets/img/mu.png" style="height: 400px" />
                             </div>
                             <div class="container" style="width: 100%">
                                 <div class="row">
@@ -122,7 +122,7 @@
 
                                 <div style="width: 100%; max-width: 800px; margin: auto; border: 2px solid #000; font-family: Arial, sans-serif; font-size: 14px; padding: 15px; box-sizing: border-box;">
 
-                                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px 16px; font-size: 16px;">
+                                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px 14px; font-size: 14px;">
                                         <div>
                                             <b>Rec No:</b>
                                             <asp:Label ID="lblNo" runat="server" Text=""></asp:Label>
@@ -163,7 +163,7 @@
                                         </div>
 
                                     </div>
-                                    <table style="width: 100%; border-top: 2px solid #000; border-bottom: 1px solid #000; border-collapse: collapse; margin-top: 5px; font-size: 16px;">
+                                    <table style="width: 100%; border-top: 2px solid #000; border-bottom: 1px solid #000; border-collapse: collapse; margin-top: 5px; font-size: 14px;">
                                         <tr style="background-color: #f2f2f2;">
                                             <th style="text-align: left; padding: 5px;">Received the following</th>
                                             <th style="text-align: right; padding: 5px;">(₹) Amount</th>
@@ -174,14 +174,14 @@
                                             <br />
                                             <asp:GridView ID="gridstructre" CssClass="table" AutoGenerateColumns="false" runat="server">
                                                 <Columns>
-                                                    <asp:BoundField DataField="Struct_name" ItemStyle-Font-Size="16px" ItemStyle-CssClass="itemCss" ItemStyle-VerticalAlign="Middle" HeaderText="PARTICULARS" HeaderStyle-HorizontalAlign="left" ControlStyle-Font-Size="18px" />
-                                                    <asp:BoundField DataField="Amount" ItemStyle-Font-Size="16px" ItemStyle-VerticalAlign="Middle" ItemStyle-CssClass="itemCss" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderText="AMOUNT (IN Rs.)" ControlStyle-Font-Size="18px" />
+                                                    <asp:BoundField DataField="Struct_name" ItemStyle-Font-Size="14px" ItemStyle-CssClass="itemCss" ItemStyle-VerticalAlign="Middle" HeaderText="PARTICULARS" HeaderStyle-HorizontalAlign="left" ControlStyle-Font-Size="16px" />
+                                                    <asp:BoundField DataField="Amount" ItemStyle-Font-Size="14px" ItemStyle-VerticalAlign="Middle" ItemStyle-CssClass="itemCss" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderText="AMOUNT (IN Rs.)" ControlStyle-Font-Size="16px" />
                                                 </Columns>
                                             </asp:GridView>
                                         </div>
                                     </div>
 
-                                    <table style="width: 100%; border-top: 2px solid #000; border-bottom: 1px solid #000; border-collapse: collapse; margin-top: 5px; font-size: 16px;">
+                                    <table style="width: 100%; border-top: 2px solid #000; border-bottom: 1px solid #000; border-collapse: collapse; margin-top: 5px; font-size: 14px;">
                                         <tr>
                                             <td style="padding: 8px;"><b>Total:</b></td>
                                             <td style="text-align: right; padding: 8px;">
@@ -192,7 +192,7 @@
                                         </tr>
                                     </table>
 
-                                    <div style="margin-top: 15px; font-size: 16px; line-height: 1.5; padding: 12px; border: 1px solid #ccc; border-radius: 6px;">
+                                    <div style="margin-top: 15px; font-size: 14px; line-height: 1.5; padding: 12px; border: 1px solid #ccc; border-radius: 6px;">
 
                                         <p style="margin-bottom: 6px;">
                                             <b>In Words:</b>
@@ -226,7 +226,7 @@
                                                 </td>
                                             </tr>--%>
                                         </table>
-                                        <div style="text-align: right; margin-bottom: 15px; font-size: 16px;">
+                                        <div style="text-align: right; margin-bottom: 15px; font-size: 14px;">
                                             <div style="display: inline-block; border-top: 1px solid #000; padding-top: 5px;">
                                                 <span class="copy-label"><b>RECEIVER'S SIGNATURE</b></span>
                                             </div>
@@ -253,7 +253,7 @@
 
             var cloneLabel = document.querySelector("#receipt-clone .copy-label b");
             if (cloneLabel) {
-                cloneLabel.textContent = "OFFICE STAFF SIGNATURE";
+                cloneLabel.textContent = "ACCOUNTANT SIGNATURE";
             }
         };
     </script>

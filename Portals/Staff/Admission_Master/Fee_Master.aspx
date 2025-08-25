@@ -52,7 +52,7 @@
                     <ContentTemplate>
                         <div class="card">
                             <div class="card-title mx-4" style="font-size: 21px">
-                                Fee Master
+                                Fee Master Open
                             </div>
                             <div class="card-body">
                                 <div class="row">
