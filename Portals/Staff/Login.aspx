@@ -59,9 +59,9 @@
 
 
     <%--font links --%>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo&family=Baloo+Bhai+2&family=Cabin&family=Roboto+Slab&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo&family=Baloo+Bhai+2&family=Cabin&family=Roboto+Slab&display=swap" rel="stylesheet" />
     <%--font links--%>
 
     <%--Datatable --%>
@@ -70,26 +70,20 @@
     <%--Datatable --%>
 
     <style>
-     body {
-
-         background-image:url("../../assets/img/backimg5.jpg ");
-           background-repeat: no-repeat;
-           background-size:cover;
-            /*background:rgba(0,0,0,0.7)*/
-  
-  
-     }
-   
-
- </style> 
+        body {
+            background-image: url("../../assets/img/backimg5.jpg ");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
 
-  
+
     <div class="container">
 
-      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-1">
-          
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-1">
 
         <div class="container">
           <div class="row justify-content-center">
@@ -132,53 +126,79 @@
                       </div>
                     </div>
 
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <asp:TextBox runat="server" MaxLength="20" type="password" name="password" class="form-control" id="txtPassword" oncopy="return false" oncut="return paste" required/>
-                      <div class="invalid-feedback">Please enter your password!</div>
-                    </div>
-                        <div class="col-12">
-                <asp:Label id="lblerror" ForeColor="Red" Visible="false" runat="server"></asp:Label>
-              </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center" style="background-color: rgba(0, 0, 0, .5); color: white; border-radius: 10px">
+                        <div class="d-flex justify-content-center">
 
-                  <%--  <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
-                      </div>
-                    </div>--%>
-                    <div class="col-12">
-                      <asp:Button runat="server" ID="btnLogin" class="btn btn-primary w-100"  OnClick="btnLogin_Click"   Text="Submit"/>
+                            <span class="d-lg-block">
+                                <br />
+                                <img src="../../assets/img/RGCMS.png" alt="" style="max-height: 100PX !IMPORTANT;" /></span>
+
+
+                        </div>
+                        <!-- End Logo -->
+                        <div class="d-flex justify-content-center">
+                            <%--<span class="d-none d-lg-block"><img src="assets/img/logo.jpg" alt="" style="max-height:50PX !IMPORTANT"/></span>--%>
+                            <a href="#" class="logo d-flex align-items-center w-auto">
+
+                                <span class="d-lg-block pt-2" style="color: white">College IMR </span>
+                            </a>
+                        </div>
+                        <!-- End Logo -->
+
+                        <%--<div class="card mb-3">--%>
+
+                        <div class="card-body">
+
+                            <div class="">
+                                <h5 class="card-title text-center pb-0 fs-4" style="color: white">Login to Your Account</h5>
+
+                            </div>
+                            <form id="Form1" runat="server" class="row g-3 needs-validation" novalidate>
+
+                                <div class="col-12">
+                                    <label for="yourUsername" class="form-label">Username</label>
+                                    <div class="input-group has-validation">
+                                        <asp:TextBox runat="server" type="text" name="username" MaxLength="8" autocomplete="off" class="form-control" ID="txtUserName" Style="text-transform: uppercase;" onkeyPress="return alphaandnum(event)" required oncopy="return false"
+                                            oncut="return false" />
+                                        <div class="invalid-feedback">Please enter your username.</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="yourPassword" class="form-label">Password</label>
+                                    <asp:TextBox runat="server" MaxLength="20" type="password" name="password" class="form-control" ID="txtPassword" oncopy="return false" oncut="return paste" required />
+                                    <div class="invalid-feedback">Please enter your password!</div>
+                                </div>
+                                <div class="col-12">
+                                    <asp:Label ID="lblerror" ForeColor="Red" Visible="false" runat="server"></asp:Label>
+                                </div>
+                                <div class="col-12">
+                                    <asp:Button runat="server" ID="btnLogin" class="btn btn-primary w-100" OnClick="btnLogin_Click" Text="Submit" />
+                                </div>
+                                <div class="credits container" style="text-align: center;">
+
+                                </div>
+                            </form>
+
+                        </div>
                     </div>
-                        <div class="credits container" style="text-align:center;">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                
-              </div>
-                   <%-- <div class="col-12">
-                      <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p>
-                    </div>--%>
-                  </form>
+
+
 
                 </div>
-              </div>
-
-            
-
             </div>
-          </div>
-        
-    
-      </section>
+
+
+        </section>
 
     </div>
-  
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-   <!-- Vendor JS Files -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
     <script src="<%= ResolveUrl("~/Assets/vendor/apexcharts/apexcharts.min.js") %>"></script>
     <script src="<%= ResolveUrl("~/Assets/vendor/bootstrap/js/bootstrap.bundle.min.js") %>"></script>
     <script src="<%= ResolveUrl("~/Assets/vendor/chart.js/chart.min.js") %>"></script>
@@ -193,11 +213,11 @@
 
 </body>
 
-    <script>
-        function alphaandnum(event) {
-            var val = String.fromCharCode(event.which);
-            var pattern = new RegExp(/^[A-Za-z0-9\s]+$/);
-            return pattern.test(val);
-        }
-    </script>
+<script>
+    function alphaandnum(event) {
+        var val = String.fromCharCode(event.which);
+        var pattern = new RegExp(/^[A-Za-z0-9\s]+$/);
+        return pattern.test(val);
+    }
+</script>
 </html>
