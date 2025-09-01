@@ -13,16 +13,33 @@ public partial class FeeEntry_New : System.Web.UI.Page
     Class1 cls = new Class1();
     protected void Page_Load(object sender, EventArgs e)
     {
-        try
+        if (!IsPostBack)
         {
-            if (Session["emp_id"] == null)
+            try
             {
-                Response.Redirect("~/Portals/Staff/Login.aspx");
+
+                if (Convert.ToString(Session["Emp_id"]) == "")
+                {
+                    Response.Redirect("~/Portals/Staff/Login.aspx");
+
+                }
+                else
+                {
+                    string stud_id = Request.QueryString["stud_id"];
+                    if (!string.IsNullOrEmpty(stud_id))
+                    {
+                        txt_studid.Text = stud_id;
+                        ScriptManager.RegisterStartupScript(this, GetType(), "DoSearch", "__doPostBack('" + lnksearch.UniqueID + "','');", true);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "removeQS", "Sys.Application.add_load(function(){if(history.replaceState){history.replaceState(null,null,window.location.pathname);}});", true);
+
+
+                    }
+                }
             }
-        }
-        catch (Exception ex)
-        {
-            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('" + ex.Message.ToString() + "', { color: '#fff', background: '#D44950', blur: 0.2, delay: 0, timeout: 100 });", true);
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('" + ex.Message.ToString() + "', { color: '#fff', background: '#D44950', blur: 0.2, delay: 0, timeout: 100 });", true);
+            }
         }
         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "loaddate()", true);
     }
@@ -237,7 +254,7 @@ public partial class FeeEntry_New : System.Web.UI.Page
                     Session["feemaster"] = "m_FeeMaster_category";
                     Session["gender"] = gender;
                 }
-                string student_details = "SELECT ISNULL(Paid.PaidAmount, 0) AS PaidAmount,ISNULL(Total.TotalAmount, 0) AS TotalAmount,ISNULL(Total.TotalAmount, 0) - ISNULL(Paid.PaidAmount, 0) AS Balance FROM (SELECT SUM(CAST(Amount AS INT)) AS PaidAmount FROM m_FeeEntry WHERE Stud_id = '" + stud_id + "' AND Ayid = '" + ayid + "' AND Chq_status = 'Clear' AND del_flag = 0 and fine_flag=0) AS Paid CROSS JOIN(SELECT SUM(CAST(Amount AS INT)) AS TotalAmount FROM " + Session["feemaster"].ToString() + " WHERE Ayid = '" + ayid + "' AND Group_id = '" + group_id + "' AND del_flag = 0 and Gender='" + Session["gender"].ToString() + "' and Category='" + category + "' ) AS Total";
+                string student_details = "SELECT ISNULL(Paid.PaidAmount,0) AS PaidAmount,(ISNULL(Total.TotalAmount,0)-ISNULL(Concession.ConcessionAmount,0)) AS TotalAmount,ISNULL(Concession.ConcessionAmount,0) AS ConcessionAmount,(ISNULL(Total.TotalAmount,0)-ISNULL(Concession.ConcessionAmount,0))-ISNULL(Paid.PaidAmount,0) AS Balance FROM (SELECT SUM(CAST(Amount AS INT)) AS PaidAmount FROM m_FeeEntry WHERE Stud_id='" + stud_id + "' AND Ayid='" + ayid + "' AND Chq_status='Clear' AND del_flag=0 AND fine_flag=0 AND ISNULL(concession_flag,0)=0) AS Paid CROSS JOIN (SELECT SUM(CAST(Amount AS INT)) AS TotalAmount FROM " + Session["feemaster"].ToString() + " WHERE Ayid='" + ayid + "' AND Group_id='" + group_id + "' AND del_flag=0 AND Gender='" + Session["gender"].ToString() + "' AND Category='" + category + "') AS Total CROSS JOIN (SELECT SUM(CAST(Amount AS INT)) AS ConcessionAmount FROM m_FeeEntry WHERE Stud_id='" + stud_id + "' AND Ayid='" + ayid + "' AND del_flag=0 AND Chq_status='Clear' AND concession_flag=1) AS Concession;";
 
                 DataTable dt = cls.fillDataTable(student_details);
                 if (dt.Rows.Count > 0)
@@ -276,7 +293,7 @@ public partial class FeeEntry_New : System.Web.UI.Page
     {
         try
         {
-            DataTable dt = cls.fillDataTable("select Receipt_no,Chq_status,Type,SUM(CAST(Amount as int)) [Amount],Recpt_mode,Convert(varchar, Pay_date,103) [Pay_date],Install_id from m_FeeEntry where Stud_id='" + txt_studid.Text.Trim() + "' and Ayid='" + lblayid.Text.Trim() + "' and del_flag=0 and fine_flag=0 group by Receipt_no,Chq_status,Type,Recpt_mode,Pay_date,Install_id ;");
+            DataTable dt = cls.fillDataTable("select Receipt_no,Chq_status,Type,SUM(CAST(Amount as int)) [Amount],Recpt_mode,Convert(varchar, Pay_date,103) [Pay_date],Install_id from m_FeeEntry where Stud_id='" + txt_studid.Text.Trim() + "' and Ayid='" + lblayid.Text.Trim() + "' and del_flag=0 and fine_flag=0 and concession_flag=0 group by Receipt_no,Chq_status,Type,Recpt_mode,Pay_date,Install_id ;");
             if (dt.Rows.Count > 0)
             {
                 grdedit.DataSource = dt;
@@ -377,11 +394,11 @@ public partial class FeeEntry_New : System.Web.UI.Page
             string qry = "";
             if (btnsave.Text.Trim() == "Save")
             {
-                qry = "SELECT CASE WHEN ISNULL(Paid, 0) >= CAST(mst.Amount AS INT) THEN 1 ELSE 0 END AS flag, mst.Struct_type, mst.Struct_name, CAST(mst.Amount AS INT) AS TotalFees, ISNULL(Paid, 0) AS Paid, CAST(mst.Amount AS INT) - ISNULL(Paid, 0) AS Balance, mst.Struct_id, mst.Rank FROM " + Session["feemaster"].ToString() + " mst LEFT JOIN (SELECT fee.Struct_id, SUM(CAST(fee.Amount AS INT)) AS Paid FROM m_FeeEntry fee WHERE fee.Stud_id = '" + txt_studid.Text.Trim() + "' AND fee.Ayid = '" + lblayid.Text.Trim() + "' AND fee.del_flag = 0 AND fee.Chq_status = 'Clear' GROUP BY fee.Struct_id) fee ON fee.Struct_id = mst.Struct_id WHERE mst.Ayid = '" + lblayid.Text.Trim() + "' AND mst.del_flag = 0 AND mst.Group_id = '" + lblgroupid.Text.Trim() + "' AND mst.Gender = '" + Session["gender"].ToString().Trim() + "' AND mst.Category = '" + lblcategory.Text.Trim() + "' ORDER BY mst.Rank;";
+                qry = "SELECT CASE WHEN ISNULL(Paid,0) + ISNULL(con.concession,0) >= CAST(mst.Amount AS INT) THEN 1 ELSE 0 END AS flag, mst.Struct_type, mst.Struct_name, (CAST(mst.Amount AS INT)-ISNULL(con.concession,0)) AS TotalFees, ISNULL(Paid,0) AS Paid, ISNULL(con.concession,'') AS Concession, CAST(mst.Amount AS INT) - ISNULL(Paid,0) - ISNULL(con.concession,0) AS Balance, mst.Struct_id, mst.Rank  FROM " + Session["feemaster"].ToString() + " mst LEFT JOIN (SELECT fee.Struct_id, SUM(CAST(fee.Amount AS INT)) AS Paid FROM m_FeeEntry fee WHERE fee.Stud_id='" + txt_studid.Text.Trim() + "' AND fee.Ayid='" + lblayid.Text.Trim() + "' AND fee.del_flag=0 AND fee.Chq_status='Clear'  AND fee.concession_flag=0 GROUP BY fee.Struct_id) fee ON fee.Struct_id=mst.Struct_id LEFT JOIN (SELECT con.Struct_id, SUM(CAST(con.Amount AS INT)) AS concession FROM m_FeeEntry con WHERE con.Stud_id='" + txt_studid.Text.Trim() + "' AND con.Ayid='" + lblayid.Text.Trim() + "' AND con.del_flag=0 AND con.Chq_status='Clear' AND con.concession_flag=1 GROUP BY con.Struct_id) con ON con.Struct_id=mst.Struct_id WHERE mst.Ayid='" + lblayid.Text.Trim() + "' AND mst.del_flag=0 AND mst.Group_id='" + lblgroupid.Text.Trim() + "' AND mst.Gender='" + Session["gender"].ToString().Trim() + "' AND mst.Category='" + lblcategory.Text.Trim() + "' ORDER BY mst.Rank;";
             }
             else
             {
-                qry = "SELECT CASE WHEN ISNULL(Paid, 0) >= CAST(mst.Amount AS INT) THEN 1 ELSE 0 END AS flag, mst.Struct_type, mst.Struct_name, CAST(mst.Amount AS INT) AS TotalFees, ISNULL(Paid, 0) AS Paid, CAST(mst.Amount AS INT) - ISNULL(Paid, 0) AS Balance, mst.Struct_id, mst.Rank FROM " + Session["feemaster"].ToString() + " mst LEFT JOIN (SELECT fee.Struct_id, SUM(CAST(fee.Amount AS INT)) AS Paid FROM m_FeeEntry fee WHERE fee.Stud_id = '" + txt_studid.Text.Trim() + "' AND fee.Ayid = '" + lblayid.Text.Trim() + "' AND fee.del_flag = 0 AND fee.Chq_status = 'Clear' and Receipt_no !='" + hidden_recpt_no.Value + "' GROUP BY fee.Struct_id) fee ON fee.Struct_id = mst.Struct_id WHERE mst.Ayid = '" + lblayid.Text.Trim() + "' AND mst.del_flag = 0 AND mst.Group_id = '" + lblgroupid.Text.Trim() + "' AND mst.Gender = '" + Session["gender"].ToString().Trim() + "' AND mst.Category = '" + lblcategory.Text.Trim() + "' ORDER BY mst.Rank;";
+                qry = "SELECT CASE WHEN ISNULL(Paid,0) + ISNULL(con.concession,0) >= CAST(mst.Amount AS INT) THEN 1 ELSE 0 END AS flag, mst.Struct_type, mst.Struct_name, (CAST(mst.Amount AS INT)-ISNULL(con.concession,0)) AS TotalFees, ISNULL(Paid,0) AS Paid, ISNULL(con.concession,'') AS Concession, CAST(mst.Amount AS INT) - ISNULL(Paid,0) - ISNULL(con.concession,0) AS Balance, mst.Struct_id, mst.Rank  FROM " + Session["feemaster"].ToString() + " mst LEFT JOIN (SELECT fee.Struct_id, SUM(CAST(fee.Amount AS INT)) AS Paid FROM m_FeeEntry fee WHERE fee.Stud_id='" + txt_studid.Text.Trim() + "' AND fee.Ayid='" + lblayid.Text.Trim() + "' AND fee.del_flag=0 AND fee.Chq_status='Clear'  AND fee.concession_flag=0 and Receipt_no !='" + hidden_recpt_no.Value + "' GROUP BY fee.Struct_id) fee ON fee.Struct_id=mst.Struct_id LEFT JOIN (SELECT con.Struct_id, SUM(CAST(con.Amount AS INT)) AS concession FROM m_FeeEntry con WHERE con.Stud_id='" + txt_studid.Text.Trim() + "' AND con.Ayid='" + lblayid.Text.Trim() + "' AND con.del_flag=0 AND con.Chq_status='Clear' AND con.concession_flag=1 and Receipt_no !='" + hidden_recpt_no.Value + "' GROUP BY con.Struct_id) con ON con.Struct_id=mst.Struct_id WHERE mst.Ayid='" + lblayid.Text.Trim() + "' AND mst.del_flag=0 AND mst.Group_id='" + lblgroupid.Text.Trim() + "' AND mst.Gender='" + Session["gender"].ToString().Trim() + "' AND mst.Category='" + lblcategory.Text.Trim() + "' ORDER BY mst.Rank;";
             }
             DataTable dt = cls.fillDataTable(qry);
             if (dt.Rows.Count > 0)

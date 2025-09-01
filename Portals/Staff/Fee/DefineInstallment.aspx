@@ -191,13 +191,17 @@
                                                 <br />
                                                 <asp:Button ID="btncancel" runat="server" CssClass="btn btn-primary form-control" Text="Cancel" OnClick="btncancel_Click" />
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <br />
                                                 <asp:LinkButton ID="btn_new" runat="server" CssClass="btn btn-outline-danger form-control" Text="New Installment" OnClick="btn_new_Click" Visible="false" OnClientClick="Confirm();"></asp:LinkButton>
                                             </div>
+                                            <div class="col-md-2">
+                                                <br />
+                                                <asp:Button ID="btn_waveoff" runat="server" CssClass="btn btn-primary form-control" Text="Wave Off" OnClick="btn_waveoff_Click" />
+                                            </div>
                                         </div>
                                         <br />
-                                        <div class="row">
+                                        <div class="row" runat="server" id="installtable">
                                             <div class="col-md-12 col-sm-12 col-xs-12 table-responsive" style="overflow: auto; max-height: 400px; width: 100%;">
                                                 <asp:GridView ID="grd_install" runat="server" AutoGenerateColumns="false" CssClass="table">
                                                     <Columns>
@@ -235,6 +239,75 @@
                                                             <ItemTemplate>
                                                                 <asp:TextBox ID="balance_Amount" runat="server" placeholder="Balance Amount" Text='<%# Eval("balance_Amount") %>' CssClass="form-control" onkeypress="return allowonlynumbers(event,this);" ReadOnly="true"></asp:TextBox>
                                                             </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                    </Columns>
+                                                </asp:GridView>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row" runat="server" id="feetable" visible="true">
+                                            <div class="col-md-12 table-responsive" style="overflow: auto; max-height: 400px;">
+                                                <asp:GridView ID="grdfees" runat="server" Style="text-align: left;" AutoGenerateColumns="False" CssClass="table">
+                                                    <Columns>
+                                                        <asp:TemplateField HeaderText="Sr.no">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lbl_sr_no" runat="server" Text='<%# Container.DataItemIndex + 1 %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                            <ItemStyle Width="5%" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField Visible="false">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblflag" runat="server" Text='<%# Eval("flag")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField Visible="false">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblconcession" runat="server" Text='<%# Eval("concession")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField Visible="false">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lbl_struct_id" runat="server" Text='<%# Eval("Struct_id")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField Visible="false">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lbl_struct_type" runat="server" Text='<%# Eval("Struct_type")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="STRUCTURE NAME">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblstructname" runat="server" Text='<%# Eval("Struct_name")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                            <ItemStyle Width="20%" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="TOTAL FEE">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblamount" runat="server" Text='<%# Eval("TotalFees")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                            <ItemStyle Width="15%" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="PAID">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblpaid" runat="server" Text='<%# Eval("Paid")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                            <ItemStyle Width="15%" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="BALANCE">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblpending" runat="server" Text='<%# Eval("Balance")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                            <ItemStyle Width="15%" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="PAY">
+                                                            <ItemTemplate>
+                                                                <div style="display: flex; align-items: center; gap: 6px;">
+                                                                    <asp:TextBox ID="txtpay" runat="server" onkeypress="return isNumber(event)" MaxLength="10" placeholder="Pay Amount" Enabled='<%# !(Convert.ToBoolean(Eval("flag"))) %>' CssClass="form-control" Text='<%#Eval("concession") %>'></asp:TextBox>
+                                                                    <asp:LinkButton ID="btn_save_waveoff" runat="server" CssClass='<%# Convert.ToBoolean(Eval("flag")) ? "btn btn-outline-danger bi bi-trash" : "btn btn-outline-success bi bi-save" %>' OnClick="btn_save_waveoff_Click">
+                                                                    </asp:LinkButton>
+                                                                </div>
+                                                            </ItemTemplate>
+                                                            <ItemStyle Width="30%" />
                                                         </asp:TemplateField>
                                                     </Columns>
                                                 </asp:GridView>
