@@ -77,57 +77,93 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-lg-2">
-                                        <label for="inputState" class="form-label">From Date</label>
-                                        <asp:TextBox ID="txtfrmdate" runat="server" autocomplete="off" CssClass="form-control"></asp:TextBox>
+                                        <label for="inputstate" class="form-label">
+                                            Course
+                                        </label>
+                                        <asp:UpdatePanel runat="server">
+                                            <ContentTemplate>
+                                                <asp:DropDownList ID="ddlcourse" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlcourse_SelectedIndexChanged" CssClass="form-select"></asp:DropDownList>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+
                                     </div>
                                     <div class="col-lg-2">
-                                        <label for="inputState" class="form-label">To Date</label>
-                                        <asp:TextBox ID="txttodate" runat="server" autocomplete="off" CssClass="form-control"></asp:TextBox>
+                                        <label for="inputstate" class="form-label">
+                                            Sub Course                                        
+                                        </label>
+                                        <asp:UpdatePanel runat="server">
+                                            <ContentTemplate>
+                                                <asp:DropDownList ID="ddlsubcou" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlsubcou_SelectedIndexChanged" CssClass="form-select"></asp:DropDownList>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+
                                     </div>
-                                    <div class="col-lg-2">
+                                    <%--<div class="col-lg-2">
                                         <label for="inputState" class="form-label">Select Category:</label>
                                         <asp:DropDownList ID="ddlcat" runat="server" AutoPostBack="true" CssClass="form-select" OnSelectedIndexChanged="ddlcat_SelectedIndexChanged">
-                                            <asp:ListItem>--Select--</asp:ListItem>
-                                            <asp:ListItem Value="OPEN">OPEN</asp:ListItem>
-                                            <asp:ListItem Value="Other">Other</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>--%>
+                                    <div class="col-lg-2">
+                                        <label for="inputState" class="form-label">Select Group:</label>
+                                        <asp:DropDownList ID="ddlgroup" runat="server" AutoPostBack="true" CssClass="form-select" OnSelectedIndexChanged="ddlgroup_SelectedIndexChanged">
                                         </asp:DropDownList>
                                     </div>
+
+                                    <%--<div class="col-2">
+                                        <div class="col-lg-4">
+                                                <span>Data In</span>
+                                            </div>
+                                        <asp:RadioButton runat="server" ID="rdb_detl" Text="Detailed" GroupName="Category" OnCheckedChanged="rdb_detl_CheckedChanged" AutoPostBack="true" />
+
+                                    </div>
+                                    <div class="col-2">
+                                        <asp:RadioButton runat="server" ID="rdb_sumar" Text="Summarized" GroupName="Category" OnCheckedChanged="rdb_sumar_CheckedChanged" AutoPostBack="true" />
+                                    </div>--%>
+                                    <div class="col-6">
+                                        <fieldset>
+                                            <span class="m-3">Data In:</span>
+                                            <div class="row mx-3 my-3">
+                                                <div class="col-lg-3">
+                                                    <asp:RadioButton runat="server"
+                                                        ID="rdb_detl"
+                                                        Text="Detailed"
+                                                        GroupName="Category"
+                                                        OnCheckedChanged="rdb_detl_CheckedChanged"
+                                                        AutoPostBack="true" />
+                                                </div>
+
+                                                <div class="col-lg-3">
+                                                    <asp:RadioButton runat="server"
+                                                        ID="rdb_sumar"
+                                                        Text="Summarized"
+                                                        GroupName="Category"
+                                                        OnCheckedChanged="rdb_sumar_CheckedChanged"
+                                                        AutoPostBack="true" />
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+
                                     <asp:HiddenField runat="server" ID="ddlcategory" />
-                                    <div class="col-lg-1" style="margin-top: 32px">
-                                        <asp:Button ID="btngtdata" Text="Get Data" OnClick="btngtdata_Click" runat="server" CssClass="form-control btn btn-primary btn-block" />
-                                    </div>
-                                    <div class="col-lg-1" style="margin-top: 32px">
-                                        <asp:Button ID="btnclear" runat="server" Text="Clear" OnClick="btnclear_Click" CssClass="form-control btn btn-primary btn-block" />
-                                    </div>
 
-
-                                    <div class="col-lg-1" style="margin-top: 32px">
-                                        <asp:Button ID="btnexcel" runat="server" Text="Get Excel" OnClick="btnexcel_Click" CssClass="form-control btn btn-primary btn-block" />
-                                    </div>
 
                                 </div>
                                 <br />
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-lg-2">
+                                        <asp:Button ID="btngtdata" Text="Get Data" OnClick="btngtdata_Click" runat="server" CssClass="mt-1 form-control btn btn-primary btn-block" />
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <asp:Button ID="btnclear" runat="server" Text="Clear" OnClick="btnclear_Click" CssClass="mt-1 form-control btn btn-primary btn-block" />
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <asp:Button ID="btnexcel" runat="server" Text="Get Excel" OnClick="btnexcel_Click" CssClass="mt-1 form-control btn btn-success btn-block" />
+                                    </div>
+                                </div>
 
-                                <div id="scrll" style="width: 100%; overflow-x: auto">
-                                    <asp:GridView ID="grd" runat="server" OnDataBound="grd_DataBound" AutoGenerateColumns="false" HeaderStyle-CssClass="FixedHeader" HeaderStyle-BackColor="white">
-                                        <Columns>
-                                            <asp:BoundField DataField="stud_id" ItemStyle-CssClass="caps" HeaderText="Student ID" />
-                                            <asp:BoundField DataField="NAME" ItemStyle-CssClass="caps" HeaderText="Student Name" />
-                                            <asp:BoundField DataField="Group_title" HeaderText="Course Name" />
-                                            <asp:BoundField DataField="paydate" HeaderText="Payment Date" />
-                                            <asp:BoundField DataField="receipt_No" HeaderText="Receipt No." />
-                                            <asp:BoundField DataField="structure" HeaderText="Structure" />
-                                            <asp:BoundField DataField="Amount" HeaderText="Amount" />
-                                            <asp:BoundField DataField="Recpt_mode" HeaderText="Payment Mode" />
-                                            <asp:BoundField DataField="Recpt_Chq_No" HeaderText="Cheque No." />
-                                            <asp:BoundField DataField="Cheque_dt" HeaderText="Cheque Date" />
-                                            <asp:BoundField DataField="Bank_details" HeaderText="Bank Details" />
-                                            <asp:BoundField DataField="stud_Category" HeaderText="Category" />
-                                            <asp:BoundField DataField="duration" HeaderText="Duration" />
-                                            <asp:BoundField DataField="Total" HeaderText="Total" />
-                                            <asp:BoundField DataField="Paid" HeaderText="Total Paid" />
-                                            <asp:BoundField DataField="Balance" HeaderText="Balance" />
-                                        </Columns>
+                                <div id="scrll" style="width: 100%; overflow-x: auto;margin-top:30px">
+                                    <asp:GridView ID="grd" runat="server" AutoGenerateColumns="True" HeaderStyle-CssClass="FixedHeader" HeaderStyle-BackColor="white">
                                     </asp:GridView>
                                 </div>
                                 <div>

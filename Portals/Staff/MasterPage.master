@@ -71,16 +71,45 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style>
+        /*.sidebar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 500;*/ /* lighter than 600, looks sharper */
+        /*color: #fff;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.6);*/ /* softer border */
+        /*padding: 8px 12px;*/ /* reduced padding to tighten look */
+        /*border-radius: 4px;
+    transition: all 0.3s ease;*/ /* fixed transition */
+        /*-webkit-font-smoothing: antialiased;*/ /* smoother text */
+        /*-moz-osx-font-smoothing: grayscale;
+}*/
+
+
+
+
+
+
+        .sidebar-nav .nav-link {
+            border-left: none;
+            border-right: none;
+            font-weight: 500;
+        }
+
+
         .sidebar {
             /*background-image: linear-gradient(to top, #72afd3 60%, #37ecba 150%);*/
             background: #2471A3;
+            padding-left: 0;
+            padding-right: 0;
         }
 
 
         .sidebar-nav .nav-content a {
             /*background: white;*/
             margin-bottom: 2px;
-            border:1px solid #fff;
+            border: 1px solid #fff;
         }
 
         .logo img {
@@ -89,7 +118,8 @@
 
 
         .pagetitle {
-            color: #fff !important; }
+            color: #fff !important;
+        }
 
         body {
             text-transform: uppercase !important;
@@ -114,7 +144,6 @@
 
         table {
             text-transform: uppercase;
-
         }
 
         .hideli {
