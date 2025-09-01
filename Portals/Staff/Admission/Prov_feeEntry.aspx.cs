@@ -95,7 +95,7 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
                             gender = gender == "0" ? "FEMALE" : (gender == "1" ? "MALE" : gender);
 
 
-                            string checkin = "select paid_status,receipt_no,struct_name from admProvFees where formno='" + txt_studid.Text + "'and paid_status=1";
+                            string checkin = "select paid_status,receipt_no,struct_name from admProvFees where formno='" + txt_studid.Text + "'and paid_status=1 and del_flag=0";
                             DataTable dt = cls.fillDataTable(checkin);
                             if (dt.Rows.Count > 0)
                             {
@@ -144,7 +144,7 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
 
     protected void btnPrint_Click(object Sender,EventArgs e)
     {
-        string printData = "select paid_status,receipt_no,struct_name,formno from admProvFees where formno='" + txt_studid.Text + "'and paid_status=1";
+        string printData = "select paid_status,receipt_no,struct_name,formno from admProvFees where formno='" + txt_studid.Text + "'and paid_status=1 and del_flag=0";
         DataTable dt = cls.fillDataTable(printData);
         if (dt.Rows.Count > 0)
             Session["Prov_studID"] = dt.Rows[0]["formno"].ToString();
@@ -307,6 +307,8 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
                 txtpaydate1.Visible = false;
                 //btn.Visible = false;
                 // printsection.Visible = false;
+                grdedit.Columns[6].Visible = true;
+                grdedit.Columns[7].Visible = true;
                 grdedit.Columns[8].Visible = true;
                 grdedit.Columns[9].Visible = false;
             }
@@ -317,6 +319,8 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
                 ddlmode1.Visible = true;
                 txtpaydate1.Visible = true;
                 grdedit.Columns[9].Visible = true;
+                grdedit.Columns[6].Visible = false;
+                grdedit.Columns[7].Visible = false;
                 //btn.Visible = true;
 
 
@@ -564,14 +568,11 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
         string Receipt_no = ((Label)gvrow.FindControl("Receipt_no")).Text.Trim();
         string Amount = ((Label)gvrow.FindControl("Amount")).Text.Trim();
         hidden_recpt_no.Value = Receipt_no;
-        string check = "select Receipt_no from admProvfees where Receipt_no='" + Receipt_no + "' and Del_flag=1;select Receipt_no from admProvfees where formno='" + txt_studid.Text.Trim() + "' and Ayid='" + lblayid.Text.Trim() + "' and Receipt_no='" + Receipt_no + "' and Del_flag=0;";
-        DataSet dscheck = cls.fillDataset(check);
-        if (dscheck.Tables[0].Rows.Count > 0 && dscheck.Tables[1].Rows.Count > 0)
+        string check = "select Receipt_no from admProvfees where formno='" + txt_studid.Text.Trim() + "' and Ayid='" + lblayid.Text.Trim() + "' and Receipt_no='" + Receipt_no + "' and Del_flag=0;";
+        DataTable dscheck = cls.fillDataTable(check);
+        if (dscheck.Rows.Count > 0)
         {
-            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Deletion Prohibited New Installment Defined Based on Current Selection!!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
-        }
-        else
-        {
+            //ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Deletion Prohibited New Installment Defined Based on Current Selection!!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
             btnsave.Text = "Update";
 
             ddlmode.SelectedValue = Recpt_mode;
@@ -579,7 +580,7 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
 
             txtpaydate.Text = Pay_date;
 
-            DataSet ds = cls.fillDataset("select distinct formno,Receipt_no,Pay_date,Recpt_mode,Recpt_Bnk_Branch,Recpt_Bnk_Name,Recpt_Chq_dt,Recpt_Chq_No,Chq_status from admProvFees where  formno = '" + txt_studid.Text.Trim() + "' and Ayid = '" + lblayid.Text.Trim() + "' and Receipt_no = '" + Receipt_no + "';");
+            DataSet ds = cls.fillDataset("select distinct formno,Receipt_no,Pay_date,Recpt_mode,Recpt_Bnk_Branch,Recpt_Bnk_Name,Recpt_Chq_dt,Recpt_Chq_No,Chq_status from admProvFees where  formno = '" + txt_studid.Text.Trim() + "' and Ayid = '" + lblayid.Text.Trim() + "' and Receipt_no = '" + Receipt_no + "' and del_flag=0;");
 
             ds.Tables[0].TableName = "Details";
             if (ds.Tables["Details"].Rows[0]["Recpt_mode"].ToString() == "Cheque" || ds.Tables["Details"].Rows[0]["Recpt_mode"].ToString().Contains("NEFT") == true)
@@ -609,6 +610,47 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
             ddlmode1.Visible = true;
             txtpaydate1.Visible = true;
             btn.Visible = true;
+        }
+        else
+        {
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Not able to Edit Form!!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+            //btnsave.Text = "Update";
+
+            //ddlmode.SelectedValue = Recpt_mode;
+            //ddlmode_SelectedIndexChanged(sender, e);
+
+            //txtpaydate.Text = Pay_date;
+
+            //DataSet ds = cls.fillDataset("select distinct formno,Receipt_no,Pay_date,Recpt_mode,Recpt_Bnk_Branch,Recpt_Bnk_Name,Recpt_Chq_dt,Recpt_Chq_No,Chq_status from admProvFees where  formno = '" + txt_studid.Text.Trim() + "' and Ayid = '" + lblayid.Text.Trim() + "' and Receipt_no = '" + Receipt_no + "' and del_flag=0;");
+
+            //ds.Tables[0].TableName = "Details";
+            //if (ds.Tables["Details"].Rows[0]["Recpt_mode"].ToString() == "Cheque" || ds.Tables["Details"].Rows[0]["Recpt_mode"].ToString().Contains("NEFT") == true)
+            //{
+            //    txtbnkname.Text = ds.Tables["Details"].Rows[0]["Recpt_Bnk_Name"].ToString();
+            //    txtbranch.Text = ds.Tables["Details"].Rows[0]["Recpt_Bnk_Branch"].ToString();
+            //    txtchdate.Text = Convert.ToDateTime(ds.Tables["Details"].Rows[0]["Recpt_Chq_dt"]).ToString("dd/MM/yyyy").Replace("-", "/");
+            //    txtchno.Text = ds.Tables["Details"].Rows[0]["Recpt_Chq_No"].ToString();
+            //    ddlstatus.SelectedValue = ds.Tables["Details"].Rows[0]["Chq_status"].ToString();
+            //}
+            //else if (ds.Tables["Details"].Rows[0]["Recpt_mode"].ToString() == "DD")
+            //{
+            //    txtbnkname.Text = ds.Tables["Details"].Rows[0]["Recpt_Bnk_Name"].ToString();
+            //    txtbranch.Text = ds.Tables["Details"].Rows[0]["Recpt_Bnk_Branch"].ToString();
+            //    txtchdate.Text = Convert.ToDateTime(ds.Tables["Details"].Rows[0]["Recpt_Chq_dt"]).ToString("dd/MM/yyyy").Replace("-", "/");
+            //    txtchno.Text = ds.Tables["Details"].Rows[0]["Recpt_Chq_No"].ToString();
+            //}
+            //else if (ds.Tables["Details"].Rows[0]["Recpt_mode"].ToString() == "Online")
+            //{
+            //    txtbnkname.Text = ds.Tables["Details"].Rows[0]["Recpt_Bnk_Name"].ToString();
+
+            //    txtchdate.Text = ds.Tables["Details"].Rows[0]["Recpt_Chq_dt"] != DBNull.Value ? Convert.ToDateTime(ds.Tables["Details"].Rows[0]["Recpt_Chq_dt"]).ToString("dd/MM/yyyy").Replace("-", "/") : "";
+            //    txtchno.Text = ds.Tables["Details"].Rows[0]["Recpt_Chq_No"].ToString();
+            //}
+            //txt_amount.Text = Amount;
+            //txt_amount_TextChanged(sender, e);
+            //ddlmode1.Visible = true;
+            //txtpaydate1.Visible = true;
+            //btn.Visible = true;
         }
     }
 
