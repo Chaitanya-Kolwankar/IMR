@@ -98,49 +98,71 @@
                                         </asp:UpdatePanel>
 
                                     </div>
-                                    <div class="col-lg-2">
+                                    <%--<div class="col-lg-2">
                                         <label for="inputState" class="form-label">Select Category:</label>
                                         <asp:DropDownList ID="ddlcat" runat="server" AutoPostBack="true" CssClass="form-select" OnSelectedIndexChanged="ddlcat_SelectedIndexChanged">
-                                            <%-- <asp:ListItem>--Select--</asp:ListItem>
-                                            <asp:ListItem Value="OPEN">OPEN</asp:ListItem>
-                                            <asp:ListItem Value="Other">Other</asp:ListItem>--%>
+                                        </asp:DropDownList>
+                                    </div>--%>
+                                    <div class="col-lg-2">
+                                        <label for="inputState" class="form-label">Select Group:</label>
+                                        <asp:DropDownList ID="ddlgroup" runat="server" AutoPostBack="true" CssClass="form-select" OnSelectedIndexChanged="ddlgroup_SelectedIndexChanged">
                                         </asp:DropDownList>
                                     </div>
+
+                                    <%--<div class="col-2">
+                                        <div class="col-lg-4">
+                                                <span>Data In</span>
+                                            </div>
+                                        <asp:RadioButton runat="server" ID="rdb_detl" Text="Detailed" GroupName="Category" OnCheckedChanged="rdb_detl_CheckedChanged" AutoPostBack="true" />
+
+                                    </div>
+                                    <div class="col-2">
+                                        <asp:RadioButton runat="server" ID="rdb_sumar" Text="Summarized" GroupName="Category" OnCheckedChanged="rdb_sumar_CheckedChanged" AutoPostBack="true" />
+                                    </div>--%>
+                                    <div class="col-6">
+                                        <fieldset>
+                                            <span class="m-3">Data In:</span>
+                                            <div class="row mx-3 my-3">
+                                                <div class="col-lg-3">
+                                                    <asp:RadioButton runat="server"
+                                                        ID="rdb_detl"
+                                                        Text="Detailed"
+                                                        GroupName="Category"
+                                                        OnCheckedChanged="rdb_detl_CheckedChanged"
+                                                        AutoPostBack="true" />
+                                                </div>
+
+                                                <div class="col-lg-3">
+                                                    <asp:RadioButton runat="server"
+                                                        ID="rdb_sumar"
+                                                        Text="Summarized"
+                                                        GroupName="Category"
+                                                        OnCheckedChanged="rdb_sumar_CheckedChanged"
+                                                        AutoPostBack="true" />
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+
                                     <asp:HiddenField runat="server" ID="ddlcategory" />
-                                    <div class="col-lg-1" style="margin-top: 32px">
-                                        <asp:Button ID="btngtdata" Text="Get Data" OnClick="btngtdata_Click" runat="server" CssClass="form-control btn btn-primary btn-block" />
-                                    </div>
-                                    <div class="col-lg-1" style="margin-top: 32px">
-                                        <asp:Button ID="btnclear" runat="server" Text="Clear" OnClick="btnclear_Click" CssClass="form-control btn btn-primary btn-block" />
-                                    </div>
 
-
-                                    <div class="col-lg-1" style="margin-top: 32px">
-                                        <asp:Button ID="btnexcel" runat="server" Text="Get Excel" OnClick="btnexcel_Click" CssClass="form-control btn btn-primary btn-block" />
-                                    </div>
 
                                 </div>
                                 <br />
-                                <div class="row">
-                                    <div class="col-lg-4 col-sm-4 col-md-4">
-
-                                        <div class="well well-lg" style="padding-bottom: 10px; padding-top: 10px">
-                                            <div class="col-lg-4">
-                                                <span style="font-weight: 900">Data In</span>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-5">
-                                                    <asp:RadioButton runat="server" ID="rdb_detl" Text="Detailed" GroupName="Category" OnCheckedChanged="rdb_detl_CheckedChanged" AutoPostBack="true" />
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <asp:RadioButton runat="server" ID="rdb_sumar" Text="Summarized" GroupName="Category" OnCheckedChanged="rdb_sumar_CheckedChanged" AutoPostBack="true" />
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-lg-2">
+                                        <asp:Button ID="btngtdata" Text="Get Data" OnClick="btngtdata_Click" runat="server" CssClass="mt-1 form-control btn btn-primary btn-block" />
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <asp:Button ID="btnclear" runat="server" Text="Clear" OnClick="btnclear_Click" CssClass="mt-1 form-control btn btn-primary btn-block" />
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <asp:Button ID="btnexcel" runat="server" Text="Get Excel" OnClick="btnexcel_Click" CssClass="mt-1 form-control btn btn-success btn-block" />
                                     </div>
                                 </div>
 
-                                <div id="scrll" style="width: 100%; overflow-x: auto">
+                                <div id="scrll" style="width: 100%; overflow-x: auto;margin-top:30px">
                                     <asp:GridView ID="grd" runat="server" AutoGenerateColumns="True" HeaderStyle-CssClass="FixedHeader" HeaderStyle-BackColor="white">
                                     </asp:GridView>
                                 </div>
