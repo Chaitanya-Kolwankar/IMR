@@ -192,7 +192,7 @@ public partial class Portals_Staff_Admission_Master_NewStudent : System.Web.UI.P
             {
                 fee_master = "m_FeeMaster_category";
             }
-            string qry_mst = "SELECT * FROM " + fee_master + " WHERE Ayid = '" + ddlyear.SelectedValue + "' AND Group_id = '" + hidden_grp_id.Value + "' AND del_flag = 0 and Gender='" + gender + "' and Category='" + category + "' and Struct_type='OTHER'";
+            string qry_mst = "SELECT * FROM " + fee_master + " WHERE Ayid = '" + ddlyear.SelectedValue + "' AND Group_id = '" + hidden_grp_id.Value + "' AND del_flag = 0 and Gender='" + gender + "' and Category='" + category + "' and Struct_type like 'OTHER%'";
             DataTable dt_master = cls.fillDataTable(qry_mst);
             if (dt_master.Rows.Count > 0)
             {

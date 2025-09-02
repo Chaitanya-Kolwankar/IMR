@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Portals/Staff/MasterPage.master" AutoEventWireup="true" CodeFile="Prov_feeEntry.aspx.cs" Inherits="Portals_Staff_Admission_Prov_feeEntry" %>
 
- 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-     <style>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style>
         input[type=number] {
             -moz-appearance: textfield;
         }
@@ -53,7 +53,7 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="main" class="main">
         <div class="container-fluid">
             <div class="pagetitle " style="font-size: 32px; margin-left: 34px; font-weight: 300; color: #012970;">
@@ -148,9 +148,9 @@
                                                 <asp:Label ID="lblgroupid" runat="server" Visible="false"></asp:Label>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="row">
-                                            <div class="col-md-3" style="display:none">
+                                            <div class="col-md-3" style="display: none">
                                                 <b>ACADEMIC YEAR : </b>
                                                 <asp:Label ID="lblyear" runat="server"></asp:Label>
                                                 <asp:Label ID="lblayid" runat="server" Visible="false"></asp:Label>
@@ -182,15 +182,16 @@
                                             </div>
                                             <div class="col-md-6" runat="server" id="btn" visible="false">
                                                 <br />
-                                           <div class="row">
-                                            <div class="col-md-6">
-                                                <asp:Button ID="btnsave" runat="server" CssClass="btn btn-primary  form-control" Text="Save" OnClick="btnsave_Click" />
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <asp:Button ID="btnsave" runat="server" CssClass="btn btn-primary  form-control" Text="Save" OnClick="btnsave_Click" />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <asp:Button ID="btncancel" runat="server" CssClass="btn btn-primary form-control" Text="Cancel" OnClick="btncancel_Click" />
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <asp:Button ID="btncancel" runat="server" CssClass="btn btn-primary form-control" Text="Cancel" OnClick="btncancel_Click" />
-                                            </div></div>
-                                        </div>
-                                        
+
                                         </div>
                                         <div runat="server" id="details" visible="false">
                                             <br />
@@ -228,7 +229,7 @@
                                         </div>
                                         <br />
 
-                                        
+
                                         <br />
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-xs-12 table-responsive" style="overflow: auto; max-height: 400px; width: 100%;">
@@ -246,7 +247,7 @@
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="RECEIPT NO">
                                                             <ItemTemplate>
-                                                                <asp:Label ID="Receipt_no" runat="server" Text='<%# Eval("Receipt_no")%>'></asp:Label>
+                                                                <asp:Label ID="Receipt_no" runat="server" Text='<%# Convert.ToString(Eval("Receipt_no")).Trim()==""?"-NA-":Eval("Receipt_no")%>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="AMOUNT">
@@ -374,7 +375,7 @@
             if (/[a-zA-Z]/.test(ch)) return !alphabetUsed && !/[a-zA-Z]/.test(input.value) ? (alphabetUsed = true) : false;
             return false;
         }
-</script>
+    </script>
 
 
 

@@ -226,7 +226,7 @@ public partial class Portals_Staff_Admission_Prov_feeEntry : System.Web.UI.Page
                 if (receipt_no != "")
                 {
                     //qry = "insert into admProvfees values ('" + stud_id + "','" + amount + "','" + ayid + "',Getdate(),'Provisional Admission','" + receipt_no + "','" + recpt_mode + "',NULLIF((CAST('" + recpt_chq_dt + "' AS datetime)),''),NULLIF('" + recpt_chq_no + "',''),NULLIF('" + bankname + "',''),NULLIF('" + recpt_bank_branch + "',''),'" + chq_status + "',NULL,NULL,'" + Session["emp_id"].ToString() + "',GetDate(),Null,0,NULL,0)";
-                    qry = "insert into admProvfees values ('" + stud_id + "','" + amount + "','" + ayid + "',Getdate(),'Provisional Admission','NULL','" + recpt_mode + "',NULLIF((CAST('" + recpt_chq_dt + "' AS datetime)),''),NULLIF('" + recpt_chq_no + "',''),NULLIF('" + bankname + "',''),NULLIF('" + recpt_bank_branch + "',''),'" + chq_status + "',NULL,NULL,'" + Session["emp_id"].ToString() + "',GetDate(),Null,0,NULL,0)";
+                    qry = "insert into admProvfees values ('" + stud_id + "','" + amount + "','" + ayid + "',Getdate(),'Provisional Admission',NULL,'" + recpt_mode + "',NULLIF((CAST('" + recpt_chq_dt + "' AS datetime)),''),NULLIF('" + recpt_chq_no + "',''),NULLIF('" + bankname + "',''),NULLIF('" + recpt_bank_branch + "',''),'" + chq_status + "',NULL,NULL,'" + Session["emp_id"].ToString() + "',GetDate(),Null,0,NULL,0)";
 
                     if (qry != "")
                     {
