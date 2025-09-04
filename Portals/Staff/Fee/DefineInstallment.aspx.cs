@@ -312,7 +312,8 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                 grd_install.DataBind();
                 ddl_installment.SelectedValue = dt.Rows.Count.ToString();
                 ddl_installment.Enabled = false;
-                btn_new.Visible = true;
+                div_new.Visible = true;
+                div_print.Visible = true;
                 btnsave.Enabled = false;
                 btncancel.Enabled = false;
                 installtable.Visible = true;
@@ -380,7 +381,8 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                     ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Redefine Installment', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
                     ddl_installment.SelectedValue = "";
                     ddl_installment.Enabled = true;
-                    btn_new.Visible = false;
+                    div_new.Visible = false;
+                    div_print.Visible = false;
                     grd_install.DataSource = null;
                     grd_install.DataBind();
                     btnsave.Enabled = true;
@@ -535,5 +537,13 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
 
         string receiptNo = prefix + newIncrement.ToString("D2");
         return receiptNo;
+    }
+
+    protected void btn_print_Click(object sender, EventArgs e)
+    {
+        Session["install_stud_id"] = txt_studid.Text.Trim();
+        Session["instll_group_id"] = lblgroupid.Text;
+        Session["install_ayid"] = lblayid.Text.Trim();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "redirect('Installment_Receipt.aspx');", true);
     }
 }

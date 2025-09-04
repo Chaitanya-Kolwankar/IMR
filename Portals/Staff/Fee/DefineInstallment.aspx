@@ -180,20 +180,24 @@
                                                     <asp:ListItem Value="8" Text="8 (EIGHT)"></asp:ListItem>
                                                     <asp:ListItem Value="9" Text="9 (NINE)"></asp:ListItem>
                                                     <asp:ListItem Value="10" Text="10 (TEN)"></asp:ListItem>
-
                                                 </asp:DropDownList>
                                             </div>
                                             <div class="col-md-2">
                                                 <br />
                                                 <asp:Button ID="btnsave" runat="server" CssClass="btn btn-primary form-control" Text="Save" OnClick="btnsave_Click" />
                                             </div>
+                                            <div class="col-md-1" id="div_print" runat="server" visible="false">
+                                                <br />
+                                                <asp:LinkButton ID="btn_print" runat="server" CssClass="btn btn-outline-success form-control bi bi-printer" OnClick="btn_print_Click"></asp:LinkButton>
+                                            </div>
                                             <div class="col-md-2">
                                                 <br />
                                                 <asp:Button ID="btncancel" runat="server" CssClass="btn btn-primary form-control" Text="Cancel" OnClick="btncancel_Click" />
                                             </div>
-                                            <div class="col-md-3">
+
+                                            <div class="col-md-2" id="div_new" runat="server" visible="false">
                                                 <br />
-                                                <asp:LinkButton ID="btn_new" runat="server" CssClass="btn btn-outline-danger form-control" Text="New Installment" OnClick="btn_new_Click" Visible="false" OnClientClick="Confirm();"></asp:LinkButton>
+                                                <asp:LinkButton ID="btn_new" runat="server" CssClass="btn btn-outline-danger form-control" Text="Revise" OnClick="btn_new_Click" OnClientClick="Confirm();"></asp:LinkButton>
                                             </div>
                                             <div class="col-md-2">
                                                 <br />
@@ -441,6 +445,9 @@
             }
 
             form.appendChild(confirm_value);
+        }
+        function redirect(name) {
+            window.open(name, '_blank');
         }
     </script>
 </asp:Content>
