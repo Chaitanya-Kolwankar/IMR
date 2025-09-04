@@ -166,15 +166,13 @@
                                                                 <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                                                                     Blood Group :
                                                                      <asp:DropDownList ID="ddlblood" runat="server" CssClass="form-control">
-                                                                         <asp:ListItem Text="--Select--" Value="0">--Select--</asp:ListItem>
-                                                                         <asp:ListItem Text="A+ve" Value="1"> </asp:ListItem>
-                                                                         <asp:ListItem Text="A-ve" Value="2"> </asp:ListItem>
-                                                                         <asp:ListItem Text="B+ve" Value="3"> </asp:ListItem>
-                                                                         <asp:ListItem Text="B-ve" Value="4"> </asp:ListItem>
-                                                                         <asp:ListItem Text="AB+ve" Value="5">  </asp:ListItem>
-                                                                         <asp:ListItem Text="AB-ve" Value="6">  </asp:ListItem>
-                                                                         <asp:ListItem Text="O+ve" Value="7"> </asp:ListItem>
-                                                                         <asp:ListItem Text=" O-ve" Value="8"> </asp:ListItem>
+                                                                         <asp:ListItem Text="A -ve" Value="A -ve"></asp:ListItem>
+                                                                         <asp:ListItem Text="B +ve" Value="B +ve"></asp:ListItem>
+                                                                         <asp:ListItem Text="B -ve" Value="B -ve"></asp:ListItem>
+                                                                         <asp:ListItem Text="AB +ve" Value="AB +ve"></asp:ListItem>
+                                                                         <asp:ListItem Text="AB -ve" Value="AB -ve"></asp:ListItem>
+                                                                         <asp:ListItem Text="O +ve" Value="O +ve"></asp:ListItem>
+                                                                         <asp:ListItem Text="O -ve" Value="O -ve"></asp:ListItem>
                                                                      </asp:DropDownList>
 
                                                                 </div>
@@ -255,7 +253,7 @@
                                                     <asp:UpdatePanel runat="server">
                                                         <ContentTemplate>
                                                             <div class="row">
-                                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                     <div class="card">
                                                                         <div class="card-header bg-primary" style="font-weight: 600; color: white">
                                                                             <h7>S.S.C </h7>
@@ -265,65 +263,12 @@
                                                                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                                                                     State<span style="color: #ff3333">*</span>
                                                                                     <asp:DropDownList ID="ddlstate" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlstate_SelectedIndexChanged">
-                                                                                        <%-- <asp:ListItem Selected="True">--Select--</asp:ListItem>
-                            <asp:ListItem> Maharashtra </asp:ListItem>
-                            <asp:ListItem> Andaman and Nicobar </asp:ListItem>
-                            <asp:ListItem> Andhra Pradesh </asp:ListItem>
-                            <asp:ListItem> Arunachal Pradesh </asp:ListItem>
-                            <asp:ListItem> Assam </asp:ListItem>
-                            <asp:ListItem> Bihar </asp:ListItem>
-                            <asp:ListItem> Chandigarh </asp:ListItem>
-                            <asp:ListItem> Chattisgarh </asp:ListItem>
-                            <asp:ListItem> Dadra and Nagar Haveli </asp:ListItem>
-                            <asp:ListItem> Daman and Diu </asp:ListItem>
-                            <asp:ListItem> Delhi </asp:ListItem>
-                            <asp:ListItem> Goa </asp:ListItem>
-                            <asp:ListItem> Gujarat </asp:ListItem>
-                            <asp:ListItem> Haryana </asp:ListItem>
-                            <asp:ListItem> Himachal Pradesh </asp:ListItem>
-                            <asp:ListItem> Jammu and Kashmir </asp:ListItem>
-                            <asp:ListItem> Jharkhand </asp:ListItem>
-                            <asp:ListItem> Karnataka </asp:ListItem>
-                            <asp:ListItem> Kerala </asp:ListItem>
-                            <asp:ListItem> Lakshadweep </asp:ListItem>
-                            <asp:ListItem> Madhya Pradesh </asp:ListItem>
-                            <asp:ListItem> Manipur </asp:ListItem>
-                            <asp:ListItem> Meghalaya  </asp:ListItem>
-                            <asp:ListItem> Mizoram  </asp:ListItem>
-                            <asp:ListItem> Nagaland  </asp:ListItem>
-                            <asp:ListItem> Orissa </asp:ListItem>
-                            <asp:ListItem> Pondicherry </asp:ListItem>
-                            <asp:ListItem> Punjab </asp:ListItem>
-                            <asp:ListItem> Rajasthan </asp:ListItem>
-                            <asp:ListItem> Sikkim </asp:ListItem>
-                            <asp:ListItem> Tamil Nadu </asp:ListItem>
-                            <asp:ListItem> Tripura </asp:ListItem>
-                            <asp:ListItem> Uttar Pradesh </asp:ListItem>
-                            <asp:ListItem> Uttarakhand </asp:ListItem>
-                            <asp:ListItem> West Bengal </asp:ListItem>--%>
                                                                                     </asp:DropDownList>
                                                                                 </div>
 
                                                                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                                                                     Board <span style="color: #ff3333">*</span>
                                                                                     <asp:DropDownList ID="ddlboard" runat="server" CssClass="form-control">
-                                                                                        <%--<asp:ListItem Selected="True">--Select--</asp:ListItem>
-                            <asp:ListItem> Central Board Of Secondary Education </asp:ListItem>
-                            <asp:ListItem> Council For The Indian School Certificate Examinations </asp:ListItem>
-                            <asp:ListItem> Directorate of Art Maharashtra State </asp:ListItem>
-                            <asp:ListItem> Maharashtra State Board Of Secondary And Higher Secondary Education </asp:ListItem>
-                            <asp:ListItem> Maharashtra State Board of Technical Education </asp:ListItem>
-                            <asp:ListItem> Maharashtra Nursing Council Board </asp:ListItem>
-                            <asp:ListItem> National Institute Of Open Schooling </asp:ListItem>
-                            <asp:ListItem> University Of Mumbai </asp:ListItem>
-                            <asp:ListItem> Dr. Babsaheb Ambedkar Marathwada University </asp:ListItem>
-                            <asp:ListItem> SNDT Women's University </asp:ListItem>
-                            <asp:ListItem> Yashwantrao Chavan Maharashtra Open University </asp:ListItem>
-                            <asp:ListItem> Savitribai Phule Pune University </asp:ListItem>
-                            <asp:ListItem> Shivaji University Kolhapur </asp:ListItem>
-                            <asp:ListItem> University of Solapur </asp:ListItem>
-                            <asp:ListItem> North Maharashtra University </asp:ListItem>
-                            <asp:ListItem> Other </asp:ListItem>--%>
                                                                                     </asp:DropDownList>
                                                                                 </div>
 
@@ -352,7 +297,7 @@
 
                                                                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                                                                     Passing Year<span style="color: #ff3333">*</span>
-                                                                                    <asp:DropDownList ID="ddlpassyear" runat="server" CssClass="form-control">
+                                                                                    <asp:DropDownList ID="ddlpassyear" runat="server" CssClass="form-select">
                                                                                         <asp:ListItem Value="0">--Select--</asp:ListItem>
                                                                                         <asp:ListItem Value="2022"> 2022 </asp:ListItem>
                                                                                         <asp:ListItem Value="2021"> 2021 </asp:ListItem>
@@ -392,7 +337,7 @@
 
                                                                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                                                                     Passing Month <span style="color: #ff3333">*</span>
-                                                                                    <asp:DropDownList ID="ddlpassmth" runat="server" CssClass="form-control">
+                                                                                    <asp:DropDownList ID="ddlpassmth" runat="server" CssClass="form-select">
                                                                                         <asp:ListItem Value="0">--Select--</asp:ListItem>
                                                                                         <asp:ListItem Value="Jan"> Jan </asp:ListItem>
                                                                                         <asp:ListItem Value="Feb"> Feb </asp:ListItem>
@@ -436,7 +381,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                     <div class="card">
                                                                         <div class="card-header bg-primary" style="font-weight: 600; color: white">
                                                                             <h7>H.S.C / Diploma</h7>
@@ -446,7 +391,7 @@
 
                                                                                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                                                     State <span style="color: #ff3333">*</span>
-                                                                                    <asp:DropDownList ID="ddlstate1" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlstate1_SelectedIndexChanged">
+                                                                                    <asp:DropDownList ID="ddlstate1" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlstate1_SelectedIndexChanged">
                                                                                         <%--<asp:ListItem Selected="True" Value="0">--Select--</asp:ListItem>--%>
                                                                                         <%--  <asp:ListItem> Maharashtra </asp:ListItem>
                             <asp:ListItem> Andaman and Nicobar </asp:ListItem>
@@ -488,7 +433,7 @@
 
                                                                                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                                                     Board <span style="color: #ff3333">*</span>
-                                                                                    <asp:DropDownList ID="ddlboard1" runat="server" CssClass="form-control">
+                                                                                    <asp:DropDownList ID="ddlboard1" runat="server" CssClass="form-select">
                                                                                         <%-- <asp:ListItem Selected="True">--Select--</asp:ListItem>
                             <asp:ListItem> Central Board Of Secondary Education </asp:ListItem>
                             <asp:ListItem> Council For The Indian School Certificate Examinations </asp:ListItem>
@@ -534,7 +479,7 @@
 
                                                                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                                                                     Passing Year<span style="color: #ff3333">*</span>
-                                                                                    <asp:DropDownList ID="ddlpassyear1" runat="server" CssClass="form-control">
+                                                                                    <asp:DropDownList ID="ddlpassyear1" runat="server" CssClass="form-select">
                                                                                         <asp:ListItem Value="0">--Select--</asp:ListItem>
                                                                                         <asp:ListItem Value="2021"> 2021 </asp:ListItem>
                                                                                         <asp:ListItem Value="2020"> 2020 </asp:ListItem>
@@ -573,7 +518,7 @@
 
                                                                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                                                                     Passing Month<span style="color: #ff3333">*</span>
-                                                                                    <asp:DropDownList ID="ddlpassmth1" runat="server" CssClass="form-control">
+                                                                                    <asp:DropDownList ID="ddlpassmth1" runat="server" CssClass="form-select">
 
                                                                                         <%--  <asp:ListItem> Jan </asp:ListItem>
                             <asp:ListItem> Feb </asp:ListItem>
@@ -625,6 +570,187 @@
                                                                                     Grade Obtained<span style="color: #ff3333">*</span>
                                                                                     <asp:TextBox ID="gradeobt1" Style="text-transform: uppercase" onkeypress="return grade(event)" autocomplete="off" oncut="return false" onpaste="return false" oncopy="return false" CssClass="form-control" MaxLength="2" runat="server"></asp:TextBox>
                                                                                     <%--  onkeypress="return allowgrade(event,this);"--%>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12 col-md-12 col-xs-12">
+                                                                    <div class="panel panel-primary">
+                                                                        <div class="panel-heading">
+                                                                            <h7>Graduation & Entrance Exam Details</h7>
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                                            <div id="divgrad" runat="server">
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                        <span>Graduation Course<span style="color: #ff3333">*</span> </span>
+                                                                                        <asp:TextBox runat="server" type="text" ID="txtGraduationCourse" CssClass="form-control" MaxLength="20" autocomplete="off" onkeypress="return allowOnlyLetters(event,this);"></asp:TextBox>
+                                                                                    </div>
+                                                                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                        <span>State <span style="color: #ff3333">*</span> </span>
+                                                                                        <asp:DropDownList ID="ddlTYstate" CssClass="form-control" runat="server">
+                                                                                            <%--<asp:ListItem>--SELECT--</asp:ListItem>
+                         <asp:ListItem>MAHARASHTRA</asp:ListItem>
+                         <asp:ListItem>ANDHRA PRADESH</asp:ListItem>
+                         <asp:ListItem>ARUNACHAL PRADESH</asp:ListItem>
+                         <asp:ListItem>ASSAM</asp:ListItem>
+                         <asp:ListItem>BIHAR</asp:ListItem>
+                         <asp:ListItem>CHHATTISGARH</asp:ListItem>
+                         <asp:ListItem>GOA</asp:ListItem>
+                         <asp:ListItem>GUJARAT</asp:ListItem>
+                         <asp:ListItem>HARYANA</asp:ListItem>
+                         <asp:ListItem>HIMACHAL PRADESH</asp:ListItem>
+                         <asp:ListItem>JAMMU AND KASHMIR</asp:ListItem>
+                         <asp:ListItem>JHARKHAND</asp:ListItem>
+                         <asp:ListItem>KARNATAKA</asp:ListItem>
+                         <asp:ListItem>KERALA</asp:ListItem>
+                         <asp:ListItem>MADHYA PRADESH</asp:ListItem>
+                         <asp:ListItem>MANIPUR</asp:ListItem>
+                         <asp:ListItem>MEGHALAYA</asp:ListItem>
+                         <asp:ListItem>MIZORAM</asp:ListItem>
+                         <asp:ListItem>NAGALAND</asp:ListItem>
+                         <asp:ListItem>ORISSA</asp:ListItem>
+                         <asp:ListItem>PUNJAB</asp:ListItem>
+                         <asp:ListItem>RAJASTHAN</asp:ListItem>
+                         <asp:ListItem>SIKKIM</asp:ListItem>
+                         <asp:ListItem>TAMIL NADU</asp:ListItem>
+                         <asp:ListItem>TRIPURA</asp:ListItem>
+                         <asp:ListItem>UTTAR PRADESH</asp:ListItem>
+                         <asp:ListItem>UTTARAKHAND</asp:ListItem>
+                         <asp:ListItem>WEST BENGAL</asp:ListItem>
+                         <asp:ListItem>ANDAMAN AND NICOBAR ISLANDS</asp:ListItem>
+                         <asp:ListItem>CHANDIGARH</asp:ListItem>
+                         <asp:ListItem>DADRA AND NAGAR HAVELI</asp:ListItem>
+                         <asp:ListItem>DAMAN AND DIU</asp:ListItem>
+                         <asp:ListItem>LAKSHADWEEP</asp:ListItem>
+                         <asp:ListItem>NATIONAL CAPITAL TERRITORY OF DELHI</asp:ListItem>
+                         <asp:ListItem>PUDUCHERRY</asp:ListItem>--%>
+                                                                                        </asp:DropDownList>
+                                                                                    </div>
+                                                                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                        <span>University<span style="color: #ff3333">*</span> </span>
+                                                                                        <asp:TextBox runat="server" ID="txt_graduation_university" CssClass="form-control" MaxLength="100" autocomplete="off" onkeypress="return allowOnlyLetters(event,this);"></asp:TextBox>
+                                                                                    </div>
+                                                                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                        <span>Institute Name/College Name<span style="color: #ff3333">*</span> </span>
+                                                                                        <asp:TextBox runat="server" ID="txtTYinstitutename" CssClass="form-control" MaxLength="100" autocomplete="off" onkeypress="return allowOnlyLetters(event,this);"></asp:TextBox>
+                                                                                    </div>
+                                                                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                        <span>Institute place<span style="color: #ff3333">*</span></span>
+                                                                                        <asp:TextBox runat="server" ID="txtTYinstituteplace" CssClass="form-control" MaxLength="100" autocomplete="off" onkeypress="return allowaddress(event,this);"></asp:TextBox>
+                                                                                    </div>
+                                                                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                        <span>First Attempt<span style="color: #ff3333">*</span></span>
+                                                                                        <asp:RadioButtonList ID="rbl_fstattemptgrd" runat="server" CssClass="form-control rbl" RepeatDirection="Horizontal">
+                                                                                            <asp:ListItem Text="Yes" Value="1" />
+                                                                                            <asp:ListItem Text="No" Value="0" />
+                                                                                        </asp:RadioButtonList>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <br />
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                        <span>Passing Year<span style="color: #ff3333">*</span> </span>
+                                                                                        <asp:DropDownList ID="ddlTYpassyear" runat="server" CssClass="form-control">
+                                                                                            <asp:ListItem Value="">--Select--</asp:ListItem>
+                                                                                            <asp:ListItem Value="2022"> 2022 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2021"> 2021 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2020"> 2020 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2019"> 2019 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2018"> 2018 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2017"> 2017 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2016"> 2016 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2015"> 2015 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2014"> 2014 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2013"> 2013 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2012"> 2012 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2011"> 2011 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2010"> 2010 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2009"> 2009 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2008"> 2008 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2007"> 2007 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2006"> 2006 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2005"> 2005 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2004"> 2004 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2003"> 2003 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2002"> 2002 </asp:ListItem>
+                                                                                            <asp:ListItem Value="2001"> 2001  </asp:ListItem>
+                                                                                            <asp:ListItem Value="2000"> 2000 </asp:ListItem>
+                                                                                            <asp:ListItem Value="1999"> 1999  </asp:ListItem>
+                                                                                            <asp:ListItem Value="1998"> 1998  </asp:ListItem>
+                                                                                            <asp:ListItem Value="1997"> 1997  </asp:ListItem>
+                                                                                            <asp:ListItem Value="1996"> 1996 </asp:ListItem>
+                                                                                            <asp:ListItem Value="1995"> 1995 </asp:ListItem>
+                                                                                            <asp:ListItem Value="1994"> 1994 </asp:ListItem>
+                                                                                            <asp:ListItem Value="1993"> 1993 </asp:ListItem>
+                                                                                            <asp:ListItem Value="1992"> 1992 </asp:ListItem>
+                                                                                            <asp:ListItem Value="1991"> 1991  </asp:ListItem>
+                                                                                            <asp:ListItem Value="1990"> 1990 </asp:ListItem>
+                                                                                        </asp:DropDownList>
+                                                                                    </div>
+                                                                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                        <span>Passing Month<span style="color: #ff3333">*</span> </span>
+                                                                                        <asp:DropDownList ID="ddlTYmonth" CssClass="form-control" runat="server">
+                                                                                            <asp:ListItem Value="">--Select--</asp:ListItem>
+                                                                                            <asp:ListItem Value="Jan">Jan</asp:ListItem>
+                                                                                            <asp:ListItem Value="Feb">Feb</asp:ListItem>
+                                                                                            <asp:ListItem Value="Mar">Mar</asp:ListItem>
+                                                                                            <asp:ListItem Value="Apr">Apr</asp:ListItem>
+                                                                                            <asp:ListItem Value="May">May</asp:ListItem>
+                                                                                            <asp:ListItem Value="Jun">Jun</asp:ListItem>
+                                                                                            <asp:ListItem Value="Jul">Jul</asp:ListItem>
+                                                                                            <asp:ListItem Value="Aug">Aug</asp:ListItem>
+                                                                                            <asp:ListItem Value="Sept">Sept</asp:ListItem>
+                                                                                            <asp:ListItem Value="Oct">Oct</asp:ListItem>
+                                                                                            <asp:ListItem Value="Nov">Nov</asp:ListItem>
+                                                                                            <asp:ListItem Value="Dec">Dec</asp:ListItem>
+                                                                                        </asp:DropDownList>
+                                                                                    </div>
+                                                                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                        <span>Total Marks Obtained/CGPI<span style="color: #ff3333">*</span> </span>
+                                                                                        <asp:TextBox runat="server" type="text" ID="txtTYmarksobtained" CssClass="form-control" autocomplete="off" onkeypress="return allowonlynumbersdot(event,this);" MaxLength="5"></asp:TextBox>
+                                                                                    </div>
+                                                                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                        <span>Out of Marks/Total CGPI<span style="color: #ff3333">*</span> </span>
+                                                                                        <asp:TextBox runat="server" type="text" ID="txtTYtotalmarks" CssClass="form-control" autocomplete="off" onkeypress="return allowonlynumbers(event,this);" MaxLength="5"></asp:TextBox>
+                                                                                    </div>
+                                                                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                        <span>Grade Obtained<span style="color: #ff3333">*</span> </span>
+                                                                                        <asp:TextBox runat="server" type="text" Style="text-transform: uppercase" ID="txtTYgrade" CssClass="form-control" autocomplete="off" onkeypress="return grade(event)" MaxLength="2"></asp:TextBox>
+                                                                                    </div>
+                                                                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                        <span>Seat No<span style="color: #ff3333">*</span> </span>
+                                                                                        <asp:TextBox runat="server" type="text" ID="txtTYseatno" CssClass="form-control" autocomplete="off" onkeypress="return allow(event,this);" MaxLength="9"></asp:TextBox>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br />
+                                                                            <div class="row">
+                                                                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                    <span>Exam Type<span style="color: #ff3333">*</span> </span>
+                                                                                    <asp:DropDownList ID="ddl_examcet_type" runat="server" CssClass="form-control">
+                                                                                        <asp:ListItem Value="">--Select--</asp:ListItem>
+                                                                                        <asp:ListItem Value="JEE">JEE</asp:ListItem>
+                                                                                        <asp:ListItem Value="MHT-CET">MHT-CET</asp:ListItem>
+                                                                                        <asp:ListItem Value="OTHERS">OTHERS</asp:ListItem>
+                                                                                    </asp:DropDownList>
+                                                                                </div>
+                                                                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                    <span>Percentile<span style="color: #ff3333">*</span> </span>
+                                                                                    <asp:TextBox runat="server" type="text" ID="txt_cet_mks_obt" CssClass="form-control" autocomplete="off" onkeypress="return allowonlynumbersdot(event,this);" MaxLength="5"></asp:TextBox>
+                                                                                </div>
+                                                                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                    <span>DTE/ARA Password<span style="color: #ff3333">*</span> </span>
+                                                                                    <asp:TextBox runat="server" type="text" ID="txt_dtepasswd" CssClass="form-control" autocomplete="off" MaxLength="15"></asp:TextBox>
+                                                                                </div>
+                                                                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                    <span>CET/JEE ROLL NO<span style="color: #ff3333">*</span> </span>
+                                                                                    <asp:TextBox runat="server" type="text" ID="txt_cetjee_rollno" CssClass="form-control" autocomplete="off" onkeypress="return allow(event,this);" MaxLength="30"></asp:TextBox>
+                                                                                </div>
+                                                                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                                    <span>CET/JEE MERIT SCORE<span style="color: #ff3333">*</span> </span>
+                                                                                    <asp:TextBox runat="server" type="text" ID="txt_cet_jee_meritscore" CssClass="form-control" autocomplete="off" onkeypress="return allowonlynumbers(event,this);" MaxLength="3"></asp:TextBox>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -815,7 +941,7 @@
                                                             <div class="row">
                                                                 <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                                                                     Category<span style="color: #ff3333">*</span>
-                                                                    <asp:DropDownList ID="ddlcat" runat="server" CssClass="form-control"
+                                                                    <asp:DropDownList ID="ddlcat" runat="server" CssClass="form-select"
                                                                         AutoPostBack="true" OnSelectedIndexChanged="ddlcat_SelectedIndexChanged2">
                                                                     </asp:DropDownList>
                                                                 </div>
@@ -846,7 +972,7 @@
                                                             <div class="row">
                                                                 <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                                                                     Religion<span style="color: #ff3333">*</span>
-                                                                    <asp:DropDownList ID="ddlrel" runat="server" CssClass="form-control">
+                                                                    <asp:DropDownList ID="ddlrel" runat="server" CssClass="form-select">
                                                                     </asp:DropDownList>
                                                                 </div>
                                                                 <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">

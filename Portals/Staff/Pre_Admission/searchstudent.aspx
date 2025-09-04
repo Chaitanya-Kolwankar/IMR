@@ -950,95 +950,10 @@
                                                            <asp:TextBox ID="certibox" oncut="return false" MaxLength="80" onpaste="return false" oncopy="return false" CssClass="form-control" runat="server"></asp:TextBox>
                                                             </div>
 
-                                                            <div class="col-lg-3">
-                                                                Religion<span style="COLOR: #ff3333">*</span>
-                                                           <asp:DropDownList ID="ddlrel" runat="server" CssClass="form-control">
-                                                               
-                                                           </asp:DropDownList>
-                                                            </div>
-
 
                                                         </div>
-
-
-                                                        <div class="row">
-                                                            <div class="col-lg-3" style="margin-top: 23px;">
-                                                                Is Physically Reserved :
-                                                          <asp:DropDownList ID="ddlphy" runat="server" CssClass="form-control">
-                                                              <asp:ListItem Selected="True">--Select--</asp:ListItem>
-                                                              <asp:ListItem Text="Visually Impaired" Value="Visually Impaired"></asp:ListItem>
-                                                              <asp:ListItem Text="Speech and/or Hearing Impaired" Value="Speech and/or Hearing Impaired"></asp:ListItem>
-                                                              <asp:ListItem Text="Orthopedic Disorder" Value="Orthopedic Disorder"></asp:ListItem>
-                                                              <asp:ListItem Text="Mentally Retarded" Value="Mentally Retarded"></asp:ListItem>
-                                                              <asp:ListItem Text="Learning Disability" Value="Learning Disability"></asp:ListItem>
-                                                              <asp:ListItem Text="Dyslexia" Value="Dyslexia"></asp:ListItem>
-                                                          </asp:DropDownList>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                Proficiency Acquired in extra Curricular Activities 
-                                                                        <asp:RadioButtonList ID="ddlProficien" runat="server" CssClass="form-control" AutoPostBack="true" RepeatDirection="Horizontal">
-
-                                                                            <asp:ListItem Text="Yes" Value="1" />
-                                                                            <asp:ListItem Text="No" Value="0" />
-
-
-                                                                        </asp:RadioButtonList>
-
-                                                            </div>
-                                                            <div class="col-lg-3" style="margin-top:25px">
-                                                                Whether a Member of NCC / NSS
-                                                                        <asp:DropDownList ID="ddlnccnss" runat="server" CssClass="form-select" AutoPostBack="true">
-                                                                            <asp:ListItem Text="None" Value="0"></asp:ListItem>
-                                                                            <asp:ListItem Text="Both" Value="1"></asp:ListItem>
-                                                                            <asp:ListItem Text="NCC" Value="2"></asp:ListItem>
-                                                                            <asp:ListItem Text="NSS" Value="3"></asp:ListItem>
-                                                                        </asp:DropDownList>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                Are you proposed to apply for Scholarship/Freeship * 
-                                                      <asp:RadioButtonList ID="rdbscholar" runat="server" CssClass="form-control" RepeatDirection="Horizontal">
-                                                          <asp:ListItem Text="Yes" Value="1" />
-                                                          <asp:ListItem Text="No" Value="0" />
-                                                      </asp:RadioButtonList>
-                                                            </div>
-
-
-
-                                                        </div>
-                                                        <div class="row">
-
-                                                            <div class="card">
-                                                                <div class="card-title" style="font-size: 14px">
-                                                                    NO. OF PERSONS IN THE FAMILY  *
-
-                                                                </div>
-                                                                <div class="card-body" style="padding:0px">
-                                                                    <div class="row">
-                                                                        <div class="col-lg-2">
-                                                                            Earning<span style="COLOR: #ff3333">*</span>
-                                                                                      <asp:TextBox ID="txtearn" autocomplete="off" onKeyPress="return OnlyNum(event)"  runat="server" MaxLength="2" CssClass="form-control" oncut="return false" onpaste="return false" oncopy="return false"></asp:TextBox>
-                                                                        </div>
-                                                                        <div class="col-lg-2">
-                                                                            Non-Earning<span style="COLOR: #ff3333">*</span>
-                                                                                      <asp:TextBox ID="txtnonear" OnTextChanged="txtnonear_TextChanged"  onKeyPress="return OnlyNum(event)" AutoPostBack="true"  autocomplete="off" MaxLength="2" oncut="return false" onpaste="return false" oncopy="return false" runat="server" CssClass="form-control"></asp:TextBox>
-                                                                        </div>
-                                                                        <div class="col-lg-2">
-                                                                            Total<span style="COLOR: #ff3333">*</span>
-                                                                                      <asp:TextBox ID="txttotal" runat="server" autocomplete="off" ReadOnly="true" CssClass="form-control"></asp:TextBox>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            Yearly income of the Family from all sources :(in RS.): <span style="COLOR: #ff3333">*</span>
-                                                                                        <asp:TextBox ID="txtincome" runat="server" oncut="return false" onpaste="return false" autocomplete="off" oncopy="return false" onkeypress="return num(event)" MaxLength="10" CssClass="form-control"></asp:TextBox>
-
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
+                                                        <br />
+                                                      
                                                         <div class="row">
                                                             <div class="col-lg-5">
                                                             </div>

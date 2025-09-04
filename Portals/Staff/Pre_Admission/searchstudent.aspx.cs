@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Activities.Expressions;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Globalization;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -42,20 +36,6 @@ public partial class searchstudent : System.Web.UI.Page
     }
 
 
-    public void religion()
-    {
-        string relqury = "SELECT DISTINCT Parent FROM State_Category_details where Main='Religion'";
-        obj1.fillDataTable(relqury);
-        DataTable dt4 = new DataTable();
-        dt4 = obj1.fillDataTable(relqury);
-        ddlrel.DataSource = dt4;
-        ddlrel.DataTextField = dt4.Columns["parent"].ToString().ToUpper();
-        ddlrel.DataValueField = dt4.Columns["parent"].ToString().ToUpper();
-        
-        ddlrel.DataBind();
-        ddlrel.Items.Insert(0, new ListItem("--Select--", ""));
-
-    }
     public void state()
     {
         string state = "select distinct trim(upper(Parent)) as parent from State_category_details where Main='State'";
@@ -87,7 +67,6 @@ public partial class searchstudent : System.Web.UI.Page
             string mob = mobno.Text;
             string other = othercont.Text;
 
-            religion();
 
             if (formno == "")
             {
@@ -120,17 +99,7 @@ public partial class searchstudent : System.Web.UI.Page
                     state();
                     ddlsta();
                     fillcat();
-                    int Ear = Convert.ToInt32(dt.Rows[0]["Earning"]);
-                    //Ear = Convert.ToInt32(txtearn.Text);
-                    //txtearn.Text = Ear.ToString();
-                    int noEar = Convert.ToInt32(dt.Rows[0]["NonEarning"]);
-                    // noEar =Convert.ToInt32( txtnonear.Text);
-                    // txtnonear.Text = noEar.ToString();
-
-                    // int total = Ear + noEar;
-                    //txttotal.Text = total.ToString();
-                    int total = Ear + noEar;
-                    txttotal.Text = total.ToString();
+                   
                     lastname.Text = dt.Rows[0]["L_name"].ToString();
                     firstname.Text = dt.Rows[0]["F_name"].ToString();
                     midname.Text = dt.Rows[0]["M_name"].ToString();
@@ -293,7 +262,6 @@ public partial class searchstudent : System.Web.UI.Page
 
 
                     }
-                    ddlphy.SelectedValue = dt.Rows[0]["Phy_handicap_Description"].ToString();
 
                     certibox.Text = dt.Rows[0]["Certificate_No"].ToString();
                     //if (dt.Rows[0]["Religion"].ToString() == "" || dt.Rows[0]["Religion"].ToString() == "--Select--")
@@ -306,43 +274,13 @@ public partial class searchstudent : System.Web.UI.Page
                     //     ddlrel.SelectedValue= dt.Rows[0]["Religion"].ToString();
                     //}
 
-                    if (dt.Rows[0]["Religion"].ToString() != "0")
-                    {
-                        ddlrel.Text = dt.Rows[0]["Religion"].ToString().ToUpper();
-
-                    }
+                   
 
                     //religion
                     ddlcaste.SelectedItem.Text = dt.Rows[0]["caste"].ToString();
                     //   ddlphy.Text = dt.Rows[0]["Phy_handicap_Description"].ToString();
 
-
-
-                    if (dt.Rows[0]["Extra_Curricular_Activities"].ToString() == "")
-                    {
-                        ddlProficien.SelectedValue = "0";
-                    }
-                    else
-                    {
-
-                        ddlProficien.SelectedValue = dt.Rows[0]["Extra_Curricular_Activities"].ToString();
-                    }
-
-                    ddlnccnss.Text = dt.Rows[0]["is_NSS_NCC"].ToString();
-                    if (dt.Rows[0]["is_Scholarship"].ToString() == "True")
-                    {
-                        rdbscholar.SelectedValue = "1";
-                    }
-                    else
-                    {
-                        rdbscholar.SelectedValue = "0";
-                    }
-                    //rdbscholar.SelectedValue = dt.Rows[0]["is_Scholarship"].ToString();
-                    txtearn.Text = dt.Rows[0]["earning"].ToString();
-                    txtnonear.Text = dt.Rows[0]["NonEarning"].ToString();
-                    txtincome.Text = dt.Rows[0]["Annual_Income"].ToString();
-
-
+                    
 
                 }
                 else
@@ -740,37 +678,15 @@ public partial class searchstudent : System.Web.UI.Page
         try
         {
             string formno = txtformno.Text;
-            string totEar = txtearn.Text;
             if (ddlcat.SelectedIndex == 0)
             {
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('Select Category', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
 
             }
-            else if (ddlrel.SelectedIndex == 0)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('Select Religion', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
-
-            }
-          
-            else if (txtearn.Text.Trim() == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('Enter Earning', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
-
-            }
-            else if (txtnonear.Text.Trim() == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('Enter non Earning', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
-
-            }
-            else if (txtincome.Text.Trim() == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('Enter Year Income', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
-
-            }
             else
             {
 
-                string update5 = "update d_adm_applicant set Category='" + ddlcat.SelectedItem.ToString() + "', caste='" + ddlcaste.SelectedItem.ToString() + "',Certificate_No='" + certibox.Text + "',Religion='" + ddlrel.SelectedItem.ToString() + "',Phy_handicap_Description='" + ddlphy.SelectedItem.ToString() + "',Extra_Curricular_Activities='" + ddlProficien.SelectedValue.ToString() + "',is_NSS_NCC='" + ddlnccnss.SelectedItem.ToString() + "',is_Scholarship='" + rdbscholar.SelectedValue + "',Earning='" + txtearn.Text + "',NonEarning='" + txtnonear.Text + "',Annual_Income='" + txtincome.Text + "'where Form_no='" + formno + "'";
+                string update5 = "update d_adm_applicant set Category='" + ddlcat.SelectedItem.ToString() + "', caste='" + ddlcaste.SelectedItem.ToString() + "',Certificate_No='" + certibox.Text + "' where Form_no='" + formno + "'";
                 bool chk4 = obj1.DMLqueries(update5);
                 if (chk4)
                 {
@@ -913,20 +829,6 @@ public partial class searchstudent : System.Web.UI.Page
         //ddl_Faculty.Items.Insert(0, new ListItem("--Select--", "na"));
     }
 
-    protected void txtnonear_TextChanged(object sender, EventArgs e)
-    {
-        if (txtnonear.Text.Trim() == "")
-        { }
-        else
-        {
-            int add = Convert.ToInt32(txtearn.Text.Trim()) + Convert.ToInt32(txtnonear.Text.Trim());
-            txttotal.Text = "";
-
-            txttotal.Text = add.ToString();
-        }
-
-
-    }
 
     public string valid_date(string date)
     {
