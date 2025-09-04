@@ -165,17 +165,18 @@
                                                                 </div>
                                                                 <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                                                                     Blood Group :
-   <asp:DropDownList ID="ddlblood" runat="server" CssClass="form-control">
-       <asp:ListItem Text="--Select--" Value="0">--Select--</asp:ListItem>
-       <asp:ListItem Text="A+ve" Value="1"> </asp:ListItem>
-       <asp:ListItem Text="A-ve" Value="2"> </asp:ListItem>
-       <asp:ListItem Text="B+ve" Value="3"> </asp:ListItem>
-       <asp:ListItem Text="B-ve" Value="4"> </asp:ListItem>
-       <asp:ListItem Text="AB+ve" Value="5">  </asp:ListItem>
-       <asp:ListItem Text="AB-ve" Value="6">  </asp:ListItem>
-       <asp:ListItem Text="O+ve" Value="7"> </asp:ListItem>
-       <asp:ListItem Text=" O-ve" Value="8"> </asp:ListItem>
-   </asp:DropDownList>
+                                                                     <asp:DropDownList ID="ddlblood" runat="server" CssClass="form-control">
+                                                                         <asp:ListItem Text="--Select--" Value="0">--Select--</asp:ListItem>
+                                                                         <asp:ListItem Text="A+ve" Value="1"> </asp:ListItem>
+                                                                         <asp:ListItem Text="A-ve" Value="2"> </asp:ListItem>
+                                                                         <asp:ListItem Text="B+ve" Value="3"> </asp:ListItem>
+                                                                         <asp:ListItem Text="B-ve" Value="4"> </asp:ListItem>
+                                                                         <asp:ListItem Text="AB+ve" Value="5">  </asp:ListItem>
+                                                                         <asp:ListItem Text="AB-ve" Value="6">  </asp:ListItem>
+                                                                         <asp:ListItem Text="O+ve" Value="7"> </asp:ListItem>
+                                                                         <asp:ListItem Text=" O-ve" Value="8"> </asp:ListItem>
+                                                                     </asp:DropDownList>
+
                                                                 </div>
                                                                 <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                                                                     Place Of Birth<span style="color: #ff3333">*</span>

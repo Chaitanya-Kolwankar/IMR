@@ -312,7 +312,8 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                 grd_install.DataBind();
                 ddl_installment.SelectedValue = dt.Rows.Count.ToString();
                 ddl_installment.Enabled = false;
-                btn_new.Visible = true;
+                div_new.Visible = true;
+                div_print.Visible = true;
                 btnsave.Enabled = false;
                 btncancel.Enabled = false;
                 installtable.Visible = true;
@@ -380,7 +381,8 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                     ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Redefine Installment', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
                     ddl_installment.SelectedValue = "";
                     ddl_installment.Enabled = true;
-                    btn_new.Visible = false;
+                    div_new.Visible = false;
+                    div_print.Visible = false;
                     grd_install.DataSource = null;
                     grd_install.DataBind();
                     btnsave.Enabled = true;
@@ -438,7 +440,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
         {
             if (!btn_waveoff.Text.Contains("Cancel"))
             {
-                string qry = "SELECT CASE ISNULL(con.concession,0) WHEN 0 THEN 0 ELSE 1 END AS flag, mst.Struct_type, mst.Struct_name, (CAST(mst.Amount AS INT)-ISNULL(con.concession,0)) AS TotalFees, ISNULL(Paid,0) AS Paid, ISNULL(con.concession,'') AS Concession, CAST(mst.Amount AS INT) - ISNULL(Paid,0) - ISNULL(con.concession,0) AS Balance, mst.Struct_id, mst.Rank  FROM " + Session["feemaster"].ToString() + " mst LEFT JOIN (SELECT fee.Struct_id, SUM(CAST(fee.Amount AS INT)) AS Paid FROM m_FeeEntry fee WHERE fee.Stud_id='" + txt_studid.Text.Trim() + "' AND fee.Ayid='" + lblayid.Text.Trim() + "' AND fee.del_flag=0 AND fee.Chq_status='Clear'  AND fee.concession_flag=0 GROUP BY fee.Struct_id) fee ON fee.Struct_id=mst.Struct_id LEFT JOIN (SELECT con.Struct_id, SUM(CAST(con.Amount AS INT)) AS concession FROM m_FeeEntry con WHERE con.Stud_id='" + txt_studid.Text.Trim() + "' AND con.Ayid='" + lblayid.Text.Trim() + "' AND con.del_flag=0 AND con.Chq_status='Clear' AND con.concession_flag=1 GROUP BY con.Struct_id) con ON con.Struct_id=mst.Struct_id WHERE mst.Ayid='" + lblayid.Text.Trim() + "' AND mst.del_flag=0 AND mst.Group_id='" + lblgroupid.Text.Trim() + "' AND mst.Gender='" + Session["gender"].ToString().Trim() + "' AND mst.Category='" + lblcategory.Text.Trim() + "' AND mst.Struct_type='OTHER' ORDER BY mst.Rank";
+                string qry = "SELECT CASE ISNULL(con.concession,0) WHEN 0 THEN 0 ELSE 1 END AS flag, mst.Struct_type, mst.Struct_name, (CAST(mst.Amount AS INT)-ISNULL(con.concession,0)) AS TotalFees, ISNULL(Paid,0) AS Paid, ISNULL(con.concession,'') AS Concession, CAST(mst.Amount AS INT) - ISNULL(Paid,0) - ISNULL(con.concession,0) AS Balance, mst.Struct_id, mst.Rank  FROM " + Session["feemaster"].ToString() + " mst LEFT JOIN (SELECT fee.Struct_id, SUM(CAST(fee.Amount AS INT)) AS Paid FROM m_FeeEntry fee WHERE fee.Stud_id='" + txt_studid.Text.Trim() + "' AND fee.Ayid='" + lblayid.Text.Trim() + "' AND fee.del_flag=0 AND fee.Chq_status='Clear'  AND fee.concession_flag=0 GROUP BY fee.Struct_id) fee ON fee.Struct_id=mst.Struct_id LEFT JOIN (SELECT con.Struct_id, SUM(CAST(con.Amount AS INT)) AS concession FROM m_FeeEntry con WHERE con.Stud_id='" + txt_studid.Text.Trim() + "' AND con.Ayid='" + lblayid.Text.Trim() + "' AND con.del_flag=0 AND con.Chq_status='Clear' AND con.concession_flag=1 GROUP BY con.Struct_id) con ON con.Struct_id=mst.Struct_id WHERE mst.Ayid='" + lblayid.Text.Trim() + "' AND mst.del_flag=0 AND mst.Group_id='" + lblgroupid.Text.Trim() + "' AND mst.Gender='" + Session["gender"].ToString().Trim() + "' AND mst.Category='" + lblcategory.Text.Trim() + "' AND mst.Struct_type like 'OTHER%' ORDER BY mst.Rank";
 
                 DataTable dt = cls.fillDataTable(qry);
                 if (dt.Rows.Count > 0)
@@ -489,12 +491,25 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
         }
         else
         {
-            string qry = "insert into m_FeeEntry(Stud_id, Amount, Ayid, Pay_date, Struct_id,Install_id,Struct_name, Recpt_mode, Receipt_no, Recpt_Chq_dt, Recpt_Chq_No, Recpt_Bnk_Name, Recpt_Bnk_Branch, Chq_status, type, user_id,concession_flag) values ('" + txt_studid.Text.Trim() + "','" + txtpay.Text.Trim() + "','" + lblayid.Text.Trim() + "',Getdate(),'" + lbl_struct_id + "',NULL,'" + lblstructname + "','concession','" + load_recipt_no() + "',NULL,NULL,NULL,NULL,'Clear','concession','" + Session["emp_id"].ToString() + "',1);";
-            if (cls.DMLqueries(qry))
+            if (txtpay.Text.Trim() == "")
             {
-                ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Concession Updated Successfully', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
-                btn_waveoff.Text = "Wave Off";
-                btn_waveoff_Click(sender, e);
+                ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Enter Concession Amount !!', { color: '#fff', background: '#D44950', blur: 0.2, delay: 0, timeout: 100 });", true);
+                return;
+            }
+            else if (txtpay.Text.Trim() == "0")
+            {
+                ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Concession Amount Cannot be Zero!!', { color: '#fff', background: '#D44950', blur: 0.2, delay: 0, timeout: 100 });", true);
+                return;
+            }
+            else
+            {
+                string qry = "insert into m_FeeEntry(Stud_id, Amount, Ayid, Pay_date, Struct_id,Install_id,Struct_name, Recpt_mode, Receipt_no, Recpt_Chq_dt, Recpt_Chq_No, Recpt_Bnk_Name, Recpt_Bnk_Branch, Chq_status, type, user_id,concession_flag) values ('" + txt_studid.Text.Trim() + "','" + txtpay.Text.Trim() + "','" + lblayid.Text.Trim() + "',Getdate(),'" + lbl_struct_id + "',NULL,'" + lblstructname + "','concession','" + load_recipt_no() + "',NULL,NULL,NULL,NULL,'Clear','concession','" + Session["emp_id"].ToString() + "',1);";
+                if (cls.DMLqueries(qry))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Concession Updated Successfully', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
+                    btn_waveoff.Text = "Wave Off";
+                    btn_waveoff_Click(sender, e);
+                }
             }
         }
     }
@@ -522,5 +537,13 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
 
         string receiptNo = prefix + newIncrement.ToString("D2");
         return receiptNo;
+    }
+
+    protected void btn_print_Click(object sender, EventArgs e)
+    {
+        Session["install_stud_id"] = txt_studid.Text.Trim();
+        Session["instll_group_id"] = lblgroupid.Text;
+        Session["install_ayid"] = lblayid.Text.Trim();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "redirect('Installment_Receipt.aspx');", true);
     }
 }
