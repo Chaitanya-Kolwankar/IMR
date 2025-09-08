@@ -141,7 +141,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
         }
         else
         {
-            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Wave Off In Process !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Waive Off In Process !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
         }
     }
 
@@ -264,7 +264,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
         }
         else
         {
-            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Wave Off In Process !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Waive Off In Process !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
         }
     }
     public string getnum(int num)
@@ -396,7 +396,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
         }
         else
         {
-            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Wave Off In Process !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Waive Off In Process !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true);
         }
     }
 
@@ -450,7 +450,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                     grdfees.DataBind();
                     installtable.Visible = false;
                     feetable.Visible = true;
-                    btn_waveoff.Text = "Cancel Wave Off";
+                    btn_waveoff.Text = "Cancel Waive Off";
                 }
                 else
                 {
@@ -464,7 +464,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
             }
             else
             {
-                btn_waveoff.Text = "Wave Off";
+                btn_waveoff.Text = "Waive Off";
                 installtable.Visible = true;
                 feetable.Visible = false;
             }
@@ -485,7 +485,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
             if (cls.DMLqueries(qry))
             {
                 ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Concession Deleted !!', { color: '#fff', background: '#D44950', blur: 0.2, delay: 0, timeout: 100 });", true);
-                btn_waveoff.Text = "Wave Off";
+                btn_waveoff.Text = "Waive Off";
                 btn_waveoff_Click(sender, e);
             }
         }
@@ -507,7 +507,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                 if (cls.DMLqueries(qry))
                 {
                     ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Concession Updated Successfully', { color: '#3c763d', background: '#dff0d8', blur: 0.2, delay: 0 });", true);
-                    btn_waveoff.Text = "Wave Off";
+                    btn_waveoff.Text = "Waive Off";
                     btn_waveoff_Click(sender, e);
                 }
             }

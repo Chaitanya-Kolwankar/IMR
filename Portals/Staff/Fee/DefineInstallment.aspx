@@ -201,7 +201,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <br />
-                                                <asp:Button ID="btn_waveoff" runat="server" CssClass="btn btn-primary form-control" Text="Wave Off" OnClick="btn_waveoff_Click" />
+                                                <asp:Button ID="btn_waveoff" runat="server" CssClass="btn btn-primary form-control" Text="Waive Off" OnClick="btn_waveoff_Click" />
                                             </div>
                                         </div>
                                         <br />
