@@ -12,7 +12,7 @@ public partial class searchstudent : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+
         if (!IsPostBack)
         {
             if (Convert.ToString(Session["Emp_id"]) == "")
@@ -26,7 +26,7 @@ public partial class searchstudent : System.Web.UI.Page
                 btnupdate2.Enabled = false;
                 btnupdate3.Enabled = false; btnupdt5.Enabled = false;
 
-               
+
             }
 
         }
@@ -44,7 +44,7 @@ public partial class searchstudent : System.Web.UI.Page
         ddlstate1.DataSource = dtstate;
         ddlstate1.DataTextField = dtstate.Columns["Parent"].ToString().ToUpper();
         ddlstate1.DataValueField = dtstate.Columns["Parent"].ToString().ToUpper();
-        
+
         ddlstate1.DataBind();
         ddlstate1.Items.Insert(0, new ListItem("--Select--", ""));
 
@@ -99,7 +99,7 @@ public partial class searchstudent : System.Web.UI.Page
                     state();
                     ddlsta();
                     fillcat();
-                   
+
                     lastname.Text = dt.Rows[0]["L_name"].ToString();
                     firstname.Text = dt.Rows[0]["F_name"].ToString();
                     midname.Text = dt.Rows[0]["M_name"].ToString();
@@ -239,7 +239,7 @@ public partial class searchstudent : System.Web.UI.Page
                     obj1.fillDataTable(castfillquery);
                     DataTable dt12 = new DataTable();
                     dt12 = obj1.fillDataTable(castfillquery);
-                    
+
                     ddlcaste.DataTextField = dt12.Columns["child"].ToString();
                     ddlcaste.DataValueField = dt12.Columns["child"].ToString();
                     ddlcaste.DataSource = dt12;
@@ -274,13 +274,13 @@ public partial class searchstudent : System.Web.UI.Page
                     //     ddlrel.SelectedValue= dt.Rows[0]["Religion"].ToString();
                     //}
 
-                   
+
 
                     //religion
                     ddlcaste.SelectedItem.Text = dt.Rows[0]["caste"].ToString();
                     //   ddlphy.Text = dt.Rows[0]["Phy_handicap_Description"].ToString();
 
-                    
+
 
                 }
                 else
@@ -293,7 +293,7 @@ public partial class searchstudent : System.Web.UI.Page
         catch (Exception d)
         {
 
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('"+d.Message+"', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('" + d.Message + "', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
         }
     }
     protected void btncancel_Click(object sender, EventArgs e)
@@ -314,7 +314,7 @@ public partial class searchstudent : System.Web.UI.Page
         {
             string mail = emailbox.Text;
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", RegexOptions.CultureInvariant | RegexOptions.Singleline);
-         
+
             bool mail2 = regex.IsMatch(mail);
             //if (mail.Contains("@") && mail.Contains(".")) { 
             //}
@@ -363,7 +363,7 @@ public partial class searchstudent : System.Web.UI.Page
             }
             else
             {
-                String updt = ("update d_adm_applicant set F_name='" + firstname.Text.Trim().Replace("'", "''") + "',M_name='" + midname.Text.Trim().Replace("'", "''") + "',L_name='" + lastname.Text.Trim().Replace("'", "''") + "',Mo_name='" + mothername.Text.Trim().Replace("'", "''") + "',DOB='"+ dob.Text.Trim()+ "',Email_id='" + mail.Trim().Replace("'", "''") + "',Mob_No='" + mobno.Text.Trim() + "',Phone_No='" + othercont.Text.Trim() + "' where Form_no='" + formno + "'");
+                String updt = ("update d_adm_applicant set F_name='" + firstname.Text.Trim().Replace("'", "''") + "',M_name='" + midname.Text.Trim().Replace("'", "''") + "',L_name='" + lastname.Text.Trim().Replace("'", "''") + "',Mo_name='" + mothername.Text.Trim().Replace("'", "''") + "',DOB='" + dob.Text.Trim() + "',Email_id='" + mail.Trim().Replace("'", "''") + "',Mob_No='" + mobno.Text.Trim() + "',Phone_No='" + othercont.Text.Trim() + "' where Form_no='" + formno + "'");
 
 
                 bool chk = obj1.DMLqueries(updt);
@@ -403,7 +403,7 @@ public partial class searchstudent : System.Web.UI.Page
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('Enter City.', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
 
             }
-            else if (ddlmarrystatus.SelectedIndex==0)
+            else if (ddlmarrystatus.SelectedIndex == 0)
             {
 
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('Select Maritial Status.', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
@@ -447,11 +447,11 @@ public partial class searchstudent : System.Web.UI.Page
                 }
             }
         }
-        catch(Exception d)
+        catch (Exception d)
         {
 
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('"+d.Message+"','danger')", true);
-        
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('" + d.Message + "','danger')", true);
+
         }
     }
 
@@ -588,7 +588,7 @@ public partial class searchstudent : System.Web.UI.Page
     {
         try
         {
-            
+
 
             string formno = txtformno.Text;
             if (fathername.Text.Trim() == "")
@@ -685,8 +685,13 @@ public partial class searchstudent : System.Web.UI.Page
             }
             else
             {
+                string caste = "";
+                if (ddlcaste.Items.Count > 0)
+                {
+                    caste = ddlcaste.SelectedValue;
+                }
 
-                string update5 = "update d_adm_applicant set Category='" + ddlcat.SelectedItem.ToString() + "', caste='" + ddlcaste.SelectedItem.ToString() + "',Certificate_No='" + certibox.Text + "' where Form_no='" + formno + "'";
+                string update5 = "update d_adm_applicant set Category='" + ddlcat.SelectedItem.ToString() + "', caste='" + caste + "',Certificate_No='" + certibox.Text + "' where Form_no='" + formno + "'";
                 bool chk4 = obj1.DMLqueries(update5);
                 if (chk4)
                 {
@@ -700,7 +705,7 @@ public partial class searchstudent : System.Web.UI.Page
         }
         catch (Exception d)
         {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('"+d.Message+"', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('" + d.Message + "', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
         }
     }
     protected void ddlcaste_SelectedIndexChanged(object sender, EventArgs e)
@@ -750,7 +755,7 @@ public partial class searchstudent : System.Web.UI.Page
             }
             else
             {
-                ddlcaste.Enabled = true ;
+                ddlcaste.Enabled = true;
 
             }
 
@@ -781,7 +786,7 @@ public partial class searchstudent : System.Web.UI.Page
         }
     }
     protected void ddlstate_SelectedIndexChanged(object sender, EventArgs e)     //ssc
-     {
+    {
         try
         {
             string board = "select  Child from State_category_details where Main='State' and Parent='" + ddlstate.SelectedValue.ToString() + "'";
@@ -808,7 +813,7 @@ public partial class searchstudent : System.Web.UI.Page
         ddlstate.DataSource = dtstate;
         ddlstate.DataTextField = dtstate.Columns["Parent"].ToString();
         ddlstate.DataValueField = dtstate.Columns["Parent"].ToString();
-        
+
         ddlstate.DataBind();
         ddlstate.Items.Insert(0, new ListItem("--Select--", ""));
 
@@ -816,7 +821,8 @@ public partial class searchstudent : System.Web.UI.Page
 
 
     }
-    public void fillcat() {
+    public void fillcat()
+    {
         string catfillquery = "SELECT DISTINCT Parent FROM State_Category_details where Main ='Reserved Category'";
         obj1.fillDataTable(catfillquery);
         DataTable dt1 = new DataTable();
