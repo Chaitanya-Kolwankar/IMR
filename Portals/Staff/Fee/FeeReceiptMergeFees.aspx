@@ -88,6 +88,7 @@
                 margin: 2px 10px;
                 box-sizing: border-box;
                 font-size: 14px;
+                margin-top:15px;
             }
 
             table {
