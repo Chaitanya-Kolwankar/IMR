@@ -253,6 +253,15 @@
                                                                     Bloodgroup
                                                                 </label>
                                                                 <asp:DropDownList ID="ddlbldgrp" runat="server" CssClass="form-select">
+                                                                    <asp:ListItem Value="--Select--">--Select--</asp:ListItem>
+                                                                    <asp:ListItem Value="A +ve">A +ve</asp:ListItem>
+<asp:ListItem Value="A -ve">A -ve</asp:ListItem>
+<asp:ListItem Value="B +ve">B +ve</asp:ListItem>
+<asp:ListItem Value="B -ve">B -ve</asp:ListItem>
+<asp:ListItem Value="AB +ve">AB +ve</asp:ListItem>
+<asp:ListItem Value="AB -ve">AB -ve</asp:ListItem>
+<asp:ListItem Value="O +ve">O +ve</asp:ListItem>
+<asp:ListItem Value="O -ve">O -ve</asp:ListItem>
                                                                 </asp:DropDownList>
                                                             </div>
                                                             <div class="col-lg-2">
@@ -484,13 +493,13 @@
                                                             <label for="inputState" class="form-label">Occupation<span style="color: #ff3333; font-weight: 800">*</span></label>
                                                             <asp:DropDownList ID="ddl_fath_occupation" runat="server" CssClass="form-select">
                                                                 <asp:ListItem>--select--</asp:ListItem>
-                                                                <asp:ListItem>Service</asp:ListItem>
-                                                                <asp:ListItem>Business</asp:ListItem>
-                                                                <asp:ListItem>Professional</asp:ListItem>
-                                                                <asp:ListItem>Farmer</asp:ListItem>
-                                                                <asp:ListItem>Laborer</asp:ListItem>
-                                                                <asp:ListItem>Retired</asp:ListItem>
-                                                                <asp:ListItem>Other</asp:ListItem>
+                                                                <asp:ListItem Value="SERVICE">Service</asp:ListItem>
+<asp:ListItem Value="BUSINESS">Business</asp:ListItem>
+<asp:ListItem Value="PROFESSIONAL">Professional</asp:ListItem>
+<asp:ListItem Value="FARMER">Farmer</asp:ListItem>
+<asp:ListItem Value="LABORER">Laborer</asp:ListItem>
+<asp:ListItem Value="RETIRED">Retired</asp:ListItem>
+<asp:ListItem Value="OTHER">Other</asp:ListItem>
                                                             </asp:DropDownList>
                                                         </div>
                                                         <div class="col-lg-2">
@@ -543,14 +552,14 @@
                                                             <label for="inputState" class="form-label">Occupation<span style="color: #ff3333; font-weight: 800">*</span></label>
                                                             <asp:DropDownList ID="ddl_Moth_occu" runat="server" CssClass="form-select">
                                                                 <asp:ListItem>--select--</asp:ListItem>
-                                                                <asp:ListItem>Homemaker</asp:ListItem>
-                                                                <asp:ListItem>Service</asp:ListItem>
-                                                                <asp:ListItem>Business</asp:ListItem>
-                                                                <asp:ListItem>Professional</asp:ListItem>
-                                                                <asp:ListItem>Farmer</asp:ListItem>
-                                                                <asp:ListItem>Laborer</asp:ListItem>
-                                                                <asp:ListItem>Retired</asp:ListItem>
-                                                                <asp:ListItem>Other</asp:ListItem>
+                                                                <asp:ListItem Value="HOUSE WIFE">House Wife</asp:ListItem>
+<asp:ListItem Value="SERVICE">Service</asp:ListItem>
+<asp:ListItem Value="BUSINESS">Business</asp:ListItem>
+<asp:ListItem Value="PROFESSIONAL">Professional</asp:ListItem>
+<asp:ListItem Value="FARMER">Farmer</asp:ListItem>
+<asp:ListItem Value="LABORER">Laborer</asp:ListItem>
+<asp:ListItem Value="RETIRED">Retired</asp:ListItem>
+<asp:ListItem Value="OTHER">Other</asp:ListItem>
                                                             </asp:DropDownList>
                                                         </div>
                                                         <div class="col-lg-2">
@@ -614,7 +623,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card">
+                                            <div class="card" style="display:none">
                                                 <div class="card-header">
                                                     No. Of Person In The Family
                                                 </div>

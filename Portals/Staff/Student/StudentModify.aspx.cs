@@ -16,7 +16,6 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
     Class1 cls = new Class1();
     int queryResult;
     int queryResult1;
-    SqlConnection con = new SqlConnection("Data Source=172.16.10.42; Initial Catalog=VIVA_IMR_TESTING; User Id = sa; password=VIVAV$$@613;");
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Convert.ToString(Session["emp_id"]) == "")
@@ -39,10 +38,10 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
             }
         }
     }
-    public void dataonpageload() 
+    public void dataonpageload()
     {
-        btnUpload.Attributes.Add("disabled","disabled");
-       //    btnUpload.Enabled = false;
+        btnUpload.Attributes.Add("disabled", "disabled");
+        //    btnUpload.Enabled = false;
         btn_pd.Enabled = false;
         btn_brthplace_updt.Enabled = false;
         btnaddrss.Enabled = false;
@@ -54,12 +53,12 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
         btn_new.Enabled = false;
         btn_clr.Enabled = false;
         btnUpload.Enabled = false;
-      //  BTN_SAVE_IMAGE.Enabled = false;
+        //  BTN_SAVE_IMAGE.Enabled = false;
         PHOTO.Enabled = false;
         SIGN.Enabled = false;
 
         CATEGORY();
-        BLOODGROUP();
+        //BLOODGROUP();
         religion_load();
         state();
         nat_state();
@@ -78,7 +77,7 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
         ddlstate.DataValueField = dtstat.Columns["parent"].ToString();
         ddlstate.DataSource = dtstat;
         ddlstate.DataBind();
-        ddlstate.Items.Insert(0, new ListItem("--Select--", " "));  
+        ddlstate.Items.Insert(0, new ListItem("--Select--", " "));
     }
     public void nat_state()
     {
@@ -90,19 +89,19 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
         ddl_nat_state.DataBind();
         ddl_nat_state.Items.Insert(0, new ListItem("--Select--", " "));
     }
-    public void BLOODGROUP()
-    {
-        string bldgrp = "SELECT parent FROM State_category_details WHERE Main='BLOODGROUP' AND del_flag=0";
-        DataTable dtbldgrp = cls.fillDataTable(bldgrp);
-        ddlbldgrp.DataTextField = dtbldgrp.Columns["parent"].ToString();
-        ddlbldgrp.DataValueField = dtbldgrp.Columns["parent"].ToString();
-        ddlbldgrp.DataSource = dtbldgrp;
-        ddlbldgrp.DataBind();
-        ddlbldgrp.Items.Insert(0, new ListItem("--Select--", " "));
-    }
+    //public void BLOODGROUP()
+    //{
+    //    string bldgrp = "SELECT parent FROM State_category_details WHERE Main='BLOODGROUP' AND del_flag=0";
+    //    DataTable dtbldgrp = cls.fillDataTable(bldgrp);
+    //    ddlbldgrp.DataTextField = dtbldgrp.Columns["parent"].ToString();
+    //    ddlbldgrp.DataValueField = dtbldgrp.Columns["parent"].ToString();
+    //    ddlbldgrp.DataSource = dtbldgrp;
+    //    ddlbldgrp.DataBind();
+    //    ddlbldgrp.Items.Insert(0, new ListItem("--Select--", " "));
+    //}
 
 
-    public void CATEGORY() 
+    public void CATEGORY()
     {
         string cate = "select distinct Parent  from State_category_details where main ='Reserved Category' and del_flag=0";
         DataTable dtcat = cls.fillDataTable(cate);
@@ -158,7 +157,7 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                 txt_mname.Text =
                     "";
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Enter Middle Name.','danger')", true);
-            }         
+            }
             else if (rad_female.Checked == false && rad_gender.Checked == false)
             {
                 gen.Focus();
@@ -195,11 +194,11 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                     }
                     else
                     {
-                        con.Open();
+                        cls.con.Open();
 
                         string dat2 = txt_dob.Text.Trim();
-                        string updte_personaldetails = "update m_std_personaldetails_tbl set  stud_Gender='" + gen_value + "',stud_DOB= Convert(datetime,'" + dat2 + "',105),stud_BloodGroup='" + ddlbldgrp.SelectedValue.ToString() + "',stud_Nationality='" + ddlnation.SelectedValue.ToString() + "',stud_Category='" + ddlcat.SelectedValue.ToString() + "',stud_Caste='" + ddlcast.SelectedValue.ToString() + "',mod_dt=getdate() where stud_id='" + txt_studid.Text.Trim() + "';UPDATE m_std_studentacademic_tbl SET ID_No='"+ txt_prn.Text.Trim() + "' WHERE stud_id='" + txt_studid.Text.Trim() + "'";
-                        SqlCommand cmd = new SqlCommand("update m_std_personaldetails_tbl set stud_L_Name=@Lastname, stud_F_Name=@studFname, stud_M_Name=@studMName where stud_id = '" + txt_studid.Text.Trim() + "'", con);
+                        string updte_personaldetails = "update m_std_personaldetails_tbl set  stud_Gender='" + gen_value + "',stud_DOB= Convert(datetime,'" + dat2 + "',105),stud_BloodGroup='" + ddlbldgrp.SelectedValue.ToString() + "',stud_Nationality='" + ddlnation.SelectedValue.ToString() + "',stud_Category='" + ddlcat.SelectedValue.ToString() + "',stud_Caste='" + ddlcast.SelectedValue.ToString() + "',mod_dt=getdate() where stud_id='" + txt_studid.Text.Trim() + "';UPDATE m_std_studentacademic_tbl SET ID_No='" + txt_prn.Text.Trim() + "' WHERE stud_id='" + txt_studid.Text.Trim() + "'";
+                        SqlCommand cmd = new SqlCommand("update m_std_personaldetails_tbl set stud_L_Name=@Lastname, stud_F_Name=@studFname, stud_M_Name=@studMName where stud_id = '" + txt_studid.Text.Trim() + "'", cls.con);
                         SqlParameter[] param = new SqlParameter[3];
                         param[0] = new SqlParameter("@Lastname", txt_lname.Text.Trim());
                         cmd.Parameters.Add(param[0]);
@@ -208,14 +207,14 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                         param[2] = new SqlParameter("@studMName", txt_mname.Text.Trim());
                         cmd.Parameters.Add(param[2]);
                         int check = cmd.ExecuteNonQuery();
-                        con.Close();
+                        cls.con.Close();
                         if (cls.DMLqueries(updte_personaldetails))
                         {
 
-                             string search_stud1 = "select convert(varchar,p.stud_DOB,103) as stud_dob,* from m_std_studentacademic_tbl as a,m_std_personaldetails_tbl as p where a.ayid ='" + Session["Year"].ToString() + "' and a.stud_id ='" + txt_studid.Text.Trim() + "' and a.stud_id = p.stud_id and a.del_flag = 0 and p.del_flag = 0;select * from  m_std_pervrecord_tbl where Stud_id='" + txt_studid.Text.Trim() + "' and Del_Flag=0  ORDER BY Exam;select * from studentImage where stud_id='" + txt_studid.Text.Trim() + "'";
+                            string search_stud1 = "select convert(varchar,p.stud_DOB,103) as stud_dob,* from m_std_studentacademic_tbl as a,m_std_personaldetails_tbl as p where a.ayid ='" + Session["Year"].ToString() + "' and a.stud_id ='" + txt_studid.Text.Trim() + "' and a.stud_id = p.stud_id and a.del_flag = 0 and p.del_flag = 0;select * from  m_std_pervrecord_tbl where Stud_id='" + txt_studid.Text.Trim() + "' and Del_Flag=0  ORDER BY Exam;select * from studentImage where stud_id='" + txt_studid.Text.Trim() + "'";
 
                             DataSet srchdt1 = cls.fillDataset(search_stud1);
-                            if(srchdt1.Tables[0].Rows.Count> 0)
+                            if (srchdt1.Tables[0].Rows.Count > 0)
                             {
 
                                 txt_prn.Text = srchdt1.Tables[0].Rows[0]["ID_NO"].ToString();
@@ -304,9 +303,9 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                                 txt_guard_phone.Text = srchdt1.Tables[0].Rows[0]["stud_Gaurd_TelNo"].ToString();
                                 txt_guard_address.Text = srchdt1.Tables[0].Rows[0]["stud_Gaurd_Add"].ToString();
                                 //family members
-                                txt_earning.Text = srchdt1.Tables[0].Rows[0]["stud_Earning"].ToString();
-                                txt_Nonearn.Text = srchdt1.Tables[0].Rows[0]["stud_NonEarning"].ToString();
-                                txt_tot_Member.Text = srchdt1.Tables[0].Rows[0]["stud_NoOfFamilyMembers"].ToString();
+                                //txt_earning.Text = srchdt1.Tables[0].Rows[0]["stud_Earning"].ToString();
+                                //txt_Nonearn.Text = srchdt1.Tables[0].Rows[0]["stud_NonEarning"].ToString();
+                                //txt_tot_Member.Text = srchdt1.Tables[0].Rows[0]["stud_NoOfFamilyMembers"].ToString();
                                 txt_Incone.Text = srchdt1.Tables[0].Rows[0]["stud_YearlyIncome"].ToString();
                                 //educational
                                 if (srchdt1.Tables[1].Rows.Count > 0)
@@ -341,11 +340,11 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                 }
                 else
                 {
-                    con.Open();
+                    cls.con.Open();
                     string caste_null = "NULL";
                     string dat2 = txt_dob.Text.Trim();
                     string updte_personaldetails = "update m_std_personaldetails_tbl set  stud_Gender='" + gen_value + "',stud_DOB= Convert(datetime,'" + dat2 + "',105),stud_BloodGroup='" + ddlbldgrp.SelectedValue.ToString() + "',stud_Nationality='" + ddlnation.SelectedValue.ToString() + "',stud_Category='" + ddlcat.SelectedValue.ToString() + "',stud_Caste='" + caste_null + "',mod_dt=getdate() where stud_id='" + txt_studid.Text.Trim() + "'";
-                    SqlCommand cmd = new SqlCommand("update m_std_personaldetails_tbl set stud_L_Name=@Lastname, stud_F_Name=@studFname, stud_M_Name=@studMName where stud_id = '" + txt_studid.Text.Trim() + "'", con);
+                    SqlCommand cmd = new SqlCommand("update m_std_personaldetails_tbl set stud_L_Name=@Lastname, stud_F_Name=@studFname, stud_M_Name=@studMName where stud_id = '" + txt_studid.Text.Trim() + "'", cls.con);
                     SqlParameter[] param = new SqlParameter[3];
                     param[0] = new SqlParameter("@Lastname", txt_lname.Text.Trim());
                     cmd.Parameters.Add(param[0]);
@@ -354,7 +353,7 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                     param[2] = new SqlParameter("@studMName", txt_mname.Text.Trim());
                     cmd.Parameters.Add(param[2]);
                     int check = cmd.ExecuteNonQuery();
-                    con.Close();
+                    cls.con.Close();
                     if (cls.DMLqueries(updte_personaldetails))
                     {
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Personal Details Updated.','success')", true);
@@ -387,7 +386,7 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                 ddlcast.Items.Clear();
             }
             else
-              {
+            {
                 caste();
                 if (ddlcat.SelectedItem.Text == "OPEN")
                 {
@@ -438,7 +437,7 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('" + d.Message + "','danger')", true);
         }
     }
-    public void idsearch() 
+    public void idsearch()
     {
         string ayd = Session["Year"].ToString();
         edit_image.ImageUrl = "";
@@ -504,13 +503,12 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                     ddlbldgrp.SelectedValue = srchdt.Tables[0].Rows[0]["stud_bloodGroup"].ToString();
                 }
 
-                if (srchdt.Tables[0].Rows[0]["stud_gender"].ToString() == "Female")
+                if (srchdt.Tables[0].Rows[0]["stud_gender"].ToString() == "Female" || srchdt.Tables[0].Rows[0]["stud_gender"].ToString() == "0")
                 {
                     rad_female.Checked = true;
                     rad_gender.Checked = false;
-                    rad_gender.Checked = false;
                 }
-                else if (srchdt.Tables[0].Rows[0]["stud_gender"].ToString() == "Male")
+                else if (srchdt.Tables[0].Rows[0]["stud_gender"].ToString() == "Male" || srchdt.Tables[0].Rows[0]["stud_gender"].ToString() == "1")
                 {
                     rad_gender.Checked = true;
                     rad_female.Checked = false;
@@ -539,7 +537,14 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                 txtemail.Text = srchdt.Tables[0].Rows[0]["stud_Email"].ToString().Trim();
                 ddlreli.SelectedValue = srchdt.Tables[0].Rows[0]["stud_Religion"].ToString().Trim();
                 txtadd.Text = srchdt.Tables[0].Rows[0]["stud_PermanentAdd"].ToString().Trim();
-                ddlstate.SelectedValue = srchdt.Tables[0].Rows[0]["stud_PermanentState"].ToString().Trim();
+                if (srchdt.Tables[0].Rows[0]["stud_PermanentState"].ToString() != null && srchdt.Tables[0].Rows[0]["stud_PermanentState"].ToString() != "NULL" && srchdt.Tables[0].Rows[0]["stud_PermanentState"].ToString() != "")
+                {
+                    ddlstate.SelectedValue = srchdt.Tables[0].Rows[0]["stud_PermanentState"].ToString().Trim();
+                }
+                else
+                {
+                    state();
+                }
                 txtcity.Text = srchdt.Tables[0].Rows[0]["stud_Permanentcity"].ToString().Trim();
                 txtpin.Text = srchdt.Tables[0].Rows[0]["stud_PermanentPincode"].ToString().Trim();
                 txtphone.Text = srchdt.Tables[0].Rows[0]["stud_PermanentPhone"].ToString().Trim();
@@ -568,7 +573,7 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                 txtMother_LstName.Text = srchdt.Tables[0].Rows[0]["stud_L_Name"].ToString();
                 txt_Mothe_Phon.Text = srchdt.Tables[0].Rows[0]["stud_Mother_TelNo"].ToString();
                 txt_Moth_servaddres.Text = srchdt.Tables[0].Rows[0]["stud_Mother_BusinessServiceAdd"].ToString();
-                ddl_Moth_occu.SelectedValue = srchdt.Tables[0].Rows[0]["stud_Mother_Occupation"].ToString();
+                ddl_Moth_occu.SelectedValue = srchdt.Tables[0].Rows[0]["stud_Mother_Occupation"].ToString().ToUpper();
                 //guardian Details
                 txtguard_fname.Text = srchdt.Tables[0].Rows[0]["stud_Gaurd_FName"].ToString();
                 txt_guard_MiddleName.Text = srchdt.Tables[0].Rows[0]["stud_Gaurd_MName"].ToString();
@@ -581,6 +586,8 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                 txt_tot_Member.Text = srchdt.Tables[0].Rows[0]["stud_NoOfFamilyMembers"].ToString();
                 txt_Incone.Text = srchdt.Tables[0].Rows[0]["stud_YearlyIncome"].ToString();
                 //educational
+
+           
                 if (srchdt.Tables[1].Rows.Count > 0)
                 {
                     grdviw.DataSource = srchdt.Tables[1];
@@ -746,15 +753,15 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
             else
             {
                 string updte_address = "update m_std_personaldetails_tbl set stud_PermanentState='" + ddlstate.SelectedValue.ToString() + "',stud_PermanentPincode='" + txtpin.Text.Trim() + "',stud_PermanentPhone='" + txtphone.Text.Trim() + "' where stud_id='" + txt_studid.Text.Trim() + "'";
-                con.Open();
-                SqlCommand cmd2 = new SqlCommand("update m_std_personaldetails_tbl set stud_PermanentAdd=@address,stud_PermanentCity=@stucity where stud_id='" + txt_studid.Text.Trim() + "' ",con);
+                cls.con.Open();
+                SqlCommand cmd2 = new SqlCommand("update m_std_personaldetails_tbl set stud_PermanentAdd=@address,stud_PermanentCity=@stucity where stud_id='" + txt_studid.Text.Trim() + "' ", cls.con);
                 SqlParameter[] param = new SqlParameter[2];
                 param[0] = new SqlParameter("@address", txtadd.Text.Trim());
                 cmd2.Parameters.Add(param[0]);
                 param[1] = new SqlParameter("@stucity", txtcity.Text.Trim());
                 cmd2.Parameters.Add(param[1]);
                 int check = cmd2.ExecuteNonQuery();
-                con.Close();
+                cls.con.Close();
                 if (cls.DMLqueries(updte_address))
                 {
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Address Updated.','success')", true);
@@ -775,11 +782,11 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
     {
         try
         {
-            if (txt_nat_pin.Text.Length >1 && txt_nat_pin.Text.Length < 6)
+            if (txt_nat_pin.Text.Length > 1 && txt_nat_pin.Text.Length < 6)
             {
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('  Native`s Pincode. must be of 6 digit','danger')", true);
                 txt_nat_pin.Focus();
-               
+
             }
             else if (txt_nat_phone.Text.Length > 1 && txt_nat_phone.Text.Length < 10)
             {
@@ -789,15 +796,15 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
             else
             {
                 string NAT_ADD = "UPDATE m_std_personaldetails_tbl SET stud_NativeState='" + ddl_nat_state.SelectedValue.ToString() + "',stud_NativePincode='" + txt_nat_pin.Text.Trim() + "',stud_NativePhone='" + txt_nat_phone.Text.Trim() + "' where stud_id='" + txt_studid.Text.Trim() + "'";
-                con.Open();
-                SqlCommand cmd = new SqlCommand("update m_std_personaldetails_tbl set  stud_NativeAdd=@nataddress,stud_NativeCity=@natcity where stud_id = '" + txt_studid.Text.Trim() + "'", con);
+                cls.con.Open();
+                SqlCommand cmd = new SqlCommand("update m_std_personaldetails_tbl set  stud_NativeAdd=@nataddress,stud_NativeCity=@natcity where stud_id = '" + txt_studid.Text.Trim() + "'", cls.con);
                 SqlParameter[] param = new SqlParameter[2];
                 param[0] = new SqlParameter("@nataddress", nat_address.Text.Trim());
                 cmd.Parameters.Add(param[0]);
                 param[1] = new SqlParameter("@natcity", nat_txt_city.Text.Trim());
                 cmd.Parameters.Add(param[1]);
                 int check = cmd.ExecuteNonQuery();
-                con.Close();
+                cls.con.Close();
                 if (cls.DMLqueries(NAT_ADD))
                 {
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Native`s Details Updated.','success')", true);
@@ -841,10 +848,10 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
             }
             else
             {
-                 con.Open();
-                 string father_updt_qry = "update m_std_personaldetails_tbl set stud_Father_Occupation='" + ddl_fath_occupation.SelectedValue.ToString() + "',stud_Father_TelNo='" + txt_fath_phone.Text.Trim() + "',mod_dt= GETDATE() where stud_id='" + txt_studid.Text.Trim() + "'";
+                cls.con.Open();
+                string father_updt_qry = "update m_std_personaldetails_tbl set stud_Father_Occupation='" + ddl_fath_occupation.SelectedValue.ToString() + "',stud_Father_TelNo='" + txt_fath_phone.Text.Trim() + "',mod_dt= GETDATE() where stud_id='" + txt_studid.Text.Trim() + "'";
 
-                SqlCommand cmd8 = new SqlCommand("update m_std_personaldetails_tbl set stud_L_Name=@fatherlname, stud_Father_MName=@fatherMiddlename, stud_M_Name=@studfather_firstname,stud_Father_BusinessServiceAdd=@businessadress where stud_id = '" + txt_studid.Text.Trim() + "'", con);
+                SqlCommand cmd8 = new SqlCommand("update m_std_personaldetails_tbl set stud_L_Name=@fatherlname, stud_Father_MName=@fatherMiddlename, stud_M_Name=@studfather_firstname,stud_Father_BusinessServiceAdd=@businessadress where stud_id = '" + txt_studid.Text.Trim() + "'", cls.con);
                 SqlParameter[] param = new SqlParameter[4];
                 param[0] = new SqlParameter("@fatherlname", txt_fatherLstnam.Text.Trim());
                 cmd8.Parameters.Add(param[0]);
@@ -855,7 +862,7 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                 param[3] = new SqlParameter("@businessadress", txt_fath_address.Text.Trim());
                 cmd8.Parameters.Add(param[3]);
                 int check = cmd8.ExecuteNonQuery();
-                con.Close();
+                cls.con.Close();
 
 
                 if (cls.DMLqueries(father_updt_qry))
@@ -991,7 +998,7 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
         {
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('" + d.Message + "','danger')", true);
         }
-     }
+    }
 
     protected void btn_Mortherdetail_Click(object sender, EventArgs e)
     {
@@ -1017,10 +1024,10 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
             }
             else
             {
-                con.Open();
+                cls.con.Open();
                 string Morther_updte_qry = "update m_std_personaldetails_tbl set stud_Mother_Occupation='" + ddl_Moth_occu.SelectedValue.ToString() + "',stud_Mother_TelNo='" + txt_Mothe_Phon.Text.Trim() + "',mod_dt=getdate() where stud_id='" + txt_studid.Text.Trim() + "'";
 
-                SqlCommand cmd = new SqlCommand("update m_std_personaldetails_tbl set stud_Mother_FName=@Motherfirstname, stud_Mother_MName=@motherMiddle, stud_Mother_LName=@Motherlast,stud_Mother_BusinessServiceAdd=@momadrress where stud_id = '" + txt_studid.Text.Trim() + "'", con);
+                SqlCommand cmd = new SqlCommand("update m_std_personaldetails_tbl set stud_Mother_FName=@Motherfirstname, stud_Mother_MName=@motherMiddle, stud_Mother_LName=@Motherlast,stud_Mother_BusinessServiceAdd=@momadrress where stud_id = '" + txt_studid.Text.Trim() + "'", cls.con);
                 SqlParameter[] param = new SqlParameter[4];
                 param[0] = new SqlParameter("@Motherfirstname", txtMother_fname.Text.Trim());
                 cmd.Parameters.Add(param[0]);
@@ -1034,7 +1041,7 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
 
 
                 int check = cmd.ExecuteNonQuery();
-                con.Close();
+                cls.con.Close();
 
 
 
@@ -1065,10 +1072,10 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
             }
             else
             {
-                con.Open();
+                cls.con.Open();
                 string guard_qry = "update m_std_personaldetails_tbl set stud_Gaurd_TelNo = '" + txt_guard_phone.Text.Trim() + "',mod_dt= GETDATE() where stud_id = '" + txt_studid.Text.Trim() + "'";
 
-                SqlCommand cmd = new SqlCommand("update m_std_personaldetails_tbl set stud_Gaurd_FName=@guardfirst, stud_Gaurd_MName=@guardmiddle, stud_Gaurd_LName=@guardLast,stud_Gaurd_Add=@guardaddress where stud_id = '" + txt_studid.Text.Trim() + "'", con);
+                SqlCommand cmd = new SqlCommand("update m_std_personaldetails_tbl set stud_Gaurd_FName=@guardfirst, stud_Gaurd_MName=@guardmiddle, stud_Gaurd_LName=@guardLast,stud_Gaurd_Add=@guardaddress where stud_id = '" + txt_studid.Text.Trim() + "'", cls.con);
                 SqlParameter[] param = new SqlParameter[4];
                 param[0] = new SqlParameter("@guardfirst", txtguard_fname.Text.Trim());
                 cmd.Parameters.Add(param[0]);
@@ -1079,7 +1086,7 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                 param[3] = new SqlParameter("@guardaddress", txt_guard_address.Text.Trim());
                 cmd.Parameters.Add(param[3]);
                 int check = cmd.ExecuteNonQuery();
-                con.Close();
+                cls.con.Close();
 
 
 
@@ -1164,7 +1171,7 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
             string mnth_year = mnthpassing.Text;
             string[] month_year_split = mnth_year.Split(' ');
 
-           
+
             txtPassingmonth.SelectedValue = month_year_split[0];
             txtPassingyear.SelectedValue = month_year_split[8];
             txtobtmrks.Text = obtmarks.Text;
@@ -1180,9 +1187,9 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
         }
     }
 
-    public void EDUC_GRID() 
+    public void EDUC_GRID()
     {
-        string GRD_QURY = "select * from  m_std_pervrecord_tbl where Stud_id = '" + txt_studid.Text.Trim() + "' and Del_Flag = 0  ORDER BY Exam";        
+        string GRD_QURY = "select * from  m_std_pervrecord_tbl where Stud_id = '" + txt_studid.Text.Trim() + "' and Del_Flag = 0  ORDER BY Exam";
         DataTable DT_EDU = cls.fillDataTable(GRD_QURY);
         grdviw.DataSource = DT_EDU;
         grdviw.DataBind();
@@ -1273,7 +1280,8 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Enter Institute Name','danger')", true);
 
                 }
-                else if (txt_inst_place.Text.Trim() == "") {
+                else if (txt_inst_place.Text.Trim() == "")
+                {
                     txt_inst_place.Text = "";
                     txt_inst_place.Focus();
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Enter Institute Place','danger')", true);
@@ -1284,7 +1292,7 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                     txt_seat.Text = "";
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Enter Seat Number.','danger')", true);
                     txt_seat.Focus();
-                }              
+                }
                 else if (txt_boardUniver.Text.Trim() == "")
                 {
                     txt_boardUniver.Text = "";
@@ -1345,9 +1353,9 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                     }
                     else
                     {
-                        con.Open();
+                        cls.con.Open();
 
-                        SqlCommand cmd6 = new SqlCommand("INSERT INTO m_std_pervrecord_tbl (Stud_id,Exam,Institute_name,Institute_place,Major_Subject,Exam_seatno,Board_University,Specialization,certificate_no,Marks_obtained,Outof,Month_year_passing,Class_obtained,Exact_percentage,User_id,Curr_dt,Del_Flag,FYID,AYID) VALUES(@studid,@exam,@instname,@instplace,@majorsubject,@seatno,@boarduniversity,@specialization,@certificate,@obtainmrks,@outmrks,@monthandyear,@classobtain,@percentage,@admin,@getdate,@delflag,@fyid,@ayidd)", con);
+                        SqlCommand cmd6 = new SqlCommand("INSERT INTO m_std_pervrecord_tbl (Stud_id,Exam,Institute_name,Institute_place,Major_Subject,Exam_seatno,Board_University,Specialization,certificate_no,Marks_obtained,Outof,Month_year_passing,Class_obtained,Exact_percentage,User_id,Curr_dt,Del_Flag,FYID,AYID) VALUES(@studid,@exam,@instname,@instplace,@majorsubject,@seatno,@boarduniversity,@specialization,@certificate,@obtainmrks,@outmrks,@monthandyear,@classobtain,@percentage,@admin,@getdate,@delflag,@fyid,@ayidd)", cls.con);
                         SqlParameter[] param = new SqlParameter[19];
 
                         param[0] = new SqlParameter("@studid", txt_studid.Text.Trim());
@@ -1382,15 +1390,15 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                         cmd6.Parameters.Add(param[14]);
                         param[15] = new SqlParameter("@getdate", "");
                         cmd6.Parameters.Add(param[15]);
-                        param[16] = new SqlParameter("@delflag","0");
+                        param[16] = new SqlParameter("@delflag", "0");
                         cmd6.Parameters.Add(param[16]);
-                        param[17] = new SqlParameter("@fyid","");
+                        param[17] = new SqlParameter("@fyid", "");
                         cmd6.Parameters.Add(param[17]);
                         param[18] = new SqlParameter("@ayidd", Session["Year"].ToString());
                         cmd6.Parameters.Add(param[18]);
 
                         int check = cmd6.ExecuteNonQuery();
-                        con.Close();
+                        cls.con.Close();
 
 
                         if (check == 1)
@@ -1415,8 +1423,8 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                         else
                         {
                             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('something went wrong','danger')", true);
-                        }                                                    
-                       
+                        }
+
                     }
                 }
             }
@@ -1503,44 +1511,44 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                         }
                         else
                         {
-                            con.Open();
+                            cls.con.Open();
 
-                                 string updte_info = "update m_std_pervrecord_tbl set Institute_name='" + txt_inst_Name.Text.Trim() + "',Institute_place='" + txt_inst_place.Text.Trim() + "',Exam_seatno='" + txt_seat.Text.Trim() + "',Month_year_passing='" + qry_passmnth_and_year + "',Marks_obtained='" + txtobtmrks.Text.Trim() + "',Outof='" + txt_OutOfMarks.Text.Trim() + "',Major_Subject='" + txt_Major_sub.Text.Trim() + "',Specialization='" + txtspec.Text.Trim() + "',certificate_no='" + txtcertificate.Text.Trim() + "',Class_obtained='" + class__obtained1 + "',Exact_percentage='" + PERCENTAGE1 + "',mod_dt= GETDATE() where Exam='" + txtexam.Text.Trim() + "' and Stud_id='" + txt_studid.Text.Trim() + "' and Del_Flag=0 and AYID='" + Session["Year"].ToString() + "'";
+                            string updte_info = "update m_std_pervrecord_tbl set Institute_name='" + txt_inst_Name.Text.Trim() + "',Institute_place='" + txt_inst_place.Text.Trim() + "',Exam_seatno='" + txt_seat.Text.Trim() + "',Month_year_passing='" + qry_passmnth_and_year + "',Marks_obtained='" + txtobtmrks.Text.Trim() + "',Outof='" + txt_OutOfMarks.Text.Trim() + "',Major_Subject='" + txt_Major_sub.Text.Trim() + "',Specialization='" + txtspec.Text.Trim() + "',certificate_no='" + txtcertificate.Text.Trim() + "',Class_obtained='" + class__obtained1 + "',Exact_percentage='" + PERCENTAGE1 + "',mod_dt= GETDATE() where Exam='" + txtexam.Text.Trim() + "' and Stud_id='" + txt_studid.Text.Trim() + "' and Del_Flag=0 and AYID='" + Session["Year"].ToString() + "'";
 
-                            SqlCommand cmd5 = new SqlCommand("update m_std_pervrecord_tbl set Board_University=@univer_board where stud_id='"+ txt_studid.Text.Trim() + "' and Del_Flag=0 and AYID='" + Session["Year"].ToString() + "'", con);
+                            SqlCommand cmd5 = new SqlCommand("update m_std_pervrecord_tbl set Board_University=@univer_board where stud_id='" + txt_studid.Text.Trim() + "' and Del_Flag=0 and AYID='" + Session["Year"].ToString() + "'", cls.con);
                             SqlParameter[] param = new SqlParameter[1];
                             param[0] = new SqlParameter("@univer_board", txt_boardUniver.Text.Trim());
-                             cmd5.Parameters.Add(param[0]);
+                            cmd5.Parameters.Add(param[0]);
 
                             int check = cmd5.ExecuteNonQuery();
-                            con.Close();
+                            cls.con.Close();
 
 
                             if (cls.DMLqueries(updte_info))
-                                {
-                                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Education Record Updated.','success')", true);
-                                    btn_new.Text = "Save";
-                                    EDUC_GRID();
-                                    txtexam.SelectedIndex = 0;
-                                    txt_inst_Name.Text = "";
-                                    txt_inst_place.Text = "";
-                                    txt_Major_sub.Text = "";
-                                    txt_seat.Text = "";
-                                    txt_boardUniver.Text = "";
-                                    txtspec.Text = "";
-                                    txtcertificate.Text = "";
-                                    txtPassingyear.SelectedIndex = 0;
-                                    txtPassingmonth.SelectedIndex = 0;
-                                    txt_OutOfMarks.Text = "";
-                                    txtobtmrks.Text = "";
-                                    txtexam.Enabled = true;
-                                }
-                                else
-                                {
-                                    btn_new.Text = "Save";
-                                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Something went wrong.','danger')", true);
-                                }
-                           
+                            {
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Education Record Updated.','success')", true);
+                                btn_new.Text = "Save";
+                                EDUC_GRID();
+                                txtexam.SelectedIndex = 0;
+                                txt_inst_Name.Text = "";
+                                txt_inst_place.Text = "";
+                                txt_Major_sub.Text = "";
+                                txt_seat.Text = "";
+                                txt_boardUniver.Text = "";
+                                txtspec.Text = "";
+                                txtcertificate.Text = "";
+                                txtPassingyear.SelectedIndex = 0;
+                                txtPassingmonth.SelectedIndex = 0;
+                                txt_OutOfMarks.Text = "";
+                                txtobtmrks.Text = "";
+                                txtexam.Enabled = true;
+                            }
+                            else
+                            {
+                                btn_new.Text = "Save";
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "func", "notify('Something went wrong.','danger')", true);
+                            }
+
                         }
                     }
                 }
@@ -1639,7 +1647,8 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
     {
         try
         {
-            if (txt_studid.Text!="") {
+            if (txt_studid.Text != "")
+            {
 
 
 
@@ -1802,7 +1811,7 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                     txt_tot_Member.Text = "";
                     txt_tot_Member.Text = Convert.ToString(Convert.ToInt32(txt_earning.Text));
                 }
-                else 
+                else
                 {
                     txt_tot_Member.Text = "";
                 }
