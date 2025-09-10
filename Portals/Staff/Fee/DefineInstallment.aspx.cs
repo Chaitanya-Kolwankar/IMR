@@ -434,7 +434,7 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
 
     protected void btn_waveoff_Click(object sender, EventArgs e)
     {
-        DataTable dt_in = cls.fillDataTable("select Install_id from m_FeeInstallment where Stud_id='" + txt_studid.Text.Trim() + "' and Ayid='" + txt_studid.Text.Trim() + "' and Del_flag=0");
+        DataTable dt_in = cls.fillDataTable("select Install_id from m_FeeInstallment where Stud_id='" + txt_studid.Text.Trim() + "' and Ayid='" + lblayid.Text.Trim() + "' and Del_flag=0");
         if (dt_in.Rows.Count > 0) { ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Installment Defined Cannot Define Concession !!', { color: '#fff', background: '#D44950', blur: 0.2, delay: 0, timeout: 100 });", true); }
         else
         {

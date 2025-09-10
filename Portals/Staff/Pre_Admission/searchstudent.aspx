@@ -447,7 +447,7 @@
                                                                             </div>
 
                                                                             <div class="col-lg-3">
-                                                                                Seat No<span style="COLOR: #ff3333">*</span>
+                                                                                Seat No
                                                            <asp:TextBox ID="seatno" CssClass="form-control" autocomplete="off" oncut="return false" onpaste="return false" oncopy="return false" MaxLength="10" onkeypress="return allow(event,this);" runat="server"></asp:TextBox>
                                                                                                                                                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="seatno" ErrorMessage="Seat No. Must Be Of 7 Digit" Display="Dynamic" ValidationExpression=".{7}.*" ForeColor="Red"></asp:RegularExpressionValidator>
 
@@ -689,7 +689,7 @@
                                                                             </div>
 
                                                                             <div class="col-lg-3">
-                                                                                Seat No<span style="COLOR: #ff3333">*</span>
+                                                                                Seat No
                                                            <asp:TextBox ID="seatno1" oncut="return false" onpaste="return false" oncopy="return false" CssClass="form-control" MaxLength="10" autocomplete="off" onkeypress="return allow(event,this);" runat="server"></asp:TextBox>
                                                                                 
                                                                                                                                                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ControlToValidate="seatno1" ErrorMessage="Seat No. Must Be Of 7 Digit" Display="Dynamic" ValidationExpression=".{7}.*" ForeColor="Red"></asp:RegularExpressionValidator>
