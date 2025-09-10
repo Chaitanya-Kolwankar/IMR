@@ -487,10 +487,10 @@ public partial class searchstudent : System.Web.UI.Page
             }
 
 
-            else if (seatno.Text.Trim() == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('Enter Seat no. in SSC.', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
-            }
+            //else if (seatno.Text.Trim() == "")
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('Enter Seat no. in SSC.', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
+            //}
             else if (mksobt.Text.Trim() == "")
             {
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('Enter Marks obtained in SSC.', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
@@ -536,10 +536,10 @@ public partial class searchstudent : System.Web.UI.Page
             }
 
 
-            else if (seatno1.Text.Trim() == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('Enter Seat of HSC.', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
-            }
+            //else if (seatno1.Text.Trim() == "")
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('Enter Seat of HSC.', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);
+            //}
             else if (mksobt1.Text.Trim() == "")
             {
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$.notify('Enter Marks Obtained of HSC.', { type: 'danger', animation: true, animationType: 'drop', align: 'center', verticalAlign: 'top', blur: 0.0, delay: 0 });", true);

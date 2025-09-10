@@ -181,7 +181,7 @@ public partial class Portals_Staff_Admission_Master_Fee_Master_Category : System
         {
             fill_grd();
             fill_subgrd();
-            string qry = " select Stud_id from m_feeEntry where Struct_id in  (select Struct_id from m_FeeMaster where Ayid='" + Session["Year"].ToString() + "' and Group_id='" + ddl_group.SelectedValue + "' and del_flag=0) and del_flag=0";
+            string qry = " select Stud_id from m_feeEntry where Struct_id in  (select Struct_id from m_FeeMaster_Category where Ayid='" + Session["Year"].ToString() + "' and Group_id='" + ddl_group.SelectedValue + "' and del_flag=0 and Gender='" + ddl_gender.SelectedValue + "' and Category='" + ddl_category.SelectedValue + "' ) and del_flag=0";
             DataTable dt = cls.fillDataTable(qry);
             if (dt.Rows.Count > 0)
             {
