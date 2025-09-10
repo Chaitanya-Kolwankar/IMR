@@ -535,7 +535,12 @@ public partial class Portals_Staff_Student_StudentModify : System.Web.UI.Page
                     ddlmart.SelectedValue = "Unmarried";
                 }
                 txtemail.Text = srchdt.Tables[0].Rows[0]["stud_Email"].ToString().Trim();
+                if (srchdt.Tables[0].Rows[0]["stud_Religion"].ToString().Trim() == "") {
+                    ddlreli.SelectedValue = "--SELECT--";
+                }
+                else { 
                 ddlreli.SelectedValue = srchdt.Tables[0].Rows[0]["stud_Religion"].ToString().Trim();
+                }
                 txtadd.Text = srchdt.Tables[0].Rows[0]["stud_PermanentAdd"].ToString().Trim();
                 if (srchdt.Tables[0].Rows[0]["stud_PermanentState"].ToString() != null && srchdt.Tables[0].Rows[0]["stud_PermanentState"].ToString() != "NULL" && srchdt.Tables[0].Rows[0]["stud_PermanentState"].ToString() != "")
                 {
