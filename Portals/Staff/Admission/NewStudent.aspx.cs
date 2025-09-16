@@ -213,7 +213,8 @@ public partial class Portals_Staff_Admission_Master_NewStudent : System.Web.UI.P
 
     public string load_recipt_no(string studId)
     {
-        string year = ddlyear.SelectedItem.Text.Trim().Split('/')[2];
+        string base_year = ddlyear.SelectedItem.Text.Trim().Split('/')[2];
+        string year = base_year.Split('-')[0];
         string prefix = studId + "-" + year + "-";
         int newIncrement = 1;
 
