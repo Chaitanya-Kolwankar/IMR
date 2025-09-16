@@ -733,6 +733,7 @@ public partial class FeeEntry_New : System.Web.UI.Page
                     DataTable dt = cls.fillDataTable(student_details);
                     if (dt.Rows.Count > 0)
                     {
+                        lbl_totalfees.Text = dt.Rows[0]["TotalAmount"].ToString();
                         lblpaidfees.Text = dt.Rows[0]["PaidAmount"].ToString();
                         lblbal.Text = dt.Rows[0]["Balance"].ToString();
                     }

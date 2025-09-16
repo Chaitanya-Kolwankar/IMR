@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Web;
@@ -511,6 +510,15 @@ public partial class Portals_Staff_Fee_DefineInstallment : System.Web.UI.Page
                     btn_waveoff_Click(sender, e);
                 }
             }
+        }
+        string student_details = "SELECT ISNULL(Paid.PaidAmount, 0) AS PaidAmount,ISNULL(Total.TotalAmount, 0) AS TotalAmount,ISNULL(Total.TotalAmount, 0) - ISNULL(Paid.PaidAmount, 0) AS Balance FROM (SELECT SUM(CAST(Amount AS INT)) AS PaidAmount FROM m_FeeEntry WHERE Stud_id = '" + txt_studid.Text.Trim() + "' AND Ayid = '" + lblayid.Text.Trim() + "' AND Chq_status = 'Clear' AND del_flag = 0 and fine_flag=0) AS Paid CROSS JOIN(SELECT SUM(CAST(Amount AS INT)) AS TotalAmount FROM " + Session["feemaster"].ToString() + " WHERE Ayid = '" + lblayid.Text.Trim() + "' AND Group_id = '" + lblgroupid.Text.Trim() + "' AND del_flag = 0 and Gender='" + Session["gender"].ToString() + "' and Category='" + lblcategory.Text.Trim() + "' ) AS Total";
+
+        DataTable dt = cls.fillDataTable(student_details);
+        if (dt.Rows.Count > 0)
+        {
+            lbl_totalfees.Text = dt.Rows[0]["TotalAmount"].ToString();
+            lblpaidfees.Text = dt.Rows[0]["PaidAmount"].ToString();
+            lblbal.Text = dt.Rows[0]["Balance"].ToString();
         }
     }
 
