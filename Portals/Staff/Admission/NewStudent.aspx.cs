@@ -143,6 +143,7 @@ public partial class Portals_Staff_Admission_Master_NewStudent : System.Web.UI.P
                     if (!insert_fees(lblstudid.Text.Trim())) { ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Fee Transfer Failed !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true); }
                     laod_grd(lblstudid.Text.Trim());
                     btn_confirm.Enabled = false;
+                    cls.DMLqueries("UPDATE m_std_studentacademic_tbl SET Roll_no = (SELECT ISNULL(MAX(Roll_no), 0) + 1 FROM m_std_studentacademic_tbl WITH (UPDLOCK, SERIALIZABLE) WHERE ayid = '" + ddlyear.SelectedValue + "' AND group_id = '" + hidden_grp_id.Value + "' AND del_flag = 0) WHERE stud_id = '" + lblstudid.Text.Trim() + "' AND ayid = '" + ddlyear.SelectedValue + "' AND group_id = '" + hidden_grp_id.Value + "' AND del_flag = 0;");// Roll No Generation
                 }
                 else { ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('Something Went Wrong !!', { color: '#a94442', background: '#f2dede', blur: 0.2, delay: 0 });", true); }
             }
