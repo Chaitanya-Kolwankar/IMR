@@ -362,12 +362,6 @@ public partial class FeeEntry_New : System.Web.UI.Page
                 status.Visible = false;
                 branch.Visible = true;
             }
-            else if (ddlmode.SelectedItem.ToString() == "Online Pay")
-            {
-                details.Visible = true;
-                branch.Visible = false;
-                status.Visible = false;
-            }
             else
             {
                 details.Visible = false;
@@ -398,7 +392,7 @@ public partial class FeeEntry_New : System.Web.UI.Page
             }
             else
             {
-                qry = "SELECT CASE WHEN ISNULL(Paid,0) + ISNULL(con.concession,0) >= CAST(mst.Amount AS INT) THEN 1 ELSE 0 END AS flag, mst.Struct_type, mst.Struct_name, (CAST(mst.Amount AS INT)-ISNULL(con.concession,0)) AS TotalFees, ISNULL(Paid,0) AS Paid, ISNULL(con.concession,'') AS Concession, CAST(mst.Amount AS INT) - ISNULL(Paid,0) - ISNULL(con.concession,0) AS Balance, mst.Struct_id, mst.Rank  FROM " + Session["feemaster"].ToString() + " mst LEFT JOIN (SELECT fee.Struct_id, SUM(CAST(fee.Amount AS INT)) AS Paid FROM m_FeeEntry fee WHERE fee.Stud_id='" + txt_studid.Text.Trim() + "' AND fee.Ayid='" + lblayid.Text.Trim() + "' AND fee.del_flag=0 AND fee.Chq_status='Clear'  AND fee.concession_flag=0 and Receipt_no !='" + hidden_recpt_no.Value + "' GROUP BY fee.Struct_id) fee ON fee.Struct_id=mst.Struct_id LEFT JOIN (SELECT con.Struct_id, SUM(CAST(con.Amount AS INT)) AS concession FROM m_FeeEntry con WHERE con.Stud_id='" + txt_studid.Text.Trim() + "' AND con.Ayid='" + lblayid.Text.Trim() + "' AND con.del_flag=0 AND con.Chq_status='Clear' AND con.concession_flag=1 and Receipt_no !='" + hidden_recpt_no.Value + "' GROUP BY con.Struct_id) con ON con.Struct_id=mst.Struct_id WHERE mst.Ayid='" + lblayid.Text.Trim() + "' AND mst.del_flag=0 AND mst.Group_id='" + lblgroupid.Text.Trim() + "' AND mst.Gender='" + Session["gender"].ToString().Trim() + "' AND mst.Category='" + lblcategory.Text.Trim() + "' ORDER BY mst.Rank;";
+                qry = "SELECT CASE WHEN ISNULL(Paid,0) + ISNULL(con.concession,0) >= CAST(mst.Amount AS INT) THEN 1 ELSE 0 END AS flag, mst.Struct_type, mst.Struct_name, (CAST(mst.Amount AS INT)-ISNULL(con.concession,0)) AS TotalFees, ISNULL(Paid,0) AS Paid, ISNULL(con.concession,'') AS Concession, CAST(mst.Amount AS INT) - ISNULL(Paid,0) - ISNULL(con.concession,0) AS Balance, mst.Struct_id, mst.Rank  FROM " + Session["feemaster"].ToString() + " mst LEFT JOIN (SELECT fee.Struct_id, SUM(CAST(fee.Amount AS INT)) AS Paid FROM m_FeeEntry fee WHERE fee.Stud_id='" + txt_studid.Text.Trim() + "' AND fee.Ayid='" + lblayid.Text.Trim() + "' AND fee.del_flag=0 AND fee.Chq_status='Clear'  AND fee.concession_flag=0 and Receipt_no !='" + hidden_recpt_no.Value + "' GROUP BY fee.Struct_id) fee ON fee.Struct_id=mst.Struct_id LEFT JOIN (SELECT con.Struct_id, SUM(CAST(con.Amount AS INT)) AS concession FROM m_FeeEntry con WHERE con.Stud_id='" + txt_studid.Text.Trim() + "' AND con.Ayid='" + lblayid.Text.Trim() + "' AND con.del_flag=0 AND con.Chq_status='Clear' AND con.concession_flag=1 and Receipt_no !='" + hidden_recpt_no.Value + "' GROUP BY con.Struct_id) con ON con.Struct_id=mst.Struct_id WHERE mst.Ayid='" + lblayid.Text.Trim() + "' AND mst.del_flag=0 AND mst.Group_id='" + lblgroupid.Text.Trim() + "' AND mst.Gender='" + Session["gender"].ToString().Trim() + "' AND mst.Category='" + lblcategory.Text.Trim() + "' and mst.Struct_id in (select Struct_id from m_FeeEntry where Receipt_no='" + hidden_recpt_no.Value + "' and del_flag=0) ORDER BY mst.Rank;";
             }
             DataTable dt = cls.fillDataTable(qry);
             if (dt.Rows.Count > 0)
@@ -443,7 +437,7 @@ public partial class FeeEntry_New : System.Web.UI.Page
             }
             else
             {
-                qry = "select CAST(Amount as int) [Fine],Fine_flag from m_FeeEntry where Stud_id='22101096' and Ayid='AYD0071' and del_flag=0 and fine_flag=1  and Install_id='" + hidden_install_Id.Value + "' and Receipt_no='" + hidden_recpt_no.Value + "';";
+                qry = "select CAST(Amount as int) [Fine],Fine_flag from m_FeeEntry where Stud_id='" + txt_studid.Text.Trim() + "' and Ayid='" + lblayid.Text.Trim() + "' and del_flag=0 and fine_flag=1  and Install_id='" + hidden_install_Id.Value + "' and Receipt_no='" + hidden_recpt_no.Value + "';";
             }
             DataTable dt = cls.fillDataTable(qry);
             if (dt.Rows.Count > 0)
@@ -682,14 +676,8 @@ public partial class FeeEntry_New : System.Web.UI.Page
                 txtchdate.Text = Convert.ToDateTime(ds.Tables["Details"].Rows[0]["Recpt_Chq_dt"]).ToString("dd/MM/yyyy").Replace("-", "/");
                 txtchno.Text = ds.Tables["Details"].Rows[0]["Recpt_Chq_No"].ToString();
             }
-            else if (ds.Tables["Details"].Rows[0]["Recpt_mode"].ToString() == "Online Pay")
-            {
-                txtbnkname.Text = ds.Tables["Details"].Rows[0]["Recpt_Bnk_Name"].ToString();
-                //txtchdate.Text = Convert.ToDateTime(ds.Tables["Details"].Rows[0]["Recpt_Chq_dt"]).ToString("dd/MM/yyyy").Replace("-", "/");
-                DateTime? chequeDate = ds.Tables["Details"].Rows[0].Field<DateTime?>("Recpt_Chq_dt");
-                txtchdate.Text = chequeDate.HasValue ? chequeDate.Value.ToString("dd/MM/yyyy") : "";
-                txtchno.Text = ds.Tables["Details"].Rows[0]["Recpt_Chq_No"].ToString();
-            }
+
+
             if (div_install.Visible)
             {
                 ddl_install.SelectedValue = Install_id;

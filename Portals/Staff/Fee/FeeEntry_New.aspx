@@ -71,7 +71,7 @@
                                         <asp:CheckBox ID="chk_bx" runat="server" Text="Search by Name" OnCheckedChanged="chk_bx_CheckedChanged" AutoPostBack="true" />
                                     </div>
                                     <div class="col-md-2" runat="server" id="div_stud_id">
-                                        <asp:TextBox ID="txt_studid" runat="server" CssClass="form-control" placeholder="Student ID" MaxLength="8" onkeypress="return isNumber(event)" Text="22101096"></asp:TextBox>
+                                        <asp:TextBox ID="txt_studid" runat="server" CssClass="form-control" placeholder="Student ID" MaxLength="8" onkeypress="return isNumber(event)" Text=""></asp:TextBox>
                                     </div>
                                     <div class="col-md-8" runat="server" id="div_name" visible="false">
                                         <div class="row">
