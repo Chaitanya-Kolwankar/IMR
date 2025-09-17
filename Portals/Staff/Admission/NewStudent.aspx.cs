@@ -1,17 +1,6 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using DocumentFormat.OpenXml.VariantTypes;
-using DocumentFormat.OpenXml.Wordprocessing;
-using System;
-using System.Activities.Expressions;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.EnterpriseServices;
-using System.Linq;
-using System.Web;
-using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -197,7 +186,7 @@ public partial class Portals_Staff_Admission_Master_NewStudent : System.Web.UI.P
             DataTable dt_master = cls.fillDataTable(qry_mst);
             if (dt_master.Rows.Count > 0)
             {
-                cls.DMLqueries("insert into m_FeeEntry(Stud_id, Amount, Ayid, Pay_date, Struct_id,Install_id,Struct_name, Recpt_mode, Receipt_no, Recpt_Chq_dt, Recpt_Chq_No, Recpt_Bnk_Name, Recpt_Bnk_Branch, Chq_status, type, user_id)  select top(1) '" + stud_id + "', Amount, Ayid, Pay_date, '" + dt_master.Rows[0]["Struct_id"].ToString() + "','','" + dt_master.Rows[0]["Struct_name"].ToString() + "', (case Recpt_mode when 'Online' then 'Online Pay' else Recpt_mode end), '" + receiptNo + "', Recpt_Chq_dt, Recpt_Chq_No, Recpt_Bnk_Name, Recpt_Bnk_Branch, Chq_status, '" + dt_master.Rows[0]["Struct_type"].ToString() + "', '" + Session["emp_id"].ToString() + "' from admProvFees where formno='D0107' and Ayid='AYD0073' and del_flag=0");
+                cls.DMLqueries("insert into m_FeeEntry(Stud_id, Amount, Ayid, Pay_date, Struct_id,Install_id,Struct_name, Recpt_mode, Receipt_no, Recpt_Chq_dt, Recpt_Chq_No, Recpt_Bnk_Name, Recpt_Bnk_Branch, Chq_status, type, user_id)  select top(1) '" + stud_id + "', Amount, Ayid, Pay_date, '" + dt_master.Rows[0]["Struct_id"].ToString() + "','','" + dt_master.Rows[0]["Struct_name"].ToString() + "', (case Recpt_mode when 'Online' then 'Online Pay' else Recpt_mode end), '" + receiptNo + "', Recpt_Chq_dt, Recpt_Chq_No, Recpt_Bnk_Name, Recpt_Bnk_Branch, Chq_status, '" + dt_master.Rows[0]["Struct_type"].ToString() + "', '" + Session["emp_id"].ToString() + "' from admProvFees where formno='" + hidden_form_no.Value + "' and Ayid='" + ddlyear.SelectedValue + "' and del_flag=0");
             }
             else
             {

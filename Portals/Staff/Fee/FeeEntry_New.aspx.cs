@@ -135,7 +135,7 @@ public partial class FeeEntry_New : System.Web.UI.Page
             string recpt_bank_branch = "";
             string receipt_no = load_recipt_no();
             string recpt_mode = ddlmode.SelectedItem.ToString();
-            if (ddlmode.SelectedItem.ToString() != "Cash")
+            if (ddlmode.SelectedItem.ToString() != "Cash" && ddlmode.SelectedItem.ToString() != "Online Pay")
             {
                 bankname = txtbnkname.Text;
                 DateTime parsedDate1 = DateTime.ParseExact(txtchdate.Text.Trim(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
