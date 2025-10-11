@@ -58,6 +58,31 @@
         .p-5 {
             padding: 5px;
         }
+
+        body {
+            text-transform: uppercase !important;
+        }
+
+
+        input[type="text"] {
+            text-transform: uppercase;
+        }
+
+        input[type="submit"], input[type="button"] {
+            text-transform: uppercase;
+        }
+
+        select {
+            text-transform: uppercase !important;
+        }
+
+            select option {
+                text-transform: uppercase;
+            }
+
+        table {
+            text-transform: uppercase;
+        }
     </style>
     <style>
         @media print {
@@ -112,12 +137,12 @@
                     padding: 10px 14px 10px 14px;
                 }
 
-                #grd_install th:first-child {
-                    font-size: 14px;
-                    padding: 4px;
-                    width: 35px !important;
-                    padding: 10px 14px 10px 14px;
-                }
+            #grd_install th:first-child {
+                font-size: 14px;
+                padding: 4px;
+                width: 35px !important;
+                padding: 10px 14px 10px 14px;
+            }
         }
     </style>
 
@@ -262,10 +287,10 @@
             document.getElementById("receipt-clone").innerHTML =
                 document.querySelector("#receipt-original .receipt-copy").innerHTML;
 
-            var cloneLabel = document.querySelector("#receipt-clone .copy-label b");
-            if (cloneLabel) {
-                cloneLabel.textContent = "ACCOUNTANT SIGNATURE";
-            }
+            //var cloneLabel = document.querySelector("#receipt-clone .copy-label b");
+            //if (cloneLabel) {
+            //    cloneLabel.textContent = "ACCOUNTANT SIGNATURE";
+            //}
         };
     </script>
 </body>

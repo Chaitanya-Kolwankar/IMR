@@ -26,11 +26,11 @@
             text-align: center;
         }
 
-        .watermark img{
-            height:550px;
-            width:100%;
-            margin-top:40px
-        }
+            .watermark img {
+                height: 550px;
+                width: 100%;
+                margin-top: 40px
+            }
 
         .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
             padding: 0.3em;
@@ -58,6 +58,31 @@
         .p-5 {
             padding: 5px;
         }
+
+        body {
+            text-transform: uppercase !important;
+        }
+
+
+        input[type="text"] {
+            text-transform: uppercase;
+        }
+
+        input[type="submit"], input[type="button"] {
+            text-transform: uppercase;
+        }
+
+        select {
+            text-transform: uppercase !important;
+        }
+
+            select option {
+                text-transform: uppercase;
+            }
+
+        table {
+            text-transform: uppercase;
+        }
     </style>
     <style>
         @media print {
@@ -84,11 +109,11 @@
             .receipt-copy {
                 flex: 1;
                 border: 1px solid #000;
-                padding:0 8px;
+                padding: 0 8px;
                 margin: 2px 10px;
                 box-sizing: border-box;
                 font-size: 14px;
-                margin-top:15px;
+                margin-top: 15px;
             }
 
             table {
